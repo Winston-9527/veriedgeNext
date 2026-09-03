@@ -1,0 +1,17 @@
+{
+  "status": "projection-policy simulation with six-prompt smoke thresholds",
+  "projection_family": "gaussian",
+  "exact_law": "K*T_K/F2 ~ chi-square(K)",
+  "K_sequence": [
+    8,
+    16,
+    32,
+    64,
+    128,
+    256
+  ],
+  "simultaneous_interval_beta": 0.01,
+  "allocation": "two-sided Bonferroni across six looks",
+  "draws_per_prompt_setting": 50000,
+  "strict_1pct_calibration_claim": false
+}

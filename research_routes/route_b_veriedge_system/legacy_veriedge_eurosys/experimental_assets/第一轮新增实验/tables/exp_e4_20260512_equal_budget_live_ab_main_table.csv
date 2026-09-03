@@ -1,0 +1,6 @@
+variant,family,tolerance_mode,percentile,tolerance_scale,signature_scalars_per_checkpoint,signature_bytes_per_checkpoint_fp32,reveal_payload_bytes_per_trace,mean_commitment_head_bytes,mean_commitment_chain_bytes,honest_homo_detection_rate,honest_homo_challenge_latency_no_commit_ms,honest_homo_challenge_latency_ms,honest_hetero_detection_rate,honest_hetero_challenge_latency_no_commit_ms,honest_hetero_challenge_latency_ms,tamper_detection_rate,tamper_challenge_latency_no_commit_ms,tamper_challenge_latency_ms
+projcos16,projcos,checkpoint_specific,99.0,1.5,256,1024,3072,32.0,96.0,0.0,3.672537,4.037137,0.12,3.676832,4.040801,1.0,3.605089,3.943448
+projcos4,projcos,checkpoint_specific,99.0,1.5,64,256,768,32.0,96.0,0.0,3.509727,3.744505,0.02,3.559581,3.79823,1.0,3.471074,3.683724
+projscalar1_abs,projabs,checkpoint_specific,99.0,1.5,16,64,192,32.0,96.0,0.0,3.523581,3.72325,0.03,3.515214,3.708742,1.0,3.624641,3.813726
+scalar16,scalar,global_shared,99.99,1.5,16,64,192,32.0,96.0,0.0,3.270443,3.42047,0.15,3.497666,3.603487,1.0,3.296332,3.381667
+scalar64,scalar,global_shared,99.99,2.0,64,256,768,32.0,96.0,0.0,3.397022,3.510154,0.415,3.365238,3.468791,1.0,3.311772,3.402573

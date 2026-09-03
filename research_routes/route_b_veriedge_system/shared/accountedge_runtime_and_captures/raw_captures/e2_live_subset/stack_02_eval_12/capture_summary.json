@@ -1,0 +1,158 @@
+[
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_001.npz",
+    "prompt_id": "eval_001",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  },
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_002.npz",
+    "prompt_id": "eval_002",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  },
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_003.npz",
+    "prompt_id": "eval_003",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  },
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_004.npz",
+    "prompt_id": "eval_004",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  },
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_005.npz",
+    "prompt_id": "eval_005",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  },
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_006.npz",
+    "prompt_id": "eval_006",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  },
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_007.npz",
+    "prompt_id": "eval_007",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  },
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_008.npz",
+    "prompt_id": "eval_008",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  },
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_009.npz",
+    "prompt_id": "eval_009",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  },
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_010.npz",
+    "prompt_id": "eval_010",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  },
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_011.npz",
+    "prompt_id": "eval_011",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  },
+  {
+    "decode_steps": 0,
+    "metadata_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/checkpoint_metadata.jsonl",
+    "npz_path": "raw_captures/e2_live_subset/stack_02_eval_12/captures/eval_012.npz",
+    "prompt_id": "eval_012",
+    "provider_plan": [
+      "provider_c1",
+      "provider_c2",
+      "provider_c3"
+    ],
+    "runtime": "heterogeneous_checkpoint_capture",
+    "split": "evaluation"
+  }
+]

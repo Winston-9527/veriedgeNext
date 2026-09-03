@@ -1,0 +1,71 @@
+\begin{figure}[t]
+    \centering
+    \resizebox{0.94\linewidth}{!}{
+    \begin{tikzpicture}[
+      font=\scriptsize,
+      >=Latex,
+      shard/.style={draw, rounded corners=2pt, fill=blue!8, minimum width=1.65cm, minimum height=0.75cm, align=center},
+      ckpt/.style={draw, circle, fill=orange!15, minimum size=0.6cm, inner sep=1pt},
+      op/.style={draw, rounded corners=2pt, fill=gray!8, minimum width=1.45cm, minimum height=0.58cm, align=center},
+      outbox/.style={draw, rounded corners=2pt, fill=teal!10, minimum width=1.55cm, minimum height=0.58cm, align=center},
+      note/.style={align=left, text width=3.8cm}
+    ]
+      \node[align=left, font=\scriptsize\bfseries] (prefill) at (0,2.45) {Prefill-focused verification object};
+      \node[shard] (s1) at (-2.8,1.65) {Shard 1};
+      \node[ckpt] (c1) at (-1.35,1.65) {$C1$};
+      \node[shard] (s2) at (0,1.65) {Shard 2};
+      \node[ckpt] (c2) at (1.45,1.65) {$C2$};
+      \node[shard] (s3) at (2.8,1.65) {Shard 3};
+      \node[ckpt] (c3) at (4.25,1.65) {$C3$};
+      \draw[->, thick] (-4.0,1.65) -- (s1.west);
+      \draw[->, thick] (s1.east) -- (c1.west);
+      \draw[->, thick] (c1.east) -- (s2.west);
+      \draw[->, thick] (s2.east) -- (c2.west);
+      \draw[->, thick] (c2.east) -- (s3.west);
+      \draw[->, thick] (s3.east) -- (c3.west);
+      \node[anchor=east] at (-4.05,1.65) {tokens};
+
+      \node[font=\scriptsize\bfseries, anchor=west] at (-4.05,0.95) {THC baseline};
+      \node[op] (th1) at (-2.9,0.2) {$H(T_1)$};
+      \node[op] (th2) at (-1.2,0.2) {$H(h_1,\!T_2)$};
+      \node[op] (th3) at (0.5,0.2) {$H(h_2,\!T_3)$};
+      \node[outbox] (thm) at (2.55,0.2) {first mismatch};
+      \draw[->] (c1.south) |- (th1.north);
+      \draw[->] (c2.south) |- (th2.north);
+      \draw[->] (c3.south) |- (th3.north);
+      \draw[->] (th1.east) -- (th2.west);
+      \draw[->] (th2.east) -- (th3.west);
+      \draw[->] (th3.east) -- (thm.west);
+      \node[note, anchor=west] at (4.05,0.2) {strict checkpoint equality\\sensitive to honest drift};
+
+      \node[font=\scriptsize\bfseries, anchor=west] at (-4.05,-0.8) {TSTC escalation path};
+      \node[op] (ts1a) at (-3.1,-1.55) {sample $\Omega_1$};
+      \node[op] (ts1b) at (-1.6,-1.55) {$Q_{\Delta_1}$};
+      \node[outbox] (ts1c) at (-0.15,-1.55) {$c_1$};
+      \node[op] (ts2a) at (1.15,-1.55) {sample $\Omega_2$};
+      \node[op] (ts2b) at (2.65,-1.55) {$Q_{\Delta_2}$};
+      \node[outbox] (ts2c) at (4.1,-1.55) {$c_2,\!c_3$};
+      \draw[->] (c1.south) |- (ts1a.north);
+      \draw[->] (c2.south) |- (ts2a.north);
+      \draw[->] (ts1a.east) -- (ts1b.west);
+      \draw[->] (ts1b.east) -- (ts1c.west);
+      \draw[->] (ts1c.east) -- (ts2a.west);
+      \draw[->] (ts2a.east) -- (ts2b.west);
+      \draw[->] (ts2b.east) -- (ts2c.west);
+      \draw[->] (c3.south) |- ($(ts2c.north)+(0,-0.02)$);
+      \node[note, anchor=west] at (4.95,-1.55) {sampled + tolerance-aware\\chain preserves localization};
+
+      \node[draw, rounded corners=2pt, fill=green!8, minimum width=7.9cm, minimum height=0.72cm, align=center] (local) at (0.35,-2.7)
+      {compare committed summaries $\rightarrow$ localize first mismatching boundary ($C1/C2/C3$)};
+
+      \begin{scope}[on background layer]
+        \node[draw, rounded corners=4pt, fill=blue!3, fit=(s1)(c3)(prefill), inner sep=6pt] {};
+        \node[draw, rounded corners=4pt, fill=gray!4, fit=(th1)(thm), inner sep=6pt] {};
+        \node[draw, rounded corners=4pt, fill=teal!3, fit=(ts1a)(ts2c), inner sep=6pt] {};
+      \end{scope}
+    \end{tikzpicture}
+    }
+    \caption{Prefill-focused dispute escalation in \system. THC applies strict checkpoint hashing at \(C1,C2,C3\), whereas TSTC samples coordinates, applies checkpoint-specific tolerance, and chains the resulting summaries to preserve first-mismatch localization under heterogeneous execution.}
+    \Description{A verification mechanism diagram showing three shard-boundary checkpoints C1, C2, and C3 on the prefill path. The THC baseline hashes full checkpoints strictly, while TSTC samples checkpoint coordinates, quantizes them under checkpoint-specific tolerance, chains the summaries, and uses the first mismatching checkpoint to localize responsibility.}
+    \label{fig:verification}
+\end{figure}

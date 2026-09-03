@@ -1,0 +1,7 @@
+This anonymous artifact package is provided for double-blind review and
+reproducibility assessment. The package contains data-processing scripts,
+summary tables, and plotting utilities for the submitted paper's main
+evaluation claims.
+
+The package is not a production deployment and does not include private
+payloads, model weights, or raw hardware traces.

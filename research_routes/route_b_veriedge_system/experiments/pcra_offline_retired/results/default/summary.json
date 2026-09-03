@@ -1,0 +1,62 @@
+{
+  "calibration_challenges_per_prompt_checkpoint": 2048,
+  "calibration_prompts": 6,
+  "checkpoints": [
+    "prefill__C1",
+    "prefill__C2",
+    "prefill__C3"
+  ],
+  "evaluation_challenges_per_prompt_checkpoint": 64,
+  "evaluation_prompts": 12,
+  "plot_written": true,
+  "q_values": [
+    64,
+    128,
+    256,
+    512
+  ],
+  "scope": "offline protocol/statistic smoke test; not a paper-level E2-R result",
+  "strengths": [
+    0.002,
+    0.005,
+    0.01,
+    0.02,
+    0.05,
+    0.1
+  ],
+  "target_combined_alpha": 0.01,
+  "timing_contrast_at_max_strength": [
+    {
+      "honest_fpr": 0.016927083333333332,
+      "known_coordinates_detection": 0.016927083333333332,
+      "post_commit_detection": 1.0,
+      "post_commit_gain": 0.9830729166666666,
+      "q": 64,
+      "rho": 0.1
+    },
+    {
+      "honest_fpr": 0.020833333333333332,
+      "known_coordinates_detection": 0.020833333333333332,
+      "post_commit_detection": 1.0,
+      "post_commit_gain": 0.9791666666666666,
+      "q": 128,
+      "rho": 0.1
+    },
+    {
+      "honest_fpr": 0.030381944444444444,
+      "known_coordinates_detection": 0.030381944444444444,
+      "post_commit_detection": 1.0,
+      "post_commit_gain": 0.9696180555555556,
+      "q": 256,
+      "rho": 0.1
+    },
+    {
+      "honest_fpr": 0.05295138888888889,
+      "known_coordinates_detection": 0.05295138888888889,
+      "post_commit_detection": 1.0,
+      "post_commit_gain": 0.9470486111111112,
+      "q": 512,
+      "rho": 0.1
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+pair_id,pair_label,variant,family,paper_status,paper_include_as_main,calib_feasible_count,selected_from_feasible,selection_fallback_reason,tolerance_mode,percentile,tolerance_scale,signature_scalars_per_checkpoint,signature_bytes_per_checkpoint_fp32,calib_honest_hetero_fpr,calib_tamper_tpr,eval_honest_hetero_fpr,eval_tamper_tpr,eval_tamper_locacc
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,scalar16,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,1.5,16,64,0.125,1.0,0.15,1.0,1.0
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,scalar64,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,2.0,64,256,0.475,1.0,0.415,1.0,1.0
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,projcos4,projcos,calibration_feasible,1,35,1,,checkpoint_specific,99.0,1.5,64,256,0.0,1.0,0.02,1.0,1.0
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,projcos8,projcos,calibration_feasible,1,30,1,,checkpoint_specific,99.0,1.5,128,512,0.0,1.0,0.08,1.0,1.0
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,projcos16,projcos,calibration_feasible,1,30,1,,checkpoint_specific,99.0,1.5,256,1024,0.0,1.0,0.12,1.0,1.0
+t4strict_pair_a_vs_c_40_200,stack_a_vs_stack_c,scalar16,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,2.0,16,64,0.175,1.0,0.11,1.0,1.0
+t4strict_pair_a_vs_c_40_200,stack_a_vs_stack_c,scalar64,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,2.0,64,256,0.5,1.0,0.305,1.0,1.0
+t4strict_pair_a_vs_c_40_200,stack_a_vs_stack_c,projcos4,projcos,calibration_feasible,1,30,1,,checkpoint_specific,99.0,1.5,64,256,0.0,1.0,0.045,1.0,1.0
+t4strict_pair_a_vs_c_40_200,stack_a_vs_stack_c,projcos8,projcos,calibration_feasible,1,30,1,,checkpoint_specific,99.0,1.5,128,512,0.0,1.0,0.075,1.0,1.0
+t4strict_pair_a_vs_c_40_200,stack_a_vs_stack_c,projcos16,projcos,calibration_feasible,1,30,1,,checkpoint_specific,99.0,1.5,256,1024,0.0,1.0,0.135,1.0,1.0
+t4strict_pair_a_vs_d_40_200,stack_a_vs_stack_d,scalar16,scalar,calibration_feasible,1,3,1,,global_shared,99.99,2.0,16,64,0.025,1.0,0.09,1.0,1.0
+t4strict_pair_a_vs_d_40_200,stack_a_vs_stack_d,scalar64,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,2.0,64,256,0.175,1.0,0.38,1.0,1.0
+t4strict_pair_a_vs_d_40_200,stack_a_vs_stack_d,projcos4,projcos,calibration_feasible,1,35,1,,checkpoint_specific,99.0,1.5,64,256,0.0,1.0,0.02,1.0,1.0
+t4strict_pair_a_vs_d_40_200,stack_a_vs_stack_d,projcos8,projcos,calibration_feasible,1,35,1,,checkpoint_specific,99.0,1.5,128,512,0.0,1.0,0.065,1.0,1.0
+t4strict_pair_a_vs_d_40_200,stack_a_vs_stack_d,projcos16,projcos,calibration_feasible,1,30,1,,checkpoint_specific,99.0,1.5,256,1024,0.0,1.0,0.065,1.0,1.0
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,scalar16,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,1.5,16,64,0.2,1.0,0.245,1.0,1.0
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,scalar64,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,2.0,64,256,0.625,1.0,0.59,1.0,1.0
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,projcos4,projcos,calibration_feasible,1,34,1,,checkpoint_specific,99.0,1.5,64,256,0.0,1.0,0.075,1.0,1.0
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,projcos8,projcos,calibration_feasible,1,30,1,,checkpoint_specific,99.0,1.5,128,512,0.0,1.0,0.075,1.0,1.0
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,projcos16,projcos,calibration_feasible,1,30,1,,checkpoint_specific,99.0,1.5,256,1024,0.0,1.0,0.065,1.0,1.0

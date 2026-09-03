@@ -1,0 +1,550 @@
+\documentclass[sigplan,screen,review,anonymous]{acmart}
+
+\settopmatter{printfolios=false}
+\renewcommand{\shortauthors}{Anonymous Author(s)}
+\citestyle{acmnumeric}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{placeins}
+\usepackage{stfloats}
+\usetikzlibrary{patterns,plotmarks}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{compat=1.18}
+
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\dblfloatsep}{6pt plus 2pt minus 2pt}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\dbltopfraction}{0.95}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.85}
+\renewcommand{\dblfloatpagefraction}{0.85}
+
+\graphicspath{{img/}}
+
+\newcommand{\system}{\textsc{VeriEdge}\xspace}
+\newcommand{\suppRiskCompositionWidth}{0.9\linewidth}
+\newcommand{\suppDeliveryScalingWidth}{1\linewidth}
+\newcommand{\suppLiveStoreWidth}{1\linewidth}
+\newcommand{\suppProjScalarStabilityWidth}{1\linewidth}
+\newcommand{\suppProjScalarBoundaryWidth}{1\linewidth}
+\newcommand{\suppStrengthSweepWidth}{1\linewidth}
+\newcommand{\suppPayloadLatencyWidth}{1\linewidth}
+\newcommand{\suppPolicyCompareWidth}{1\linewidth}
+
+\begin{document}
+
+\title[Supplementary Evaluation Results for VeriEdge]{Supplementary Evaluation Results for%
+\texorpdfstring{\\}{ }%
+\texorpdfstring{\system}{VeriEdge}: Verifiability-Constrained Placement for Heterogeneous Edge LLM Inference}
+
+\author{Anonymous Author(s)}
+\affiliation{
+  \institution{Anonymous Institution(s)}
+  \country{}
+}
+
+\ccsdesc[500]{Computer systems organization~Dependable and fault-tolerant systems}
+\ccsdesc[300]{Security and privacy~Distributed systems security}
+\keywords{edge AI, decentralized inference, heterogeneous systems, verification, orchestration}
+
+\acmConference[EuroSys '27]{European Conference on Computer Systems}{April 19--23, 2027}{Rabat, Morocco}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+\raggedbottom
+
+\phantomsection
+\label{app:eval-supplement}
+
+This supplement provides evaluation details that support the main paper without
+extending its claims. It reports the measured verifier-profile matrix,
+placement replay inputs, selective-delivery scaling, sketch robustness checks,
+known sketch blind spots, overhead breakdowns, and full policy-composition
+views.
+
+\section{Measured Verifier Profiles Used by Placement Replay}
+\label{app:profile-matrix}
+
+Table~\ref{tab:app-profile-matrix} reports the verifier-profile matrix used by
+the closed-loop placement replay. Each row is a profile key: stack pair, sketch
+mode, and checked C1--C3 boundaries. The risk class is the descriptive class
+used by the risk-composition plots; task admission still applies the explicit
+\(\alpha,\beta,S^{\max},C^{\max}\) feasibility test. Scale TPR is reported as a
+diagnostic for the cosine-sketch blind spot, while admission uses held-out
+honest FPR and primary material-tamper TPR.
+
+
+\section{Placement Replay Inputs and Policy Semantics}
+\label{app:placement-replay-config}
+
+The replay is a controlled decision replay rather than a live marketplace
+trace. It fixes three inputs: the verifier-profile matrix in
+Table~\ref{tab:app-profile-matrix}, a candidate-placement table, and a workload
+table. The candidate table contains 13 placements: one homogeneous F/F control
+and 12 heterogeneous LAN/WAN variants over A/B, A/B-RTXint8, A/C, A/D, B/D,
+and E/F. Each candidate records a provider group, a C1--C3 shard map, a
+stack-pair label, network and execution latency estimates, availability cost,
+reputation, capacity feasibility, and backend-mix class. The workload table
+contains 400 records: 200 evaluation prompts replayed as a low-pressure
+single-arrival workload and the same 200 prompts replayed as a queued-8 burst
+workload. Table~\ref{tab:app-placement-replay-config} summarizes these fixed
+replay inputs.
+
+
+Table~\ref{tab:app-placement-policy-exact} reports the queued-8 replay numbers
+summarized in the main paper. The main text uses the figure and key deltas for
+the placement narrative; this table preserves exact policy metrics for
+comparison.
+
+
+For each task and policy, the replay first filters candidates by capacity and
+group-size bounds. A candidate and sketch choice then looks up its measured
+profile row. The selected choice is admissible when
+\(\mathrm{FPR}\le\alpha\), primary-material \(\mathrm{TPR}\ge\beta\), trace
+bytes are within \(S^{\max}\), and challenge-time verifier latency is within
+\(C^{\max}\). If a policy selects a candidate whose profile violates any of
+these checks, the admitted task contributes to infeasible usage. False-dispute
+risk is computed as \(0.10\times\mathrm{FPR}\) for the selected profile.
+Expected challenge cost is computed analogously as \(0.10\) times the measured
+honest verifier latency.
+
+The policy families differ in when they use these profiles. Network-aware
+baselines first choose the lowest-latency candidate from network and execution
+estimates, then attach a fixed sketch. Risk-constrained policies apply the
+hard verifiability admission test before ranking. Adaptive-verifier policies
+choose the smallest feasible sketch for a selected candidate, or jointly choose
+a candidate and sketch under the same feasibility test. Queue-aware policies
+add current candidate wait time,
+\(\max(0,\mathsf{busyUntil}-\mathsf{arrival})\), to the placement score before
+choosing a candidate. Replay latency is modeled service time plus queue wait,
+and goodput is the number of admitted tasks divided by final completion time.
+
+\section{Risk Composition Behind Placement Decisions}
+\label{app:placement-risk-composition}
+
+Figure~\ref{fig:app-risk-composition} decomposes which verifier-profile risk
+classes are actually selected by each placement policy. This view complements
+the main paper's placement-frontier plots: latency-oriented network and
+queue-aware policies can improve modeled service time or queueing behavior
+while still selecting profile keys that violate the task's FPR/TPR target.
+Risk-constrained and adaptive-verifier policies remove those choices before
+task disclosure, either by filtering the placement or by upgrading the sketch
+mode. The same pattern appears in both arrival regimes. At
+\(\alpha=0.10\), network-aware projcos4 has infeasible usage \(1.000\) in
+both the single and queued-8 replay, while risk-constrained and adaptive
+variants keep infeasible usage at \(0.000\). In the queue-aware replay,
+queue-aware network placement reaches the highest goodput, but still uses
+infeasible profile keys for \(93.5\%\) of admitted tasks; queue-aware adaptive
+placement keeps infeasible usage at zero while preserving nearly the same
+goodput.
+
+
+\section{Selective Delivery and Placement-Defined Disclosure}
+\label{app:delivery-scaling}
+
+The main paper reports the central 100MB selective-delivery readout. Here we
+include the exact modeled LAN/WAN medians in
+Table~\ref{tab:app-delivery-sweep-exact} and corresponding curves in
+Figure~\ref{fig:app-delivery-scaling}. The experiment compares replicated
+payload delivery (RPD), which sends one full encrypted payload per selected
+provider, against privacy-preserving delivery (PPD), which publishes one
+encrypted object and releases small locator-and-key packages after the
+placement commitment. Both modes encrypt the payload; the difference is
+whether requester-side payload transfer scales with selected group size.
+
+
+
+\paragraph{Live local-store validation.}
+The LAN/WAN sweep is a calibrated delivery-path model, so we also ran a local
+store supplement to validate the disclosure-path assumptions. Each of the 240
+local-store runs created a fresh ciphertext, derived the object key from the
+actual SHA-256 content hash, had providers fetch the object, and hash-checked
+the fetched ciphertext. This supplement is not used as the LAN/WAN latency
+source; it rules out cache reuse and confirms that the measured PPD path uses
+fresh stored objects and targeted access material. Table~\ref{tab:app-live-store}
+reports the exact local-store medians.
+
+
+
+\section{Projected-Scalar Bridge Stability}
+\label{app:projscalar-stability}
+
+Figure~\ref{fig:app-projscalar-stability} checks whether the
+projscalar1\_abs bridge in the main evaluation is an artifact of one random
+seed. Across A/B, A/B-RTXint8, A/C, A/D, B/D, and E/F with five seeds, every
+selected operating point remains admissible under the
+\(\alpha=0.10,\beta=0.90\) profile, with mean held-out FPR \(0.0073\), max FPR
+\(0.025\), and minimum primary-material TPR \(1.000\). This supports using the
+sketch as a norm-sensitive companion to projected-token cosine TSTC. It is a
+diagnostic and hybrid-verifier component rather than a replacement for
+projected-token TSTC.
+
+
+\section{Norm-Sensitive Bridge Boundary}
+\label{app:projscalar-boundary}
+
+Figure~\ref{fig:app-projscalar-boundary} expands the projected-scalar bridge.
+The bridge detects scale perturbations that cosine-only projected-token
+sketches miss because it keeps norm information. However, a projection-aware
+null-space attack can avoid the one-dimensional projection. This is the
+boundary used in the main paper: norm-sensitive projections are useful hybrid
+components, not adaptive cryptographic guarantees.
+
+
+\section{Material-Tamper Coverage and Cosine Blind Spot}
+\label{app:strength-sweep}
+
+Figure~\ref{fig:app-strength-sweep} varies perturbation strength for the
+material-tamper study. Projcos4 detects Gaussian perturbations across the
+tested strengths, while scale-only perturbations remain undetected. This
+matches the TSTC mechanism: projected-token cosine sketches retain directional
+geometry but deliberately discard most norm information.
+
+Table~\ref{tab:app-material-tamper-exact} gives the exact A/B and B/D
+attack-family TPRs summarized by the main paper's material-tamper figure.
+
+
+Table~\ref{tab:app-output-affecting} summarizes the output-affecting subset
+across six stack pairs. It separates attacks that merely perturb checkpoint
+statistics from attacks that change the next-token neighborhood. Directional
+attacks remain detected by projcos4 on the output-affecting subset, while
+scale perturbations remain the cosine-only blind spot even when they affect
+the output neighborhood.
+
+
+
+\section{Checkpoint-Sketch Payload and Challenge-Time Runtime}
+\label{app:payload-latency}
+
+Figure~\ref{fig:app-payload-latency} visualizes the payload and latency
+numbers summarized in the main paper's verifier-overhead table. Stronger
+checkpoint sketches increase reveal payload, but challenge-time verifier
+latency remains in the few-millisecond range for the measured implementation.
+
+
+\section{Full Queued-Workload Policy Metrics}
+\label{app:placement-composition}
+
+Figure~\ref{fig:app-placement-policy-compare} returns to the queued-workload
+placement replay with the full metric set. Network-aware placement keeps
+scalar16 on heterogeneous paths, while risk-constrained and adaptive-verifier
+placement upgrade risky profile keys and remove infeasible usage without
+changing measured goodput.
+
+
+
+\begin{table*}[b]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4.2pt}
+\renewcommand{\arraystretch}{0.94}
+\caption{Measured verifier profiles consumed by the closed-loop placement
+replay. Each row is a stack-pair/sketch profile key over the three checked
+C1--C3 boundaries. B/tr. is the sketch payload per three-checkpoint challenge
+trace; TPR\(_p\) is primary material-tamper detection; TPR\(_s\) is
+scale-perturbation detection; and ms is honest challenge-time verifier latency
+per trace. ``inadjud.'' denotes an inadjudicable profile class; task feasibility
+is determined by the explicit admission test.}
+\label{tab:app-profile-matrix}
+\begin{tabular}{llrrrrrrl}
+\toprule
+Pair & Sketch & B/tr. & FPR & TPR\(_p\) & TPR\(_s\) & LocAcc & ms & Risk \\
+\midrule
+A/B & projcos16 & 3072 & 0.120 & 1.000 & 0.000 & 1.000 & 4.04 & medium \\
+A/B & projcos4 & 768 & 0.020 & 1.000 & 0.000 & 1.000 & 3.80 & low \\
+A/B & projcos8 & 1536 & 0.080 & 1.000 & 0.000 & 1.000 & 3.92 & low \\
+A/B & scalar16 & 192 & 0.150 & 0.760 & 0.520 & 0.760 & 3.60 & high \\
+A/B & scalar64 & 768 & 0.415 & 0.855 & 0.880 & 0.855 & 3.47 & inadjud. \\
+\addlinespace[0.25em]
+A/B-RTXint8 & projcos16 & 3072 & 0.080 & 1.000 & 0.000 & 1.000 & 4.04 & low \\
+A/B-RTXint8 & projcos4 & 768 & 0.020 & 1.000 & 0.000 & 1.000 & 3.80 & low \\
+A/B-RTXint8 & projcos8 & 1536 & 0.035 & 1.000 & 0.000 & 1.000 & 3.92 & low \\
+A/B-RTXint8 & scalar16 & 192 & 0.155 & 0.600 & 0.370 & 0.600 & 3.60 & high \\
+A/B-RTXint8 & scalar64 & 768 & 0.520 & 0.855 & 0.880 & 0.855 & 3.47 & inadjud. \\
+\addlinespace[0.25em]
+A/C & projcos16 & 3072 & 0.135 & 1.000 & 0.000 & 1.000 & 4.04 & medium \\
+A/C & projcos4 & 768 & 0.045 & 1.000 & 0.000 & 1.000 & 3.80 & low \\
+A/C & projcos8 & 1536 & 0.075 & 1.000 & 0.000 & 1.000 & 3.92 & low \\
+A/C & scalar16 & 192 & 0.110 & 0.585 & 0.355 & 0.585 & 3.60 & high \\
+A/C & scalar64 & 768 & 0.305 & 0.875 & 0.930 & 0.875 & 3.47 & inadjud. \\
+\addlinespace[0.25em]
+A/D & projcos16 & 3072 & 0.065 & 1.000 & 0.000 & 1.000 & 4.04 & low \\
+A/D & projcos4 & 768 & 0.020 & 1.000 & 0.000 & 1.000 & 3.80 & low \\
+A/D & projcos8 & 1536 & 0.065 & 1.000 & 0.000 & 1.000 & 3.92 & low \\
+A/D & scalar16 & 192 & 0.090 & 0.510 & 0.220 & 0.510 & 3.60 & high \\
+A/D & scalar64 & 768 & 0.380 & 0.795 & 0.815 & 0.795 & 3.47 & inadjud. \\
+\addlinespace[0.25em]
+B/D & projcos16 & 3072 & 0.065 & 1.000 & 0.000 & 1.000 & 4.04 & low \\
+B/D & projcos4 & 768 & 0.075 & 1.000 & 0.000 & 1.000 & 3.80 & low \\
+B/D & projcos8 & 1536 & 0.075 & 1.000 & 0.000 & 1.000 & 3.92 & low \\
+B/D & scalar16 & 192 & 0.245 & 0.950 & 0.720 & 0.950 & 3.60 & high \\
+B/D & scalar64 & 768 & 0.590 & 1.000 & 0.995 & 1.000 & 3.47 & inadjud. \\
+\addlinespace[0.25em]
+E/F & projcos16 & 3072 & 0.030 & 1.000 & 0.005 & 1.000 & 4.04 & low \\
+E/F & projcos4 & 768 & 0.105 & 1.000 & 0.060 & 0.985 & 3.80 & medium \\
+E/F & projcos8 & 1536 & 0.005 & 1.000 & 0.000 & 1.000 & 3.92 & low \\
+E/F & scalar16 & 192 & 0.165 & 1.000 & 1.000 & 1.000 & 3.60 & medium \\
+E/F & scalar64 & 768 & 0.615 & 1.000 & 1.000 & 1.000 & 3.47 & inadjud. \\
+\addlinespace[0.25em]
+F/F & scalar16 & 192 & 0.000 & 1.000 & 1.000 & 1.000 & 3.60 & low \\
+F/F & projcos4 & 768 & 0.000 & 1.000 & 1.000 & 1.000 & 3.80 & low \\
+F/F & projcos8 & 1536 & 0.000 & 1.000 & 1.000 & 1.000 & 3.92 & low \\
+F/F & projcos16 & 3072 & 0.000 & 1.000 & 1.000 & 1.000 & 4.04 & low \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4.2pt}
+\caption{Fixed inputs for the controlled placement replay used in the main
+evaluation.}
+\label{tab:app-placement-replay-config}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.28\linewidth}
+                >{\raggedright\arraybackslash}p{0.66\linewidth}@{}}
+\toprule
+Item & Setting \\
+\midrule
+Candidate placements & 13 total: 1 homogeneous F/F and 12 heterogeneous LAN/WAN variants \\
+Stack-pair labels & A/B, A/B-RTXint8, A/C, A/D, B/D, E/F, and F/F control \\
+Verifier profiles & 34 measured profile keys, each identified by stack pair and sketch mode over C1--C3 \\
+Workload prompts & 200 held-out evaluation prompts \\
+Arrival patterns & single: one task every 5.0 s; queued-8: eight tasks every 0.25 s \\
+Replay seeds & 5 seeds: 20260513--20260517 \\
+Target sweep & \(\alpha\in\{0.05,0.10,0.20\}\), \(\beta=0.90\) \\
+Main target & \(\alpha=0.10,\beta=0.90\) \\
+Sketch budget & \(S^{\max}=3072\) bytes per three-checkpoint trace \\
+Verifier budget & \(C^{\max}=5.0\) ms per challenge \\
+Challenge probability & \(0.10\), used for false-risk and challenge-cost expectations \\
+Group-size bound & \(1\le |\mathcal{G}|\le 4\); heterogeneous candidates use group size 3 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3.4pt}
+\caption{Queued-8 closed-loop placement replay at
+\(\alpha=0.10,\beta=0.90\). Risk-constrained hard admission and adaptive
+verifier-mode selection remove infeasible profile keys before disclosure;
+queue-aware scoring improves modeled latency and goodput, but does not by
+itself enforce verifiability. Chal. ms/task is expected challenge-time verifier
+cost under challenge probability \(0.10\), and FD risk is expected
+false-dispute risk.}
+\label{tab:app-placement-policy-exact}
+\begin{tabular}{llrrrrrr}
+\toprule
+Replay & Policy & Med. task s & P95 task s & Goodput & Chal. ms/task & FD risk & Infeas. \\
+\midrule
+controlled & network-aware, projcos4 & 90.156 & 170.384 & 1.079 & .380 & .0105 & 1.000 \\
+controlled & risk-constrained, projcos4 & 91.844 & 173.576 & 1.060 & .380 & .0020 & .000 \\
+controlled & network-aware, adaptive & 90.156 & 170.384 & 1.079 & .392 & .0005 & .000 \\
+controlled & homogeneous only & 119.301 & 225.498 & .822 & .360 & .0000 & .000 \\
+\midrule
+queue-aware & network & 5.522 & 9.757 & 12.266 & .360 & .0142 & .935 \\
+queue-aware & risk-constrained & 7.004 & 12.714 & 10.392 & .380 & .0033 & .000 \\
+queue-aware & adaptive & 5.457 & 9.781 & 12.251 & .380 & .0028 & .000 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure*}[t]
+\centering
+\resizebox{\suppRiskCompositionWidth}{!}{\input{fig_exp_tikz/fig_risk_class_composition_tikz.tex}}
+\caption{Selected verifier-profile risk composition in the placement replay.
+Network and queue-aware policies can select infeasible profile keys; the
+risk-constrained and adaptive policies filter or upgrade those choices before
+task disclosure.}
+\Description{A TikZ plot showing the selected low-risk, medium-risk,
+high-risk, and infeasible verifier-profile composition for controlled and
+queue-aware placement policies.}
+\label{fig:app-risk-composition}
+\end{figure*}
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4.2pt}
+\caption{Selective-delivery group-size sweep for a 100MB encrypted payload.
+Latency is all-providers-ready time under the calibrated LAN/WAN transfer
+model; requester egress counts payload-sized transfers sent by the requester.}
+\label{tab:app-delivery-sweep-exact}
+\begin{tabular}{llrrrrr}
+\toprule
+Network & \(k\) & RPD med. s & PPD med. s & Med. red. & RPD req. MB & PPD req. MB \\
+\midrule
+LAN & 1 & 0.864 & 1.719 & \(-99.1\%\) & 100.0 & 100.001 \\
+LAN & 2 & 1.715 & 1.720 & \(-0.3\%\) & 200.0 & 100.001 \\
+LAN & 4 & 3.417 & 1.719 & \(49.7\%\) & 400.0 & 100.002 \\
+LAN & 8 & 6.820 & 1.719 & \(74.8\%\) & 800.0 & 100.005 \\
+\midrule
+WAN & 1 & 20.088 & 30.259 & \(-50.6\%\) & 100.0 & 100.001 \\
+WAN & 2 & 40.099 & 30.272 & \(24.5\%\) & 200.0 & 100.001 \\
+WAN & 4 & 80.088 & 30.267 & \(62.2\%\) & 400.0 & 100.002 \\
+WAN & 8 & 160.100 & 30.267 & \(81.1\%\) & 800.0 & 100.005 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure*}[t]
+\centering
+\resizebox{\suppDeliveryScalingWidth}{!}{\input{fig_exp_tikz/fig_delivery_scaling_tikz.tex}}
+\caption{Placement-defined selective-delivery scaling. RPD becomes dominated
+by repeated payload-sized requester transfers as \(k\) grows; PPD keeps
+requester egress close to one ciphertext plus small access packages.}
+\Description{Three TikZ plots showing LAN latency, WAN latency, and requester
+egress for RPD and PPD as selected group size increases.}
+\label{fig:app-delivery-scaling}
+\end{figure*}
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\caption{Live local-store validation for a 100MB payload. Latency is
+local-store specific; the key result is fresh-object semantics and
+requester-egress scaling. PPD store MB is aggregate off-chain-store egress.}
+\label{tab:app-live-store}
+\begin{tabular}{rrrrrr}
+\toprule
+\(k\) & RPD med. s & PPD med. s & RPD req. MB & PPD req. MB & PPD store MB \\
+\midrule
+1 & 0.993 & 1.033 & 100.0 & 100.001 & 100.0 \\
+2 & 0.997 & 1.034 & 200.0 & 100.001 & 200.0 \\
+4 & 1.048 & 1.046 & 400.0 & 100.003 & 400.0 \\
+8 & 1.065 & 1.089 & 800.0 & 100.005 & 800.0 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure*}[t]
+\centering
+\resizebox{\suppLiveStoreWidth}{!}{\input{fig_exp_tikz/fig_delivery_live_store_tikz.tex}}
+\caption{Live local-store validation of selective delivery. The plot confirms
+fresh content-hash object storage and the requester-egress separation between
+RPD and PPD; its latency is local-store validation evidence rather than a
+WAN/LAN deployment result.}
+\Description{A TikZ plot showing live local-store latency and requester egress
+for RPD and PPD selective delivery.}
+\label{fig:app-live-store}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\resizebox{\suppProjScalarStabilityWidth}{!}{\input{fig_exp_tikz/fig_projscalar_multiseed_stability_tikz.tex}}
+\caption{Projected-scalar multiseed stability. The plot summarizes A/B,
+A/B-RTXint8, A/C, A/D, B/D, and E/F across five seeds, showing that
+projscalar1\_abs remains low-FPR while preserving primary material-tamper
+detection.}
+\Description{A TikZ plot showing held-out FPR and material-tamper TPR across
+five projected-scalar sketch seeds and six stack pairs.}
+\label{fig:app-projscalar-stability}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\resizebox{\suppProjScalarBoundaryWidth}{!}{\input{fig_exp_tikz/fig_projscalar_attack_sweep_tikz.tex}}
+\caption{Projected-scalar attack-family and strength-sweep results. The sketch
+covers scale perturbations that cosine gaps miss, but exposes the expected
+null-space boundary for projection-aware attacks.}
+\Description{A TikZ plot showing attack-family TPR and strength-sweep behavior
+for the projected-scalar absolute-gap sketch.}
+\label{fig:app-projscalar-boundary}
+\end{figure*}
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.6pt}
+\renewcommand{\arraystretch}{0.92}
+\caption{Material-tamper TPR by attack family. Projected-token cosine sketches
+detect direction-changing attacks but are weak against direction-preserving
+scale perturbations.}
+\label{tab:app-material-tamper-exact}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Pair & Variant & Gauss. & Cross prompt & Wrong shard & Layer skip & Scale \\
+\midrule
+A/B & scalar16 & 1.00 & .76 & .76 & .83 & .52 \\
+A/B & projcos4 & 1.00 & 1.00 & 1.00 & 1.00 & .00 \\
+B/D & scalar16 & 1.00 & .95 & .95 & 1.00 & .72 \\
+B/D & projcos4 & 1.00 & 1.00 & 1.00 & 1.00 & .00 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3.8pt}
+\caption{Output-affecting material-tamper subset across six stack pairs. OA is
+the fraction of prompts whose next-token top-5 neighborhood changes under the
+attack; TPR ranges are computed only over this output-affecting subset.}
+\label{tab:app-output-affecting}
+\begin{tabular}{lrrrr}
+\toprule
+Attack family & OA rate & Projcos4 OA TPR & Scalar16 OA TPR & Mean top-5 Jaccard \\
+\midrule
+Gaussian & 1.000 & 1.000--1.000 & 1.000--1.000 & 0.002 \\
+Cross-prompt stale & 0.941 & 1.000--1.000 & 0.558--1.000 & 0.502 \\
+Wrong-shard output & 0.941 & 1.000--1.000 & 0.558--1.000 & 0.502 \\
+Layer skip & 1.000 & 1.000--1.000 & 0.510--1.000 & 0.173 \\
+Scale perturbation & 0.389 & 0.000--0.064 & 0.228--1.000 & 0.893 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure*}[t]
+\centering
+\resizebox{\suppStrengthSweepWidth}{!}{\input{fig_exp_tikz/fig_material_tamper_strength_sweep_tikz.tex}}
+\caption{Material-tamper strength sweep. Solid lines are scalar16 and dashed
+lines are projcos4; teal denotes Gaussian noise and orange denotes scale
+perturbations. The sweep confirms that cosine-only projected-token sketches
+detect direction-changing perturbations but remain weak against
+direction-preserving scale changes.}
+\Description{A TikZ plot showing material-tamper detection rates across attack
+strengths for Gaussian and scale perturbations on the A/B and B/D stack pairs.}
+\label{fig:app-strength-sweep}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\resizebox{\suppPayloadLatencyWidth}{!}{\input{fig_exp_tikz/fig_verifier_payload_latency_tikz.tex}}
+\caption{Checkpoint-sketch payload and challenge-time verifier latency. Reveal
+payload scales with sketch dimensionality, while measured verifier latency
+remains in the few-millisecond range across scalar-coordinate, projected-token,
+and projected-scalar variants.}
+\label{fig:app-payload-latency}
+\Description{A TikZ plot comparing checkpoint-sketch reveal payload and
+challenge-time verifier latency across TSTC verifier variants.}
+\end{figure*}
+
+\begin{figure*}[b]
+\centering
+\resizebox{\suppPolicyCompareWidth}{!}{\input{fig_exp_tikz/fig_e5_policy_compare_tikz.tex}}
+\caption{Queued-workload policy comparison. The plot shows the tradeoff among
+modeled latency, goodput, risk-adjusted goodput, false-dispute risk,
+infeasible usage, and expected challenge workload; Risk and Adapt. denote the
+risk-constrained and adaptive-verifier policies.}
+\label{fig:app-placement-policy-compare}
+\Description{A TikZ plot comparing queued-workload placement policies by
+latency, goodput, risk-adjusted goodput, false-dispute risk, infeasible
+placement rate, and expected challenge workload.}
+\end{figure*}
+
+\clearpage
+\end{document}

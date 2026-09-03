@@ -1,0 +1,165 @@
+\documentclass[tikz,border=2pt]{standalone}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usetikzlibrary{arrows.meta,calc,fit,positioning}
+
+\graphicspath{{icons_pdf/}{figures/icons_pdf/}}
+
+\definecolor{RoutineBlue}{HTML}{1557A6}
+\definecolor{Teal}{HTML}{0E6F78}
+\definecolor{Orange}{HTML}{F47B20}
+\definecolor{AlertRed}{HTML}{C9252C}
+\definecolor{Ink}{HTML}{1C2630}
+\definecolor{MutedGray}{HTML}{6F7782}
+\definecolor{PanelBlue}{HTML}{F3F8FF}
+\definecolor{PanelGray}{HTML}{F7F7F7}
+\definecolor{PanelTeal}{HTML}{F1FBFC}
+\definecolor{SoftOrange}{HTML}{FFF0E5}
+
+\newcommand{\icon}[2][0.48cm]{\includegraphics[width=#1,height=#1,keepaspectratio]{#2}}
+
+\begin{document}
+\begin{tikzpicture}[
+  x=1cm,y=1cm,
+  font=\sffamily,
+  line cap=round,line join=round,
+  arrow/.style={-{Latex[length=2.2mm,width=1.6mm]}, line width=0.85pt, draw=Ink},
+  softarrow/.style={-{Latex[length=2.0mm,width=1.4mm]}, line width=0.75pt, draw=MutedGray},
+  bluearrow/.style={-{Latex[length=2.2mm,width=1.6mm]}, line width=0.85pt, draw=RoutineBlue},
+  panelTitle/.style={font=\sffamily\bfseries\large, text=Ink},
+  subTitle/.style={font=\sffamily\bfseries\small},
+  small/.style={font=\sffamily\scriptsize, text=Ink},
+  note/.style={font=\sffamily\itshape\scriptsize, text=MutedGray},
+  shard/.style={draw=RoutineBlue, fill=white, rounded corners=2mm, line width=0.8pt,
+                minimum width=1.72cm, minimum height=0.86cm, align=center},
+  ckpt/.style={circle, draw=Orange, fill=SoftOrange, line width=0.9pt,
+               minimum size=0.72cm, font=\sffamily\bfseries\small, text=Orange},
+  thcbox/.style={draw=MutedGray, fill=white, rounded corners=1.6mm, line width=0.65pt,
+                 minimum width=2.20cm, minimum height=0.74cm, align=center,
+                 font=\sffamily\scriptsize},
+  tstcbox/.style={draw=Teal, fill=white, rounded corners=1.6mm, line width=0.7pt,
+                  minimum width=1.90cm, minimum height=0.72cm, align=center,
+                  font=\sffamily\scriptsize},
+  outcome/.style={draw=Teal, fill=white, rounded corners=1.8mm, line width=0.8pt,
+                  minimum width=2.20cm, minimum height=0.74cm, align=center,
+                  font=\sffamily\scriptsize}
+]
+
+% ---------------------------------------------------------------------
+% Panels
+% ---------------------------------------------------------------------
+\draw[rounded corners=3mm, draw=RoutineBlue, fill=PanelBlue, line width=0.8pt]
+  (0.25,6.35) rectangle (15.75,8.30);
+\node[panelTitle] at (8.00,8.00) {Committed sharded prefill instance};
+
+\draw[rounded corners=3mm, draw=MutedGray!70, fill=PanelGray, line width=0.75pt]
+  (0.25,3.82) rectangle (15.75,5.95);
+\node[panelTitle] at (8.00,5.62) {THC baseline};
+\node[note, align=center] at (13.80,4.78) {strict byte equality\\sensitive to honest drift};
+
+\draw[rounded corners=3mm, draw=Teal, fill=PanelTeal, line width=0.85pt]
+  (0.25,0.32) rectangle (15.75,3.46);
+\node[panelTitle, text=Teal] at (8.00,3.13) {TSTC escalation path};
+\node[note, text=Teal, align=center] at (13.70,1.42)
+  {compact sketches\\calibrated tolerance\\digest chain preserves localization};
+\node at (15.00,1.42) {\icon[0.82cm]{target_bullseye.pdf}};
+
+% ---------------------------------------------------------------------
+% Top committed execution path
+% ---------------------------------------------------------------------
+\node[small, align=center] (tokensLabel) at (0.90,6.96) {tokens};
+\node at (0.90,7.43) {\icon[0.68cm]{document.pdf}};
+
+\node[shard] (s1) at (2.45,7.13) {};
+\node[inner sep=0pt] at ($(s1.center)+(0,0.13)$) {\icon[0.8cm]{server_green.pdf}};
+\node[font=\sffamily\bfseries\footnotesize, text=Ink] at ($(s1.center)+(0,-0.30)$) {Shard 1};
+\node[ckpt] (c1) at (4.05,7.13) {\(C_1\)};
+\node[shard] (s2) at (5.75,7.13) {};
+\node[inner sep=0pt] at ($(s2.center)+(0,0.13)$) {\icon[0.8cm]{server_green.pdf}};
+\node[font=\sffamily\bfseries\footnotesize, text=Ink] at ($(s2.center)+(0,-0.30)$) {Shard 2};
+\node[ckpt] (c2) at (7.35,7.13) {\(C_2\)};
+\node[shard] (s3) at (9.05,7.13) {};
+\node[inner sep=0pt] at ($(s3.center)+(0,0.13)$) {\icon[0.8cm]{server_green.pdf}};
+\node[font=\sffamily\bfseries\footnotesize, text=Ink] at ($(s3.center)+(0,-0.30)$) {Shard 3};
+\node[ckpt] (c3) at (10.65,7.13) {\(C_3\)};
+
+\draw[arrow] (1.22,7.13) -- (s1.west);
+\draw[arrow] (s1.east) -- (c1.west);
+\draw[arrow] (c1.east) -- (s2.west);
+\draw[arrow] (s2.east) -- (c2.west);
+\draw[arrow] (c2.east) -- (s3.west);
+\draw[arrow] (s3.east) -- (c3.west);
+
+\node[small, align=left, text=RoutineBlue] at (13.25,7.22)
+  {checked boundaries\\\(\mathcal{B}_j=\{C_1,C_2,C_3\}\)};
+
+% ---------------------------------------------------------------------
+% THC baseline
+% ---------------------------------------------------------------------
+\node[thcbox] (th1) at (2.45,4.70)
+  {\(\mathsf{Hash}(\mathsf{Ser}(H_{j,1}))\)};
+\node[thcbox] (th2) at (5.75,4.70)
+  {\(\mathsf{Hash}(\mathsf{Ser}(H_{j,2}))\)};
+\node[thcbox] (th3) at (9.05,4.70)
+  {\(\mathsf{Hash}(\mathsf{Ser}(H_{j,3}))\)};
+\node[outcome] (thOut) at (11.70,4.70) {};
+\node[inner sep=0pt] at ($(thOut.center)+(-0.50,0)$) {\icon[0.50cm]{search.pdf}};
+\node[font=\sffamily\scriptsize, text=Ink, anchor=west] at ($(thOut.center)+(-0.17,0)$) {first mismatch};
+
+\foreach \c/\t in {c1/th1,c2/th2,c3/th3} {
+  \draw[softarrow] (\c.south) -- ++(0,-0.34) -| (\t.north);
+}
+\draw[arrow] (th1.east) -- (th2.west);
+\draw[arrow] (th2.east) -- (th3.west);
+\draw[arrow] (th3.east) -- (thOut.west);
+
+\node[small, align=center, text=MutedGray] at (2.45,4.05) {full tensor};
+\node[small, align=center, text=MutedGray] at (5.75,4.05) {exact compare};
+\node[small, align=center, text=MutedGray] at (9.05,4.05) {byte-level chain};
+
+% ---------------------------------------------------------------------
+% TSTC escalation
+% ---------------------------------------------------------------------
+\node[tstcbox] (sample) at (1.55,2.02) {};
+\node[inner sep=0pt] at ($(sample.center)+(-0.47,0)$) {\icon[0.50cm]{sample_dice.pdf}};
+\node[font=\sffamily\scriptsize, text=Ink, anchor=west] at ($(sample.center)+(-0.17,0)$) {sample \(\Omega_k\)};
+\node[tstcbox, minimum width=2.35cm] (sketch) at (4.10,2.02) {};
+\node[inner sep=0pt] at ($(sketch.center)+(-0.72,0.02)$) {\icon[0.46cm]{quantize_filter.pdf}};
+\node[font=\sffamily\scriptsize, text=Ink, anchor=west] at ($(sketch.center)+(-0.32,0.16)$) {sketch};
+\node[font=\sffamily\scriptsize, text=Ink, anchor=west] at ($(sketch.center)+(-0.32,-0.15)$) {\(z_{j,k}=\Phi_{j,k}(H_{j,k})\)};
+\node[tstcbox, minimum width=2.18cm] (compare) at (6.85,2.02)
+  {compare gap\\[-0.5mm]\(\delta_{j,k}=\mu(z_{j,k},z'_{j,k})\)\\[-0.5mm]\(\delta_{j,k}\le\Gamma_{j,k}\)};
+\node[tstcbox, minimum width=2.22cm] (digest) at (9.55,2.02)
+  {digest \(g_{j,k}\)\\[-0.5mm]chain \(c_{j,k}\)};
+\node[outcome, minimum width=2.15cm] (loc) at (12.05,2.02)
+  {first \(\delta_{j,k}>\Gamma_{j,k}\)\\[-0.5mm]\(\rightarrow b^\star_j\)};
+
+\draw[bluearrow] (sample.east) -- (sketch.west);
+\draw[bluearrow] (sketch.east) -- (compare.west);
+\draw[bluearrow] (compare.east) -- (digest.west);
+\draw[bluearrow] (digest.east) -- (loc.west);
+
+\foreach \c in {c1,c2,c3} {
+  \draw[draw=Teal, line width=0.62pt] (\c.south) -- ++(0,-3.12);
+}
+\draw[draw=Teal, line width=0.62pt] (4.05,3.65) -- (10.65,3.65);
+\draw[softarrow, draw=Teal] (4.05,3.65) -- (1.55,3.65) -- (sample.north);
+\node[small, text=Teal, align=center] at (2.55,2.70) {for each \(k\in\mathcal{B}_j\)};
+
+\node[small, align=center, text=Teal] at (3.65,0.82)
+  {reveal sketches, not full checkpoints};
+\node[small, align=center, text=Teal] at (9.30,0.82)
+  {above-tolerance boundary \(\rightarrow b^\star_j\) via \(\sigma_j\)};
+
+% ---------------------------------------------------------------------
+% Cross-panel labels
+% ---------------------------------------------------------------------
+\node[small, text=AlertRed, align=center] at (11.45,5.25)
+  {byte difference \(\Rightarrow\) mismatch};
+
+\node[small, text=Teal, align=center] at (6.85,2.72)
+  {reference or replayed sketch \(z'_{j,k}\)};
+
+\end{tikzpicture}
+\end{document}

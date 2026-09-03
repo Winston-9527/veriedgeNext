@@ -1,0 +1,5 @@
+Selective delivery result sentence:
+For 100MB encrypted payloads and k=8 selected providers, PPD reduces requester egress by 87.5% on LAN and 87.5% on WAN, and reduces median all-providers-ready latency by 74.8% on LAN and 81.1% on WAN under the calibrated delivery model.
+
+Scope sentence:
+This is a calibrated delivery-path microbenchmark/replay using measured local crypto costs and explicit LAN/WAN bandwidth/RTT profiles, not a live multi-provider deployment.

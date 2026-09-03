@@ -1,0 +1,85 @@
+\begin{tikzpicture}
+\definecolor{veAttackBlue}{HTML}{1F6E7A}
+\definecolor{veAttackGreen}{HTML}{26734D}
+\definecolor{veAttackAmber}{HTML}{3B5B8A}
+\definecolor{veAttackViolet}{HTML}{607180}
+\definecolor{veAttackGrid}{HTML}{D7DEE2}
+\definecolor{veAttackPanel}{HTML}{F7FAFB}
+\begin{groupplot}[
+	group style={group size=2 by 1,horizontal sep=0.86cm},
+	width=0.405\textwidth,
+	height=0.255\textwidth,
+	tick label style={font=\scriptsize},
+	label style={font=\scriptsize},
+	title style={font=\scriptsize\bfseries,yshift=-0.4ex},
+	legend style={
+		font=\scriptsize,
+		draw=none,
+		fill=white,
+		fill opacity=0.88,
+		text opacity=1,
+		row sep=0pt,
+		cells={anchor=west}
+	},
+	grid=major,
+	major grid style={draw=veAttackGrid,line width=0.25pt},
+	axis background/.style={fill=veAttackPanel},
+	axis line style={draw=black!55,line width=0.35pt},
+	tick align=outside,
+	every axis plot/.append style={line width=0.9pt},
+]
+
+\nextgroupplot[
+	title={(a) attack-family mean TPR},
+	symbolic x coords={Gauss,Stale,Wrong,Skip,Scale,Null},
+	xtick=data,
+	xticklabels={Gaussian,{Stale\\output},{Wrong\\shard},{Layer\\skip},Scale,{Null\\space}},
+	x tick label style={font=\scriptsize,align=center},
+	ylabel={mean TPR over 6 pairs},
+	ymin=0,ymax=1.08,
+	ytick={0,0.25,0.5,0.75,1.0},
+	enlarge x limits=0.13,
+]
+\addplot+[ybar=5.0pt,mark=none,fill=veAttackBlue!20,draw=veAttackBlue,line width=0.45pt]
+	coordinates {
+		(Gauss,1.0) (Stale,1.0) (Wrong,1.0)
+		(Skip,1.0) (Scale,1.0) (Null,0.0)
+	};
+\node[anchor=south,font=\scriptsize,text=veAttackViolet!80!black]
+	at (axis cs:Null,0.03) {0};
+
+\nextgroupplot[
+	title={(b) weak-to-strong sweep},
+	xlabel={attack strength},
+	ylabel={mean TPR over 6 pairs},
+	xmin=0.0,xmax=0.21,
+	ymin=-0.02,ymax=1.08,
+	xtick={0.01,0.05,0.10,0.15,0.20},
+	xticklabels={.01,.05,.10,.15,.20},
+	ytick={0,0.25,0.5,0.75,1.0},
+	legend pos=south east,
+]
+\addplot+[color=veAttackGreen,solid,mark=o,mark size=1.65pt,
+	mark options={solid,fill=white,draw=veAttackGreen,line width=0.55pt}]
+	coordinates {
+		(0.01,1.0) (0.02,1.0) (0.05,1.0)
+		(0.10,1.0) (0.15,1.0) (0.20,1.0)
+	};
+\addlegendentry{Gaussian}
+\addplot+[color=veAttackAmber,dashed,mark=square,mark size=1.55pt,
+	mark options={solid,fill=white,draw=veAttackAmber,line width=0.55pt}]
+	coordinates {
+		(0.01,0.239167) (0.02,0.941667) (0.05,1.0)
+		(0.10,1.0) (0.15,1.0) (0.20,1.0)
+	};
+\addlegendentry{Scale}
+\addplot+[color=veAttackViolet,dotted,mark=triangle,mark size=1.75pt,
+	mark options={solid,fill=white,draw=veAttackViolet,line width=0.55pt}]
+	coordinates {
+		(0.01,0.0) (0.02,0.0) (0.05,0.0)
+		(0.10,0.0) (0.15,0.0) (0.20,0.0)
+	};
+\addlegendentry{Null-space}
+
+\end{groupplot}
+\end{tikzpicture}

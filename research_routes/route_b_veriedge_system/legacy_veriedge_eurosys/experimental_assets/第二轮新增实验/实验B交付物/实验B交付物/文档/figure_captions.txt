@@ -1,0 +1,10 @@
+Figure captions
+
+fig_delivery_latency_lan.pdf:
+Selective delivery latency as placement width grows on the LAN profile with a 100MB encrypted payload. RPD sends one full ciphertext to each selected provider over the shared requester uplink, while PPD publishes one ciphertext and releases small provider-specific access packages after placement commitment.
+
+fig_delivery_latency_wan.pdf:
+Selective delivery latency as placement width grows on the WAN/emulated-WAN profile. The wider the selected group, the more RPD is dominated by repeated payload-sized requester transfers; PPD keeps requester-side delivery closer to one ciphertext publication plus small access packages.
+
+fig_delivery_egress_group_size.pdf:
+Requester egress under placement-defined disclosure. RPD grows approximately as kS, while PPD grows as S plus k small access packages. This is the core evidence that committed placement is also the data boundary.

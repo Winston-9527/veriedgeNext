@@ -1,0 +1,7 @@
+attack_family,pair_count,mean_detection_rate,min_detection_rate,mean_localization_acc,min_localization_acc
+gaussian,6,1.0,1.0,1.0,1.0
+cross_prompt_stale_substitution,6,1.0,1.0,1.0,1.0
+wrong_shard_output,6,1.0,1.0,1.0,1.0
+layer_skip,6,1.0,1.0,1.0,1.0
+scale_perturbation,6,1.0,1.0,1.0,1.0
+projection_aware_nullspace,6,0.0,0.0,0.0,0.0

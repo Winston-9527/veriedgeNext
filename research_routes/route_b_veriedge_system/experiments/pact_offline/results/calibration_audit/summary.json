@@ -1,0 +1,9 @@
+{
+  "status": "prompt-level exact-energy audit; no projection Monte Carlo error",
+  "alpha": 0.01,
+  "independent_calibration_prompts": 6,
+  "independent_evaluation_prompts": 12,
+  "minimum_calibration_prompts_for_nontrivial_distribution_free_1pct": 99,
+  "rerun_is_correlated_with_evaluation_and_not_counted_as_new_prompts": true,
+  "rerun_candidate_tensors_value_identical_to_original": true
+}

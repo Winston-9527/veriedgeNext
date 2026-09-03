@@ -1,0 +1,82 @@
+\begin{tikzpicture}
+\definecolor{veOverBridge}{HTML}{26734D}
+\definecolor{veOverScalar}{HTML}{1F6E7A}
+\definecolor{veOverProjcos}{HTML}{607180}
+\definecolor{veOverHetero}{HTML}{1F6E7A}
+\definecolor{veOverTamper}{HTML}{3B5B8A}
+\definecolor{veOverGrid}{HTML}{D7DEE2}
+\definecolor{veOverPanel}{HTML}{F7FAFB}
+\begin{groupplot}[
+	group style={group size=2 by 1,horizontal sep=0.86cm},
+	width=0.405\textwidth,
+	height=0.285\textwidth,
+	symbolic x coords={projscalar,scalar16,projcos4,scalar64,projcos16},
+	xtick=data,
+	xticklabels={{projscalar1\\abs},scalar16,projcos4,scalar64,projcos16},
+	x tick label style={font=\scriptsize,align=center},
+	tick label style={font=\scriptsize},
+	label style={font=\scriptsize},
+	title style={font=\scriptsize\bfseries,yshift=-0.4ex},
+	legend style={
+		font=\scriptsize,
+		draw=none,
+		fill=white,
+		fill opacity=0.88,
+		text opacity=1,
+		row sep=0pt,
+		cells={anchor=west}
+	},
+	enlarge x limits=0.13,
+	grid=major,
+	major grid style={draw=veOverGrid,line width=0.25pt},
+	axis background/.style={fill=veOverPanel},
+	axis line style={draw=black!55,line width=0.35pt},
+	tick align=outside,
+]
+
+\nextgroupplot[
+	title={(a) reveal payload},
+	ylabel={bytes / trace},
+	ymin=0,ymax=3600,
+	ytick={0,1000,2000,3000},
+	legend pos=north west,
+]
+\addplot+[ybar,bar width=7.2pt,area legend,mark=none,fill=veOverBridge!18,draw=veOverBridge,line width=0.45pt]
+	coordinates {(projscalar,192)};
+\addlegendentry{projscalar}
+\addplot+[ybar,bar width=7.2pt,area legend,mark=none,fill=veOverScalar!18,draw=veOverScalar,line width=0.45pt]
+	coordinates {(scalar16,192) (scalar64,768)};
+\addlegendentry{scalar}
+\addplot+[ybar,bar width=7.2pt,area legend,mark=none,fill=veOverProjcos!16,draw=veOverProjcos,line width=0.45pt,
+	postaction={pattern=north east lines,pattern color=veOverProjcos!72}]
+	coordinates {(projcos4,768) (projcos16,3072)};
+\addlegendentry{projcos}
+\node[anchor=south,font=\scriptsize,text=black!60] at (axis cs:projscalar,218) {192};
+\node[anchor=south,font=\scriptsize,text=black!60] at (axis cs:scalar16,218) {192};
+\node[anchor=south,font=\scriptsize,text=black!60] at (axis cs:projcos4,805) {768};
+\node[anchor=south,font=\scriptsize,text=black!60] at (axis cs:scalar64,805) {768};
+\node[anchor=south,font=\scriptsize,text=black!60] at (axis cs:projcos16,3110) {3072};
+
+\nextgroupplot[
+	title={(b) challenge latency},
+	ylabel={ms / trace},
+	ymin=0,ymax=4.35,
+	ytick={0,1,2,3,4},
+	legend pos=south east,
+]
+\addplot+[ybar=2.8pt,bar shift=-2.1pt,area legend,mark=none,fill=veOverHetero!18,draw=veOverHetero,line width=0.45pt]
+	coordinates {
+		(projscalar,3.708742) (scalar16,3.603487) (projcos4,3.798230)
+		(scalar64,3.468791) (projcos16,4.040801)
+	};
+\addlegendentry{honest-hetero}
+\addplot+[ybar=2.8pt,bar shift=2.1pt,area legend,mark=none,fill=veOverTamper!16,draw=veOverTamper,line width=0.45pt,
+	postaction={pattern=north east lines,pattern color=veOverTamper!78}]
+	coordinates {
+		(projscalar,3.813726) (scalar16,3.381667) (projcos4,3.683724)
+		(scalar64,3.402573) (projcos16,3.943448)
+	};
+\addlegendentry{tamper}
+
+\end{groupplot}
+\end{tikzpicture}

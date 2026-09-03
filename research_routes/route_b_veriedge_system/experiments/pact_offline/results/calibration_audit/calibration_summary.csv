@@ -1,0 +1,4 @@
+checkpoint,calibration_prompts,evaluation_prompts,max_calibration_energy,median_calibration_energy,median_evaluation_energy,max_evaluation_energy,evaluation_exceedance_rate_at_max_calibration,rerun_exceedance_rate_at_max_calibration,median_abs_original_rerun_energy_difference,nominal_alpha,smallest_distribution_free_alpha_with_n_calibration,minimum_calibration_prompts_for_nontrivial_alpha
+prefill__C1,6,12,3.799015097715494e-05,1.4621427481594656e-05,1.4639666607748611e-05,3.809073259383518e-05,0.08333333333333333,0.08333333333333333,0.0,0.01,0.14285714285714285,99
+prefill__C2,6,12,3.826957817670183e-05,1.4979084454861422e-05,1.5157739979737147e-05,3.94652455608863e-05,0.16666666666666666,0.16666666666666666,0.0,0.01,0.14285714285714285,99
+prefill__C3,6,12,0.0003357878999127994,0.00023348647696235165,0.0002647046215625094,0.0004963097061981468,0.3333333333333333,0.3333333333333333,0.0,0.01,0.14285714285714285,99

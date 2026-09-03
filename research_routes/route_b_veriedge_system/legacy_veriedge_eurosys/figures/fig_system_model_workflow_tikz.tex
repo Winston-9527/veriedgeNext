@@ -1,0 +1,282 @@
+\documentclass[tikz,border=2pt]{standalone}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usetikzlibrary{arrows.meta,calc,fit,positioning}
+
+\graphicspath{{figures/icons_pdf/}{icons_pdf/}}
+
+\definecolor{RoutineBlue}{HTML}{1557A6}
+\definecolor{OrchBrown}{HTML}{8A560D}
+\definecolor{ProviderGreen}{HTML}{1F7A2E}
+\definecolor{AlertRed}{HTML}{C9252C}
+\definecolor{LedgerPurple}{HTML}{5B3B93}
+\definecolor{MutedGray}{HTML}{6F7782}
+\definecolor{Ink}{HTML}{1C2630}
+\definecolor{SoftBlue}{HTML}{F2F7FF}
+\definecolor{SoftBrown}{HTML}{FFF8EE}
+\definecolor{SoftGreen}{HTML}{F2FFF4}
+\definecolor{SoftRed}{HTML}{FFF3F4}
+\definecolor{SoftPurple}{HTML}{F7F3FF}
+\definecolor{SoftCyan}{HTML}{EFF8FF}
+
+\newcommand{\icon}[2][0.58cm]{\includegraphics[width=#1,height=#1,keepaspectratio]{#2}}
+\newcommand{\stepbadge}[3][RoutineBlue]{%
+  \node[circle, fill=#1, text=white, inner sep=0pt, minimum size=0.42cm,
+        font=\sffamily\bfseries\scriptsize] at (#2) {#3};%
+}
+
+\begin{document}
+\begin{tikzpicture}[
+  x=1cm,y=1cm,
+  font=\sffamily,
+  line cap=round,line join=round,
+  routine/.style={RoutineBlue, line width=0.9pt, -{Latex[length=2.2mm,width=1.6mm]}},
+  routineNoArrow/.style={RoutineBlue, line width=0.9pt},
+  challenge/.style={AlertRed, line width=0.9pt, dashed, dash pattern=on 3pt off 3pt,
+                    -{Latex[length=2.2mm,width=1.6mm]}},
+  challengeNoArrow/.style={AlertRed, line width=0.9pt, dashed, dash pattern=on 3pt off 3pt},
+  panelText/.style={font=\sffamily\bfseries\large, text=Ink},
+  smallText/.style={font=\sffamily\scriptsize, text=Ink},
+  noteText/.style={font=\sffamily\itshape\scriptsize},
+  row/.style={rounded corners=2mm, line width=0.6pt, fill=white}
+]
+
+% ---------------------------------------------------------------------
+% Main panels
+% ---------------------------------------------------------------------
+\draw[rounded corners=3mm, draw=RoutineBlue, fill=SoftBlue, line width=0.8pt]
+  (0.2,6.7) rectangle (4.25,12.15);
+\node at (0.83,11.68) {\icon[0.82cm]{requester.pdf}};
+\node[panelText, text=RoutineBlue, anchor=west] at (1.35,11.72) {Requester \(R\)};
+\node[font=\sffamily\itshape\scriptsize, text=MutedGray, anchor=west] at (1.35,11.18)
+  {owns task plaintext};
+
+\draw[rounded corners=3mm, draw=OrchBrown, fill=SoftBrown, line width=0.8pt]
+  (5.75,6.95) rectangle (10.75,12.15);
+\node at (6.36,11.70) {\icon[0.82cm]{orchestrator.pdf}};
+\node[panelText, text=OrchBrown, anchor=west] at (6.95,11.78)
+  {Verification-aware};
+\node[panelText, text=OrchBrown, anchor=west] at (6.95,11.35)
+  {Orchestrator \(O\)};
+
+\draw[rounded corners=3mm, draw=ProviderGreen, fill=SoftGreen, line width=0.8pt]
+  (11.85,5.65) rectangle (21.85,12.15);
+\node at (12.70,11.72) {\icon[0.80cm]{server_green.pdf}};
+\node[panelText, text=ProviderGreen, anchor=west] at (13.28,11.75)
+  {Provider pool};
+\node[font=\sffamily\itshape\small, text=Ink, anchor=west] at (13.28,11.27)
+  {\(\mathcal{P}=\{P_1,\ldots,P_n\}\)};
+
+\draw[rounded corners=2mm, draw=LedgerPurple, fill=SoftPurple, line width=0.8pt]
+  (0.75,0.65) rectangle (11.20,2.80);
+\node at (1.55,2.30) {\icon[0.76cm]{ledger_link.pdf}};
+\node[panelText, text=LedgerPurple, anchor=west] at (2.15,2.30)
+  {Contract / Ledger \(\mathcal{L}\)};
+
+\draw[rounded corners=2mm, draw=RoutineBlue, fill=SoftCyan, line width=0.8pt]
+  (12.35,0.65) rectangle (21.05,2.80);
+\node at (13.18,2.30) {\icon[0.80cm]{data_store.pdf}};
+\node[panelText, text=RoutineBlue, anchor=west] at (13.80,2.30)
+  {Off-chain Data Store \(\mathcal{D}\)};
+
+% ---------------------------------------------------------------------
+% Requester internals
+% ---------------------------------------------------------------------
+\foreach \y/\ico/\title/\sub in {
+  10.00/document.pdf/prepare task/{public descriptor only},
+  8.92/lock.pdf/encrypt payload/{\(C_j=\mathsf{Enc}_{k_j}(x_j)\)},
+  7.84/key.pdf/targeted access/{release \(e_{i,j}\) after commit}
+}{
+  \draw[row, draw=RoutineBlue] (0.55,\y) rectangle (3.95,\y+0.72);
+  \node at (0.92,\y+0.36) {\icon[0.58cm]{\ico}};
+  \node[font=\sffamily\bfseries\scriptsize, text=RoutineBlue, anchor=west]
+    at (1.35,\y+0.46) {\title};
+  \node[smallText, text=MutedGray, anchor=west] at (1.35,\y+0.18) {\sub};
+}
+\node at (0.85,7.15) {\icon[0.65cm]{shield_check.pdf}};
+\node[smallText, text=MutedGray, anchor=west] at (1.25,7.23)
+  {outside access-tuple};
+\node[smallText, text=MutedGray, anchor=west] at (1.25,6.93)
+  {path of \(O\)};
+
+% ---------------------------------------------------------------------
+% Orchestrator internals
+% ---------------------------------------------------------------------
+\foreach \y/\ico/\txt in {
+  10.25/search.pdf/provider discovery,
+  9.15/group.pdf/group selection,
+  8.05/shard_grid.pdf/shard mapping,
+  6.95/placement_commit.pdf/placement commitment
+}{
+  \draw[row, draw=OrchBrown] (6.15,\y) rectangle (10.35,\y+0.70);
+  \node at (6.55,\y+0.35) {\icon[0.58cm]{\ico}};
+  \node[font=\sffamily\bfseries\scriptsize, text=OrchBrown, anchor=west]
+    at (7.08,\y+0.35) {\txt};
+}
+\node at (6.55,6.45) {\icon[0.54cm]{orchestrator_lock.pdf}};
+\node[noteText, text=OrchBrown, anchor=west] at (7.05,6.45)
+  {No task plaintext or access tuples};
+
+% ---------------------------------------------------------------------
+% Provider internals
+% ---------------------------------------------------------------------
+\draw[rounded corners=2mm, draw=ProviderGreen, fill=white, dashed, line width=0.7pt]
+  (12.55,8.02) rectangle (19.85,11.00);
+\node[font=\sffamily\bfseries\scriptsize, text=ProviderGreen] at (16.20,10.65)
+  {selected execution group \(\mathcal{G}_j=\{P_1,P_2,P_3\}\)};
+
+\foreach \x/\name/\col/\fillc/\file in {
+  13.25/P_1/ProviderGreen/SoftGreen/server_green.pdf,
+  15.70/P_2/ProviderGreen/SoftGreen/server_green.pdf,
+  18.15/P_3/AlertRed/SoftRed/server_red.pdf
+}{
+  \draw[rounded corners=2mm, draw=\col, fill=\fillc, line width=0.8pt]
+    (\x,9.25) rectangle (\x+1.25,10.35);
+  \node at (\x+0.62,9.95) {\icon[0.65cm]{\file}};
+  \node[font=\sffamily\bfseries\large, text=\col] at (\x+0.62,9.42) {\(\name\)};
+}
+\draw[<->, line width=0.8pt, Ink] (14.50,9.82) -- (15.70,9.82);
+\draw[<->, line width=0.8pt, Ink] (16.95,9.82) -- (18.15,9.82);
+\node[noteText, text=ProviderGreen] at (15.80,8.82) {shard-boundary activations};
+\node[noteText, text=ProviderGreen] at (15.80,8.45)
+  {execute \(\sigma_j\) and return \(y_j\)};
+
+\node at (19.22,9.86) {\icon[0.60cm]{warning_triangle.pdf}};
+\node[noteText, text=AlertRed] at (18.72,8.44) {faulty / malicious};
+\node[noteText, text=AlertRed, align=center] at (18.72,8.12)
+  {wrong output /\\tampered boundary state};
+
+\foreach \x/\name in {13.95/P_4,16.60/P_5}{
+  \draw[rounded corners=2mm, draw=MutedGray, fill=white, line width=0.6pt]
+    (\x,6.45) rectangle (\x+1.45,7.30);
+  \node at (\x+0.42,6.95) {\icon[0.54cm]{server_gray.pdf}};
+  \node[font=\sffamily\bfseries\scriptsize, text=MutedGray] at (\x+0.95,6.92) {\(\name\)};
+}
+\node[noteText, text=MutedGray, align=center] at (16.00,6.05)
+  {unselected providers (no access packages)};
+
+\draw[rounded corners=1.8mm, draw=ProviderGreen, dashed, fill=white, line width=0.6pt]
+  (20.25,9.48) rectangle (21.55,10.88);
+\node[noteText, text=ProviderGreen, align=center] at (20.90,10.18)
+  {placement\\defines\\accountability\\boundary};
+\draw[ProviderGreen, line width=0.7pt, -{Latex[length=1.8mm,width=1.3mm]}]
+  (20.25,10.20) -- (19.85,10.20);
+
+\draw[rounded corners=1.8mm, draw=AlertRed, dashed, fill=white, line width=0.6pt]
+  (20.25,6.62) rectangle (21.55,8.12);
+\node[noteText, text=AlertRed, align=center] at (20.90,7.38)
+  {unselected\\providers\\receive no\\access\\packages};
+\draw[AlertRed, dashed, dash pattern=on 3pt off 3pt, line width=0.7pt,
+      -{Latex[length=1.8mm,width=1.3mm]}] (20.25,7.25) -- (18.10,6.95);
+
+% ---------------------------------------------------------------------
+% Ledger and data-store internals
+% ---------------------------------------------------------------------
+\draw[rounded corners=1.5mm, draw=LedgerPurple!35, fill=white, line width=0.5pt]
+  (1.00,0.95) rectangle (3.05,1.75);
+\node at (1.42,1.35) {\icon[0.52cm]{document.pdf}};
+\node[smallText, anchor=west] at (1.78,1.35) {commitments};
+
+\draw[rounded corners=1.5mm, draw=LedgerPurple!35, fill=white, line width=0.5pt]
+  (3.45,0.95) rectangle (5.50,1.75);
+\node at (3.87,1.35) {\icon[0.52cm]{escrow_wallet.pdf}};
+\node[smallText, anchor=west] at (4.23,1.35) {escrow};
+
+\draw[rounded corners=1.5mm, draw=LedgerPurple!35, fill=white, line width=0.5pt]
+  (5.90,0.95) rectangle (7.95,1.75);
+\node at (6.32,1.35) {\icon[0.52cm]{challenge_clipboard.pdf}};
+\node[smallText, align=left, anchor=west] at (6.68,1.35) {challenge\\outcome};
+
+\draw[rounded corners=1.5mm, draw=LedgerPurple!35, fill=white, line width=0.5pt]
+  (8.35,0.95) rectangle (10.40,1.75);
+\node at (8.77,1.35) {\icon[0.52cm]{settlement_bank.pdf}};
+\node[smallText, anchor=west] at (9.13,1.35) {settlement};
+
+\draw[rounded corners=1.5mm, draw=RoutineBlue!35, fill=white, line width=0.5pt]
+  (12.85,0.95) rectangle (15.90,1.75);
+\node at (13.30,1.35) {\icon[0.54cm]{encrypted_object.pdf}};
+\node[smallText, align=left, anchor=west] at (13.69,1.35)
+  {encrypted task\\object \(C_j\)};
+
+\draw[rounded corners=1.5mm, draw=RoutineBlue!35, fill=white, line width=0.5pt]
+  (16.85,0.95) rectangle (19.90,1.75);
+\node at (17.30,1.35) {\icon[0.54cm]{ciphertext_storage.pdf}};
+\node[smallText, align=left, anchor=west] at (17.69,1.35)
+  {ciphertext\\storage};
+
+% ---------------------------------------------------------------------
+% Verifier
+% ---------------------------------------------------------------------
+\draw[rounded corners=2mm, draw=LedgerPurple, fill=white, line width=0.8pt]
+  (9.35,3.55) rectangle (13.00,4.55);
+\node at (9.78,4.08) {\icon[0.62cm]{verifier_balance.pdf}};
+\node[font=\sffamily\bfseries\small, text=LedgerPurple, anchor=west] at (10.20,4.20)
+  {\(\mathsf{Verify}(E_j,\pi_j,\vartheta_j)\)};
+\node[font=\sffamily\itshape\scriptsize, text=MutedGray, anchor=west] at (10.20,3.82)
+  {TSTC challenge verifier};
+
+% ---------------------------------------------------------------------
+% Routine path arrows
+% ---------------------------------------------------------------------
+\draw[routine] (4.25,10.45) -- (5.75,10.45);
+\stepbadge{4.82,10.78}{1}
+\node[smallText, text=RoutineBlue, align=center] at (4.82,9.98)
+  {public task\\descriptor \(\widehat{\tau}_j\)};
+
+\draw[routine] (11.85,10.45) -- (10.75,10.45);
+\stepbadge{11.35,10.78}{2}
+\node[smallText, text=RoutineBlue, align=center] at (11.35,9.98)
+  {resource\\profiles};
+
+\draw[routine] (8.25,6.95) -- (8.25,2.80);
+\stepbadge{7.62,4.82}{3}
+\node[smallText, text=Ink, align=center] at (7.35,4.35)
+  {commit placement\\\(\pi_j=(\mathcal{G}_j,\sigma_j,\vartheta_j)\)};
+
+\draw[routineNoArrow] (2.20,6.70) -- (2.20,3.25) -- (17.40,3.25);
+\draw[routine] (17.40,3.25) -- (17.40,2.80);
+\stepbadge{2.02,3.08}{4}
+\node[smallText, text=RoutineBlue, align=left] at (2.55,3.05)
+  {upload encrypted\\task object \(C_j\)};
+
+\draw[routineNoArrow] (4.25,8.20) -- (5.20,8.20) -- (5.20,5.72) -- (12.75,5.72);
+\draw[routine] (12.75,5.72) -- (12.75,8.02);
+\stepbadge{5.02,5.95}{5}
+\node[smallText, text=RoutineBlue, anchor=west] at (5.30,5.98)
+  {encrypted access packages \(e_{i,j}\)};
+
+\draw[routine] (15.95,2.80) -- (15.95,8.02);
+\stepbadge{15.62,5.60}{6}
+\node[smallText, text=RoutineBlue, align=left, anchor=west] at (16.15,5.58)
+  {fetch \(C_j\) via \(\ell_j\)};
+
+% ---------------------------------------------------------------------
+% Challenge path arrows
+% ---------------------------------------------------------------------
+\draw[challengeNoArrow] (0.75,6.70) -- (0.75,3.75) -- (9.35,3.75);
+\draw[challenge] (0.75,3.75) -- (9.35,3.75);
+\stepbadge[AlertRed]{0.55,4.55}{7}
+\node[noteText, text=AlertRed, anchor=west] at (0.78,4.32) {challenge trigger};
+
+\draw[challengeNoArrow] (18.78,9.25) -- (19.55,9.25) -- (19.55,4.78) -- (13.00,4.78);
+\draw[challenge] (19.55,4.78) -- (13.00,4.78);
+\stepbadge[AlertRed]{18.80,4.38}{8}
+\node[noteText, text=AlertRed, align=left] at (16.20,4.32)
+  {checkpoint-sketch evidence\\\(E_j\) from \(\mathcal{G}_j\)};
+
+\draw[challenge] (11.18,3.55) -- (11.18,2.80);
+\stepbadge[AlertRed]{10.70,3.10}{9}
+\node[noteText, text=AlertRed, align=center] at (10.12,3.10)
+  {first mismatch \(b_j^\star\) /\\settlement};
+
+% ---------------------------------------------------------------------
+% Legend
+% ---------------------------------------------------------------------
+\draw[routine] (6.20,0.15) -- (7.30,0.15);
+\node[smallText, anchor=west] at (7.55,0.15) {Routine path};
+\draw[challenge] (11.20,0.15) -- (12.30,0.15);
+\node[smallText, anchor=west] at (12.55,0.15) {Challenge path};
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,8 @@
+{
+  "status": "exact projection-only conditional power; assumes prompt-specific honest energy",
+  "projection_family": "gaussian",
+  "conditional_fpr": 0.01,
+  "max_K_searched": 4096,
+  "prompt_distribution_calibration_included": false,
+  "support_dependence": false
+}

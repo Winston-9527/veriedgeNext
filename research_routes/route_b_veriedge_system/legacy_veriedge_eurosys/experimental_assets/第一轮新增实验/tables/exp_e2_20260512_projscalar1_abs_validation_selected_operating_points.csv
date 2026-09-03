@@ -1,0 +1,7 @@
+pair_id,pair_label,variant,family,tolerance_mode,percentile,tolerance_scale,signature_scalars_per_checkpoint,signature_bytes_per_checkpoint_fp32,token_samples,channel_samples,projection_dim,calib_honest_hetero_fpr,calib_tamper_tpr,calib_tamper_locacc,calib_prompt_count,calib_feasible_count,selected_from_feasible,selection_fallback_reason,selection_rule
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,scalar16,scalar,global_shared,99.99,1.5,16,64,1,16,0,0.125,1.0,1.0,40,0,0,no calibration candidate with FPR <= 0.10,"prefer calib FPR<=0.10, then maximize (TPR-FPR)"
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,projscalar1_abs,projabs,checkpoint_specific,99.0,1.5,16,64,16,0,1,0.0,1.0,1.0,40,30,1,,"prefer calib FPR<=0.10, then maximize (TPR-FPR)"
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,projcos4,projcos,checkpoint_specific,99.0,1.5,64,256,16,0,4,0.0,1.0,1.0,40,35,1,,"prefer calib FPR<=0.10, then maximize (TPR-FPR)"
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,scalar16,scalar,global_shared,99.99,1.5,16,64,1,16,0,0.2,1.0,1.0,40,0,0,no calibration candidate with FPR <= 0.10,"prefer calib FPR<=0.10, then maximize (TPR-FPR)"
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,projscalar1_abs,projabs,checkpoint_specific,99.0,1.5,16,64,16,0,1,0.0,1.0,1.0,40,30,1,,"prefer calib FPR<=0.10, then maximize (TPR-FPR)"
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,projcos4,projcos,checkpoint_specific,99.0,1.5,64,256,16,0,4,0.0,1.0,1.0,40,34,1,,"prefer calib FPR<=0.10, then maximize (TPR-FPR)"

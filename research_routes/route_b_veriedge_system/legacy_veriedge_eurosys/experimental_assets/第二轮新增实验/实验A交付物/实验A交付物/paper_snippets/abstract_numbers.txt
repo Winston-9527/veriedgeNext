@@ -1,0 +1,3 @@
+Placement result sentence:
+Under queued-8 replay at alpha=0.10 and beta=0.90, network-aware placement with fixed scalar sketches selects infeasible signatures in 100.0% of tasks. With the same fixed projcos4 sketch, verifiability-constrained placement reduces infeasible usage from 100.0% to 0.0% by avoiding infeasible groups. A network-aware adaptive-sketch baseline also reduces infeasible usage to 0.0% by upgrading the selected low-latency group, while the joint adaptive-verifier policy remains feasible by selecting the best group/sketch trade-off under the same constraints.
+Adaptive-verifier placement obtains infeasible usage 0.0%, false risk 0.0020, and goodput 1.060.

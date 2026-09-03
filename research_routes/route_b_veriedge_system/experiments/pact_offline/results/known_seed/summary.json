@@ -1,0 +1,11 @@
+{
+  "status": "negative control outside the commit-before-seed threat model",
+  "projection_family": "gaussian",
+  "attack_timing": "realized seed known before attack construction",
+  "construction": "(K+2)-sparse nullspace vector orthogonal to honest residual",
+  "draws_per_pair_K": 64,
+  "max_l2_error": 1.3877787807814457e-17,
+  "max_null_relative": 9.663194993709712e-15,
+  "max_abs_residual_cosine": 1.4697427872205963e-15,
+  "max_abs_pair_detection_rate_difference": 0.0
+}

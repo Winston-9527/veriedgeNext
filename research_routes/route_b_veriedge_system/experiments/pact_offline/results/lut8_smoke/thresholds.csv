@@ -1,0 +1,7 @@
+checkpoint,K,threshold,calibration_prompt_seed_draws,calibration_prompts,target_alpha_smoke_only,projection_family
+prefill__C1,4,0.0002119504465822639,24,6,0.01,lut8
+prefill__C1,16,7.967603207041262e-05,24,6,0.01,lut8
+prefill__C2,4,9.028769933455412e-05,24,6,0.01,lut8
+prefill__C2,16,6.580244371899105e-05,24,6,0.01,lut8
+prefill__C3,4,0.0009335054249029936,24,6,0.01,lut8
+prefill__C3,16,0.00045215053195111316,24,6,0.01,lut8

@@ -1,0 +1,27 @@
+\documentclass[border=1pt]{standalone}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{patterns,plotmarks}
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+\begin{minipage}{31.0cm}
+\centering
+\begin{minipage}[t]{10.0cm}
+	\centering
+	\input{fig_placement_frontier_a1_tikz.tex}\\[-0.1em]
+	{\footnotesize (a) Controlled placement frontier.}
+\end{minipage}\hspace{0.35cm}
+\begin{minipage}[t]{10.0cm}
+	\centering
+	\input{fig_placement_frontier_a3_queue_tikz.tex}\\[-0.1em]
+	{\footnotesize (b) Queue-aware placement frontier.}
+\end{minipage}\hspace{0.35cm}
+\begin{minipage}[t]{10.0cm}
+	\centering
+	\input{fig_alpha_sensitivity_infeasible_tikz.tex}\\[-0.1em]
+	{\footnotesize (c) Infeasible usage under target $\alpha$.}
+\end{minipage}
+\end{minipage}
+\end{document}

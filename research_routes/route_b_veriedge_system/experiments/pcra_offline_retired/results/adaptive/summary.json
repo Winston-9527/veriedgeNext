@@ -1,0 +1,267 @@
+{
+  "aggregate": [
+    {
+      "attack": "honest",
+      "max_test_rate": 0.1806640625,
+      "mean_test_rate": 0.038736979166666664,
+      "min_test_rate": 0.005859375,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.0
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.173828125,
+      "mean_test_rate": 0.06827799479166667,
+      "min_test_rate": 0.0224609375,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 0.721923828125,
+      "min_test_rate": 0.0458984375,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 0.946533203125,
+      "min_test_rate": 0.7900390625,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.228515625,
+      "mean_test_rate": 0.09659830729166667,
+      "min_test_rate": 0.06103515625,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.01
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.224609375,
+      "mean_test_rate": 0.09269205729166667,
+      "min_test_rate": 0.05615234375,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 0.8992513020833334,
+      "min_test_rate": 0.56982421875,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.23095703125,
+      "mean_test_rate": 0.09724934895833333,
+      "min_test_rate": 0.06640625,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.02
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.23681640625,
+      "mean_test_rate": 0.09676106770833333,
+      "min_test_rate": 0.060546875,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.24365234375,
+      "mean_test_rate": 0.09749348958333333,
+      "min_test_rate": 0.05908203125,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.05
+    },
+    {
+      "attack": "honest",
+      "max_test_rate": 0.4580078125,
+      "mean_test_rate": 0.08536783854166667,
+      "min_test_rate": 0.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.0
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.103515625,
+      "mean_test_rate": 0.023030598958333332,
+      "min_test_rate": 0.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 0.806640625,
+      "mean_test_rate": 0.16202799479166666,
+      "min_test_rate": 0.00146484375,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.57666015625,
+      "mean_test_rate": 0.15022786458333334,
+      "min_test_rate": 0.0107421875,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.01
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.57275390625,
+      "mean_test_rate": 0.16121419270833334,
+      "min_test_rate": 0.02099609375,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 0.4056803385416667,
+      "min_test_rate": 0.09228515625,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.59033203125,
+      "mean_test_rate": 0.2984212239583333,
+      "min_test_rate": 0.2294921875,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.02
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.57568359375,
+      "mean_test_rate": 0.2505696614583333,
+      "min_test_rate": 0.15576171875,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.5732421875,
+      "mean_test_rate": 0.2913411458333333,
+      "min_test_rate": 0.22119140625,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.05
+    }
+  ],
+  "checkpoints": [
+    "prefill__C1",
+    "prefill__C2",
+    "prefill__C3"
+  ],
+  "optimizer_steps": 60,
+  "pairs": 6,
+  "prompts": [
+    "eval_001",
+    "eval_005"
+  ],
+  "q_values": [
+    64,
+    256
+  ],
+  "scope": "local white-box non-anticipating attack smoke test; no semantic harm measurement",
+  "selection_challenges": 512,
+  "strengths": [
+    0.01,
+    0.02,
+    0.05
+  ],
+  "support_candidates": [
+    16,
+    256,
+    0
+  ],
+  "test_challenges": 2048,
+  "train_challenges": 512
+}

@@ -1,0 +1,100 @@
+\begin{tikzpicture}
+\definecolor{veSweepGaussian}{HTML}{1F6E7A}
+\definecolor{veSweepScale}{HTML}{B7651A}
+\definecolor{veSweepGrid}{HTML}{D7DEE2}
+\definecolor{veSweepPanel}{HTML}{F7FAFB}
+\begin{groupplot}[
+	group style={group size=2 by 1,horizontal sep=0.86cm},
+	width=0.405\textwidth,
+	height=0.255\textwidth,
+	xmin=0.0,xmax=0.21,
+	ymin=-0.02,ymax=1.08,
+	xtick={0.01,0.05,0.10,0.15,0.20},
+	xticklabels={.01,.05,.10,.15,.20},
+	ytick={0,0.25,0.5,0.75,1.0},
+	xlabel={attack strength},
+	ylabel={detection rate / TPR},
+	tick label style={font=\scriptsize},
+	label style={font=\scriptsize},
+	title style={font=\scriptsize\bfseries,yshift=-0.4ex},
+	legend style={
+		font=\scriptsize,
+		draw=none,
+		fill=white,
+		fill opacity=0.88,
+		text opacity=1,
+		row sep=0pt,
+		cells={anchor=west}
+	},
+	grid=major,
+	major grid style={draw=veSweepGrid,line width=0.25pt},
+	axis background/.style={fill=veSweepPanel},
+	axis line style={draw=black!55,line width=0.35pt},
+	tick align=outside,
+	every axis plot/.append style={line width=0.9pt},
+]
+
+\nextgroupplot[
+	title={(a) A/B pair},
+]
+\addplot+[color=veSweepGaussian,solid,mark=o,mark size=1.65pt,
+	mark options={solid,fill=white,draw=veSweepGaussian,line width=0.55pt}]
+	coordinates {
+		(0.01,0.67) (0.02,0.94) (0.05,1.00)
+		(0.10,1.00) (0.15,1.00) (0.20,1.00)
+	};
+\addplot+[color=veSweepGaussian,dashed,mark=square,mark size=1.55pt,
+	mark options={solid,fill=white,draw=veSweepGaussian,line width=0.55pt}]
+	coordinates {
+		(0.01,1.00) (0.02,1.00) (0.05,1.00)
+		(0.10,1.00) (0.15,1.00) (0.20,1.00)
+	};
+\addplot+[color=veSweepScale,solid,mark=o,mark size=1.65pt,
+	mark options={solid,fill=white,draw=veSweepScale,line width=0.55pt}]
+	coordinates {
+		(0.01,0.06) (0.02,0.10) (0.05,0.26)
+		(0.10,0.425) (0.15,0.52) (0.20,0.69)
+	};
+\addplot+[color=veSweepScale,dashed,mark=square,mark size=1.55pt,
+	mark options={solid,fill=white,draw=veSweepScale,line width=0.55pt}]
+	coordinates {
+		(0.01,0.00) (0.02,0.00) (0.05,0.00)
+		(0.10,0.00) (0.15,0.00) (0.20,0.00)
+	};
+\node[anchor=west,font=\scriptsize,text=veSweepGaussian!80!black]
+	at (axis cs:0.112,0.96) {Gaussian};
+\node[anchor=west,font=\scriptsize,text=veSweepScale!80!black]
+	at (axis cs:0.112,0.36) {Scale};
+
+\nextgroupplot[
+	title={(b) B/D pair},
+]
+\addplot+[color=veSweepGaussian,solid,mark=o,mark size=1.65pt,
+	mark options={solid,fill=white,draw=veSweepGaussian,line width=0.55pt}]
+	coordinates {
+		(0.01,0.955) (0.02,1.00) (0.05,1.00)
+		(0.10,1.00) (0.15,1.00) (0.20,1.00)
+	};
+\addplot+[color=veSweepGaussian,dashed,mark=square,mark size=1.55pt,
+	mark options={solid,fill=white,draw=veSweepGaussian,line width=0.55pt}]
+	coordinates {
+		(0.01,1.00) (0.02,1.00) (0.05,1.00)
+		(0.10,1.00) (0.15,1.00) (0.20,1.00)
+	};
+\addplot+[color=veSweepScale,solid,mark=o,mark size=1.65pt,
+	mark options={solid,fill=white,draw=veSweepScale,line width=0.55pt}]
+	coordinates {
+		(0.01,0.14) (0.02,0.20) (0.05,0.35)
+		(0.10,0.555) (0.15,0.72) (0.20,0.84)
+	};
+\addplot+[color=veSweepScale,dashed,mark=square,mark size=1.55pt,
+	mark options={solid,fill=white,draw=veSweepScale,line width=0.55pt}]
+	coordinates {
+		(0.01,0.00) (0.02,0.00) (0.05,0.00)
+		(0.10,0.00) (0.15,0.00) (0.20,0.00)
+	};
+\node[anchor=west,font=\scriptsize,text=veSweepScale!80!black]
+	at (axis cs:0.08,0.11) {cosine blind spot};
+
+\end{groupplot}
+\end{tikzpicture}

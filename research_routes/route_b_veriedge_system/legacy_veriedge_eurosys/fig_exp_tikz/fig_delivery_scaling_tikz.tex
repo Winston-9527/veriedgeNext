@@ -1,0 +1,78 @@
+\begin{tikzpicture}
+\definecolor{veDeliveryRPD}{HTML}{5C6670}
+\definecolor{veDeliveryPPD}{HTML}{0E6F78}
+\definecolor{veDeliveryGrid}{HTML}{D7DEE2}
+\definecolor{veDeliveryPanel}{HTML}{F7FAFB}
+\begin{groupplot}[
+	group style={group size=3 by 1,horizontal sep=0.68cm},
+	width=0.285\textwidth,
+	height=0.225\textwidth,
+	xmin=0.7,xmax=8.3,
+	xtick={1,2,4,8},
+	xlabel={selected group size \(k\)},
+	tick label style={font=\scriptsize},
+	label style={font=\scriptsize},
+	title style={font=\scriptsize\bfseries,yshift=-0.4ex},
+	legend style={
+		font=\scriptsize,
+		draw=none,
+		fill=white,
+		fill opacity=0.84,
+		text opacity=1,
+		row sep=0pt,
+		cells={anchor=west}
+	},
+	grid=both,
+	major grid style={draw=veDeliveryGrid,line width=0.25pt},
+	axis background/.style={fill=veDeliveryPanel},
+	axis line style={draw=black!55,line width=0.35pt},
+	tick align=outside,
+	every axis plot/.append style={line width=0.85pt},
+]
+
+\nextgroupplot[
+	title={(a) LAN latency},
+	ylabel={median latency (s)},
+	ymin=0,ymax=7.4,
+	ytick={0,2,4,6},
+	legend pos=north west,
+]
+\addplot+[color=veDeliveryRPD,solid,mark=square,mark size=1.55pt,
+	mark options={solid,fill=white,draw=veDeliveryRPD,line width=0.55pt}]
+	coordinates {(1,0.864) (2,1.715) (4,3.417) (8,6.820)};
+\addlegendentry{RPD}
+\addplot+[color=veDeliveryPPD,dashed,mark=o,mark size=1.65pt,
+	mark options={solid,fill=white,draw=veDeliveryPPD,line width=0.55pt}]
+	coordinates {(1,1.719) (2,1.720) (4,1.719) (8,1.719)};
+\addlegendentry{PPD}
+
+\nextgroupplot[
+	title={(b) WAN latency},
+	ylabel={median latency (s)},
+	ymin=0,ymax=170,
+	ytick={0,50,100,150},
+]
+\addplot+[color=veDeliveryRPD,solid,mark=square,mark size=1.55pt,
+	mark options={solid,fill=white,draw=veDeliveryRPD,line width=0.55pt}]
+	coordinates {(1,20.088) (2,40.099) (4,80.088) (8,160.100)};
+\addplot+[color=veDeliveryPPD,dashed,mark=o,mark size=1.65pt,
+	mark options={solid,fill=white,draw=veDeliveryPPD,line width=0.55pt}]
+	coordinates {(1,30.259) (2,30.272) (4,30.267) (8,30.267)};
+
+\nextgroupplot[
+	title={(c) requester egress},
+	ylabel={requester egress (MB)},
+	ymin=0,ymax=850,
+	ytick={0,200,400,600,800},
+]
+\addplot+[color=veDeliveryRPD,solid,mark=square,mark size=1.55pt,
+	mark options={solid,fill=white,draw=veDeliveryRPD,line width=0.55pt}]
+	coordinates {(1,100.000) (2,200.000) (4,400.000) (8,800.000)};
+\addplot+[color=veDeliveryPPD,dashed,mark=o,mark size=1.65pt,
+	mark options={solid,fill=white,draw=veDeliveryPPD,line width=0.55pt}]
+	coordinates {(1,100.001) (2,100.001) (4,100.002) (8,100.005)};
+\node[anchor=west,font=\scriptsize,text=veDeliveryPPD!80!black]
+	at (axis cs:2.25,128) {one ciphertext};
+
+\end{groupplot}
+\end{tikzpicture}

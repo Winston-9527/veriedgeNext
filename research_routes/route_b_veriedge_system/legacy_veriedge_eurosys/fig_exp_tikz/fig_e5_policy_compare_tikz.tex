@@ -1,0 +1,123 @@
+\begin{tikzpicture}
+\definecolor{vePolRandom}{HTML}{6B7280}
+\definecolor{vePolCost}{HTML}{8AA0AD}
+\definecolor{vePolRep}{HTML}{1F6E7A}
+\definecolor{vePolNet}{HTML}{0F766E}
+\definecolor{vePolRisk}{HTML}{3B5B8A}
+\definecolor{vePolAdapt}{HTML}{26734D}
+\definecolor{vePolGrid}{HTML}{D7DEE2}
+\definecolor{vePolPanel}{HTML}{F7FAFB}
+\newcommand{\vePolicySolidBar}[2]{%
+	\addplot+[ybar,bar width=6.2pt,mark=none,fill=#1!16,draw=#1,line width=0.4pt]
+		coordinates {#2};%
+}
+\newcommand{\vePolicyHatchBar}[2]{%
+	\addplot+[ybar,bar width=6.2pt,mark=none,fill=#1!14,draw=#1,line width=0.4pt,
+		postaction={pattern=north east lines,pattern color=#1!74}] coordinates {#2};%
+}
+\begin{groupplot}[
+	group style={group size=3 by 2,horizontal sep=0.62cm,vertical sep=0.68cm},
+	width=0.305\textwidth,
+	height=0.255\textwidth,
+	symbolic x coords={Rand,Cost,Rep,Net,Risk,Adapt},
+	xtick={Rand,Cost,Rep,Net,Risk,Adapt},
+	xticklabels={Rand,Cost,Rep,Net,Risk,Adapt},
+	x tick label style={font=\tiny,rotate=25,anchor=east},
+	tick label style={font=\scriptsize},
+	label style={font=\scriptsize},
+	title style={font=\scriptsize\bfseries,yshift=-0.5ex},
+	enlarge x limits=0.11,
+	grid=major,
+	major grid style={draw=vePolGrid,line width=0.25pt},
+	axis background/.style={fill=vePolPanel},
+	axis line style={draw=black!55,line width=0.35pt},
+	tick align=outside,
+]
+
+\nextgroupplot[
+	title={(a) latency},
+	ylabel={latency (s)},
+	ymin=0,ymax=56,
+	ytick={0,20,40},
+	xticklabels={,,,,,},
+]
+\vePolicySolidBar{vePolRandom}{(Rand,12.781498)}
+\vePolicySolidBar{vePolCost}{(Cost,51.636917)}
+\vePolicySolidBar{vePolRep}{(Rep,36.310436)}
+\vePolicySolidBar{vePolNet}{(Net,36.310436)}
+\vePolicyHatchBar{vePolRisk}{(Risk,36.310436)}
+\vePolicyHatchBar{vePolAdapt}{(Adapt,36.310436)}
+
+\nextgroupplot[
+	title={(b) goodput},
+	ylabel={tasks / s},
+	ymin=0,ymax=5.1,
+	ytick={0,2,4},
+	xticklabels={,,,,,},
+]
+\vePolicySolidBar{vePolRandom}{(Rand,4.741068)}
+\vePolicySolidBar{vePolCost}{(Cost,1.485707)}
+\vePolicySolidBar{vePolRep}{(Rep,2.160597)}
+\vePolicySolidBar{vePolNet}{(Net,2.160597)}
+\vePolicyHatchBar{vePolRisk}{(Risk,2.160597)}
+\vePolicyHatchBar{vePolAdapt}{(Adapt,2.240619)}
+
+\nextgroupplot[
+	title={(c) risk-adjusted goodput},
+	ylabel={adj. tasks / s},
+	ymin=0,ymax=4.8,
+	ytick={0,2,4},
+	xticklabels={,,,,,},
+]
+\vePolicySolidBar{vePolRandom}{(Rand,4.445107)}
+\vePolicySolidBar{vePolCost}{(Cost,1.445593)}
+\vePolicySolidBar{vePolRep}{(Rep,2.043924)}
+\vePolicySolidBar{vePolNet}{(Net,2.043924)}
+\vePolicyHatchBar{vePolRisk}{(Risk,2.139855)}
+\vePolicyHatchBar{vePolAdapt}{(Adapt,2.219109)}
+
+\nextgroupplot[
+	title={(d) false-dispute risk},
+	ylabel={FPR},
+	ymin=0,ymax=0.08,
+	ytick={0,0.025,0.05,0.075},
+	scaled y ticks=false,
+	yticklabels={0,.025,.050,.075},
+]
+\vePolicySolidBar{vePolRandom}{(Rand,0.062425)}
+\vePolicySolidBar{vePolCost}{(Cost,0.027000)}
+\vePolicySolidBar{vePolRep}{(Rep,0.054000)}
+\vePolicySolidBar{vePolNet}{(Net,0.054000)}
+\vePolicyHatchBar{vePolRisk}{(Risk,0.009600)}
+\vePolicyHatchBar{vePolAdapt}{(Adapt,0.009600)}
+
+\nextgroupplot[
+	title={(e) infeasible placements},
+	ylabel={rate},
+	ymin=0,ymax=1.0,
+	ytick={0,0.25,0.50,0.75,1.0},
+	yticklabels={0,.25,.50,.75,1.0},
+]
+\vePolicySolidBar{vePolRandom}{(Rand,0.335)}
+\vePolicySolidBar{vePolCost}{(Cost,0.300)}
+\vePolicySolidBar{vePolRep}{(Rep,0.480)}
+\vePolicySolidBar{vePolNet}{(Net,0.480)}
+\vePolicyHatchBar{vePolRisk}{(Risk,0.000)}
+\vePolicyHatchBar{vePolAdapt}{(Adapt,0.000)}
+
+\nextgroupplot[
+	title={(f) challenge workload},
+	ylabel={ms/task},
+	ymin=0,ymax=0.35,
+	ytick={0,0.1,0.2,0.3},
+	yticklabels={0,.1,.2,.3},
+]
+\vePolicySolidBar{vePolRandom}{(Rand,0.327945)}
+\vePolicySolidBar{vePolCost}{(Cost,0.145264)}
+\vePolicySolidBar{vePolRep}{(Rep,0.284592)}
+\vePolicySolidBar{vePolNet}{(Net,0.284592)}
+\vePolicyHatchBar{vePolRisk}{(Risk,0.054005)}
+\vePolicyHatchBar{vePolAdapt}{(Adapt,0.054005)}
+
+\end{groupplot}
+\end{tikzpicture}

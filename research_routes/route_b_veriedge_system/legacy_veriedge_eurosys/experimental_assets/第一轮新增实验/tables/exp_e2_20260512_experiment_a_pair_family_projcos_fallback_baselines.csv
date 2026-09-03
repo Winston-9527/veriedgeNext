@@ -1,0 +1,8 @@
+pair_id,pair_label,variant,family,paper_status,paper_include_as_main,calib_feasible_count,selected_from_feasible,selection_fallback_reason,tolerance_mode,percentile,tolerance_scale,signature_scalars_per_checkpoint,signature_bytes_per_checkpoint_fp32,calib_honest_hetero_fpr,calib_tamper_tpr,eval_honest_hetero_fpr,eval_tamper_tpr,eval_tamper_locacc
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,scalar16,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,1.5,16,64,0.125,1.0,0.15,1.0,1.0
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,scalar64,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,2.0,64,256,0.475,1.0,0.415,1.0,1.0
+t4strict_pair_a_vs_c_40_200,stack_a_vs_stack_c,scalar16,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,2.0,16,64,0.175,1.0,0.11,1.0,1.0
+t4strict_pair_a_vs_c_40_200,stack_a_vs_stack_c,scalar64,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,2.0,64,256,0.5,1.0,0.305,1.0,1.0
+t4strict_pair_a_vs_d_40_200,stack_a_vs_stack_d,scalar64,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,2.0,64,256,0.175,1.0,0.38,1.0,1.0
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,scalar16,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,1.5,16,64,0.2,1.0,0.245,1.0,1.0
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,scalar64,scalar,fallback_no_feasible_calib_fpr,0,0,0,no calibration candidate with FPR <= 0.10,global_shared,99.99,2.0,64,256,0.625,1.0,0.59,1.0,1.0

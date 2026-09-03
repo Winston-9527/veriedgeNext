@@ -1,0 +1,6 @@
+\subsection{Selective Delivery Under Placement Width}
+\label{subsec:eval-selective-delivery}
+
+Placement also defines the data boundary: only selected providers receive decryptable task-access material. We compare replicated payload delivery (RPD), which sends a full encrypted payload to each selected provider, against privacy-preserving delivery (PPD), which publishes one ciphertext and sends small locator-and-key packages after placement commitment.
+
+We use a 100MB encrypted payload and sweep selected group size $k \in \{1,2,4,8\}$ under LAN and WAN delivery profiles. In the calibrated delivery replay, RPD incurs requester egress proportional to $kS$, whereas PPD incurs one ciphertext publication plus $k$ small access packages. At $k=8$, PPD reduces requester egress by 87.5% on LAN and 87.5% on WAN. Median all-providers-ready latency is reduced by 74.8% on LAN and 81.1% on WAN under the same model.

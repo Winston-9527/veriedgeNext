@@ -1,0 +1,7 @@
+pair_id,seed_count,selected_feasible_rate,mean_eval_fpr,max_eval_fpr,min_eval_tpr,min_eval_locacc,min_primary_material_tpr,mean_primary_material_tpr,min_scale_tpr,mean_scale_tpr
+t4strict_pair_a_vs_b_40_200,5,1.0,0.014,0.025,1.0,1.0,1.0,1.0,1.0,1.0
+t4strict_pair_a_vs_b_rtxint8_40_200,5,1.0,0.004,0.005,1.0,1.0,1.0,1.0,1.0,1.0
+t4strict_pair_a_vs_c_40_200,5,1.0,0.006,0.01,1.0,1.0,1.0,1.0,1.0,1.0
+t4strict_pair_a_vs_d_40_200,5,1.0,0.01,0.02,1.0,1.0,1.0,1.0,1.0,1.0
+t4strict_pair_b_vs_d_40_200,5,1.0,0.006,0.01,1.0,1.0,1.0,1.0,1.0,1.0
+t4strict_pair_e_vs_f_40_200,5,1.0,0.004,0.01,1.0,1.0,1.0,1.0,1.0,1.0

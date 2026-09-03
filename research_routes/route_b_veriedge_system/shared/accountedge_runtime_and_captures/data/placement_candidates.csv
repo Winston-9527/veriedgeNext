@@ -1,0 +1,6 @@
+candidate_id,task_id,group_id,provider_ids,shard_map,network_ms,queue_ms,service_ms,sketch,profile_ids,group_size,backend_mix
+trace_lan_a_b,all,trace_lan_a_b,provider_1;provider_2;provider_3,C1:provider_1;C2:provider_2;C3:provider_3,945.0,0.0,940.0,selected_by_policy,A_B,3,heterogeneous
+trace_lan_f_f,all,trace_lan_f_f,provider_1,C1:provider_1;C2:provider_1;C3:provider_1,785.0,0.0,780.0,selected_by_policy,F_F,1,homogeneous
+trace_wan_a_c,all,trace_wan_a_c,T3_1;T3_2;T3_3,C1:T3_1;C2:T3_2;C3:T3_3,1129.0,0.0,1080.0,selected_by_policy,A_C,3,heterogeneous
+trace_wan_a_d,all,trace_wan_a_d,T4_1;T4_2;T4_3,C1:T4_1;C2:T4_2;C3:T4_3,1109.0,0.0,1060.0,selected_by_policy,A_D,3,heterogeneous
+trace_wan_b_d,all,trace_wan_b_d,T5_1;T5_2;T5_3,C1:T5_1;C2:T5_2;C3:T5_3,1169.0,0.0,1120.0,selected_by_policy,B_D,3,heterogeneous

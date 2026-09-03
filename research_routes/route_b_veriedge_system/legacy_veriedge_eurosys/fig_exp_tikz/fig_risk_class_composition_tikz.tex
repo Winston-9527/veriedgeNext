@@ -1,0 +1,59 @@
+\begin{tikzpicture}[x=4.75cm,y=0.54cm,font=\scriptsize]
+\definecolor{veRiskLow}{HTML}{1F6E7A}
+\definecolor{veRiskBad}{HTML}{607180}
+\definecolor{veRiskGrid}{HTML}{D7DEE2}
+\definecolor{veRiskText}{HTML}{525C66}
+\definecolor{veRiskPanel}{HTML}{F7FAFB}
+\def\barh{0.36}
+\def\xleft{-0.40}
+\def\xright{1.11}
+\def\ytop{7.58}
+\def\ybase{1.55}
+
+\path[fill=veRiskPanel,draw=none] (0,\ybase) rectangle (1,\ytop);
+\foreach \x/\lab in {0/0,.5/.5,1/1.0} {
+	\draw[veRiskGrid,line width=0.22pt] (\x,\ybase) -- (\x,\ytop);
+	\node[anchor=north,text=black!58,font=\tiny] at (\x,1.25) {\lab};
+}
+\draw[black!55,line width=0.33pt] (0,\ybase) -- (1,\ybase);
+\draw[black!55,line width=0.33pt] (0,\ybase) -- (0,\ytop);
+\node[anchor=north,text=black!68,font=\tiny] at (.5,0.92) {share of selected placements};
+
+\path[fill=veRiskLow!86,draw=black!24,line width=0.2pt,rounded corners=0.35pt]
+	(.03,7.88) rectangle (.11,8.08);
+\node[anchor=west,text=black!66,font=\tiny] at (.13,7.98) {low-risk};
+\path[fill=veRiskBad!22,draw=veRiskBad!70,line width=0.2pt,rounded corners=0.35pt]
+	(.44,7.88) rectangle (.52,8.08);
+\path[pattern=north east lines,pattern color=veRiskBad!85,draw=none]
+	(.44,7.88) rectangle (.52,8.08);
+\node[anchor=west,text=black!66,font=\tiny] at (.54,7.98) {infeasible};
+
+\node[anchor=east,text=veRiskText!78,font=\tiny\bfseries,align=right] at (-0.23,6.55) {queue-\\aware};
+\node[anchor=east,text=veRiskText!78,font=\tiny\bfseries] at (-0.23,3.10) {controlled};
+\draw[veRiskGrid,line width=0.22pt] (\xleft,5.18) -- (\xright,5.18);
+
+\foreach \name/\low/\bad/\yy in {
+	Q-adapt/1/0/7.02,
+	Q-VC/1/0/6.44,
+	Q-network/.065/.935/5.86,
+	Homo-only/1/0/4.78,
+	Adaptive/1/0/4.20,
+	N-adapt/1/0/3.62,
+	VC-proj4/1/0/3.04,
+	N-proj4/0/1/2.46,
+	N-scalar/0/1/1.88
+} {
+	\node[anchor=east,text=black!68,font=\tiny] at (-0.045,\yy+.20) {\name};
+	\path[fill=black!2,draw=black!16,line width=0.18pt,rounded corners=0.45pt]
+		(0,\yy) rectangle (1,\yy+\barh);
+	\path[fill=veRiskLow!86] (0,\yy) rectangle (\low,\yy+\barh);
+	\path[fill=veRiskBad!22] (\low,\yy) rectangle (1,\yy+\barh);
+	\path[pattern=north east lines,pattern color=veRiskBad!82] (\low,\yy) rectangle (1,\yy+\barh);
+	\draw[draw=black!22,line width=0.2pt,rounded corners=0.45pt]
+		(0,\yy) rectangle (1,\yy+\barh);
+}
+
+\node[anchor=west,text=veRiskBad!85!black,font=\tiny] at (1.015,6.06) {93.5\% infeas.};
+\node[anchor=west,text=veRiskBad!85!black,font=\tiny] at (1.015,2.66) {100\% infeas.};
+\node[anchor=west,text=veRiskBad!85!black,font=\tiny] at (1.015,2.08) {100\% infeas.};
+\end{tikzpicture}

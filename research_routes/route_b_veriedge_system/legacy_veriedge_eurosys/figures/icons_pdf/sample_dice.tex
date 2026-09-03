@@ -1,0 +1,20 @@
+\documentclass[tikz,border=0.8pt]{standalone}
+\usepackage{xcolor}
+\usetikzlibrary{calc}
+\definecolor{IconTeal}{HTML}{0E6F78}
+\begin{document}
+\begin{tikzpicture}[x=1pt,y=1pt,line cap=round,line join=round]
+  \path[use as bounding box] (0,0) rectangle (24,24);
+  \begin{scope}[draw=IconTeal, line width=1.7pt]
+    \draw[rounded corners=2.2pt] (5.2,7.0) -- (12.0,3.3) -- (18.8,7.0)
+      -- (18.8,16.4) -- (12.0,20.7) -- (5.2,16.4) -- cycle;
+    \draw (5.2,7.0) -- (12.0,11.0) -- (18.8,7.0);
+    \draw (12.0,11.0) -- (12.0,20.7);
+  \end{scope}
+  \foreach \p in {(8.2,12.8),(8.2,16.0),(10.5,14.4),
+                 (15.8,12.8),(15.8,16.0),(13.5,14.4),
+                 (10.2,7.1),(13.8,7.1),(12.0,9.0)}{
+    \fill[IconTeal] \p circle (0.9pt);
+  }
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,6 @@
+\subsection{Closed-Loop Verifiability-Constrained Placement}
+\label{subsec:eval-vc-placement}
+
+We replay placement policies using the measured verifier profile matrix. Each candidate placement is associated with a device/backend pair, and the verifier mode supplies measured false-dispute rate, material-tamper detection rate, sketch budget, and challenge latency. A placement is admissible only if its conservative profile satisfies the task-level $\alpha$, $\beta$, sketch-budget, and challenge-cost targets before task disclosure.
+
+At $\alpha=0.10$ and $\beta=0.90$ on the queued-8 workload, verifiability-constrained placement removes infeasible signatures selected by latency-oriented placement while preserving comparable replay goodput. The adaptive-verifier policy further chooses the smallest feasible sketch for each candidate, making the measured verifier profile a placement-time decision variable rather than an after-the-fact checker.

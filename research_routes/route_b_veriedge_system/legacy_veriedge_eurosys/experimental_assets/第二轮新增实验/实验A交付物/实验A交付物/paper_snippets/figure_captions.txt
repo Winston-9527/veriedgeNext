@@ -1,0 +1,13 @@
+Figure captions
+
+fig_placement_frontier_a1.pdf:
+A1 controlled replay placement frontier under measured verifier profiles for the queued-8 workload at alpha=0.10. Latency-oriented baselines keep lower estimated latency but select profiles that violate task-level verifiability constraints; constrained and adaptive policies move the selected signatures to the low false-risk region before disclosure.
+
+fig_placement_frontier_a3_queue.pdf:
+A3 queue-aware replay frontier under measured verifier profiles for the queued-8 workload at alpha=0.10. Queue-aware scoring sharply reduces queue-induced latency, but queue-aware network selection alone still admits infeasible signatures; adding verifiability constraints or adaptive sketch selection preserves feasibility.
+
+fig_risk_class_composition.pdf:
+Risk-class composition of selected placements at alpha=0.10. Verifiability-constrained policies route all admitted tasks through profiles satisfying the false-dispute, detection, sketch-budget, and challenge-cost targets.
+
+fig_alpha_sensitivity_infeasible.pdf:
+Sensitivity to the false-dispute target alpha. The constrained policies preserve the admission invariant as alpha changes, while latency-oriented baselines continue to select infeasible signatures.

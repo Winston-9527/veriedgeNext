@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local configuration and logs
+.env
+.env.*
+!.env.example
+*.log
+_scratch/
+tmp/
+
+# LaTeX build products
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.toc
+
+# OS and archive metadata
+.DS_Store
+Thumbs.db
+__MACOSX/
+._*
+
+# Reproduction-only onboarding outputs
+experiments/pact_offline/results/onboarding_*/

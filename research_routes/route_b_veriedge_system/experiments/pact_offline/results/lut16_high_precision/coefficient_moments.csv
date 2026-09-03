@@ -1,0 +1,3 @@
+family,empirical_mean,empirical_variance,empirical_zero_rate,empirical_excess_kurtosis,analytic_quantized_variance_before_normalization
+lut16,-0.0003123494971077889,1.0009114742279053,0.0,-0.0007176399230957031,
+gaussian,-0.0015795930521562696,1.0009641647338867,0.0,0.005316972732543945,

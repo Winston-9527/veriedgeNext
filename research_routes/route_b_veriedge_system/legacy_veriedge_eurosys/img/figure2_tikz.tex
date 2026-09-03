@@ -1,0 +1,64 @@
+% Backup of the original TikZ implementation of Figure 2 (fig:privacy).
+% The main paper currently uses img/figure2.png instead.
+\begin{figure}[t]
+    \centering
+    \resizebox{0.98\linewidth}{!}{%
+    \begin{tikzpicture}[
+      font=\small,
+      entity/.style={draw=blue!55!black, very thick, rounded corners=4pt, fill=blue!6, align=center, minimum width=2.15cm, minimum height=1.0cm},
+      module/.style={draw=black!70, thick, rounded corners=3pt, fill=white, align=center, minimum width=2.1cm, minimum height=0.92cm},
+      contract/.style={draw=orange!80!black, thick, rounded corners=3pt, fill=orange!11, align=center, minimum width=2.2cm, minimum height=0.92cm},
+      ghost/.style={draw=black!35, thick, rounded corners=4pt, fill=black!3, align=center, minimum width=2.05cm, minimum height=0.92cm, text=black!55},
+      plane/.style={draw=black!18, rounded corners=8pt, fill=black!2, inner sep=8pt},
+      ctrl/.style={-{Latex[length=2.3mm]}, semithick, draw=black!75},
+      data/.style={-{Latex[length=2.3mm]}, semithick, draw=blue!70!black},
+      deny/.style={-{Latex[length=2.3mm]}, semithick, draw=black!45, dashed},
+      note/.style={font=\scriptsize, align=center, text=black!70},
+      planehdr/.style={font=\bfseries\small, text=black!75}
+    ]
+      \node[entity, minimum width=2.2cm, minimum height=1.18cm] (req) at (0,0) {Requester};
+      \node[module, minimum width=2.45cm, minimum height=1.05cm] (enc) at (2.85,0.72) {Encrypt payload\\\(C_j=\mathcal{E}_{\mathrm{sym}}(k_j,m_j)\)};
+      \node[module, minimum width=2.25cm, minimum height=1.0cm] (pkg) at (2.85,-0.95) {Build access tuple\\\((\ell_j,k_j)\)};
+      \node[module, minimum width=2.25cm] (store) at (6.55,0.72) {IPFS / storage\\single ciphertext object};
+      \node[contract, minimum width=2.25cm] (commit) at (6.55,-0.95) {On-chain payload\\commitment};
+      \node[entity, minimum width=2.35cm, minimum height=1.18cm] (sel) at (10.6,1.05) {Selected provider \(i \in \mathcal{G}_j\)};
+      \node[ghost, minimum width=2.35cm, minimum height=1.18cm] (nsel) at (10.6,-1.3) {Non-winner / observer};
+      \node[module, minimum width=2.45cm, minimum height=1.0cm] (use) at (13.55,1.05) {Recover \((\ell_j,k_j)\),\\fetch \(C_j\), decrypt};
+      \node[ghost, minimum width=2.25cm, minimum height=1.0cm] (block) at (13.55,-1.3) {No access tuple,\\no plaintext recovery};
+      \node[contract, minimum width=1.95cm, minimum height=0.86cm] (alloc) at (6.55,2.35) {Execution group \(\mathcal{G}_j\)};
+
+      \begin{scope}[on background layer]
+        \node[plane, fit=(req)(enc)(pkg)(store)(commit)(sel)(nsel)(use)(block)] (dataplane) {};
+        \node[plane, fit=(alloc)(commit)] (coordplane) {};
+      \end{scope}
+
+      \node[planehdr, anchor=south] at ($(dataplane.north)+(0,0.16)$) {Selective-delivery data plane};
+      \node[planehdr, anchor=south] at ($(coordplane.north)+(0,0.16)$) {Coordination metadata};
+
+      \draw[ctrl] (alloc.west) to[bend left=10] node[note, above] {selected winners} (req.north east);
+      \draw[ctrl] (alloc.east) to[bend left=12] node[note, above] {membership in \(\mathcal{G}_j\)} (sel.north west);
+
+      \draw[data] (req.east) -- node[note, above] {payload \(m_j\)} (enc.west);
+      \draw[data] (req.east) -- ++(1.0,0) |- node[note, left] {session key \(k_j\)} (pkg.west);
+      \draw[data] (enc.east) -- node[note, above] {single upload of \(C_j\)} (store.west);
+      \draw[ctrl] (enc.south east) -- ++(0.6,0) |- node[note, right] {commit \(H(m_j)\)} (commit.north);
+      \draw[data] (pkg.east) -- ++(0.75,0) |- node[note, right] {locator \(\ell_j\)} (commit.west);
+
+      \draw[data] (pkg.east) -- ++(0.7,0) |- node[note, above] {small encrypted package \(e_{i,j}\)} (sel.west);
+      \draw[data] (store.east) -- ++(0.7,0) |- node[note, above] {ciphertext fetch} (use.west);
+      \draw[data] (sel.east) -- node[note, above] {decrypt with \((\ell_j,k_j)\)} (use.west);
+
+      \draw[deny] (store.east) -- ++(0.7,0) |- node[note, below] {ciphertext visible} (nsel.west);
+      \draw[deny] (nsel.east) -- node[note, above] {no \(e_{i,j}\), no \(k_j\)} (block.west);
+
+      \node[note, align=left] at ($(store.south)+(0,-1.55)$) {\textbf{PPD intuition:}\\publish ciphertext once;\\release only per-winner access material.};
+      \draw[deny] ($(nsel.north)+(0,0.12)$) -- ++(0.28,0.28);
+      \draw[deny] ($(nsel.north)+(0.28,0.12)$) -- ++(-0.28,0.28);
+      \draw[deny] ($(block.north)+(0,0.12)$) -- ++(0.28,0.28);
+      \draw[deny] ($(block.north)+(0.28,0.12)$) -- ++(-0.28,0.28);
+    \end{tikzpicture}%
+    }
+    \caption{Technical view of privacy-preserving task delivery in \system. The requester uploads one ciphertext object to shared storage, records only lightweight coordination metadata on chain, and releases a small encrypted access package only to providers selected in the execution group \(\mathcal{G}_j\).}
+    \Description{A technical protocol diagram for privacy-preserving task delivery. A requester encrypts payload m_j into ciphertext C_j, uploads one ciphertext object to IPFS or shared storage, records a payload commitment and execution-group metadata in coordination state, and creates per-provider access packages containing the locator and symmetric key. A selected provider receives the encrypted access package, fetches the ciphertext, and decrypts it, while a non-winner or observer sees at most the ciphertext and cannot recover plaintext because it lacks the access package and key.}
+    \label{fig:privacy}
+\end{figure}

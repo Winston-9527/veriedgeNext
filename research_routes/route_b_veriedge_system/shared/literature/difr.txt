@@ -1,0 +1,2222 @@
+DiFR: Inference Verification Despite Nondeterminism
+
+arXiv:2511.20621v1 [cs.LG] 25 Nov 2025
+
+Adam Karvonen * 1 Daniel Reuter * 1 Roy Rinberg 1 2 Luke Marks 1 Adria` Garriga-Alonso 3 Keri Warr 4
+
+Abstract
+As demand for LLM inference grows, it is becoming increasingly important that providers and their customers can verify that inference processes are performed correctly, without errors or tampering. However, re-running the same inference process twice often leads to different results due to benign numerical noise, making it difficult to distinguish legitimate variation from actual problems. To address this problem, we introduce Token-DiFR (Token-Divergence-From-Reference), a method for verifying inference outputs by comparing generated tokens against predictions made by a trusted reference implementation conditioned on the same random seed. Sampling seed synchronization tightly constrains valid outputs, leaving providers minimal room to deviate from correct inference, which allows output tokens themselves to serve as auditable evidence of correctness at zero additional cost to the provider. Token-DiFR reliably identifies sampling errors, simulated bugs, and model quantization, detecting 4-bit quantization with AUC > 0.999 within 300 output tokens. For applications requiring sample-efficient forward-pass verification, we additionally introduce Activation-DiFR, a scheme that uses random orthogonal projections to compress activations into compact fingerprints for subsequent verification. Activation-DiFR detects 4-bit quantization with AUC > 0.999 using just 2 output tokens, while reducing communication overhead by 25­75% relative to existing methods. We release an open-source integration with vLLM to accelerate practical deployment of verifiable inference.
+1. Introduction
+Large language models (LLMs) have become essential infrastructure for numerous applications, yet verifying the in-
+*Equal contribution 1ML Alignment and Theory Scholars (MATS) 2Harvard University 3FAR AI 4Anthropic. Correspondence to: Adam Karvonen <adam.karvonen@gmail.com>.
+Preprint.
+
+tegrity of the inference process remains a fundamental challenge. Users accessing models through third-party providers need assurance that the advertised configuration is faithfully executed, while providers themselves require quality assurance mechanisms to detect infrastructure bugs before they affect users at scale. Without robust verification methods, neither party can confidently ensure that inference outputs were computed according to the desired specification, or that they have not been subtly altered by malicious tampering.
+Recent incidents across the industry have demonstrated the practical importance of inference verification. Evaluations of providers serving the Kimi K2 model revealed dramatic quality variations (Moonshot AI, 2025), with some vendors achieving only 61-72% similarity to a reference implementation as measured by coarse statistics about its tool calling behavior. Anthropic recently disclosed that a bug in their inference service went undetected for weeks, substantially degrading performance by systematically preventing the most likely tokens from being sampled. This resulted in unwanted behavior such as producing Thai or Chinese characters in response to English prompts, or producing obvious syntax errors in code (Anthropic, 2025).
+The most straightforward approach to verifying that a given inference output was computed correctly is to attempt to exactly reproduce it using the same input and a trusted implementation of the inference process. However, bitwise reproducibility is rarely achievable in practice. For one, floating point operations are non-associative; this means that factors such as kernel selection, batching schemes, and hardware-specific optimizations which alter the ordering subsequently alter the numerical results of these operations. One study found that running the same input through the same inference engine using Qwen-3-235B 1,000 times under greedy decoding produced 80 unique outputs (He & Lab, 2025).
+To address this challenge, we introduce Token-DiFR (Token-Divergence-From-Reference),1 a verification method that can be applied post-hoc to unmodified sampling procedures. By conditioning on a shared sampling seed, Token-DiFR reduces inference to a nearly determin-
+1This methodology is concurrently studied for the concrete application of detecting steganography in LLM inference (Rinberg et al., 2025)
+
+1
+
+DiFR: Inference Verification Despite Nondeterminism
+
+istic process. Unlike distributional verification methods that check whether outputs are statistically consistent with a reference model's distribution, allowing many valid generation paths and potential adversarial manipulation, Token-DiFR exploits the fact that seed synchronization leaves providers with almost no degrees of freedom. Empirically, over 98% of tokens exactly match between provider and verifier (see Table 6), and when differences occur, there are typically only 2­3 alternative tokens. This tight specification means that the output tokens themselves serve as evidence of legitimate inference, auditable post-hoc with zero overhead for the provider and zero modifications to standard inference pipelines.
+This near-determinism enables robust verification: TokenDiFR detects 4-bit model quantization with AUC > 0.999 within just 300 output tokens (see Table 2). Thus, verifying outputs from a provider can provide high confidence in their entire inference process without needing to check every generation, as systematic issues will manifest consistently across randomly sampled outputs.
+For applications requiring highly sample-efficient verification of the forward pass (setting aside the sampling process) activation-based fingerprinting methods offer complementary strengths: they do not require sampling seed synchronization and can detect misconfigurations using only a handful of tokens. We study prior approaches in this space and propose Activation-DiFR, a simple fingerprinting scheme that applies random orthogonal projections to hidden states, which can detect 4-bit quantization with AUC > 0.999 with just 2 output tokens (see Table 3). Across six model and configuration pairs, Activation-DiFR matches detection performance while reducing communication overhead by 25­75% relative to existing protocols.
+Core Contributions Our work provides the following contributions:
+· Token-DiFR: A trustless, zero-communication method that verifies correctness of the entire generation process directly from token outputs.
+· Activation-DiFR: An activation-based verification scheme with reduced communication overhead compared to prior fingerprinting methods.
+· Empirical Validation: Empirical evaluations demonstrating strong detection of quantization, sampling errors, and simulated inference bugs
+· Open-Source Implementation: A publicly available integration with vLLM enabling practical deployment of our verification methods today. Our implementation is available at: github.com/adamkarvonen/ difr.
+
+· Deployable verification for open-source models: Token-DiFR can be applied immediately to any opensource model served by an inference provider by issuing temperature-0 (greedy) queries and replaying them with a trusted implementation, enabling practical spot-checking of inference correctness today, as we demonstrate in a small case study on third-party Llama 3.1 8B providers (Appendix D).
+2. Related Work
+Numerous methods have been proposed to verify the correctness of LLM inference performed by untrusted entities. These approaches can be categorized into cryptographic verifiable computing, activation-based validation, and sampling verification.
+2.1. Cryptographic Verifiable Computing
+Cryptographic verifiable computing allows one to verify that a computation was performed correctly on an untrusted provider using mathematical proofs. Zero-knowledge proofs (ZKPs) provide the strongest security guarantees but impose prohibitive computational overhead for LLM inference.
+Recent work has explored applying ZKPs to neural network inference. Chen et al. (2025) present a general-purpose compiler that converts ML models into zero-knowledge proofs using parallel proof accumulation, achieving proof generation in approximately 2,646 seconds per token for LLaMA-2-7B. The zkLLM system (Sun et al., 2024) uses interactive zero-knowledge proofs with sumcheck protocols, requiring 986 seconds for commitment generation and 803 seconds for proving per forward pass on LLaMA-2-13B. As TOPLOC notes, extrapolating these per-token costs across a 2000-token generation yields approximately 23 days for commitment generation and 18 days for proving, making current ZKP approaches impractical for production.
+2.2. Internal State Fingerprinting Methods
+Rather than attempting exact reproduction of inference outputs, several methods verify inference by comparing intermediate activation states. Singh et al. (2025) propose LOGIC, which collects top-k log probabilities (k=20) at sampled positions, while Ong et al. (2025) propose TOPLOC, which captures the indices and values of topk activation values (k=128) from the final hidden layer. TOPLOC encodes these indices and values as a polynomial to reduce communication costs and employs a single global threshold tuned to work across all models. However, this threshold-based approach proves unsuccessful for detecting minor deviations such as quantization. Both methods enable verification through replay: the verifier re-executes inference using the provider's output sequence, recomputes
+
+2
+
+DiFR: Inference Verification Despite Nondeterminism
+
+activations, and compares against the provider's fingerprints.
+Limitations of Internal State Fingerprinting. While these internal state fingerprinting methods provide strong integrity checks on internal computations, they fundamentally cannot verify the sampling process itself. Internal state fingerprinting only verifies that a sequence and its corresponding activations are consistent--that there exists a forward pass producing this state--not that this sequence was actually generated by the model's sampling procedure. A malicious provider could generate arbitrary text, compute internal state fingerprints on that text, and achieve perfect scores despite never using legitimate sampling. This makes internal state fingerprinting a proof of reconstructability rather than generation authenticity.
+Internal state fingerprinting also requires communication overhead, typically on the order of 5-20 bytes per token, as providers must transmit fingerprints alongside their outputs.
+2.3. Distributional Model Equality Tests
+Gao et al. (2025) study a related task they call Model Equality Testing, framing it as a two-sample test between a trusted distribution P and an API distribution Q over promptcompletion pairs. They instantiate a Maximum Mean Discrepancy (MMD) test with string kernels, using a Hamming distance kernel on characters or tokens across full generations. Because this approach only requires samples from P and Q, it can be applied to fully black-box APIs without access to logits or sampling internals.
+Zhu et al. (2025) propose a Rank-based Uniformity Test (RUT) for auditing black-box APIs. For each prompt, their method draws one completion from the target API and many completions (typically 100) from a locally deployed reference model, then computes the log-rank of the target's sampled token within the reference model's probability distribution. Under the null hypothesis--where target and reference generate from the same conditional distribution--these rank statistics should be uniformly distributed. RUT requires logit access but not seed synchronization.
+Both approaches verify that outputs are statistically consistent with a reference model's distribution, rather than conditioning on a shared sampling seed. While many generation paths can produce statistically indistinguishable outputs, conditioning on a shared seed reduces inference to a neardeterministic process with far fewer degrees of freedom. We discuss the implications of this distinction in Section 7.
+
+in ML workloads. A major contributor is that floating point arithmetic is non-associative: (a + b) + c = a + (b + c) in finite precision, so any change in reduction order can produce slightly different results (He & Lab, 2025). In LLM inference, this reduction order often depends on the effective batch size and kernel strategy, which depend on the instantaneous inference server workload, which is inherently variable. Additional variability comes from software and hardware differences such as CUDA version, GPU architecture, and kernel implementations, which change which primitives are available and how they are scheduled (Schmalbach, 2024). For mixture-of-experts models, routing and capacity constraints introduce further dependence on other tokens in the batch, since which experts a particular token uses can depend on what other sequences are being processed concurrently (Puigcerver et al., 2023; Schmalbach, 2024).
+He & Lab (2025) show that much of this nondeterminism can be eliminated on fixed hardware by using batch-invariant deterministic kernels that produce identical results whenever the model, inference implementation, and device are held fixed. In such a setting, inference verification becomes simple: the verifier can re-run the model once and check exact equality of logits or tokens. However, real deployments often involve varied inference stacks, custom kernels, and multiple GPU types, and users may want to compare providers that do not share a single fixed inference implementation. In this broader setting, we expect statistical verification to remain necessary, as verifiers must tolerate benign numerical variation across acceptable configurations.
+3.2. Inference Sampling Algorithms
+Sampling operates in two stages: first, the model produces a logit vector over the vocabulary; second, a sampling algorithm converts these logits into a token. While the sampling stage itself is deterministic given a fixed random seed, numerical noise in computing the logits can cause different probability distributions, leading to different sampled tokens even with identical seeds.
+Most modern inference engines, including vLLM (vLLM Contributors, 2024), use the Gumbel-Max trick (Gumbel, 1954; Vieira, 2014; Huijben et al., 2021) for sampling because it is more efficient on GPUs than alternative approaches like the inverse probability transform (detailed in Appendix B). See Algorithm 1 for more details.
+
+3. Background
+3.1. Nondeterminism in ML Inference
+Reproducing numerical results across different hardware, software, or even identical systems is notoriously difficult
+
+3
+
+DiFR: Inference Verification Despite Nondeterminism
+
+Algorithm 1 Gumbel-Max Sampling
+Require: Logits   RV , temperature T , top-k parameter k, top-p parameter p, seed 
+1: Apply top-k filtering: set i  - for all but the k largest logits
+2: Apply top-p filtering: set i  - for tokens outside the top-p nucleus.
+3: z  GUMBEL(0, 1)V 4: t  arg maxi{1,...,V } i + T · zi 5: return sampled token t
+3.3. Inference Prefill Mode
+During normal autoregressive generation, an LLM performs one prefill step for the input tokens and then multiple decode steps, with one per generated token. While prefill and decode perform the same mathematical operations, prefill often achieves 3-5x higher throughput in practice because it processes many tokens in parallel, making it easier to achieve full compute utilization (Erdil, 2025). The verifier can exploit this throughput advantage: once a provider generates an output sequence, the verifier simply feeds the entire sequence (both the original prompt and generated tokens) as one input sequence, obtaining logits and intermediate activations for all positions simultaneously.
+4. Methods
+We present a statistical framework for verifiable LLM inference that is robust to nondeterminism. In Section 4.1, we formalize the verification problem. Then we propose two approaches for measuring divergence-from-reference: (i) comparing token-level sampling outcomes reconstructed from a shared PRNG seed (Token-DiFR) in Section 4.2, and (ii) comparing compressed internal activations (ActivationDiFR) in Section 4.3.
+4.1. Problem Formulation
+We consider two parties: a provider that computes inference outputs, and a verifier that seeks to confirm these outputs were produced using an inference process conforming to specification . The specification  fully parametrizes the expected behavior of the provider's inference process, including the model architecture and weights, numerical precision (e.g., bf16 vs. fp8), sampling hyperparameters (temperature, top-p, top-k), and the PRNG seed .
+The provider generates a batch of input­output pairs {(xi, yi)}iB=1, claiming that each output yi was sampled according to specification  conditioned on input xi. Informally, the verifier would like to conduct the following hypothesis test:
+
+H0: The provider followed specification --that is, any discrepancies between y and the verifier's recomputed predictions are driven purely by benign (acceptable) numerical noise.
+H1: The provider deviated from specification  in some way, e.g., wrong model/weights, incorrect quantization, different temperature or top-p values.
+To accomplish this, the verifier runs a forward pass over each input­output pair {xi, yi} using specification  and computes a test statistic S that measures the DiFR. The batch is flagged as incorrectly computed if S >  , where  is some pre-determined threshold, determined empirically.
+To choose the threshold  and configure the statistic S, we assume the verifier has access to a calibration set generated under specification  on trusted hardware. This calibration set may come from a single "reference" deployment or from a pool of implementations that are all deemed acceptable (for example, different GPU types or tensor-parallel configurations). Pooling scores from these honest configurations defines the range of benign numerical variation allowed under H0, and we then flag only those deployments whose statistics fall outside this pooled distribution.
+Operationally, we treat verification as a binary classification problem. For each token, the verifier observes the provider's sampled token t and computes a scalar per-token score s(t) using a trusted implementation of the model and sampling procedure. Scores from many tokens are then aggregated into a batch-level statistic S (for example, by averaging over a fixed batch size), and the verifier decides whether S looks more like it came from a compliant configuration (H0) or a misconfigured one (H1). Single tokens typically do not carry enough signal for reliable decisions, so all of our experiments perform classification using aggregated scores over multiple tokens.
+4.2. Token-DiFR: Token-Level Divergence under Fixed Seeds
+Although the DiFR framework can be instantiated with any sampling procedure, in this work we focus on the GumbelMax sampling procedure, where tokens are generated by adding Gumbel-distributed noise to logits and taking the arg max. Given a logit vector  and a temperature T , we draw Gumbel noise g from a shared random seed  and form post-Gumbel scores
+zi = [i] + T · g[i].
+Because the seed  is fixed, the noise vector g is deterministic, so any disagreement between provider and verifier arises solely from numerical differences in the logits.2
+2An additional advantage of this Gumbel-Max parameterization is that post-Gumbel logit differences are invariant to temperature
+
+4
+
+AUC @ FPR 1%
+
+DiFR: Inference Verification Despite Nondeterminism
+
+1.0
+
+Incorrect K(Vbfc1a6chfep8q)uantization Token-DiFR
+
+0.9
+
+Cross-entropy
+
+0.8
+
+0.7
+
+0.6
+
+0.5 Token batch size
+1.0 Incorrect temperature (1.0 1.1)
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104
+
+Incorrect(bmf1o6del4qbuita)ntization Token batch size
+Incorrect seed (42 43) 100 10T1oken b1a0tc2h size103 104
+
+AUC @ FPR 1%
+
+AUC @ FPR 1%
+
+1.0
+
+Incorrect K(Vbfc1a6chfep8q)uantization Token-DiFR
+
+0.9
+
+Cross-entropy
+
+Incorrect(bmf1o6del4qbuita)ntization
+
+0.8
+
+0.7
+
+0.6
+
+0.5 Token batch size
+1.0 Incorrect temperature (1.0 1.1)
+
+Token batch size Incorrect seed (42 43)
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104 100 10T1oken b1a0tc2h size103 104
+
+(a) Llama 3.1 8B
+
+(b) Qwen3-30B-A3B
+
+AUC @ FPR 1%
+
+Figure 1. Token-DiFR accurately detects major misconfigurations even under GPU-mismatched deployments. We plot batch-level detection performance (AUC at 1% FPR) as a function of the number of tokens when distinguishing the reference configuration from four misconfigurations (4-bit model quantization, FP8 KV-cache quantization, incorrect sampling seed, and temperature 1.1 vs. 1.0). For Llama 3.1 8B (left), Token-DiFR reliably detects all misconfigurations within a few thousand tokens. For Qwen3-30B-A3B (right), it still cleanly detects large deviations, but the smallest change (temperature +0.1) is harder to separate from the pooled honest baseline because benign differences between A100 and H200 deployments broaden the null distribution. In (matched) settings where the verifier and provider share the same H200 setup Qwen3-30B-A3B shows similarly strong performance to Llama 3.1 8B (see Appendix K).
+
+Token-DiFR is a per-token score that measures how much the provider's claimed token deviates from what the verifier would have sampled under the same seed. Let t denote the provider's claimed token at a given position, and let
+t^ = arg max zi
+i
+denote the token that the verifier would sample using the same logits, temperature, and Gumbel noise. We define the post-Gumbel logit difference
+logit(t, t^, ) = [t^] + T · g[t^] - [t] + T · g[t] . (1)
+If t = t^, then logit = 0; otherwise, logit grows as the verifier's preferred token becomes more favored than the claimed token under the shared randomness. This scalar logit is the basic Token-DiFR score for a single token position.
+To handle cases where the claimed token t is filtered out by the verifier due to top-k or top-p sampling, we treat its post-Gumbel score as -, which yields logit = +. In practice we clip extreme values to a maximum margin max to reduce the influence of very rare outliers. Formally, the
+rescaling, as temperature is applied to the Gumbel noise rather than the logits, which makes verification scores easily comparable across different temperature settings.
+
+bounded Token-DiFR margin used in our experiments is Token-DiFRmargin(t, t^, ) = min logit(t, t^, ), max , where max is a hyperparameter. This can be computed with the following pseudocode:
+# logits: shape [vocab size V] # c_token: int, claimed token t* # T: float, sampling temperature # max_logit_diff (Delta_max): float,
+clipping hyperparameter # sigma: seed for Gumbel noise
+set_random_seed(sigma) gumbel = sample_gumbel(shape=[V])
+z = logits + T * gumbel v_token = z.argmax() # verifier's token diff = z[v_token] - z[c_token]
+return min(diff, max_logit_diff)
+Throughout the main text we use the clipped margin Token-DiFRmargin as our default per-token metric because it is simple, has only one hyperparameter (max), and performs well across a wide range of settings. In Appendix A, we describe several alternative Token-DiFR transformations, such as likelihood-style scores that place more weight
+
+5
+
+DiFR: Inference Verification Despite Nondeterminism
+
+on rare large deviations. These variants can offer modest gains in some regimes such as rare bug detection.
+Cross-entropy Baseline A simple baseline for inference verification is computing the cross-entropy of a sampled token - namely, we define cross-entropy as a baseline, which measures the negative log-likelihood of the claimed token under the verifier's softmax distribution. Notably, crossentropy does not require synchronization of the RNG seed, making it a natural point of comparison.
+Implementation compatibility. Our implementation of Token-DiFR is fully compatible with vLLM (Kwon et al., 2023) without requiring any modifications to the inference engine. The method only requires access to synchronized PRNG seeds, which vLLM provides as a standard sampling parameter.
+The logit difference metric defined above is specific to Gumbel-Max sampling, but the broader Token-DiFR approach of measuring divergence from a reference implementation can be easily applied to other sampling methods. We present verification algorithms for alternative sampling approaches in Appendix B.
+
+Algorithm 2 Activation-Fingerprint Collection 1: Input: context c, token t, model , projection dim k  D, projection seed  2: a  ForwardPassExtractActivations(, c, t) 3: f  P a 4: return f
+Then we compute the 2 distance between projected activations, where higher values indicate significant deviations in the underlying forward pass:
+d = f - f^2
+Algorithm 3 Activation-Fingerprint Matching 1: Input: context c, token t, model , projection dim k  D, projection seed , reference fingerprint f  Rk 2: a^  ForwardPassExtractActivations(, c, t) 3: f^  P a^ 4: return f - f^2
+
+4.3. Activation-DiFR: Compressed Activation Comparisons
+Token-DiFR verifies that tokens were sampled from a claimed model, given only access to the tokens. Specifically, it verifies that a token was honestly sampled from the model's output distribution. However, discrete tokens are an inherently low-resolution signal compared to forward pass activations. To provide further granularity and precision, we introduce Activation-DiFR, which verifies inference by comparing internal model state from the provider against those computed by a trusted verifier.
+Unlike Token-DiFR which only takes tokens as input, Activation-DiFR requires modifying the generation process to compute and save activation fingerprints, which are then compared against during the verification process. However, Activation-DiFR also does not require using the same sampling seed on the inference server and verification server, which can simplify the operational aspect of verifying many instances with a single verification process. We break Activation-DiFR apart into a 2 step process: Activation-fingerprint collection, and Activation-fingerprint matching.
+For each token position, the provider and verifier compute activations a, a^  RD. Using a shared random seed sproj, both parties generate an identical random orthogonal projection matrix P  Rk×D with k  D, and compute:
+f = P a and f^ = P a^
+
+The provider transmits only the compressed k-dimensional vector f . To further reduce communication costs, activations can be logged at only a subset of token positions--for instance, every J-th token. Both k and J can be tuned based according to verification confidence and bandwidth constraints.
+Efficient compression via Johnson­Lindenstrauss lemma. Transmit full activation vectors to compare against would maximize verification signal; however, this would require sending D scalars per token position (where D  4096 in modern LLMs), creating prohibitive communication overhead. Instead, we leverage the Johnson­Lindenstrauss lemma (Johnson & Lindenstrauss, 1984), which guarantees that random projections can compress high-dimensional vectors into lower dimensions while approximately preserving pairwise distances.
+Why use activations? Activation-DiFR specifically targets the forward pass rather than the sampling process, and provides a method to validate activations were generated from a claimed model. Although this means that it is unable to verify that tokens where legitimately sampled from a sampling process, the forward pass constitutes the vast majority of inference computation and therefore represents the main economic incentive for degraded inference. To generate valid activation fingerprints while using a degraded model (e.g., one with quantized weights), an adversary must still recompute the forward pass with the correct model, incurring the same computational and memory costs they sought to avoid.
+
+6
+
+AUC @ FPR 1%
+
+DiFR: Inference Verification Despite Nondeterminism
+
+1.0
+
+Adversarial KV FP8 + temp 0.96
+Token-DiFR
+
+0.9
+
+Cross-entropy
+
+Adversarial 4bit model + temp 0.89
+
+0.8
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104 100 10T1oken b1a0tc2h size103 104
+
+Figure 2. Cross-entropy is vulnerable to simple adversarial manipulation. Using Llama 3.1 8B, we consider 4-bit model quantization and FP8 KV-cache quantization and tune the sampling temperature of the misconfigured model until its mean cross-entropy matches the reference configuration. Under this attack, cross-entropy-based detectors fall to near-chance performance, while Token-DiFR maintains high detection accuracy across batch sizes.
+
+5. Experimental Design
+To evaluate Token-DiFR and Activation-DiFR, we collect tokens and statistics from inference performed with configurations from three categories: (i) Reference configurations: the configuration advertised by the inference provider, (ii) Correct-but-noisy configurations: inference is done with the reference configuration, but on different GPUs or with different kernels to induce benign noise, (iii) Incorrect configurations: Differences in the configuration that substantively change the inference computation, such as incorrect quantization.
+For all configurations, we sweep three models: Llama-3.18B-Instruct (Grattafiori et al., 2024), Qwen3-8B (Yang et al., 2025), and Qwen3-30B-A3B (Yang et al., 2025), generating up to 512 tokens per prompt from 2,000 UltraChat (H4, 2023) prompts. These models cover a wide range of differences between models such as hidden dimensions, training distributions and broader architectural differences such as being dense or mixture-of-experts. We collect approximately 1 million output tokens per configuration, with 9 configurations per model.
+5.1. Inference Configurations
+Reference configurations: The configuration advertised by the inference provider. Inference performed with this configuration represents the behavior expected by the user. We use vLLM as the inference engine with bf16 precision for model weights and activations, temperature of 1.0 for sampling, top-p of 0.95 nucleus sampling, top-k of 50 filtering, and a fixed PRNG seed.
+Correct-but-noisy configurations. We simulate benign numerical noise by generating outputs using setups that are algebraically equivalent to the reference configuration apart
+
+from the ordering of floating-point reductions. We do so by running inference using the reference configuration's parameters while varying the type of GPU, parallelism strategy and inference server: (i) H200 GPUs with 4-way tensor parallelism (TP-4), (ii) A100 GPUs with no tensor parallelism, (iii) A100 GPUs with TP-4, (iv) H200 GPUs with no tensor parallelism using HuggingFace as the inference implementation.
+These variations introduce additional floating-point noise due to differences in GPU architecture, kernels, and communication patterns, and plausibly capture a naturalistic degree of floating-point noise in production settings. For the HuggingFace configuration, we use a custom logits processor to replicate vLLM's sampling procedure, allowing us to verify the forward pass implementation independently of the sampling code. Together with the reference configuration, these form the null distribution for calibrating our statistical tests.
+Pooling scores from multiple honest implementations is scientifically useful but introduces deployment overhead. In practice, a simpler approach is to use controlled perturbations such as FP8 KV cache quantization on a single reference implementation to define a tolerated noise band.
+Incorrect configurations. To evaluate whether our metrics can identify actual misconfigurations in the inference process, we manually introduce four separate misconfigurations, each of which modifies exactly one parameter of the reference configuration, leaving the rest unaltered: (i) FP8 KV cache quantization. (ii) 4 bit model quantization instead of bf16. (iii) Temperature of 1.1 instead of 1.0. (iv) Incorrect random seed usage. All incorrect configurations run on H200 GPUs with no tensor parallelism. Additional details are provided in Appendix C.
+
+7
+
+DiFR: Inference Verification Despite Nondeterminism
+
+Sampling Bug To evaluate Token-DiFR's ability to detect implementation bugs, we simulate sampling bugs by introducing controlled deviations from the intended sampling process. In the reference configuration, tokens are sampled according to the model's softmax distribution at temperature T . In the buggy configurations, 1% of the time, the sampler instead ignores the model's logits and uniformly selects one of the top-k tokens (for k  2, 32). For the remaining 99% of tokens, normal sampling proceeds unchanged.
+5.2. Verification Methodology
+Token dataset generation. We first generate output sequences using each of our reference and correct-but-noisy configurations (our "honest" configurations) and each incorrect configuration. We then implement verification by running a single forward pass over each sequence using the reference configuration, measuring the divergence-fromreference at each token position using Token-DiFR and Activation-DiFR (as described in Section 4) as well as some baseline methods such as cross-entropy and TOPLOC. We partition our dataset into training (50%) and test (50%) sets at the token level.
+Feature engineering. We first multiply features by -1 if need be to ensure that higher scores indicate greater divergence-from-reference. We then winsorize (clip values to a chosen percentile) the continuous scores computed by Token-DiFR, Activation-DiFR, and TOPLOC at the 99th, 99.9th, 99.99th, and 99.999th percentiles found in the training split of the honest set, evaluating each winsorized variant separately to investigate the effect this preprocessing step has on batch-level classification performance. For Token-DiFR features, values are set to infinity when the inference provider's claimed token is filtered out by top-p or top-k at verification time. We exclude these infinite values when computing percentiles, and then clip the infinite values to the corresponding percentile threshold.
+Detector calibration. We randomly sample batches of tokens without replacement from each split withinconfiguration and compute the mean score per batch, sweeping from 1 to 10,000 tokens. This simulates settings in which the verifier has access to only one short output sequence, as well as settings in which the verifier has access to a large set of output sequences. We then train binary classifiers3 on aggregated scores from the training set to discriminate between batches drawn from a particular set of honest configurations and batches drawn from a particular incorrect configuration, as defined in Section 5.1.
+This search is computationally inexpensive, since each set-
+3Practitioners may prefer to use parametric models to more precisely estimate classifier quality in the low false positive rate regime.
+
+ting only requires fitting a one-dimensional classifier on pre-computed scores, but the optimal clipping value can vary across models and deployment environments depending on the magnitude of benign logit noise (e.g., across different GPUs or kernels). The best settings will generally differ across applications, such as detecting subtle quantization changes, catching major implementation bugs or using the wrong model, or detecting steganography (Rinberg et al., 2025). For example, some settings might focus on high-percentile statistics of the score distribution or include several summary features instead of a single mean. We find that clipping at the 99.9th percentile generally works well for quantization detection, while more aggressive 99.999thpercentile clipping is better for rare bug detection. In our experiments, choosing an appropriate clipping threshold can substantially improve sample efficiency, reducing the number of tokens needed to reach a target AUC by more than a factor of five.
+Performance evaluation. We report area under the curve (AUC) at 1% false positive rate (FPR), reflecting deployment scenarios where false positives may incur significant costs. If any features were found to have lower divergencefrom-reference in the incorrect set than in the calibration set, then we do not train any downstream classifiers using that feature, setting their AUC to 0.5 (equivalent to random chance). This mirrors realistic deployments: when the null distribution already spans many GPUs and implementations, a provider whose setup happens to match the verifier's (and therefore looks more consistent than average) should not be penalized, so we only treat configurations as suspicious when their scores are more divergent than the pooled honest baseline, not less.
+6. Results
+We evaluate our proposed verification methods across a range of misconfigurations and deployment scenarios. Our experiments demonstrate that both Token-DiFR and Activation-DiFR provide reliable signals for detecting deviations from claimed inference configurations.
+We evaluate Token-DiFR and Activation-DiFR across three models (Llama 3.1 8B, Qwen3-8B, and Qwen3-30B-A3B) and nine configurations per model, spanning correct-butnoisy environments and a range of misconfigurations. Our main findings are:
+1. When the verifier closely matches the provider's hardware and inference stack, Token-DiFR is a strong default that reliably detects both large and small misconfigurations across all models. Unlike cross-entropy, it is robust to simple adversarial manipulations.
+2. When we deliberately pool together diverse "honest"
+
+8
+
+DiFR: Inference Verification Despite Nondeterminism
+
+implementations of the same model (different GPUs, parallelism setups, and inference engines), TokenDiFR continues to detect large problems (such as 4 bit quantization, FP8 KV cache quantization, or incorrect seeds) but sometimes struggles with the smallest deviations (temperature off by 0.1, k=2 sampling bug), especially for Qwen3-30B-A3B.
+3. Activation-DiFR achieves near-saturated detection performance for quantized models using very small batch sizes, and Pareto-dominates TOPLOC in terms of communication cost versus detection accuracy.
+We now expand on each of these points.
+6.1. Token-DiFR in Matched vs. Mismatched Environments
+For Llama 3.1 8B and Qwen3-8B, Token-DiFR maintains strong performance across all settings. When we aggregate across GPUs and inference engines for these two models, we observe almost no degradation in performance relative to the matched setting. As shown in Figure 2, TokenDiFR also remains robust to a simple adversarial manipulation where an attacker tunes the sampling temperature to match the mean cross-entropy of the reference configuration, a setting in which cross-entropy based detectors fail. We obtain near-perfect AUC for all misconfigurations by aggregating over at most a few thousand tokens. Large deviations such as 4-bit quantization or an incorrect seed are detected with high AUC after 100­500 tokens, while more subtle changes such as fp8 KV cache quantization typically require on the order of 1,000­5,000 tokens to reliably distinguish from benign numerical noise.
+Token-DiFR requires many tokens for a simple reason: with minor misconfigurations, empirically we often observe that over 95% of generated tokens exactly match the trusted configuration (see Section I). When a misconfigured model produces the identical token sequence, that individual sample is effectively legitimate, and detection must rely on subtle aggregate deviations from the expected distribution. Reliable detection therefore comes from aggregating evidence over many tokens rather than from any single generation.
+For Qwen3-30B-A3B, pooled honest environments make the smallest misconfigurations hard to detect with a single margin statistic. For this model, we found that not all "honest" implementations behaved equally. As shown in Table 4, the HuggingFace implementation yielded much larger benign Token-DiFR gaps than the vLLM-based configurations, with high-percentile values on the same order as our FP8 KV cache quantization setting. This raises a conceptual point: different inference implementations can introduce real behavioral differences, and it is ultimately up to the end user whether to treat those differences as accept-
+
+able numerical noise or as deviations worth flagging. In our main analyses, we treat behavior comparable to FP8 KV cache quantization as too large to fold into the null, so we exclude the HuggingFace runs from the default pooled-vLLM results and present them separately in Appendix K.
+In the resulting pooled vLLM-only setting, Token-DiFR still cleanly detects large deviations such as 4-bit quantization and incorrect seeds, achieving a near-perfect AUC with a few thousand tokens, and it also reliably detects FP8 KV cache quantization. However, the smallest deviations we study for Qwen3-30B-A3B, namely a temperature shift from 1.0 to 1.1 and the simulated k = 2 bug, remain difficult to separate from the broadened null distribution. Token-DiFR continues to detect the other misconfigurations, but fails to reliably distinguish these two at our target false positive rate, while cross-entropy does. This is perhaps unsurprising: increasing the temperature by 0.1 induces a small but systematic bias toward higher-entropy token distributions, which cross-entropy measures directly as a shift in average negative log-likelihood. However, in Appendix E we show that simple alternative aggregation schemes which emphasize rare large deviations restore strong Token-DiFR performance in this regime. For a more detailed breakdown of classification performance that separates GPU differences, reference-only runs, and fully pooled configurations, see Appendix K.
+Matched verifier and provider environments restore uniformly strong performance for Token-DiFR. When we restrict attention to matched environments, where the verifier uses the same GPU type, tensor-parallel configuration, and inference engine as the provider, Token-DiFR is consistently strong for all three models. In this matched setting, even the smallest misconfigurations for Qwen3-30B-A3B are reliably detected with a few thousand tokens, as shown in the appendix (see Appendix Figure 13).
+6.2. Activation-DiFR and Communication Efficiency
+Activation fingerprints saturate detection at small batch sizes, especially for larger misconfigurations. Tokenlevel metrics such as Token-DiFR and cross-entropy provide a discontinuous signal: whenever the provider and verifier sample the same token, there is no direct evidence about the quality of the forward pass. Activation-DiFR instead compares compressed internal activations and yields a continuous signal even when tokens match.
+Figure 4 shows that both TOPLOC and Activation-DiFR achieve near-saturated detection of 4-bit model quantization with relatively few tokens. For Llama 3.1 8B and Qwen38B, a logistic regression classifier trained on ActivationDiFR features reaches high AUC at FPR = 1% using only a handful of tokens (on the order of 1­4) when the projection dimension k is sufficiently large. For Qwen3-30B-A3B,
+
+9
+
+Llama-3.1 8B Instruct AUC
+
+DiFR: Inference Verification Despite Nondeterminism
+
+1.0
+
+Random bug k=2
+Token-DiFR
+
+0.9
+
+Cross-entropy
+
+Random bug k=32
+
+0.8
+
+0.7
+
+0.6
+
+0.5
+
+1.0
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5
+
+100
+
+101Token b1a0tc2h size 103
+
+104 100
+
+101Token b1a0tc2h size 103
+
+104
+
+Qwen 30B A3B AUC
+
+Figure 3. Detection of simulated sampling bugs for Llama 3.1 8B and Qwen3-30B-A3B. We introduce a bug that, with probability 1% per token, ignores the model logits and instead samples uniformly from the top-k tokens (k  {2, 32}), and otherwise samples correctly. The curves show AUC at 1% FPR as a function of batch size for cross-entropy and Token-DiFR variants. For Llama 3.1 8B, Token-DiFR detects both bug settings with modest batch sizes. For Qwen3-30B-A3B, the simple mean-pooled margin score underperforms cross-entropy in the k = 32 case and fails to separate k = 2 bugs from the pooled honest baseline. We pool per-token scores by taking their mean for consistency with our other figures, but in Appendix E we show that simple alternative aggregation schemes which emphasize rare large deviations restore strong Token-DiFR performance in this regime, and we recommend that practitioners consider monitoring multiple aggregation strategies in parallel.
+
+which exhibits more benign noise, Activation-DiFR still detects 4-bit quantization within roughly 4 tokens, but detecting the more subtle FP8 KV cache quantization requires larger batch sizes: in our experiments, we typically need up to 16­20 tokens to achieve comparable detection performance. In other words, activations allow us to detect subtle forward-pass deviations much earlier than token-only methods, but the required batch size can grow for particularly noisy models and small misconfigurations.
+Activation-DiFR Pareto-dominates TOPLOC in communication cost versus detection accuracy. We compare activation-based methods in terms of the communication cost (bytes per token) required to reach a given detection threshold. In Appendix G, we formalize this trade-off in a 32-token setting by sweeping the projection dimension k and the number of tokens B per 32-token batch that carry activation fingerprints, treating k × B as the communication cost and computing Pareto frontiers over cost versus true positive rate at 1% FPR. Across all three models, Figure 7 and Table 1 show that Activation-DiFR lies on the Pareto frontier: for a fixed AUC target at FPR = 1%, it achieves the same or higher detection accuracy than TOPLOC while using less communication (see also Figure 9). For easier
+
+tasks such as detecting FP8 KV-cache quantization in the 8B models or in Qwen3-30B-A3B on matched H200 hardware, Activation-DiFR reaches AUC  0.9999 with well under 1 byte per token of overhead and only a small number of tokens. For the more challenging FP8 KV-cache quantization on Qwen3-30B-A3B with an A100 provider and H200 verifier, achieving similarly high performance requires both more tokens (on the order of tens) and higher per-token overhead: in our experiments, Activation-DiFR reaches AUC near 0.999 at 7.25 bytes per token, while TOPLOC requires 32 bytes per token to match this accuracy.
+7. Discussion
+7.1. Practical Recommendations
+Token-DiFR is a strong default metric, while crossentropy is a practical fallback when RNG seed synchronization is not available. When deterministic sampling is unavailable--for instance, when providers cannot or will not expose seed synchronization--cross-entropy provides a reasonable alternative. While it requires approximately 5-10× more samples to achieve equivalent detection performance for certain misconfiguration types such as quantization, it re-
+
+10
+
+Llama-3.1 8B Instruct AUC
+
+1.0 0.9 0.8 0.7 0.6 0.5 1.0 0.9 0.8 0.7 0.6 0.5
+1
+
+DiFR: Inference Verification Despite Nondeterminism
+
+KV cache (bf16 fp8)
+
+Model (bf16 4bit)
+
+Activation-DiFR k=32 Activation-DiFR k=8 Activation-DiFR k=2 TOPLOC k=32 TOPLOC k=8 TOPLOC k=2
+
+2 Batch4Size 8
+
+16 1
+
+2 Batch4Size 8
+
+16
+
+Qwen 30B A3B AUC
+
+Figure 4. Activation-DiFR detects quantization with small batches and outperforms TOPLOC at fixed communication cost. We plot AUC at < 1% FPR as a function of batch size when distinguishing the reference configuration from 4-bit model quantization and FP8 KV-cache quantization, using activation fingerprints with projection dimension k  {2, 8, 32}. Across both Llama 3.1 8B and Qwen3-30B-A3B, Activation-DiFR reaches near-saturated detection with small batches (for example, FP8 KV-cache quantization on Llama 3.1 8B is detected with roughly 4 tokens at k = 8) and, at any fixed k, matches or exceeds TOPLOC's detection accuracy. In the mismatched Qwen3-30B-A3B setting, classification still eventually saturates but requires larger batch sizes, similar to the increased difficulty observed for Token-DiFR under pooled honest environments.
+
+mains effective for detecting major sampling bugs, incorrect temperature configurations, and quantized models.
+In practice, we expect practitioners to maintain a small family of simple one-dimensional detectors rather than rely on a single score. Once logits are available, TokenDiFR margins, their clipped variants, likelihood-style transformations, and cross-entropy are all cheap to compute and easy to threshold. In our experiments, more aggressive clipping (at the 99.999th percentile) tends to work better for detecting rare sampling bugs, while milder clipping (at the 99.9th percentile) improves sensitivity to subtle but systematic changes such as quantization. Cross-entropy also remains a useful auxiliary signal, particularly for bug detection in settings like Qwen3-30B-A3B where small temperature shifts have strong effects on average log-likelihood. In realistic deployments, it is natural to train and monitor several such detectors in parallel, each tuned to a different class of potential failure modes.
+A simple practical method for calibrating benign noise. In our experiments we build a pooled honest baseline by combining configurations across multiple GPUs, parallelism strategies, and inference engines. This setting is useful for scientific understanding, but it introduces complexity which is not required for deployment. A simpler pattern is to fix
+
+a single reference implementation and then use controlled perturbations such as FP8 KV-cache quantization or a small temperature shift (for example, T = 1.1 instead of T = 1.0) to estimate the level of numerical variation one is willing to regard as benign. Configurations that induce larger shifts are flagged as misconfigured, without requiring the verifier to enumerate or explicitly calibrate every possible implementation the provider might be using.
+Cross-entropy (the baseline) has several conceptual limitations that practitioners should consider. Most fundamentally, it discards the signal available in the sampling seed. When conditioning on a known seed, the token generation process becomes nearly deterministic, with very few potential tokens at any step (this near-determinism also means that seed-conditioned sampling verification may be useful for detecting steganographic channels). In contrast, there are many potential generations that could achieve an average cross-entropy value.
+As demonstrated in Figure 2, a cross-entropy based classifier can be defeated by a simple attack where the adversary tunes the temperature to obtain the correct mean crossentropy. Additionally, cross-entropy is significantly more sensitive to both the sampling configuration (temperature, top-p) and the entropy of the output distribution itself. For
+
+11
+
+DiFR: Inference Verification Despite Nondeterminism
+
+AUC  
+0.95 0.99 0.999 0.9999
+
+Llama 3.1 8B (H200)
+
+Act-DiFR TOPLOC
+
+0.125 0.219 0.312 0.375
+
+0.219 0.406 0.625 0.75
+
+Qwen3 30B A3B (A100)
+
+Act-DiFR TOPLOC
+
+1.438
+
+7.25
+
+2
+
+14.5
+
+7.25
+
+32
+
+30
+
+54
+
+Qwen3 30B A3B (H200)
+
+Act-DiFR TOPLOC
+
+0.156 0.219 0.281 0.375
+
+0.312 0.438 0.562 0.75
+
+Table 1. Communication cost [bytes per token] (lower is better). required to detect FP8 KV-cache quantization at different target AUC levels (< 1% FPR) using Activation-DiFR and TOPLOC. For each model and environment, we sweep the projection dimension k and logging stride J (number of tokens per 32-token window on which fingerprints are recorded) and report the minimum average bytes-per-token overhead needed to reach AUC   (see Appendix G for full details). For Llama 3.1 8B and Qwen3-30B-A3B on matched H200 hardware, Activation-DiFR attains very high accuracy (AUC  0.9999) with < 0.5 bytes per token. In the most challenging setting, where Qwen3-30B-A3B is served on A100 GPUs and verified on H200 GPUs, Activation-DiFR still substantially outperforms TOPLOC, requiring between 1.5 and 30 bytes per token to reach the same AUC targets, while TOPLOC consistently incurs higher communication cost. Bold entries highlight that Activation-DiFR Pareto-dominates TOPLOC at fixed detection thresholds.
+
+example, generations of sequential numbers will produce systematically lower cross-entropy values than generations of random numbers, even when both are correctly sampled, because sequential outputs have inherently lower entropy. This distribution-dependent behavior can complicate classification.
+Activation-DiFR provides additional assurance for critical applications and does not require seed synchronization. Token-DiFR alone is sufficient for most verification scenarios, reliably detecting misconfigurations with batch sizes of 5,000-10,000 tokens without requiring any modifications to standard inference implementations or communication overhead. However, at these batch sizes, Token-DiFR verifies the integrity of the batch as a whole rather than individual sequences within the batch--to verify each sequence independently would require smaller batch sizes or more tokens per sequence.
+Activation-DiFR provides much higher sensitivity to subtle deviations such as minor quantization errors, detecting issues with as few as 1 token. For applications requiring the highest confidence, we recommend combining ActivationDiFR with Token-DiFR to jointly verify both the sampling procedure and the integrity of the forward pass. In addition, unlike Token-DiFR, Activation-DiFR does not require RNG seed synchronization, making it applicable even when providers cannot expose sampling algorithms or seeds.
+7.2. Deployment Considerations
+Token-DiFR and Activation-DiFR require access to model weights. These methods enable model providers to verify their own inference traffic and allow users to verify open-source models, but cannot verify inference from providers serving closed-weights models.
+Token-DiFR can be deployed today for spot-checking using temperature zero. At temperature zero (greedy decoding), Token-DiFR requires no sampling synchronization, as
+
+the verifier simply recomputes the forward pass and checks whether the provider selected the argmax token at each position. This makes immediate deployment feasible for users who wish to spot-check providers by requesting greedy generations, as we illustrate in a small in-the-wild case study on third-party Llama 3.1 8B providers (Appendix D). However, this would not work for typical production usage at non-zero temperatures.
+In practice, temperature-zero spot checking would successfully detect honest misconfigurations (e.g., a provider accidentally using an incorrect tokenization format). However, it is vulnerable to selective cheating, as a malicious provider could serve high-quality inference only at temperature zero while using degraded models for non-zero temperature requests. Therefore, verifying production usage at non-zero temperatures requires access to the provider's sampling procedure and the ability to synchronize random seeds.
+Practical deployment requires knowledge of the provider's sampling procedure. For open-source inference frameworks like vLLM, this requirement is straightforward--the sampling code is publicly available and can be directly replicated by verifiers. The core sampling logic typically consists of only a few dozen lines of code, making verification implementation tractable. Providers must also expose an API parameter allowing clients to specify per-request sampling seeds with a known noise generation procedure. For example, vLLM uses a per-request torch.Generator passed to exponential () for Gumbel sampling.
+We recommend that open-source inference providers standardize on a common sampling algorithm. Open source providers can enable verification either by sharing their sampling procedure with verifiers or by adopting a standardized implementation (such as vLLM's sampling implementation). If providers use custom sampling procedures, verification requires implementing a custom verification function per provider. Given that sampling logic is typi-
+
+12
+
+DiFR: Inference Verification Despite Nondeterminism
+
+cally not a performance bottleneck, standardization imposes minimal overhead while enabling straightforward verification across providers. Alternatively, providers could offer a standard sampling mode alongside their custom implementations to support verification use cases without constraining their default behavior.
+Practical Deployment via Random Sampling While our framework requires the verifier to regenerate outputs, this does not impose prohibitive costs in practice. Not every user needs to verify every generation, as random sampling allows sporadic spot-checks to detect systemic issues. Since systematic misconfigurations affect outputs consistently, relatively small sample sizes suffice to provide high confidence about overall inference quality. Modern LLMs generate tokens at costs of just a few dollars per million tokens, making verification overhead negligible relative to total inference volume. The amount of verification needed is a tradeoff of cost versus confidence.
+7.3. Comparison with Distributional Verification Methods
+Distribution-based verification methods such as MMD (Gao et al., 2025) and RUT (Zhu et al., 2025) verify that outputs are statistically consistent with a reference model's distribution, allowing many valid generation paths that could produce indistinguishable statistics. This design choice has several implications.
+First, because these methods check aggregate distributional properties rather than individual tokens, they require substantial sampling; for example, RUT uses 100 reference generations per prompt. In contrast, Token-DiFR requires only a single forward pass per sequence.
+Second, distribution-based metrics are vulnerable to adversarial manipulation. As shown in Figure 2, cross-entropybased detection can be defeated by tuning the sampling temperature to match expected statistics. Token-DiFR conditions on a shared sampling seed, reducing inference to a near-deterministic process where over 98% of tokens exactly match between provider and verifier (Table 6). This tight specification leaves little room for such manipulation.
+Third, distribution-based methods struggle with subtle misconfigurations. Zhu et al. (2025) report that RUT fails to reliably distinguish 8-bit quantized models from unquantized baselines, whereas Token-DiFR detects such differences within a few thousand tokens. While Token-DiFR requires seed synchronization to audit production traffic at non-zero temperatures, it can be applied without seed synchronization in the temperature-zero auditing setting (see Appendix D).
+
+7.4. Limitations
+We have not evaluated our approach on other sampling procedures such as speculative decoding. Our algorithms and experiments focus on verifying sampling from a single LLM. In practice, providers may employ additional procedures like speculative decoding to reduce inference latency or constrained decoding to follow output formats. We do not evaluate speculative decoding scenarios, as vLLM version 0.10.0 does not yet support it, and the wide variety of speculative decoding implementations would each require slightly modified verification algorithms and may require recording additional metadata. However, our general approach of replaying inference with shared randomness remains viable. For a proposed algorithm for verifying the speculative decoding method from Chen et al. (2023), see Appendix F.
+8. Conclusion
+Our results demonstrate that trustless, zero-communication verification of LLM inference is practically achievable and highly effective in detecting even subtle misconfigurations. As the industry continues to scale, we advocate for inference providers to adopt standardized reference implementations and consistent sampling algorithms, enabling rigorous verification by any third-party user. Doing so will greatly enhance transparency, trust, and reliability in LLM deployments, benefiting providers and end-users alike.
+
+13
+
+DiFR: Inference Verification Despite Nondeterminism
+
+9. Acknowledgments
+The majority of this work was conducted while AK, DR, RR, and LM were participating in the ML Alignment and Theory Scholars (MATS) program, whose support we gratefully acknowledge.
+References
+
+Mathematics, volume 26, pp. 189­206. American Mathematical Society, 1984.
+Kwon, W., Li, Z., Zhuang, S., Sheng, Y., Zheng, L., Yu, C. H., Gonzalez, J., Zhang, H., and Stoica, I. Efficient memory management for large language model serving with pagedattention, 2023. URL https://arxiv. org/abs/2309.06180.
+
+Anthropic. A postmortem of three recent issues. https: //www.anthropic.com/engineering/ a-postmortem-of-three-recent-issues, 2025. Accessed: 2025-10-04.
+Chen, B., Zheng, M., Liu, T., Piskac, R., and Shao, Z. zktorch: Privacy-preserving deep learning with zeroknowledge proofs, 2025. URL https://arxiv. org/abs/2502.00226.
+Chen, C., Borgeaud, S., Irving, G., Lespiau, J.-B., Sifre, L., and Jumper, J. Accelerating large language model decoding with speculative sampling, 2023. URL https: //arxiv.org/abs/2302.01318.
+Erdil, E. Inference economics of language models, 2025. URL https://arxiv.org/abs/2506.04645.
+Gao, I., Liang, P., and Guestrin, C. Model equality testing: Which model is this api serving?, 2025. URL https: //arxiv.org/abs/2410.20247.
+Grattafiori, A., Dubey, A., Jauhri, A., Pandey, A., et al. The llama 3 herd of models. 2024. URL https://arxiv. org/abs/2407.21783.
+Gumbel, E. J. Statistical Theory of Extreme Values and Some Practical Applications: A Series of Lectures, volume 33 of Applied Mathematics Series. U.S. Department of Commerce, National Bureau of Standards, Washington, D.C., 1954.
+H4, H. Ultrachat 200k. https://huggingface.co/ datasets/HuggingFaceH4/ultrachat_200k, 2023. Filtered subset of 1.4M dialogue dataset.
+
+Leviathan, Y., Kalman, M., and Matias, Y. Fast inference from transformers via speculative decoding, 2023. URL https://arxiv.org/abs/2211.17192.
+
+Li, Y., Wei, F., Zhang, C., and Zhang, H. Eagle-3: Scaling up inference acceleration of large language models via training-time test, 2025. URL https://arxiv.org/ abs/2503.01840.
+
+Moonshot AI. K2 vendor verifier. https://github. com/MoonshotAI/K2-Vendor-Verfier, 2025. Accessed: 2025-10-04.
+
+Ong, J. M., Ferrante, M. D., Pazdera, A., Garner, R., Jaghouar, S., Basra, M., Ryabinin, M., and Hagemann, J. Toploc: A locality sensitive hashing scheme for trustless verifiable inference, 2025. URL https://arxiv. org/abs/2501.16007.
+
+Puigcerver, J., Riquelme, C., Mustafa, B., and Houlsby, N. From sparse to soft mixtures of experts. arXiv preprint arXiv:2308.00951, 2023. URL https:// arxiv.org/abs/2308.00951.
+
+Rinberg, R., Karvonen, A., Hoover, A., Reuter, D., and Warr, K. Verifying llm inference to prevent model weight exfiltration, 2025. URL https://arxiv.org/abs/ 2511.02620.
+
+Schmalbach, V.
+
+Does temperature 0 guaran-
+
+tee deterministic llm outputs?
+
+https:
+
+//www.vincentschmalbach.com/
+
+does-temperature-0-guarantee-deterministic-llm-ou
+
+2024. Accessed: 2025-10-06.
+
+He, H. and Lab, T. M. Defeating nondeterminism in LLM inference. Thinking Machines Lab: Connectionism, 2025. doi: 10.64434/tml.20250910. https://thinkingmachines.ai/blog/
+
+Singh, A., Virga, F., Smith, S., and Hogan, S. LOGIC: Trustless Inference through Log-Probability Verification. https://inference.net/blog/logic, 2025. Context Labs Blog, November 5, 2025.
+
+defeating-nondeterminism-in-llm-inference/. Sun, H., Li, J., and Zhang, H. zkllm: Zero knowledge
+
+Huijben, I., Kool, W., Mooij, J. M., de Vries, B., and van
+
+proofs for large language models, 2024. URL https:
+
+Sloun, W. J. J. A review of the gumbel-max trick and its
+
+//arxiv.org/abs/2404.16109.
+
+extensions for discrete stochasticity in machine learning. arXiv preprint arXiv:2110.01515, 2021.
+
+Vieira, T. The gumbel-max trick. https: //timvieira.github.io/blog/post/2014/
+
+Johnson, W. B. and Lindenstrauss, J. Extensions of Lips-
+
+07/31/gumbel-max-trick/, 2014. Accessed:
+
+chitz mappings into a Hilbert space. In Contemporary
+
+2025-10-06.
+
+14
+
+DiFR: Inference Verification Despite Nondeterminism
+
+vLLM Contributors.
+
+vLLM gumbel-max
+
+sampler implementation.
+
+https://
+
+github.com/vllm-project/vllm/blob/
+
+10d765482d19abfab6c66b5f815720a66aa9de42/
+
+vllm/v1/sample/ops/topk_topp_sampler.
+
+py#L252, 2024. Line 252.
+
+Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C., Moi, A., Cistac, P., Rault, T., Louf, R., Funtowicz, M., Davison, J., Shleifer, S., von Platen, P., Ma, C., Jernite, Y., Plu, J., Xu, C., Scao, T. L., Gugger, S., Drame, M., Lhoest, Q., and Rush, A. M. Huggingface's transformers: State-of-the-art natural language processing, 2020. URL https://arxiv.org/abs/1910.03771.
+
+Yang, A. et al. Qwen3 technical report. arXiv preprint arXiv:2505.09388, 2025.
+
+Zhang, L., Wang, X., Huang, Y., and Xu, R. Learning harmonized representations for speculative sampling, 2025. URL https://arxiv.org/abs/2408.15766.
+
+Zhu, X., Ye, Y., Qiu, T., Zhu, H., Tan, S., Mannan, A., Michala, J., Popa, R. A., and Neiswanger, W. Auditing black-box llm apis with a rank-based uniformity test, 2025. URL https://arxiv.org/abs/2506. 06975.
+
+15
+
+DiFR: Inference Verification Despite Nondeterminism
+
+A. Token-DiFR Score Transformations
+In the main text, we use the margin-based Token-DiFR score as our default verification metric. For completeness, we also explored a small number of simple score transformations on top of the raw logit gaps. Empirically, these variants yield at most modest improvements, mostly in the bug detection setting, and generally do not justify the added complexity or hyperparameters, so we do not treat them as primary metrics in the body of the paper. We nevertheless describe them here and include them in the remaining appendix plots.
+Likelihood-based variant. The clipped logit difference can also be converted into a likelihood-style score by introducing a simple noise model for the logits. We treat the logit gap  between the claimed token and the verifier's best token as being modified by Gaussian noise with standard deviation , and map it to a standardized score z = -/. We then define a likelihood score
+L(t) = log (z),
+where  is the standard normal cumulative distribution function. The parameter  can be estimated from a small calibration set or swept over a short grid as a single additional hyperparameter for improved classification performance.
+Exact-match variant. We also consider a binary exactmatch metric that assigns a score of 1 if the provider and verifier sample the same token under a shared seed and 0 otherwise. This variant is hyperparameter-free, but it produces an inherently worse classifier as it discards significant amounts of information contained in the logit differences.
+
+B. Additional Verification Algorithms
+
+B.1. Monte Carlo Simulation
+
+For sampling algorithms where analytical likelihood computation is difficult or intractable--which could potentially include certain speculative decoding schemes--Monte Carlo simulation provides a fully general verification approach. The idea is to explicitly model the effect of numerical noise on the logits through repeated simulation of the sampling process.
+
+Given the verifier's computed logits   RV and a claimed token t, we sample Gaussian noise   N (0, 2I) and run the provider's sampling algorithm on perturbed logits  +  for N trials (e.g., N = 1000). The verification score is simply the empirical frequency:
+
+LMC(t) = log
+
+1 N
+
+N
+
+[sample( + i) = t] + 
+
+i=1
+
+where  > 0 ensures numerical stability. To reduce computational cost, we apply noise only to the top-k logits (we use
+
+k = 100 in practice) and set remaining logits to -.
+While Monte Carlo simulation is somewhat more computationally expensive than analytical methods and has limited resolution for distinguishing between low-probability events, it offers a simple and general approach that works with any sampling algorithm and is still relatively cheap in practice. Empirically, we find it often achieves performance close to our analytical likelihood scores.
+
+Algorithm 4 Inverse-Probability-Transform (IPT) Sampler
+
+Require: Seed s, probability vector p  [0, 1]V with
+
+V t=1
+
+pt
+
+=
+
+1
+
+1: C  CUMULATIVESUM(p) {Convert PDF p to CDF
+
+C}
+
+2: u  UNIFORM(s)
+
+3: return min{t  {1, . . . , V } : Ct > u}{binary search: find smallest t s.t. Ct > u}
+
+B.2. Inverse Probability Transform Sampling
+Algorithm 4 presents the Inverse Probability Transform (IPT) sampling procedure, a common alternative to GumbelMax sampling for token generation, used in some inference stacks like HuggingFace (Wolf et al., 2020). Given a probability vector p  [0, 1]V (obtained by applying temperature scaling, top-k and top-p filters, and softmax to the logit vector), IPT sampling draws a uniform random variable u  Uniform(0, 1) and returns the smallest token index t such that the cumulative distribution function satisfies Ct > u.
+IPT-likelihood score for IPT Verification We propose Token-IPT-DiFR, a method for estimating the IPTlikelihood score. For a claimed token index g  {1, . . . , V } produced by IPT with shared seed s, the claimed token's interval on the CDF is
+
+Ig = (Cg-1, Cg] with width wg = Cg - Cg-1.
+
+To account for numerical noise in the computed probabilities, we model u as corrupted by Gaussian noise with standard deviation . We place a Gaussian kernel on the uniform draw and evaluate the probability mass that falls inside Ig. Let
+Z  N (u, 2),
+where u is the shared uniform draw and  > 0 is a calibration parameter that captures effective noise in the verifier­provider pipeline. The Token-IPT-DiFR computes
+
+LCG(g | u, C, )
+
+=
+
+log
+
+
+
+Cg -u 
+
+-
+
+Cg-1 -u 
+
++ ,
+
+where  is the standard normal CDF and  > 0 is a small constant for numerical stability.
+
+16
+
+DiFR: Inference Verification Despite Nondeterminism
+Because temperature is applied to scale the logits, the  or scores may have to be scaled as well to enable use of the same classifier at multiple temperature values.
+
+C. Implementation Details for Incorrect Configurations
+For reproducibility, we provide the exact vLLM arguments used to implement each misconfiguration. Temperature, seed, and top-p are standard SamplingParams arguments in vLLM. The quantization configurations are specified during model initialization with the following arguments:
+
+· 4-bit quantization: "bitsandbytes"}
+
+{"quantization":
+
+· FP8 model quantization: {"quantization": "fp8"}
+
+· FP8
+
+KV
+
+cache
+
+quantization:
+
+{"kv cache dtype": "fp8",
+
+"calculate kv scales": True}
+
+For Qwen3-30B-A3B, we used the pre-quantized model RedHatAI/Qwen3-30B-A3B-quantized.w4a16 for our 4-bit quantization as bitsandbytes quantization was not supported for this model.
+C.1. Non-Zero Baseline Detection Rates
+Our experimental design intentionally mimics real-world deployment: the trusted distribution combines outputs from multiple GPU types and configurations (H200 with TP-4, A100 with and without TP-4, and H200 with HuggingFace), while each untrusted provider uses a single GPU setup. This reflects realistic scenarios where verifiers may aggregate trusted outputs from multiple sources, but each individual provider operates with a fixed hardware configuration.
+This setup introduces a detection artifact: metrics like crossentropy show small but consistent differences across GPU types and parallelism strategies. As a result, classifiers can achieve slightly elevated detection rates even for configurations that should be indistinguishable from the reference (e.g., classifying between different random seeds with the cross-entropy metric). The classifier exploits hardwareinduced biases rather than actual configuration differences.
+As seen in Figure 1, these baseline effects are minor and do not prevent detection of substantive misconfigurations, which show much higher detection rates.
+
+17
+
+DiFR: Inference Verification Despite Nondeterminism
+
+D. In-the-wild audit of public Llama 3.1 8B providers
+Existing work on RUT (Zhu et al., 2025) and MMD (Gao et al., 2025) evaluate existing open-source inference services; in similar a vein, to evaluate the usefulness of TokenDiFR, we ran a small case study on several third-party providers that serve Llama 3.1 8B behind a public API.4
+Setup. We first calibrated four local reference configurations of meta-llama/Llama-3.1-8B-Instruct under vLLM: a bf16 baseline, an fp8-quantized baseline, an fp8 KV-cache quantized baseline, and a 4-bit-quantized baseline. For each configuration, we sampled 2,000 prompts from our evaluation distribution, generated up to 500 tokens per prompt at temperature zero (greedy decoding), and computed per-token Token-DiFR scores by replaying the same generations under the bf16 reference and measuring the clipped post-Gumbel logit margin described in Section 4.2. This yields a mean Token-DiFR score for each configuration, which we treat as a reference band for bf16-like, fp8-like, fp8-KV-like, and 4-bit-like behavior.
+We then queried five public Llama 3.1 8B deployments via the API at temperature zero, using the same 2,000 prompts and generation length. For each provider, we treated its greedy outputs as the claimed tokens and computed TokenDiFR scores against our local bf16 reference in exactly the same way as for the controlled baselines, aggregating over approximately 5 × 105 output tokens per provider.
+
+phasize that higher scores in this case study should be interpreted as evidence of a different effective specification rather than as a direct claim about overall model quality.
+In the temperature-zero setting, both Token-DiFR and cross-entropy are simple to compute without seed synchronization and behave similarly in practice, making them practical tools for spot-checking open-weight deployments and gaining confidence that advertised configurations are being followed. Unlike the non-zero-temperature setting considered in our adversarial experiments, it is harder to cheat cross-entropy with simple tricks such as temperature tuning, since greedy decoding largely fixes the output distribution. In principle, a malicious provider could still search for low cross-entropy generations (for example, by running beam search or reranking multiple candidates), but this would incur significant additional inference cost and latency, making such attacks less attractive in typical deployment scenarios.
+
+Findings. Scores vary substantially across providers. Figure 5 shows that Groq's Token-DiFR and cross-entropy scores fall between our bf16 and fp8-KV reference bands, which is consistent with their advertised near-bf16 configuration and gives us high confidence that they are serving something close to the intended specification. Silicon Flow lies near the fp8 reference band, which is consistent with their advertised fp8 configuration. The remaining providers (Hyperbolic, Cerebras, and DeepInfra) exhibit higher scores and therefore diverge more from our bf16 reference.
+Low Token-DiFR and cross-entropy scores indicate tight adherence to the chosen reference specification, while higher scores indicate systematic differences that may arise from either genuinely degraded inference or benign specification choices such as alternative tokenizers or chat templates. For Cerebras and DeepInfra, manual inspection indicates that both use an earlier Llama chattemplate format with an older system prompt, which likely accounts for a substantial fraction of the observed divergence, although we do not attempt to separate this from other implementation or configuration differences. We em-
+4Accessed in November 2025; implementations and configurations may have changed since then.
+
+18
+
+DiFR: Inference Verification Despite Nondeterminism
+
+(a) Token-DiFR Scores
+
+(b) Cross-Entropy Scores
+
+Figure 5. Token-DiFR and cross-entropy can audit in-the-wild Llama 3.1 8B deployments at temperature zero. Low scores indicate tight adherence to the chosen reference specification, while higher scores indicate divergence, which can stem from either genuinely degraded inference (for example, heavy quantization) or benign specification differences such as alternative tokenizers or chat-template formats. In this non-adversarial, temperature-zero setting, Token-DiFR and cross-entropy behave similarly and are equally simple to compute without seed synchronization.
+
+19
+
+DiFR: Inference Verification Despite Nondeterminism
+
+E. Alternative pooling strategies for rare bug detection
+In the main text, our default Token-DiFR detector aggregates per-token scores by taking the mean of clipped margins across all tokens in a batch. This works well for systematic misconfigurations such as quantization or temperature shifts, but rare bug regimes, where only a small fraction of tokens are affected, are particularly sensitive to how pertoken scores are pooled.
+To illustrate this, we consider a simple tail-focused pooling scheme applied to the simulated bug experiments in Figure 3. Given a set of per-token Token-DiFR margin scores {sj} for a batch, we first clip scores at the 99.999th percentile and then set all scores below the 99.99th percentile to zero. The final batch statistic is the mean of these transformed scores. This clipping suppresses benign fluctuations while concentrating weight on rare large deviations.
+On Qwen3-30B-A3B with the k = 2 sampling bug, this simple transformation of the same per-token Token-DiFR scores is sufficient to recover strong bug detection performance: at FPR = 1%, the detector reaches AUC = 1.0 with 10,000 tokens.
+Practically, once a verifier has access to per-token scores, it is cheap to compute several pooled statistics in parallel (for example, mean, clipped mean, tail-focused pooling, or likelihood-style transforms) and either threshold them separately or combine them with a lightweight classifier. We therefore view Token-DiFR as a family of detectors
+
+parameterized both by the per-token score and the pooling rule, and recommend that practitioners select or monitor multiple aggregation strategies based on the failure modes they care about.
+
+20
+
+DiFR: Inference Verification Despite Nondeterminism
+
+AUC @ FPR 1%
+
+Random bug k=2
+
+1.0
+
+Token-DiFR
+
+Cross-entropy (baseline)
+
+Token-DiFR (tail 99.0%)
+
+0.9
+
+Token-DiFR (tail 99.9%) Token-DiFR (tail 99.99%)
+
+0.8
+
+Random bug k=32
+
+0.7
+
+0.6
+
+0.5
+
+100
+
+101 Token ba10tc2h size 103
+
+104
+
+100
+
+101 Token ba10tc2h size 103
+
+104
+
+Figure 6. Effect of tail-focused clipping on rare bug detection. For the Qwen3-30B-A3B k = 2 sampling bug, we compare the original mean-pooled Token-DiFR margin to a tail-focused variant that clips scores at the 99.999th percentile and zeros scores below the 99.99th percentile. The tail-focused pooling restores strong performance, reaching AUC = 1.0 at 10,000 tokens.
+
+21
+
+DiFR: Inference Verification Despite Nondeterminism
+
+F. Extension to Speculative Decoding
+Speculative decoding (Leviathan et al., 2023; Chen et al., 2023; Zhang et al., 2025; Li et al., 2025) has emerged as a technique to accelerate LLM inference by using a smaller "draft" model to propose candidate tokens, which are then verified in parallel by the larger "target" model. This approach can achieve substantial speedups (often 2-3×) while preserving the exact output distribution of standard autoregressive sampling from the target model.
+In the main body of this work, we focus our verification methodology on standard autoregressive sampling (Section 4.2), where a single model generates one token at a time. This choice reflects two practical considerations:
+1. There are a variety of proposed speculative decoding algorithms, each of which may require a slightly modified verification algorithm.
+
+are accepted) samples one additional bonus token. This process maintains exact distributional equivalence to standard autoregressive sampling from the target model alone.
+F.2. Verification Strategy
+The key observation enabling verification is that each sampled token is a function of the random seed and the model logits from previous tokens--precisely the quantities available to the verifier. Unlike standard autoregressive sampling, however, this particular version of speculative decoding uses three distinct sampling modes:
+1. Accept: Token accepted from draft proposal
+2. Reject: Token resampled from adjusted target distribution max(q - p, 0)
+3. Bonus: Final token sampled when all draft tokens accepted
+
+If the inference provider is using this given method of speculative decoding,then to enable verification, the inference server must record which mode was used for each output token. Given this metadata, the verifier:
+
+1. Performs a single forward pass with both the draft and target models over the full input + output sequence to obtain pi and qi at all positions
+
+2. For each token, computes the probability of observing that token under the recorded mode and seed (via analytical calculation or Monte Carlo simulation, using logit noise estimates for the draft and target models)
+
+2. At the time of writing, vLLM version 0.10 does not natively support speculative decoding.
+Nevertheless, we recognize that speculative decoding represents an important class of real-world inference strategies. In this appendix, we demonstrate that our verification framework naturally extends to handle speculative decoding with minimal modifications. We sketch the necessary adaptations using the canonical algorithm from (Leviathan et al., 2023; Chen et al., 2023) as a concrete example.
+F.1. Background: A Speculative Decoding Algorithm
+While many subsequent methods have been proposed since the original proposal, in the speculative decoding work introduced by (Leviathan et al., 2023; Chen et al., 2023), a draft model generates K candidate tokens, which the target model then verifies in parallel. In the original work, for each candidate, the target model either accepts it, rejects and resamples from an adjusted distribution, or (if all candidates
+
+This approach preserves the efficiency advantages of our verification framework: the verifier performs only prefill operations (no sequential decode), and verification cost remains dominated by a single target model forward pass (draft models are typically small).
+F.3. Generality and Limitations
+The approach outlined here applies directly to a single speculative decoding algorithm. However, many variants exist (e.g. (Zhang et al., 2025; Li et al., 2025)), each with different acceptance criteria and resampling rules. Extending our verification framework to these methods would require identifying the sampling modes and recording which mode was used at each position.
+However, our general technique of replaying inference with a reference implementation remains applicable regardless of the underlying sampling algorithm. The primary engineering challenge is ensuring that the inference server records sufficient metadata to make each token's sampling process reproducible by the verifier.
+
+22
+
+DiFR: Inference Verification Despite Nondeterminism
+G. Activation Fingerprint Communication Cost Analysis
+To analyze the trade-off between communication overhead and detection accuracy, we examine the operational scenario where a verifier must classify batches of 32 tokens as either correctly or incorrectly generated. We limit ourselves to the setting of detecting fp8 KV Cache quantization. For each token position within a batch, the verifier can choose to collect activation fingerprints at varying granularities, parameterized by k--the number of features extracted per token.
+G.1. Experimental Setup
+In this setting, the minimum communication cost occurs when using k = 1 on only a single token within each 32token batch, yielding a cost of 1 byte per 32 tokens. At the other extreme, maximum verification fidelity is achieved by using k = 64 on all 32 tokens, incurring a cost of 64 × 32 = 2,048 bytes per 32 tokens. Between these endpoints, we evaluate all combinations of k  {1, 2, 4, 8, 16, 32, 64} and batch sizes B  {1, 2, . . . , 32}, computing the communication cost as k × B bytes per 32 tokens.
+For each (k, B) configuration, we train a classifier on the training split using the methodology described in Section 5.2 and evaluate its true positive rate (TPR) at a fixed false positive rate of 1% on the held-out test set. This yields a collection of (k × B, TPR) points representing different operating points along the accuracy-cost spectrum.
+G.2. Pareto Frontier Analysis
+We compute the Pareto frontier by identifying, for each communication cost level, the configuration achieving maximum TPR. Configurations not on this frontier are strictly dominated--there exists an alternative with equal or lower cost and strictly better detection performance. Figure 7 presents the Pareto frontiers for Activation-DiFR and TOPLOC across three model architectures, demonstrating that Activation-DiFR consistently dominates TOPLOC across all cost levels.
+G.3. Threshold-Based Cost Comparison
+To quantify the communication savings more precisely, we measure the minimum cost required to achieve specific AUC thresholds: 0.95, 0.99, 0.999, and 0.9999. For each threshold  and each method (Activation-DiFR or TOPLOC), we identify the lowest communication cost at which AUC   . Figure 9 presents these costs as bar charts, with communication costs annotated above each threshold. Across all three models and all thresholds examined, Activation-DiFR achieves the target AUC at 25­75% lower communication cost compared to TOPLOC.
+23
+
+Best AUC @ FPR < 1% Best AUC @ FPR < 1%
+
+DiFR: Inference Verification Despite Nondeterminism
+
+1.0
+
+1.0
+
+0.8
+
+0.8
+
+0.6
+
+0.6
+
+0.4
+
+0.4
+
+0.2
+
+Activation-DiFR (all points) TopLoc (all points)
+
+Activation-DiFR Pareto Frontier
+
+TopLoc Pareto Frontier
+
+0.0
+
+10 1 Communication10C0ost (bytes per toke1n0)1
+
+(a) Qwen3-8B
+
+0.2
+
+Activation-DiFR (all points) TopLoc (all points)
+
+Activation-DiFR Pareto Frontier
+
+TopLoc Pareto Frontier
+
+0.0
+
+10 1 Communication10C0ost (bytes per toke1n0)1
+
+(b) Llama-3.1-8B-Instruct
+
+Figure 7. Pareto frontiers for communication cost vs. detection accuracy for Qwen3-8B and Llama 3.1 8B. Each point represents a (k, B) configuration's communication cost (x-axis, log scale) and AUC at FPR=1%. Solid blue lines show Activation DiFR's Pareto frontier; dashed red lines show TOPLOC's frontier. Activation DiFR dominates TOPLOC across all cost levels and model architectures on the fp8 KV cache quantization detection task.
+
+Best AUC @ FPR < 1% Best TPR at FPR=1%
+
+1.0
+
+1.0
+
+0.8
+
+0.8
+
+0.6
+
+0.6
+
+0.4
+
+0.4
+
+0.2
+
+Activation-DiFR (all points) TopLoc (all points)
+
+Activation-DiFR Pareto Frontier
+
+TopLoc Pareto Frontier
+
+0.0
+
+10 1 Communication10C0ost (bytes per toke1n0)1
+
+(a) Qwen3-30B-A3B (Matched H200 GPUs)
+
+0.2
+
+Activation-DiFR (all points) TopLoc (all points)
+
+Activation-DiFR Pareto Frontier
+
+TopLoc Pareto Frontier
+
+0.0
+
+10 1 Communication10C0ost (bytes per toke1n0)1
+
+(b) Qwen3-30B-A3B (A100 vs H200 GPU)
+
+Figure 8. Pareto frontiers for communication cost vs. detection accuracy for Qwen3-30B-A3B, with matching GPUs between provider and verifier (H200s) and mismatched GPUs (A100 vs H200). Each point represents a (k, B) configuration's communication cost (x-axis, log scale) and AUC at FPR=1%. Solid blue lines show Activation DiFR's Pareto frontier; dashed red lines show TOPLOC's frontier. Activation DiFR dominates TOPLOC across all cost levels and model architectures on the fp8 KV cache quantization detection task.
+
+24
+
+Cost (bytes per token) Cost (bytes per token)
+
+DiFR: Inference Verification Despite Nondeterminism
+
+1.0
+
+Activation-DiFR TopLoc
+
+0.94
+
+6 × 10 1
+
+0.62
+
+4 × 10 1
+
+0.38
+
+3 × 10 1
+
+2 × 10 1
+
+0.16 0.9500
+
+0.38 0.25
+
+0.9900
+
+0.9990
+
+AUC @ FPR < 1% Threshold
+
+(a) Qwen3-8B
+
+1.19 0.50
+0.9999
+
+6 × 10 1 4 × 10 1 3 × 10 1 2 × 10 1
+
+Activation-DiFR TopLoc
+0.41
+0.22 0.22
+
+0.62 0.31
+
+0.12 0.9500
+
+0.9900
+
+0.9990
+
+AUC @ FPR < 1% Threshold
+
+(b) Llama-3.1-8B-Instruct
+
+0.75 0.38
+0.9999
+
+Figure 9. Communication cost required to achieve AUC thresholds for Llama 3.1 8B and Qwen3-8B. For each AUC threshold (x-axis) and method, we report the minimum communication cost (y-axis) required to achieve at least that AUC at FPR=1%. Percentage labels indicate Activation DiFR's relative cost reduction compared to TOPLOC. Activation DiFR consistently achieves target AUC at 25­50% lower communication overhead across all models and thresholds on the fp8 KV cache quantization detection task.
+
+Cost (bytes per token) Cost (bytes per token)
+
+6 × 10 1
+
+Activation-DiFR TopLoc
+
+0.75 0.56
+
+4 × 10 1
+
+0.44 0.38
+
+3 × 10 1
+
+0.31
+
+0.28
+
+2 × 10 1
+
+0.16 0.9500
+
+0.22
+
+0.9900
+
+0.9990
+
+AUC @ FPR < 1% Threshold
+
+0.9999
+
+(a) Qwen3-30B-A3B (Matched H200 GPUs)
+
+Activation-DiFR TopLoc
+
+54.00 32.00 30.00
+
+10
+
+7.25
+
+14.50 7.25
+
+1.44 0.9500
+
+2.00
+
+0.9900
+
+0.9990
+
+AUC @ FPR < 1% Threshold
+
+0.9999
+
+(b) Qwen3-30B-A3B (A100 vs H200 GPU)
+
+Figure 10. Pareto frontiers for communication cost vs. detection accuracy for Qwen3-30B-A3B, with matching GPUs between provider and verifier (H200s) and mismatched GPUs (A100 vs H200). For each AUC threshold (x-axis) and method, we report the minimum communication cost (y-axis) required to achieve at least that AUC at FPR=1%. Percentage labels indicate Activation DiFR's relative cost reduction compared to TOPLOC. Activation DiFR consistently achieves target AUC at 25­50% lower communication overhead across all models and thresholds on the fp8 KV cache quantization detection task.
+
+25
+
+DiFR: Inference Verification Despite Nondeterminism
+
+H. Misconfiguration Detection AUC Results
+We include both AUC and AUC @ FPR < 1% for our quantization and incorrect sampling detection with Qwen330B-A3B, which is our most challenging model. These values underlie the abstract's 'AUC > 0.999' claims.
+
+Batch Size
+
+Incorrect Seed
+
+Temperature (1.01.1)
+
+4-bit Model Quant.
+
+FP8 KV Cache Quant.
+
+AUC AUC < FPR 1% AUC AUC < FPR 1% AUC AUC < FPR 1% AUC AUC < FPR 1%
+
+1 3 10 30 100 300 1000 3000 10000
+
+0.5694 0.6762 0.8708 0.9834 0.9999 1.0000 1.0000 1.0000 1.0000
+
+0.5314 0.5493 0.6737 0.8668 0.9976 1.0000 1.0000 1.0000 1.0000
+
+0.5006 0.5016 0.5048 0.5149 0.5284 0.5561 0.6235 0.7016 0.7688
+
+0.5000 0.5000 0.5000 0.5000 0.4994 0.4977 0.4975 0.4975 0.4975
+
+0.5284 0.5802 0.7065 0.8668 0.9776 0.9993 1.0000 1.0000 1.0000
+
+0.5124 0.5160 0.5474 0.6067 0.7915 0.9768 1.0000 1.0000 1.0000
+
+0.5111 0.5320 0.5930 0.6947 0.8317 0.9218 0.9786 0.9976 1.0000
+
+0.5045 0.5051 0.5105 0.5178 0.5372 0.5866 0.7177 0.9302 1.0000
+
+Table 2. AUC values for Token-DiFR score across different batch sizes and incorrect configurations for Qwen-3-30B-A3B.
+
+Batch Size
+
+Incorrect Seed
+
+Temperature (1.01.1)
+
+4-bit Model Quant.
+
+FP8 KV Cache Quant.
+
+AUC AUC < FPR 1% AUC AUC < FPR 1% AUC AUC < FPR 1% AUC AUC < FPR 1%
+
+1
+
+0.8475
+
+2
+
+0.8577
+
+4
+
+0.8663
+
+8
+
+0.8693
+
+16
+
+0.8669
+
+0.5075 0.5074 0.5072 0.5068 0.5060
+
+0.8521 0.8621 0.8707 0.8751 0.8756
+
+0.5076 0.5076 0.5075 0.5075 0.5074
+
+0.9911 0.9997 1.0000 1.0000 1.0000
+
+0.6658 0.9854 1.0000 1.0000 1.0000
+
+0.9206 0.9507 0.9836 0.9982 1.0000
+
+0.5115 0.5706 0.6999 0.9294 0.9984
+
+Table 3. AUC values for Activation-DiFR score across different batch sizes and incorrect configurations for Qwen-3-30B-A3B.
+
+26
+
+DiFR: Inference Verification Despite Nondeterminism
+I. Raw Score Distributions
+This appendix provides comprehensive statistics of the raw score distributions for each model, configuration, GPU type, and metric. The tables report the count of samples, share of infinite values (where applicable), mean, standard deviation, and key percentiles (90th, 99th, 99.9th, 99.99th, and 99.999th). These statistics characterize the verification score distributions under both correct and incorrect configurations, providing insight into the separability of different misconfiguration types. All metrics are defined in Section 4.2.
+27
+
+DiFR: Inference Verification Despite Nondeterminism
+
+Token-DiFR (margin) raw score distributions
+
+Model
+
+Config
+
+GPU Count  Mean Std p90 p99 p99.9 p99.99 p99.999
+
+Qwen3-30B-A3B reference
+
+a100 629294 0.0011 0.02 0.25 0.00 0.61 4.02 6.53
+
+Qwen3-30B-A3B reference
+
+h200 627756 0.0001 0.00 0.02 0.00 0.00 0.01 0.91
+
+Qwen3-30B-A3B correct tp4
+
+a100 629072 0.0012 0.00 0.06 0.00 0.10 0.75 2.58
+
+Qwen3-30B-A3B correct tp4
+
+h200 630195 0.0011 0.00 0.06 0.00 0.10 0.72 2.47
+
+Qwen3-30B-A3B correct hf
+
+h200 806271 0.0024 0.06 0.41 0.00 2.26 5.24 7.48
+
+Qwen3-30B-A3B incorrect adv kv fp8 temp 0 96 h200 604449 0.0031 0.02 0.14 0.00 0.56 1.97 3.94
+
+Qwen3-30B-A3B incorrect config random bug k 2 h200 625908 0.0031 0.00 0.12 0.00 0.00 1.86 5.03
+
+Qwen3-30B-A3B incorrect config random bug k 32 h200 621929 0.0094 0.00 0.06 0.00 0.00 0.12 3.15
+
+Qwen3-30B-A3B incorrect kv cache quant fp8
+
+h200 603591 0.0040 0.02 0.13 0.00 0.52 1.80 3.62
+
+Qwen3-30B-A3B incorrect model quant 4bit
+
+h200 559981 0.0114 0.05 0.26 0.00 1.35 3.07 4.88
+
+Qwen3-30B-A3B incorrect model quant fp8
+
+h200 661475 0.0027 0.01 0.11 0.00 0.41 1.58 3.47
+
+Qwen3-30B-A3B incorrect seed 43
+
+h200 665261 0.0001 0.27 0.85 0.93 4.27 6.70 9.05
+
+Qwen3-30B-A3B incorrect temperature 1 1
+
+h200 615796 0.0040 0.00 0.02 0.00 0.00 0.21 0.51
+
+Qwen3-30B-A3B incorrect top p 0 85
+
+h200 628161 0.0000 0.02 0.21 0.00 0.76 3.13 5.45
+
+Qwen3-8B
+
+reference
+
+a100 786831 0.0005 0.00 0.04 0.00 0.00 0.22 2.05
+
+Qwen3-8B
+
+reference
+
+h200 784915 0.0005 0.00 0.04 0.00 0.00 0.21 1.89
+
+Qwen3-8B
+
+correct tp4
+
+a100 788186 0.0006 0.00 0.04 0.00 0.00 0.23 1.94
+
+Qwen3-8B
+
+correct tp4
+
+h200 785547 0.0005 0.00 0.04 0.00 0.00 0.23 1.97
+
+Qwen3-8B
+
+correct hf
+
+h200 783799 0.0006 0.00 0.04 0.00 0.00 0.21 1.82
+
+Qwen3-8B
+
+incorrect adv kv fp8 temp 0 96 h200 774505 0.0018 0.01 0.11 0.00 0.37 1.63 3.83
+
+Qwen3-8B
+
+incorrect adv model 4bit temp 0 89 h200 708037 0.0051 0.06 0.30 0.00 1.55 3.53 5.54
+
+Qwen3-8B
+
+incorrect config random bug k 2 h200 783008 0.0029 0.01 0.14 0.00 0.01 2.37 5.13
+
+Qwen3-8B
+
+incorrect config random bug k 32 h200 777720 0.0097 0.00 0.08 0.00 0.00 0.28 4.28
+
+Qwen3-8B
+
+incorrect kv cache quant fp8
+
+h200 764520 0.0028 0.01 0.10 0.00 0.34 1.33 3.58
+
+Qwen3-8B
+
+incorrect model quant 4bit
+
+h200 710621 0.0085 0.05 0.27 0.00 1.36 3.11 5.25
+
+Qwen3-8B
+
+incorrect model quant fp8
+
+h200 778203 0.0021 0.01 0.09 0.00 0.30 1.24 3.38
+
+Qwen3-8B
+
+incorrect seed 43
+
+h200 738399 0.0005 0.38 1.01 1.56 4.77 7.29 9.71
+
+Qwen3-8B
+
+incorrect temperature 1 1
+
+h200 781435 0.0059 0.00 0.02 0.00 0.06 0.28 0.43
+
+Qwen3-8B
+
+incorrect top p 0 85
+
+h200 783913 0.0000 0.03 0.24 0.00 1.04 3.36 5.64
+
+Llama-3.1-8B reference
+
+a100 398030 0.0004 0.00 0.04 0.00 0.00 0.12 1.77
+
+Llama-3.1-8B reference
+
+h200 400206 0.0004 0.00 0.04 0.00 0.00 0.12 1.93
+
+Llama-3.1-8B correct tp4
+
+a100 401402 0.0005 0.00 0.04 0.00 0.00 0.15 1.91
+
+Llama-3.1-8B correct tp4
+
+h200 402934 0.0005 0.00 0.04 0.00 0.00 0.14 1.83
+
+Llama-3.1-8B correct hf
+
+h200 398700 0.0005 0.00 0.03 0.00 0.00 0.12 1.64
+
+Llama-3.1-8B incorrect adv kv fp8 temp 0 96 h200 399515 0.0016 0.01 0.10 0.00 0.28 1.48 3.47
+
+Llama-3.1-8B incorrect adv model 4bit temp 0 89 h200 382343 0.0039 0.05 0.25 0.00 1.23 3.12 5.32
+
+Llama-3.1-8B incorrect config random bug k 2 h200 399210 0.0028 0.01 0.14 0.00 0.00 2.45 5.11
+
+Llama-3.1-8B incorrect config random bug k 32 h200 396691 0.0091 0.00 0.13 0.00 0.00 1.39 6.27
+
+Llama-3.1-8B incorrect kv cache quant fp8
+
+h200 399409 0.0029 0.01 0.08 0.00 0.24 1.11 3.01
+
+Llama-3.1-8B incorrect model quant 4bit
+
+h200 381999 0.0092 0.04 0.21 0.00 1.04 2.69 4.55
+
+Llama-3.1-8B incorrect model quant fp8
+
+h200 399564 0.0025 0.01 0.08 0.00 0.24 1.03 3.24
+
+Llama-3.1-8B incorrect seed 43
+
+h200 392316 0.0004 0.51 1.23 2.16 5.58 8.02 10.23
+
+Llama-3.1-8B incorrect temperature 1 1
+
+h200 388448 0.0085 0.00 0.02 0.00 0.09 0.30 0.45
+
+Llama-3.1-8B incorrect top p 0 85
+
+h200 408071 0.0000 0.03 0.25 0.00 1.12 3.48 5.75
+
+9.13 2.42 4.97 4.75 9.52 5.89 7.64 6.79 6.04 7.88 5.12 11.19 1.42 8.10 4.49 4.28 4.28 4.50 4.38 5.75 7.59 7.47 6.84 5.80 7.09 5.53 11.87 1.28 8.35 4.33 4.28 4.53 3.97 3.57 5.05 7.28 6.62 7.57 4.91 5.91 5.33 11.84 1.45 8.27
+
+Table 4. Summary statistics for the sampled token margin between the verifier's most probable token and the claimed token. The  column indicates the fraction of tokens where the claimed token was filtered out by top-k or top-p sampling.
+
+28
+
+DiFR: Inference Verification Despite Nondeterminism
+
+Cross-entropy raw score distributions
+
+Model
+
+Config
+
+GPU Count  Mean Std p90 p99 p99.9 p99.99 p99.999
+
+Qwen3-30B-A3B reference
+
+a100 629294 0.0011 0.27 0.58 0.97 2.81 3.94 4.97 5.45
+
+Qwen3-30B-A3B reference
+
+h200 627756 0.0001 0.27 0.59 0.97 2.81 3.97 5.05 5.50
+
+Qwen3-30B-A3B correct tp4
+
+a100 629072 0.0012 0.27 0.59 0.97 2.81 3.98 4.96 5.41
+
+Qwen3-30B-A3B correct tp4
+
+h200 630195 0.0011 0.27 0.58 0.97 2.81 3.93 4.89 5.38
+
+Qwen3-30B-A3B correct hf
+
+h200 806271 0.0024 0.27 0.59 0.96 2.81 4.06 5.09 5.50
+
+Qwen3-30B-A3B incorrect adv kv fp8 temp 0 96 h200 604449 0.0031 0.27 0.58 0.97 2.79 3.89 4.80 5.40
+
+Qwen3-30B-A3B incorrect config random bug k 2 h200 625908 0.0031 0.28 0.59 0.97 2.81 3.98 5.05 5.50
+
+Qwen3-30B-A3B incorrect config random bug k 32 h200 621929 0.0094 0.28 0.59 0.97 2.81 4.00 5.07 5.52
+
+Qwen3-30B-A3B incorrect kv cache quant fp8
+
+h200 603591 0.0040 0.28 0.60 0.97 2.83 3.98 4.97 5.47
+
+Qwen3-30B-A3B incorrect model quant 4bit
+
+h200 559981 0.0114 0.30 0.64 1.12 2.97 4.09 5.08 5.51
+
+Qwen3-30B-A3B incorrect model quant fp8
+
+h200 661475 0.0027 0.27 0.59 0.97 2.81 3.92 4.88 5.45
+
+Qwen3-30B-A3B incorrect seed 43
+
+h200 665261 0.0001 0.27 0.59 0.97 2.81 4.01 4.99 5.52
+
+Qwen3-30B-A3B incorrect temperature 1 1
+
+h200 615796 0.0040 0.29 0.62 1.02 2.94 4.14 5.09 5.46
+
+Qwen3-30B-A3B incorrect top p 0 85
+
+h200 628161 0.0000 0.23 0.46 0.83 2.12 3.01 3.92 4.40
+
+Qwen3-8B
+
+reference
+
+a100 786831 0.0005 0.38 0.69 1.30 3.17 4.35 5.21 5.53
+
+Qwen3-8B
+
+reference
+
+h200 784915 0.0005 0.38 0.69 1.30 3.17 4.37 5.23 5.57
+
+Qwen3-8B
+
+correct tp4
+
+a100 788186 0.0006 0.38 0.70 1.30 3.17 4.36 5.15 5.52
+
+Qwen3-8B
+
+correct tp4
+
+h200 785547 0.0005 0.37 0.69 1.29 3.17 4.33 5.15 5.52
+
+Qwen3-8B
+
+correct hf
+
+h200 783799 0.0006 0.38 0.70 1.30 3.17 4.36 5.23 5.54
+
+Qwen3-8B
+
+incorrect adv kv fp8 temp 0 96 h200 774505 0.0018 0.37 0.68 1.26 3.08 4.26 5.05 5.41
+
+Qwen3-8B
+
+incorrect adv model 4bit temp 0 89 h200 708037 0.0051 0.37 0.67 1.26 3.05 4.20 5.05 5.55
+
+Qwen3-8B
+
+incorrect config random bug k 2 h200 783008 0.0029 0.38 0.70 1.31 3.17 4.37 5.23 5.57
+
+Qwen3-8B
+
+incorrect config random bug k 32 h200 777720 0.0097 0.38 0.70 1.30 3.18 4.39 5.23 5.57
+
+Qwen3-8B
+
+incorrect kv cache quant fp8
+
+h200 764520 0.0028 0.38 0.70 1.31 3.17 4.33 5.18 5.53
+
+Qwen3-8B
+
+incorrect model quant 4bit
+
+h200 710621 0.0085 0.40 0.72 1.37 3.24 4.42 5.17 5.55
+
+Qwen3-8B
+
+incorrect model quant fp8
+
+h200 778203 0.0021 0.38 0.69 1.30 3.14 4.34 5.22 5.51
+
+Qwen3-8B
+
+incorrect seed 43
+
+h200 738399 0.0005 0.38 0.70 1.31 3.20 4.44 5.25 5.58
+
+Qwen3-8B
+
+incorrect temperature 1 1
+
+h200 781435 0.0059 0.40 0.74 1.41 3.32 4.50 5.25 5.59
+
+Qwen3-8B
+
+incorrect top p 0 85
+
+h200 783913 0.0000 0.31 0.55 1.09 2.43 3.38 4.20 4.63
+
+Llama-3.1-8B reference
+
+a100 398030 0.0004 0.51 0.93 1.80 4.22 5.26 5.60 5.74
+
+Llama-3.1-8B reference
+
+h200 400206 0.0004 0.50 0.92 1.77 4.22 5.28 5.61 5.76
+
+Llama-3.1-8B correct tp4
+
+a100 401402 0.0005 0.51 0.93 1.80 4.23 5.28 5.61 5.76
+
+Llama-3.1-8B correct tp4
+
+h200 402934 0.0005 0.51 0.93 1.80 4.24 5.27 5.61 5.79
+
+Llama-3.1-8B correct hf
+
+h200 398700 0.0005 0.51 0.93 1.79 4.23 5.29 5.61 5.81
+
+Llama-3.1-8B incorrect adv kv fp8 temp 0 96 h200 399515 0.0016 0.48 0.89 1.70 4.05 5.15 5.54 5.75
+
+Llama-3.1-8B incorrect adv model 4bit temp 0 89 h200 382343 0.0039 0.46 0.85 1.61 3.86 5.06 5.50 5.68
+
+Llama-3.1-8B incorrect config random bug k 2 h200 399210 0.0028 0.50 0.93 1.78 4.21 5.28 5.61 5.76
+
+Llama-3.1-8B incorrect config random bug k 32 h200 396691 0.0091 0.51 0.93 1.78 4.25 5.30 5.62 5.76
+
+Llama-3.1-8B incorrect kv cache quant fp8
+
+h200 399409 0.0029 0.53 0.95 1.86 4.27 5.28 5.62 5.79
+
+Llama-3.1-8B incorrect model quant 4bit
+
+h200 381999 0.0092 0.56 0.98 1.98 4.34 5.29 5.61 5.81
+
+Llama-3.1-8B incorrect model quant fp8
+
+h200 399564 0.0025 0.52 0.94 1.82 4.24 5.26 5.61 5.76
+
+Llama-3.1-8B incorrect seed 43
+
+h200 392316 0.0004 0.51 0.94 1.80 4.28 5.29 5.63 5.83
+
+Llama-3.1-8B incorrect temperature 1 1
+
+h200 388448 0.0085 0.62 1.07 2.21 4.61 5.42 5.70 5.89
+
+Llama-3.1-8B incorrect top p 0 85
+
+h200 408071 0.0000 0.37 0.70 1.34 3.21 4.25 4.64 4.82
+
+Table 5. Summary statistics for the negative log-likelihood of the claimed token under the verifier's softmax distribution. The  column indicates the fraction of tokens where either the probability underflowed to 0 before taking the log, or the token was filtered out by top-k or top-p sampling.
+
+29
+
+DiFR: Inference Verification Despite Nondeterminism
+
+Token-DiFR (exact match) raw score distributions
+
+Model
+
+Config
+
+GPU Count Mean Std p90 p99 p99.9 p99.99 p99.999
+
+Qwen3-30B-A3B reference
+
+a100 630001 0.97 0.16 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B reference
+
+h200 627824 1.00 0.03 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B correct tp4
+
+a100 629846 0.98 0.13 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B correct tp4
+
+h200 630916 0.98 0.13 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B correct hf
+
+h200 808241 0.95 0.21 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B incorrect adv kv fp8 temp 0 96 h200 606314 0.96 0.19 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B incorrect config random bug k 2 h200 627824 0.99 0.08 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B incorrect config random bug k 32 h200 627824 0.99 0.10 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B incorrect kv cache quant fp8
+
+h200 606023 0.96 0.19 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B incorrect model quant 4bit
+
+h200 566434 0.93 0.26 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B incorrect model quant fp8
+
+h200 663284 0.97 0.17 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B incorrect seed 43
+
+h200 665315 0.85 0.36 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B incorrect temperature 1 1
+
+h200 618265 0.99 0.12 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-30B-A3B incorrect top p 0 85
+
+h200 628170 0.98 0.14 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+reference
+
+a100 787234 0.99 0.09 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+reference
+
+h200 785304 0.99 0.09 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+correct tp4
+
+a100 788648 0.99 0.09 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+correct tp4
+
+h200 785979 0.99 0.09 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+correct hf
+
+h200 784280 0.99 0.09 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+incorrect adv kv fp8 temp 0 96 h200 775897 0.97 0.18 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+incorrect adv model 4bit temp 0 89 h200 711666 0.92 0.28 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+incorrect config random bug k 2 h200 785304 0.99 0.11 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+incorrect config random bug k 32 h200 785304 0.98 0.13 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+incorrect kv cache quant fp8
+
+h200 766667 0.97 0.18 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+incorrect model quant 4bit
+
+h200 716701 0.92 0.27 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+incorrect model quant fp8
+
+h200 779878 0.97 0.17 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+incorrect seed 43
+
+h200 738774 0.79 0.40 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+incorrect temperature 1 1
+
+h200 786035 0.98 0.14 1.00 1.00 1.00 1.00 1.00
+
+Qwen3-8B
+
+incorrect top p 0 85
+
+h200 783913 0.97 0.18 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B reference
+
+a100 398185 0.99 0.08 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B reference
+
+h200 400348 0.99 0.08 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B correct tp4
+
+a100 401598 0.99 0.09 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B correct tp4
+
+h200 403141 0.99 0.09 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B correct hf
+
+h200 398902 0.99 0.08 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B incorrect adv kv fp8 temp 0 96 h200 400168 0.97 0.18 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B incorrect adv model 4bit temp 0 89 h200 383836 0.93 0.26 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B incorrect config random bug k 2 h200 400348 0.99 0.11 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B incorrect config random bug k 32 h200 400348 0.98 0.13 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B incorrect kv cache quant fp8
+
+h200 400573 0.97 0.17 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B incorrect model quant 4bit
+
+h200 385544 0.92 0.26 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B incorrect model quant fp8
+
+h200 400549 0.97 0.17 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B incorrect seed 43
+
+h200 392476 0.76 0.43 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B incorrect temperature 1 1
+
+h200 391774 0.97 0.16 1.00 1.00 1.00 1.00 1.00
+
+Llama-3.1-8B incorrect top p 0 85
+
+h200 408071 0.97 0.18 1.00 1.00 1.00 1.00 1.00
+
+Table 6. Summary statistics for the binary exact-match rate: the fraction of tokens where the provider and verifier sampled the same token under a shared seed. Since this is a binary metric (0 or 1), there are no infinite values.
+
+30
+
+DiFR: Inference Verification Despite Nondeterminism
+
+Token-DiFR (likelihood,  = 0.02) raw score distributions
+
+Model
+
+Config
+
+GPU Count 
+
+Mean
+
+Std p90
+
+p99 p99.9 p99.99 p99.999
+
+Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B
+
+reference reference correct tp4 correct tp4 correct hf incorrect adv kv fp8 temp 0 96 incorrect config random bug k 2 incorrect config random bug k 32 incorrect kv cache quant fp8 incorrect model quant 4bit incorrect model quant fp8 incorrect seed 43 incorrect temperature 1 1 incorrect top p 0 85 reference reference correct tp4 correct tp4 correct hf incorrect adv kv fp8 temp 0 96 incorrect adv model 4bit temp 0 89 incorrect config random bug k 2 incorrect config random bug k 32 incorrect kv cache quant fp8 incorrect model quant 4bit incorrect model quant fp8 incorrect seed 43 incorrect temperature 1 1 incorrect top p 0 85 reference reference correct tp4 correct tp4 correct hf incorrect adv kv fp8 temp 0 96 incorrect adv model 4bit temp 0 89 incorrect config random bug k 2 incorrect config random bug k 32 incorrect kv cache quant fp8 incorrect model quant 4bit incorrect model quant fp8 incorrect seed 43 incorrect temperature 1 1 incorrect top p 0 85
+
+a100 h200 a100 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 a100 h200 a100 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 a100 h200 a100 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200
+
+629294 627756 629072 630195 806271 604449 625908 621929 603591 559981 661475 665261 615796 628161 786831 784915 788186 785547 783799 774505 708037 783008 777720 764520 710621 778203 738399 781435 783913 398030 400206 401402 402934 398700 399515 382343 399210 396691 399409 381999 399564 392316 388448 408071
+
+0.0011 0.0001 0.0012 0.0011 0.0024 0.0031 0.0031 0.0094 0.0040 0.0114 0.0027 0.0001 0.0040 0.0000 0.0005 0.0005 0.0006 0.0005 0.0006 0.0018 0.0051 0.0029 0.0097 0.0028 0.0085 0.0021 0.0005 0.0059 0.0000 0.0004 0.0004 0.0005 0.0005 0.0005 0.0016 0.0039 0.0028 0.0091 0.0029 0.0092 0.0025 0.0004 0.0085 0.0000
+
+40.96 0.27 2.48 2.28 109.36 12.55 8.76 2.20 10.87 43.55 8.04 498.82 0.19 27.66 1.05 0.92 0.99 1.10 0.85 8.32 59.88 11.68 4.01 6.42 46.14 5.66 727.44 0.29 36.04 0.89 0.82 0.94 0.84 0.60 6.46 41.20 11.82 11.24 4.38 29.73 4.34 1106.86 0.34 39.27
+
+710.36 38.23 102.66 105.55 1133.59 232.32 329.24 195.42 220.33 447.41 168.83 2353.89 12.25 468.32 94.81 73.40 75.30 87.74 76.01 203.76 554.57 382.62 249.74 174.56 462.96 164.58 2930.33 21.52 531.94 81.33 78.04 73.49 62.90 57.33 159.49 459.77 347.68 458.01 128.38 338.04 146.48 3870.31 10.24 561.00
+
+0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 547.69 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 1519.65 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 2927.18 0.00 0.00
+
+237.01 0.00 8.91 8.39
+3203.67 198.55 0.00 0.00 172.01
+1146.94 108.13 11376.17
+0.00 362.01
+0.00 0.00 0.00 0.00 0.00 89.68 1500.82 0.97 0.00 74.54 1155.74 60.84 14255.76 3.71 683.94 0.00 0.00 0.00 0.00 0.00 53.33 943.38 0.00 0.00 39.21 683.93 38.17 19447.98 7.01 794.06
+
+10127.86 0.99
+356.07 327.01 17191.44 2420.33 2159.98 10.77 2039.49 5897.47 1564.10 28051.18 30.15 6146.39
+34.12 30.30 35.06 35.17 30.88 1663.93 7794.26 3519.33 50.61 1117.25 6061.66 962.45 33201.36 51.78 7069.84 11.80 11.48 17.54 15.22 11.61 1376.86 6086.98 3769.77 1217.70 772.30 4522.18 673.27 40243.01 59.65 7564.55
+
+26636.31 522.25
+4155.61 3809.94 35016.00 9693.36 15818.20 6225.48 8209.02 14895.77 7550.36 51245.66 168.89 18599.42 2628.20 2233.97 2358.73 2440.59 2077.44 9181.77 19175.61 16425.68 11466.60 8024.11 17207.19 7164.61 58969.98 117.61 19913.24 1956.56 2343.55 2283.42 2108.15 1687.17 7515.03 17721.77 16308.28 24609.92 5650.39 12930.92 6565.22 65425.25 131.60 20686.86
+
+52152.83 3672.64 15459.88 14106.97 56656.67 21700.69 36520.42 28781.38 22831.76 38808.91 16418.96 78249.20 1268.61 41019.43 12586.91 11444.36 11468.82 12695.14 11973.31 20706.42 36001.17 34912.87 29261.41 21036.45 31459.71 19103.23 88083.83 1029.91 43582.39 11729.23 11459.91 12815.66 9845.70 7990.34 15938.51 33091.78 27385.34 35827.70 15063.85 21827.17 17794.56 87587.88 1324.05 42736.77
+
+Table 7. Summary statistics for the likelihood-based score derived from the sampled token margin using a Gaussian noise model with standard deviation  = 0.02. The  column indicates the fraction of tokens where the claimed token was filtered out by top-k or top-p sampling.
+
+31
+
+DiFR: Inference Verification Despite Nondeterminism
+
+Token-DiFR (likelihood,  = 0.08) raw score distributions
+
+Model
+
+Config
+
+GPU Count  Mean Std p90 p99 p99.9 p99.99 p99.999
+
+Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-30B-A3B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Qwen3-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B Llama-3.1-8B
+
+reference reference correct tp4 correct tp4 correct hf incorrect adv kv fp8 temp 0 96 incorrect config random bug k 2 incorrect config random bug k 32 incorrect kv cache quant fp8 incorrect model quant 4bit incorrect model quant fp8 incorrect seed 43 incorrect temperature 1 1 incorrect top p 0 85 reference reference correct tp4 correct tp4 correct hf incorrect adv kv fp8 temp 0 96 incorrect adv model 4bit temp 0 89 incorrect config random bug k 2 incorrect config random bug k 32 incorrect kv cache quant fp8 incorrect model quant 4bit incorrect model quant fp8 incorrect seed 43 incorrect temperature 1 1 incorrect top p 0 85 reference reference correct tp4 correct tp4 correct hf incorrect adv kv fp8 temp 0 96 incorrect adv model 4bit temp 0 89 incorrect config random bug k 2 incorrect config random bug k 32 incorrect kv cache quant fp8 incorrect model quant 4bit incorrect model quant fp8 incorrect seed 43 incorrect temperature 1 1 incorrect top p 0 85
+
+a100 h200 a100 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 a100 h200 a100 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 a100 h200 a100 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200 h200
+
+629294 627756 629072 630195 806271 604449 625908 621929 603591 559981 661475 665261 615796 628161 786831 784915 788186 785547 783799 774505 708037 783008 777720 764520 710621 778203 738399 781435 783913 398030 400206 401402 402934 398700 399515 382343 399210 396691 399409 381999 399564 392316 388448 408071
+
+0.0011 0.0001 0.0012 0.0011 0.0024 0.0031 0.0031 0.0094 0.0040 0.0114 0.0027 0.0001 0.0040 0.0000 0.0005 0.0005 0.0006 0.0005 0.0006 0.0018 0.0051 0.0029 0.0097 0.0028 0.0085 0.0021 0.0005 0.0059 0.0000 0.0004 0.0004 0.0005 0.0005 0.0005 0.0016 0.0039 0.0028 0.0091 0.0029 0.0092 0.0025 0.0004 0.0085 0.0000
+
+2.61 0.02 0.18 0.16 6.95 0.85 0.56 0.14 0.74 2.86 0.55 31.64 0.02 1.78 0.08 0.07 0.07 0.08 0.06 0.57 3.92 0.75 0.26 0.45 3.04 0.40 46.09 0.04 2.33 0.06 0.06 0.07 0.06 0.04 0.45 2.72 0.75 0.71 0.32 1.99 0.31 69.94 0.04 2.53
+
+44.62 2.41 6.50 6.67 71.23 14.70 20.68 12.26 13.93 28.29 10.71 147.87 0.81 29.49 5.97 4.63 4.75 5.53 4.79 12.87 35.02 24.04 15.67 11.03 29.26 10.40 183.99 1.38 33.49 5.12 4.92 4.64 3.98 3.62 10.10 29.03 21.86 28.73 8.13 21.41 9.25 242.85 0.72 35.32
+
+0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 37.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 98.22 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 186.49 0.00 0.00
+
+17.20 0.00 1.71 1.66 203.82 14.72 0.00 0.00 13.00 74.79 8.80 715.19 0.00 25.20 0.00 0.00 0.00 0.00 0.00 7.57 97.03 0.76 0.00 6.55 75.34 5.61 895.27 1.17 45.61 0.00 0.00 0.00 0.00 0.00 5.09 61.98 0.00 0.00 4.09 45.61 4.01 1219.93 1.52 52.57
+
+637.12 0.76 24.82 22.97
+1078.84 154.73 138.40 1.88 130.84 372.46 101.01 1757.80 3.42 388.04 3.72 3.44 3.79 3.79 3.48 107.28 491.14 223.59 4.90 72.92 382.74 63.18 2079.77 4.98 445.82 1.97 1.94 2.45 2.26 1.95 89.25 384.32 239.27 79.24 51.19 286.38 44.94 2519.96 5.53 476.77
+
+1669.35 35.39
+263.43 241.79 2193.21 609.94 992.97 392.99 517.09 935.29 475.88 3207.74
+12.79 1166.87
+167.76 143.04 150.86 156.00 133.22 577.94 1202.90 1030.96 720.84 505.52 1079.82 451.75 3690.57
+9.43 1249.02
+125.64 149.91 146.14 135.15 108.74 473.67 1112.00 1023.62 1542.66 357.00 812.42 414.25 4094.08
+10.35 1297.39
+
+3264.44 233.19 970.57 885.97 3545.97 1360.77 2287.25 1803.45 1431.49 2430.31 1030.54 4895.66 82.44 2568.49 790.91 719.45 720.98 797.68 752.53 1298.61 2254.79 2186.76 1833.46 1319.25 1970.89 1198.37 5510.38 67.43 2728.71 737.27 720.43 805.21 619.47 503.41 1000.49 2072.92 1716.17 2243.95 945.80 1368.68 1116.55 5479.38 85.93 2675.85
+
+Table 8. Summary statistics for the likelihood-based score derived from the sampled token margin using a Gaussian noise model with standard deviation  = 0.08. The  column indicates the fraction of tokens where the claimed token was filtered out by top-k or top-p sampling.
+
+32
+
+DiFR: Inference Verification Despite Nondeterminism
+J. All Detection Results Across Models and Configurations
+This appendix presents comprehensive batch scaling results across all three evaluated model architectures (Llama-3.18B-Instruct, Qwen3-8B, and Qwen3-30B-A3B) and all misconfiguration types. These results demonstrate the robustness of our verification methods across different model architectures and scales.
+33
+
+DiFR: Inference Verification Despite Nondeterminism
+
+AUC @ FPR 1%
+
+AUC @ FPR 1%
+
+1.0
+
+Incorrect K(Vbfc1a6chfep8q)uantization
+Token-DiFR (margin)
+
+0.9
+
+Cross-entropy Token-DiFR (likelihood)
+
+0.8
+
+Token-DiFR (match)
+
+0.7
+
+0.6
+
+0.5 Token batch size
+1.0 Incorrect temperature (1.0 1.1)
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104
+
+Incorrect(bmf1o6del4qbuita)ntization
+Token batch size
+Incorrect seed (42 43)
+100 10T1oken b1a0tc2h size103 104
+
+(a) Standard misconfigurations.
+
+1.0
+
+Random bug k=2
+Token-DiFR (margin)
+
+0.9
+
+Cross-entropy Token-DiFR (likelihood)
+
+0.8
+
+Token-DiFR (match)
+
+Random bug k=32
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104 100 10T1oken b1a0tc2h size103 104
+
+AUC @ FPR 1%
+
+AUC @ FPR 1%
+
+(b) Bug simulations.
+1.0 KV cache (bf16 fp8) Model (bf16 4bit)
+0.9 0.8 0.7 0.6 0.5
+1 2Batch4 Size8 16 1 2Batch4 Size8 16
+(c) Activation comparisons (AUC).
+
+Activation-DiFR k=32 Activation-DiFR k=8 Activation-DiFR k=2 TOPLOC k=32 TOPLOC k=8 TOPLOC k=2
+
+Figure 11. Token-DiFR and Activation-DiFR results for Llama 3.1 8B with the four metric comparison (Token-DiFR, cross entropy, Token-DiFR likelihood, and exact token match).
+
+34
+
+DiFR: Inference Verification Despite Nondeterminism
+
+AUC @ FPR 1%
+
+AUC @ FPR 1%
+
+1.0
+
+Incorrect K(Vbfc1a6chfep8q)uantization
+Token-DiFR (margin)
+
+0.9
+
+Cross-entropy Token-DiFR (likelihood)
+
+0.8
+
+Token-DiFR (match)
+
+0.7
+
+0.6
+
+0.5 Token batch size
+1.0 Incorrect temperature (1.0 1.1)
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104
+
+Incorrect(bmf1o6del4qbuita)ntization
+Token batch size
+Incorrect seed (42 43)
+100 10T1oken b1a0tc2h size103 104
+
+(a) Standard misconfigurations.
+
+1.0
+
+Random bug k=2
+Token-DiFR (margin)
+
+0.9
+
+Cross-entropy Token-DiFR (likelihood)
+
+0.8
+
+Token-DiFR (match)
+
+Random bug k=32
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104 100 10T1oken b1a0tc2h size103 104
+
+AUC @ FPR 1%
+
+AUC @ FPR 1%
+
+(b) Bug simulations.
+1.0 KV cache (bf16 fp8) Model (bf16 4bit)
+0.9 0.8 0.7 0.6 0.5
+1 2Batch4 Size8 16 1 2Batch4 Size8 16
+(c) Activation comparisons (AUC).
+
+Activation-DiFR k=32 Activation-DiFR k=8 Activation-DiFR k=2 TOPLOC k=32 TOPLOC k=8 TOPLOC k=2
+
+Figure 12. Token-DiFR and Activation-DiFR results for Qwen3-8B with the four metric comparison (Token-DiFR, cross entropy, TokenDiFR likelihood, and exact token match).
+
+35
+
+DiFR: Inference Verification Despite Nondeterminism
+K. Qwen3-30B-A3B Results
+For Llama-3.1-8B and Qwen3-8B, we find that detection performance is highly stable across different environments. Varying hardware (A100 vs. H200), tensor-parallel configurations, or inference implementations (vLLM versus HuggingFace) produces only minor changes in the score distributions, and even the most subtle misconfigurations remain reliably detectable using our default Token-DiFR configuration.
+The Qwen3-30B-A3B results exhibit substantially more variability. The largest shifts in behavior arise when switching between vLLM and HuggingFace, although we also observe noticeable changes when moving from H200 to A100 within vLLM. It is unclear whether these differences are driven primarily by the mixture-of-experts architecture or by implementation details in the current inference stacks. This is a particularly challenging setting: when verifier and provider both use our reference H200/vLLM configuration, Qwen3-30B-A3B achieves an unusually high exact-match rate of around 99.9%, while the HuggingFace configuration has a much lower exact-match rate of roughly 95%.
+When the verifier matches the provider's setup exactly (reference H200-only), the 30B model behaves much like the smaller models: minor misconfigurations, including small temperature shifts and FP8 KV-cache quantization, are detected accurately and consistently without tuning. As we expand the calibration set to the trusted vLLM pool, which includes multiple parallelism setups and both H100 and A100 runs, performance for the smallest deviations degrades: in particular, we can no longer reliably detect the temperature 1.1 vs. 1.0 misconfiguration at our target false positive rate. Adding HuggingFace runs in the pooled-with-HF configuration broadens the null distribution further, and FP8 KV-cache quantization also becomes difficult to distinguish from the pooled honest baseline. Despite these substantial implementation-driven differences, all configurations still cleanly detect major problems such as 4-bit model quantization and incorrect seeds with modest batch sizes.
+In the following pages, we present Qwen3-30B-A3B results for all three verifier­provider configurations we consider: reference H200 only, trusted vLLM pool, and trusted vLLM and HuggingFace pool.
+36
+
+DiFR: Inference Verification Despite Nondeterminism
+
+AUC @ FPR 1%
+
+AUC @ FPR 1%
+
+1.0
+
+Incorrect K(Vbfc1a6chfep8q)uantization
+Token-DiFR (margin)
+
+0.9
+
+Cross-entropy Token-DiFR (likelihood)
+
+0.8
+
+Token-DiFR (match)
+
+0.7
+
+0.6
+
+0.5 Token batch size
+1.0 Incorrect temperature (1.0 1.1)
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104
+
+Incorrect(bmf1o6del4qbuita)ntization
+Token batch size
+Incorrect seed (42 43)
+100 10T1oken b1a0tc2h size103 104
+
+(a) Standard misconfigurations.
+
+1.0
+
+Random bug k=2
+Token-DiFR (margin)
+
+0.9
+
+Cross-entropy Token-DiFR (likelihood)
+
+0.8
+
+Token-DiFR (match)
+
+Random bug k=32
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104 100 10T1oken b1a0tc2h size103 104
+
+(b) Bug simulations.
+1.0 KV cache (bf16 fp8) Model (bf16 4bit)
+0.9 0.8 0.7 0.6 0.5
+1 2Batch4 Size8 16 1 2Batch4 Size8 16
+
+Activation-DiFR k=32 Activation-DiFR k=8 Activation-DiFR k=2 TOPLOC k=32 TOPLOC k=8 TOPLOC k=2
+
+(c) Activation comparisons (AUC).
+
+AUC @ FPR 1%
+
+AUC @ FPR 1%
+
+Figure 13. Token-DiFR and Activation-DiFR results for Qwen3-30B-A3B with the reference H200 only setup with the four metric comparison (Token-DiFR, cross entropy, Token-DiFR likelihood, and exact token match).
+
+37
+
+DiFR: Inference Verification Despite Nondeterminism
+
+AUC @ FPR 1%
+
+AUC @ FPR 1%
+
+1.0
+
+Incorrect K(Vbfc1a6chfep8q)uantization
+Token-DiFR (margin)
+
+0.9
+
+Cross-entropy Token-DiFR (likelihood)
+
+0.8
+
+Token-DiFR (match)
+
+0.7
+
+0.6
+
+0.5 Token batch size
+1.0 Incorrect temperature (1.0 1.1)
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104
+
+Incorrect(bmf1o6del4qbuita)ntization
+Token batch size
+Incorrect seed (42 43)
+100 10T1oken b1a0tc2h size103 104
+
+(a) Standard misconfigurations.
+
+1.0
+
+Random bug k=2
+Token-DiFR (margin)
+
+0.9
+
+Cross-entropy Token-DiFR (likelihood)
+
+0.8
+
+Token-DiFR (match)
+
+Random bug k=32
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104 100 10T1oken b1a0tc2h size103 104
+
+(b) Bug simulations.
+1.0 KV cache (bf16 fp8) Model (bf16 4bit)
+0.9 0.8 0.7 0.6 0.5
+1 2Batch4 Size8 16 1 2Batch4 Size8 16
+
+Activation-DiFR k=32 Activation-DiFR k=8 Activation-DiFR k=2 TOPLOC k=32 TOPLOC k=8 TOPLOC k=2
+
+(c) Activation comparisons (AUC).
+
+AUC @ FPR 1%
+
+AUC @ FPR 1%
+
+Figure 14. Token-DiFR and Activation-DiFR results for Qwen3-30B-A3B with the vLLM pooled setup with the four metric comparison (Token-DiFR, cross entropy, Token-DiFR likelihood, and exact token match).
+
+38
+
+DiFR: Inference Verification Despite Nondeterminism
+
+AUC @ FPR 1%
+
+AUC @ FPR 1%
+
+1.0
+
+Incorrect K(Vbfc1a6chfep8q)uantization
+Token-DiFR (margin)
+
+0.9
+
+Cross-entropy Token-DiFR (likelihood)
+
+0.8
+
+Token-DiFR (match)
+
+0.7
+
+0.6
+
+0.5 Token batch size
+1.0 Incorrect temperature (1.0 1.1)
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104
+
+Incorrect(bmf1o6del4qbuita)ntization
+Token batch size
+Incorrect seed (42 43)
+100 10T1oken b1a0tc2h size103 104
+
+(a) Standard misconfigurations.
+
+1.0
+
+Random bug k=2
+Token-DiFR (margin)
+
+0.9
+
+Cross-entropy Token-DiFR (likelihood)
+
+0.8
+
+Token-DiFR (match)
+
+Random bug k=32
+
+0.7
+
+0.6
+
+0.5 100 10T1oken b1a0tc2h size103 104 100 10T1oken b1a0tc2h size103 104
+
+(b) Bug simulations.
+1.0 KV cache (bf16 fp8) Model (bf16 4bit)
+0.9 0.8 0.7 0.6 0.5
+1 2Batch4 Size8 16 1 2Batch4 Size8 16
+
+Activation-DiFR k=32 Activation-DiFR k=8 Activation-DiFR k=2 TOPLOC k=32 TOPLOC k=8 TOPLOC k=2
+
+(c) Activation comparisons (AUC).
+
+AUC @ FPR 1%
+
+AUC @ FPR 1%
+
+Figure 15. Token-DiFR and Activation-DiFR results for Qwen3-30B-A3B with the vLLM + HuggingFace pooled setup with the four metric comparison (Token-DiFR, cross entropy, Token-DiFR likelihood, and exact token match).
+
+39
+
+

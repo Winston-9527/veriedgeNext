@@ -1,0 +1,7 @@
+pair_id,pair_label,variant,family,signature_scalars_per_checkpoint,signature_bytes_per_checkpoint_fp32,eval_honest_hetero_fpr,eval_tamper_tpr,eval_tamper_locacc,eval_prompt_count,eval_runtime_ms_per_trace_hetero,eval_runtime_ms_per_trace_tamper,wall_runtime_sec
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,scalar16,scalar,16,64,0.15,1.0,1.0,200,3.565805,1.93319,2.186487
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,projscalar1_abs,projabs,16,64,0.0,1.0,1.0,200,3.81882,2.141405,2.290329
+t4strict_pair_a_vs_b_40_200,stack_a_vs_stack_b,projcos4,projcos,64,256,0.02,1.0,1.0,200,3.749165,2.21086,2.271108
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,scalar16,scalar,16,64,0.245,1.0,1.0,200,3.573275,1.969355,2.212028
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,projscalar1_abs,projabs,16,64,0.0,1.0,1.0,200,3.7897,2.18407,2.32393
+t4strict_pair_b_vs_d_40_200,stack_b_vs_stack_d,projcos4,projcos,64,256,0.075,1.0,1.0,200,3.826085,2.29831,2.329768

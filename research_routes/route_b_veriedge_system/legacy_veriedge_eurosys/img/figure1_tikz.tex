@@ -1,0 +1,77 @@
+% Original TikZ source for Figure 1 (technical overview).
+% The main paper currently uses img/figure1.png for this figure.
+\resizebox{0.96\textwidth}{!}{%
+\begin{tikzpicture}[
+  font=\small,
+  entity/.style={draw=blue!55!black, very thick, rounded corners=4pt, fill=blue!6, align=center, minimum width=2.5cm, minimum height=1.5cm},
+  module/.style={draw=black!70, thick, rounded corners=3pt, fill=white, align=center, minimum width=2.3cm, minimum height=1.25cm},
+  contract/.style={draw=orange!80!black, thick, rounded corners=3pt, fill=orange!11, align=center, minimum width=2.45cm, minimum height=1.15cm},
+  verify/.style={draw=green!45!black, thick, rounded corners=3pt, fill=green!10, align=center, minimum width=2.3cm, minimum height=1.15cm},
+  shard/.style={draw=blue!60!black, thick, rounded corners=2pt, fill=white, minimum width=0.75cm, minimum height=0.55cm, font=\scriptsize},
+  plane/.style={draw=black!18, rounded corners=8pt, fill=black!2, inner sep=10pt},
+  ctrl/.style={-{Latex[length=2.4mm]}, semithick, draw=black!75},
+  data/.style={-{Latex[length=2.4mm]}, semithick, draw=blue!70!black},
+  audit/.style={-{Latex[length=2.4mm]}, semithick, draw=green!45!black},
+  money/.style={-{Latex[length=2.4mm]}, semithick, draw=orange!80!black, dashed},
+  note/.style={font=\scriptsize, align=center, text=black!70},
+  planehdr/.style={font=\bfseries\small, text=black!75}
+]
+  \node[entity, minimum width=2.7cm, minimum height=2.35cm] (req) at (0,0) {Requester\\[-0.1em]\footnotesize task metadata\\\footnotesize prompt / payload owner};
+  \node[module, minimum width=2.75cm, minimum height=1.45cm] (orch) at (6.15,0.15) {Verification-aware\\orchestrator};
+  \node[module, minimum width=2.35cm] (store) at (9.45,0.95) {IPFS /\\ciphertext store};
+  \node[module, minimum width=2.35cm] (access) at (9.45,-1.05) {Targeted key\\release};
+  \node[entity, minimum width=3.1cm, minimum height=2.35cm] (prov) at (14.0,0) {Selected provider group\\[-0.1em]\footnotesize collaborative inference};
+  \node[shard] (p1) at ($(prov.center)+(-0.8,0.55)$) {P1};
+  \node[shard] (p2) at ($(prov.center)+(0,0.55)$) {P2};
+  \node[shard] (p3) at ($(prov.center)+(0.8,0.55)$) {P3};
+  \draw[data] (p1.east) -- (p2.west);
+  \draw[data] (p2.east) -- (p3.west);
+  \node[note] at ($(prov.center)+(0,-0.55)$) {shard plan \& execution trace};
+
+  \node[contract] (reg) at (3.95,3.0) {Registry \& escrow};
+  \node[contract] (commit) at (6.85,3.0) {Allocation / result\\commitments};
+  \node[contract] (settle) at (9.75,3.0) {Settlement \&\\slashing};
+
+  \node[verify] (screen) at (5.3,-3.15) {Routine\\screening};
+  \node[verify] (tstc) at (8.45,-3.15) {TSTC dispute\\verifier};
+
+  \begin{scope}[on background layer]
+    \node[plane, fit=(reg)(commit)(settle)] (chainplane) {};
+    \node[plane, fit=(req)(orch)(store)(access)(prov)] (execplane) {};
+    \node[plane, fit=(screen)(tstc)] (veriplane) {};
+  \end{scope}
+
+  \node[planehdr, anchor=south] at ($(chainplane.north)+(0,0.18)$) {On-chain coordination substrate};
+  \node[planehdr, anchor=south] at ($(execplane.north)+(0,0.18)$) {Off-chain orchestration, delivery, and execution};
+  \node[planehdr, anchor=south] at ($(veriplane.north)+(0,0.18)$) {Verification plane};
+
+  \draw[ctrl] (req.north east) to[bend left=14] node[note, above] {task metadata \& escrow} (reg.west);
+  \draw[ctrl] (prov.north west) to[bend right=16] node[note, above] {resource ad \& stake} (reg.east);
+  \draw[ctrl] (reg.south) -- (orch.north);
+  \draw[ctrl] (orch.north) -- (commit.south);
+  \draw[ctrl] (prov.north) to[bend left=18] (commit.east);
+  \draw[ctrl] (commit.east) -- ++(0.65,0) |- (settle.west);
+
+  \draw[ctrl] (orch.west) -- node[note, above] {winner set} (req.east);
+  \draw[ctrl] (orch.east) -- node[note, above] {shard plan} (prov.west);
+  \draw[data] (req.east) -- ++(1.0,0) |- node[note, right] {ciphertext \(C_j\)} (store.west);
+  \draw[data] (req.east) -- ++(1.2,0) |- node[note, right] {access tuple \((\ell_j,k_j)\)} (access.west);
+  \draw[data] (access.east) -- node[note, above] {key package \(e_i\)} (prov.west);
+  \draw[data] (prov.west) -- ++(-1.0,0) |- node[note, left] {fetch} (store.east);
+
+  \draw[audit] (prov.south west) to[bend right=14] node[note, below] {screen / trigger} (screen.north east);
+  \draw[audit] (screen.east) -- node[note, above] {escalation} (tstc.west);
+  \draw[audit] (tstc.north) to[bend left=16] node[note, right] {verdict \& localization} (settle.south);
+
+  \draw[money] (settle.west) to[bend left=24] node[note, above] {refund / compensation} (req.north east);
+  \draw[money] (settle.east) to[bend right=24] node[note, above] {payment / slashing} (prov.north west);
+
+  \node[module, draw=none, fill=none, anchor=south east] (legend) at (15.65,-4.15) {};
+  \draw[ctrl] ($(legend.west)+(-3.95,0.55)$) -- ++(0.85,0);
+  \node[note, anchor=west] at ($(legend.west)+(-3.0,0.55)$) {control / commit path};
+  \draw[data] ($(legend.west)+(-3.95,0)$) -- ++(0.85,0);
+  \node[note, anchor=west] at ($(legend.west)+(-3.0,0)$) {data / delivery path};
+  \draw[audit] ($(legend.west)+(-3.95,-0.55)$) -- ++(0.85,0);
+  \node[note, anchor=west] at ($(legend.west)+(-3.0,-0.55)$) {verification path};
+\end{tikzpicture}%
+}

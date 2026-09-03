@@ -1,0 +1,17 @@
+# Preserve exact artifact bytes so FILE_MANIFEST_SHA256.csv remains valid after clone.
+* -text
+
+# Keep binary research assets out of textual diffs and merges.
+*.docx binary
+*.jpg binary
+*.jpeg binary
+*.npy binary
+*.npz binary
+*.pdf binary
+*.png binary
+*.pptx binary
+*.rar binary
+*.sqlite binary
+*.sqlite3 binary
+*.xlsx binary
+*.zip binary

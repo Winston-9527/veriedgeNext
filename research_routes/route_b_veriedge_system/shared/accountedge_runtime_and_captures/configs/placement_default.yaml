@@ -1,0 +1,8 @@
+alpha: 0.10
+beta: 0.90
+sketch_budget_bytes: 3072
+verify_budget_ms: 5.0
+policies:
+  - network_aware
+  - verification_aware
+  - adaptive_verifier

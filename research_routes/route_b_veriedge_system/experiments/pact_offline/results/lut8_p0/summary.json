@@ -1,0 +1,37 @@
+{
+  "status": "P0 geometry/protocol smoke test; not a paper-level FPR claim",
+  "data_root": "research_routes/route_b_veriedge_system/shared/accountedge_runtime_and_captures/raw_captures/e2_live_subset",
+  "calibration_pair_checkpoints": 18,
+  "evaluation_pair_checkpoints": 6,
+  "K": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "supports": [
+    1,
+    16,
+    256
+  ],
+  "rhos": [
+    0.01,
+    0.02,
+    0.05
+  ],
+  "candidate_portfolio": 8,
+  "calibration_draws_per_prompt_checkpoint": 64,
+  "selection_draws": 64,
+  "test_draws": 512,
+  "target_alpha_smoke_only": 0.01,
+  "projection_family": "lut8",
+  "gaussian_implementation": null,
+  "seed_domains": [
+    "calibration",
+    "selection:*",
+    "final-test:*"
+  ]
+}

@@ -1,0 +1,16 @@
+\documentclass[tikz,border=0.8pt]{standalone}
+\usepackage{xcolor}
+\definecolor{IconTeal}{HTML}{0E6F78}
+\begin{document}
+\begin{tikzpicture}[x=1pt,y=1pt,line cap=round,line join=round]
+  \path[use as bounding box] (0,0) rectangle (24,24);
+  \begin{scope}[draw=IconTeal, line width=1.8pt]
+    \draw (4.2,5.0) -- (19.8,5.0) -- (13.7,12.3) -- (13.7,18.5)
+      -- (10.3,20.2) -- (10.3,12.3) -- cycle;
+    \draw (6.3,8.3) -- (17.7,8.3);
+    \draw (8.2,11.0) -- (15.8,11.0);
+    \draw (15.9,16.3) -- (20.2,16.3);
+    \draw (18.3,14.4) -- (20.2,16.3) -- (18.3,18.2);
+  \end{scope}
+\end{tikzpicture}
+\end{document}

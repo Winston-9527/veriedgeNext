@@ -1,0 +1,2 @@
+"""Prototype smoke tests."""
+

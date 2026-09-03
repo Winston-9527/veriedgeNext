@@ -1,0 +1,87 @@
+\begin{tikzpicture}
+\definecolor{veProjBlue}{HTML}{1F6E7A}
+\definecolor{veProjBlueLight}{HTML}{607180}
+\definecolor{veProjGreen}{HTML}{0F766E}
+\definecolor{veProjAmber}{HTML}{3B5B8A}
+\definecolor{veProjGrid}{HTML}{D7DEE2}
+\definecolor{veProjPanel}{HTML}{F7FAFB}
+\begin{groupplot}[
+	group style={group size=2 by 1,horizontal sep=0.86cm},
+	width=0.405\textwidth,
+	height=0.255\textwidth,
+	symbolic x coords={AB,ABint8,AC,AD,BD,EF},
+	xtick=data,
+	xticklabels={A/B,{A/B\\int8},A/C,A/D,B/D,E/F},
+	x tick label style={font=\scriptsize,align=center},
+	tick label style={font=\scriptsize},
+	label style={font=\scriptsize},
+	title style={font=\scriptsize\bfseries,yshift=-0.4ex},
+	legend style={
+		font=\scriptsize,
+		draw=none,
+		fill=white,
+		fill opacity=0.88,
+		text opacity=1,
+		row sep=0pt,
+		cells={anchor=west}
+	},
+	enlarge x limits=0.14,
+	grid=major,
+	major grid style={draw=veProjGrid,line width=0.25pt},
+	axis background/.style={fill=veProjPanel},
+	axis line style={draw=black!55,line width=0.35pt},
+	tick align=outside,
+]
+
+\nextgroupplot[
+	title={(a) held-out FPR across seeds},
+	ylabel={FPR},
+	ymin=0,ymax=0.12,
+	ytick={0,0.025,0.05,0.075,0.10},
+	legend pos=north west,
+]
+\addplot+[ybar=2.8pt,bar shift=-1.8pt,area legend,mark=none,
+	fill=veProjBlue!20,draw=veProjBlue,line width=0.45pt]
+	coordinates {
+		(AB,0.014) (ABint8,0.004) (AC,0.006)
+		(AD,0.010) (BD,0.006) (EF,0.004)
+	};
+\addlegendentry{mean FPR}
+\addplot+[ybar=2.8pt,bar shift=1.8pt,area legend,mark=none,
+	fill=veProjBlueLight!18,draw=veProjBlueLight,line width=0.45pt,
+	postaction={pattern=north east lines,pattern color=veProjBlueLight!82}]
+	coordinates {
+		(AB,0.025) (ABint8,0.005) (AC,0.010)
+		(AD,0.020) (BD,0.010) (EF,0.010)
+	};
+\addlegendentry{max FPR}
+\addplot+[sharp plot,draw=black!62,dashed,line width=0.75pt,forget plot]
+	coordinates {(AB,0.10) (EF,0.10)};
+\node[anchor=south east,font=\scriptsize,text=black!62]
+	at (axis cs:EF,0.101) {target \(0.10\)};
+
+\nextgroupplot[
+	title={(b) material-tamper stability},
+	ylabel={TPR},
+	ymin=0,ymax=1.08,
+	ytick={0,0.25,0.5,0.75,1.0},
+	legend pos=south east,
+]
+\addplot+[ybar=2.8pt,bar shift=-1.8pt,area legend,mark=none,
+	fill=veProjGreen!18,draw=veProjGreen,line width=0.45pt]
+	coordinates {
+		(AB,1.0) (ABint8,1.0) (AC,1.0)
+		(AD,1.0) (BD,1.0) (EF,1.0)
+	};
+\addlegendentry{min primary TPR}
+\addplot+[ybar=2.8pt,bar shift=1.8pt,area legend,mark=none,
+	fill=veProjAmber!16,draw=veProjAmber,line width=0.45pt,
+	postaction={pattern=north east lines,pattern color=veProjAmber!74}]
+	coordinates {
+		(AB,1.0) (ABint8,1.0) (AC,1.0)
+		(AD,1.0) (BD,1.0) (EF,1.0)
+	};
+\addlegendentry{mean scale TPR}
+
+\end{groupplot}
+\end{tikzpicture}

@@ -1,0 +1,72 @@
+{
+  "aggregate": [
+    {
+      "attack": "honest",
+      "max_test_rate": 0.001953125,
+      "mean_test_rate": 0.001953125,
+      "min_test_rate": 0.001953125,
+      "pair_count": 1,
+      "q": 64,
+      "rho": 0.0
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.041015625,
+      "mean_test_rate": 0.041015625,
+      "min_test_rate": 0.041015625,
+      "pair_count": 1,
+      "q": 64,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 1,
+      "q": 64,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 1,
+      "q": 64,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.076171875,
+      "mean_test_rate": 0.076171875,
+      "min_test_rate": 0.076171875,
+      "pair_count": 1,
+      "q": 64,
+      "rho": 0.02
+    }
+  ],
+  "checkpoints": [
+    "prefill__C1"
+  ],
+  "optimizer_steps": 20,
+  "pairs": 1,
+  "prompts": [
+    "eval_001"
+  ],
+  "q_values": [
+    64
+  ],
+  "scope": "local white-box non-anticipating attack smoke test with delta orthogonal to honest residual; no semantic harm measurement",
+  "selection_challenges": 128,
+  "strengths": [
+    0.02
+  ],
+  "support_candidates": [
+    16,
+    256,
+    0
+  ],
+  "test_challenges": 512,
+  "train_challenges": 128
+}

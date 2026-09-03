@@ -1,0 +1,18 @@
+providers:
+  - role: provider_c1
+    backend_class: mps_quant
+    checkpoint: C1
+    notes: anonymous edge-class provider for the first checkpoint
+  - role: provider_c2
+    backend_class: mps_bf16
+    checkpoint: C2
+    notes: anonymous edge-class provider for the second checkpoint
+  - role: provider_c3
+    backend_class: cuda_fp32
+    checkpoint: C3
+    notes: anonymous accelerator-class provider for the third checkpoint
+capture:
+  model_id_env: MODEL_ID
+  output_schema: npz files with prefill__C1, prefill__C2, prefill__C3
+  metadata_schema: jsonl rows with prompt_id, split, checkpoint, shape, backend, device
+

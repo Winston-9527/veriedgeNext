@@ -1,0 +1,5 @@
+network: LAN
+payload_mb: 100
+group_sizes: [1, 2, 4, 8]
+runs_per_cell: 30
+scope: calibrated delivery-path microbenchmark

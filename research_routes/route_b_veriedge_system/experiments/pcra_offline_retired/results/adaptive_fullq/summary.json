@@ -1,0 +1,503 @@
+{
+  "aggregate": [
+    {
+      "attack": "honest",
+      "max_test_rate": 0.1806640625,
+      "mean_test_rate": 0.038736979166666664,
+      "min_test_rate": 0.005859375,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.0
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.173828125,
+      "mean_test_rate": 0.06827799479166667,
+      "min_test_rate": 0.0224609375,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 0.721923828125,
+      "min_test_rate": 0.0458984375,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 0.946533203125,
+      "min_test_rate": 0.7900390625,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.228515625,
+      "mean_test_rate": 0.09659830729166667,
+      "min_test_rate": 0.06103515625,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.01
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.224609375,
+      "mean_test_rate": 0.09269205729166667,
+      "min_test_rate": 0.05615234375,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 0.8992513020833334,
+      "min_test_rate": 0.56982421875,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.23095703125,
+      "mean_test_rate": 0.09724934895833333,
+      "min_test_rate": 0.06640625,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.02
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.23681640625,
+      "mean_test_rate": 0.09676106770833333,
+      "min_test_rate": 0.060546875,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.24365234375,
+      "mean_test_rate": 0.09749348958333333,
+      "min_test_rate": 0.05908203125,
+      "pair_count": 6,
+      "q": 64,
+      "rho": 0.05
+    },
+    {
+      "attack": "honest",
+      "max_test_rate": 0.27197265625,
+      "mean_test_rate": 0.053304036458333336,
+      "min_test_rate": 0.0,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.0
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.1533203125,
+      "mean_test_rate": 0.031087239583333332,
+      "min_test_rate": 0.0,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 0.494140625,
+      "mean_test_rate": 0.09969075520833333,
+      "min_test_rate": 0.0,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 0.9959309895833334,
+      "min_test_rate": 0.98095703125,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.36474609375,
+      "mean_test_rate": 0.08992513020833333,
+      "min_test_rate": 0.00439453125,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.01
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.34765625,
+      "mean_test_rate": 0.10408528645833333,
+      "min_test_rate": 0.03076171875,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 0.99560546875,
+      "mean_test_rate": 0.3529459635416667,
+      "min_test_rate": 0.02294921875,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.36669921875,
+      "mean_test_rate": 0.166259765625,
+      "min_test_rate": 0.1123046875,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.02
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.34423828125,
+      "mean_test_rate": 0.14371744791666666,
+      "min_test_rate": 0.08154296875,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.35693359375,
+      "mean_test_rate": 0.16642252604166666,
+      "min_test_rate": 0.12060546875,
+      "pair_count": 6,
+      "q": 128,
+      "rho": 0.05
+    },
+    {
+      "attack": "honest",
+      "max_test_rate": 0.4580078125,
+      "mean_test_rate": 0.08536783854166667,
+      "min_test_rate": 0.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.0
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.103515625,
+      "mean_test_rate": 0.023030598958333332,
+      "min_test_rate": 0.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 0.806640625,
+      "mean_test_rate": 0.16202799479166666,
+      "min_test_rate": 0.00146484375,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.57666015625,
+      "mean_test_rate": 0.15022786458333334,
+      "min_test_rate": 0.0107421875,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.01
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.57275390625,
+      "mean_test_rate": 0.16121419270833334,
+      "min_test_rate": 0.02099609375,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 0.4056803385416667,
+      "min_test_rate": 0.09228515625,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.59033203125,
+      "mean_test_rate": 0.2984212239583333,
+      "min_test_rate": 0.2294921875,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.02
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.57568359375,
+      "mean_test_rate": 0.2505696614583333,
+      "min_test_rate": 0.15576171875,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.5732421875,
+      "mean_test_rate": 0.2913411458333333,
+      "min_test_rate": 0.22119140625,
+      "pair_count": 6,
+      "q": 256,
+      "rho": 0.05
+    },
+    {
+      "attack": "honest",
+      "max_test_rate": 0.75244140625,
+      "mean_test_rate": 0.13802083333333334,
+      "min_test_rate": 0.0,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.0
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.04248046875,
+      "mean_test_rate": 0.021158854166666668,
+      "min_test_rate": 0.0,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 0.9921875,
+      "mean_test_rate": 0.24853515625,
+      "min_test_rate": 0.00927734375,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.01
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.85693359375,
+      "mean_test_rate": 0.235595703125,
+      "min_test_rate": 0.01123046875,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.01
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.19970703125,
+      "mean_test_rate": 0.14689127604166666,
+      "min_test_rate": 0.00048828125,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 0.4519856770833333,
+      "min_test_rate": 0.1572265625,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.02
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.8564453125,
+      "mean_test_rate": 0.48583984375,
+      "min_test_rate": 0.400390625,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.02
+    },
+    {
+      "attack": "adaptive_joint",
+      "max_test_rate": 0.83251953125,
+      "mean_test_rate": 0.411376953125,
+      "min_test_rate": 0.25927734375,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_diffuse",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_directional",
+      "max_test_rate": 1.0,
+      "mean_test_rate": 1.0,
+      "min_test_rate": 1.0,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.05
+    },
+    {
+      "attack": "fixed_sparse16",
+      "max_test_rate": 0.85498046875,
+      "mean_test_rate": 0.4916178385416667,
+      "min_test_rate": 0.4033203125,
+      "pair_count": 6,
+      "q": 512,
+      "rho": 0.05
+    }
+  ],
+  "checkpoints": [
+    "prefill__C1",
+    "prefill__C2",
+    "prefill__C3"
+  ],
+  "optimizer_steps": 60,
+  "pairs": 6,
+  "prompts": [
+    "eval_001",
+    "eval_005"
+  ],
+  "q_values": [
+    64,
+    128,
+    256,
+    512
+  ],
+  "scope": "local white-box non-anticipating attack smoke test; no semantic harm measurement",
+  "selection_challenges": 512,
+  "strengths": [
+    0.01,
+    0.02,
+    0.05
+  ],
+  "support_candidates": [
+    16,
+    256,
+    0
+  ],
+  "test_challenges": 2048,
+  "train_challenges": 512
+}

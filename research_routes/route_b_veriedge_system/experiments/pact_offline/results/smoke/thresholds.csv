@@ -1,0 +1,7 @@
+checkpoint,K,threshold,calibration_prompt_seed_draws,calibration_prompts,target_alpha_smoke_only
+prefill__C1,4,6.066032466574016e-05,24,6,0.01
+prefill__C1,16,5.697314952013258e-05,24,6,0.01
+prefill__C2,4,7.874384747527723e-05,24,6,0.01
+prefill__C2,16,5.570706603655986e-05,24,6,0.01
+prefill__C3,4,0.0006570226061108353,24,6,0.01
+prefill__C3,16,0.00038493202264217914,24,6,0.01

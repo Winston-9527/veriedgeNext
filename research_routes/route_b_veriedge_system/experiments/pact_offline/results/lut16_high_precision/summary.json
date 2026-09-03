@@ -1,0 +1,29 @@
+{
+  "status": "coefficient-geometry experiment; not real-residual calibration",
+  "coefficient_families": [
+    "lut16",
+    "gaussian"
+  ],
+  "supports": [
+    1,
+    16,
+    256
+  ],
+  "K": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32
+  ],
+  "energy_ratios": [
+    1.0,
+    1.4,
+    2.0,
+    8.0
+  ],
+  "calibration_support": 256,
+  "alpha": 0.01,
+  "zero_free_quantizers": true
+}

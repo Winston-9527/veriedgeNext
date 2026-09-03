@@ -1,0 +1,17 @@
+\documentclass[tikz,border=0.8pt]{standalone}
+\usepackage{xcolor}
+\usetikzlibrary{arrows.meta}
+\definecolor{IconTeal}{HTML}{0E6F78}
+\begin{document}
+\begin{tikzpicture}[x=1pt,y=1pt,line cap=round,line join=round]
+  \path[use as bounding box] (0,0) rectangle (24,24);
+  \begin{scope}[draw=IconTeal, line width=1.65pt]
+    \draw (9.6,9.4) circle (6.1pt);
+    \draw (9.6,9.4) circle (3.6pt);
+    \draw (9.6,9.4) circle (1.3pt);
+    \draw[-{Latex[length=2.8pt,width=2.3pt]}] (13.7,13.5) -- (19.6,19.4);
+    \draw (16.9,19.2) -- (19.6,19.4) -- (19.8,22.1);
+    \draw (18.7,17.4) -- (21.4,17.6) -- (21.6,20.3);
+  \end{scope}
+\end{tikzpicture}
+\end{document}

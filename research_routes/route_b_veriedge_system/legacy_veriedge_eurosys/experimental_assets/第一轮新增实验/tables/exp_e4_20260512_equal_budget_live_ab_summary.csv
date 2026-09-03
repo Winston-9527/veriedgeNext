@@ -1,0 +1,16 @@
+variant,family,scenario,sample_count,tolerance_mode,percentile,tolerance_scale,signature_scalars_per_checkpoint,signature_bytes_per_checkpoint_fp32,reveal_payload_bytes_per_trace,mean_commitment_head_bytes,mean_commitment_chain_bytes,mean_reference_storage_head_bytes,mean_candidate_working_set_head_bytes,mean_challenge_working_set_head_bytes,mean_challenge_working_set_full_chain_bytes,mean_commitment_generation_ms,mean_replay_ms,mean_compare_ms,mean_challenge_latency_no_commit_ms,mean_challenge_latency_ms,detection_rate,dominant_mismatch_checkpoint
+projcos16,projcos,honest_hetero,200,checkpoint_specific,99.0,1.5,256,1024,3072,32.0,96.0,109241.765,109223.385,218686.51,218750.51,0.36397,0.320891,0.046828,3.676832,4.040801,0.12,
+projcos16,projcos,honest_homo,200,checkpoint_specific,99.0,1.5,256,1024,3072,32.0,96.0,109223.385,109223.385,218665.77,218729.77,0.3646,0.322778,0.047224,3.672537,4.037137,0.0,
+projcos16,projcos,tamper,200,checkpoint_specific,99.0,1.5,256,1024,3072,32.0,96.0,109223.385,109223.385,218668.77,218732.77,0.338359,0.319118,0.034209,3.605089,3.943448,1.0,C2
+projcos4,projcos,honest_hetero,200,checkpoint_specific,99.0,1.5,64,256,768,32.0,96.0,109241.765,109223.385,218685.21,218749.21,0.238649,0.190146,0.047831,3.559581,3.79823,0.02,
+projcos4,projcos,honest_homo,200,checkpoint_specific,99.0,1.5,64,256,768,32.0,96.0,109223.385,109223.385,218664.77,218728.77,0.234778,0.194243,0.04655,3.509727,3.744505,0.0,
+projcos4,projcos,tamper,200,checkpoint_specific,99.0,1.5,64,256,768,32.0,96.0,109223.385,109223.385,218667.77,218731.77,0.21265,0.191888,0.03329,3.471074,3.683724,1.0,C2
+projscalar1_abs,projabs,honest_hetero,200,checkpoint_specific,99.0,1.5,16,64,192,32.0,96.0,109241.765,109223.385,218692.24,218756.24,0.193528,0.152202,0.046214,3.515214,3.708742,0.03,
+projscalar1_abs,projabs,honest_homo,200,checkpoint_specific,99.0,1.5,16,64,192,32.0,96.0,109223.385,109223.385,218671.77,218735.77,0.199669,0.153656,0.047671,3.523581,3.72325,0.0,
+projscalar1_abs,projabs,tamper,200,checkpoint_specific,99.0,1.5,16,64,192,32.0,96.0,109223.385,109223.385,218674.77,218738.77,0.189085,0.156908,0.035892,3.624641,3.813726,1.0,C2
+scalar16,scalar,honest_hetero,200,global_shared,99.99,1.5,16,64,192,32.0,96.0,109241.765,109223.385,218685.6,218749.6,0.105821,0.07074,0.002938,3.497666,3.603487,0.15,
+scalar16,scalar,honest_homo,200,global_shared,99.99,1.5,16,64,192,32.0,96.0,109223.385,109223.385,218664.77,218728.77,0.150028,0.068696,0.002498,3.270443,3.42047,0.0,
+scalar16,scalar,tamper,200,global_shared,99.99,1.5,16,64,192,32.0,96.0,109223.385,109223.385,218667.77,218731.77,0.085335,0.068554,0.002835,3.296332,3.381667,1.0,C2
+scalar64,scalar,honest_hetero,200,global_shared,99.99,2.0,64,256,768,32.0,96.0,109241.765,109223.385,218686.395,218750.395,0.103553,0.072266,0.002946,3.365238,3.468791,0.415,
+scalar64,scalar,honest_homo,200,global_shared,99.99,2.0,64,256,768,32.0,96.0,109223.385,109223.385,218664.77,218728.77,0.113131,0.071608,0.002982,3.397022,3.510154,0.0,
+scalar64,scalar,tamper,200,global_shared,99.99,2.0,64,256,768,32.0,96.0,109223.385,109223.385,218667.77,218731.77,0.090801,0.069662,0.002596,3.311772,3.402573,1.0,C2

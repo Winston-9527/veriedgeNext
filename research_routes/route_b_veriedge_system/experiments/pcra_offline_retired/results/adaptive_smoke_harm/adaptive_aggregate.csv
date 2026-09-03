@@ -1,0 +1,6 @@
+q,rho,attack,mean_test_rate,min_test_rate,max_test_rate,pair_count
+64,0.0,honest,0.001953125,0.001953125,0.001953125,1
+64,0.02,adaptive_joint,0.041015625,0.041015625,0.041015625,1
+64,0.02,fixed_diffuse,1.0,1.0,1.0,1
+64,0.02,fixed_directional,1.0,1.0,1.0,1
+64,0.02,fixed_sparse16,0.076171875,0.076171875,0.076171875,1

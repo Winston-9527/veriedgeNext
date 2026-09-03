@@ -1,0 +1,61 @@
+{
+  "status": "executable transcript prototype; HMAC receipts are not public signatures",
+  "context": {
+    "task_id": "pact-prototype-eval-001",
+    "boundary": "prefill__C1",
+    "model_id": "anonymous-heterogeneous-qwen",
+    "tensor_shape": [
+      1,
+      16,
+      1024
+    ],
+    "tensor_dtype": "float32-le",
+    "actual_root": "44d122834ce5fb33465a9233323e9ba03767a967dcd3b6fe2a07c23c93ebb046",
+    "reference_root": "501779fa7dfb569a415310eb35a961a08dacb2999d3173ab47792a7b95c4f033",
+    "beacon_hex": "65c04371b8b0125f22aee763b68e12d6f0ad0c88417cbda9388dd9c53f4078c6"
+  },
+  "seed_id": "48302f836bfc72f852cdd7d590ed32b2b16d7f5b6b8d339ec301ba2768c7d773",
+  "table_hash": "8babbcaf96568f10165a1eab530c0e5c92d04de96761b6dbb3dadfa94baba37f",
+  "checks": {
+    "table_hash_matches_frozen_spec": true,
+    "same_seed_same_sketch": true,
+    "prefix_rows_stable": true,
+    "prefix_coefficient_digest_differs_by_length": true,
+    "all_witnesses_use_same_coefficients": true,
+    "linearity_max_abs_error": 4.931166586175095e-12,
+    "linearity_within_1e_7": true,
+    "float32_linearity_max_abs_error": 0.01978302001953125,
+    "actual_receipt_authenticates": true,
+    "reference_receipt_authenticates": true,
+    "tampered_receipt_rejected": true,
+    "wrong_key_rejected": true,
+    "receipt_pair_adjudicates": true,
+    "adjudicated_statistic_matches": true,
+    "authenticated_receipt_replay_rejected_in_changed_context": true,
+    "context_mutations_change_seed": {
+      "task_id": true,
+      "boundary": true,
+      "model_id": true,
+      "shape": true,
+      "actual_root": true,
+      "reference_root": true,
+      "beacon": true
+    }
+  },
+  "K": 64,
+  "N": 16384,
+  "projected_statistic": 0.1275026885402199,
+  "float32_projected_statistic": 0.12750449776649475,
+  "float32_statistic_relative_difference": 1.4189710786222075e-05,
+  "exact_full_residual_energy": 0.10004319499727021,
+  "actual_receipt_bytes": 1403,
+  "reference_receipt_bytes": 1406,
+  "combined_receipt_bytes": 2809,
+  "combined_float32_receipt_bytes": 2129,
+  "authentication_limitation": "replace HMAC signer with Ed25519 before deployment",
+  "transcript_microbenchmark": {
+    "median_commitment_ms": 0.23375,
+    "median_seed_derivation_ms": 0.02695,
+    "median_receipt_create_verify_ms": 0.0937
+  }
+}
