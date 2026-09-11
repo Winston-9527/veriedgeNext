@@ -1,0 +1,6 @@
+numpy>=1.24
+matplotlib>=3.7
+web3>=6.10
+# Optional for real Qwen path (pipeline falls back to mock if unavailable):
+# transformers>=4.40
+# torch>=2.1

@@ -1,0 +1,2 @@
+pair_label,stage,prompt_count,thc_fpr,tstc_fpr,thc_detect_count,tstc_detect_count,thc_dominant_mismatch_checkpoint,tstc_dominant_mismatch_checkpoint,thc_mismatch_distribution,tstc_mismatch_distribution,left_capture_root,right_capture_root,notes
+localm5_vs_mini1,prefill,6,1.0,1.0,6,6,C1,C1,"{""C1"": 6}","{""C1"": 6}",/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/e1_paper_c1swap_eval_a,/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/e1_paper_c1swap_eval_b,honest-honest paired capture; localization is N/A

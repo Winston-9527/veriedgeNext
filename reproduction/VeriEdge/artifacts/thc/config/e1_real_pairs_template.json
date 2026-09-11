@@ -1,0 +1,19 @@
+{
+  "pairs": [
+    {
+      "pair_label": "m4_metal_int8_vs_m4_fp16",
+      "left_capture_root": "/abs/path/to/e1_eval_m4metal_run_a",
+      "right_capture_root": "/abs/path/to/e1_eval_m4fp16_run_a"
+    },
+    {
+      "pair_label": "m4_metal_int8_vs_rtx_bf16",
+      "left_capture_root": "/abs/path/to/e1_eval_m4metal_run_a",
+      "right_capture_root": "/abs/path/to/e1_eval_rtxbf16_run_a"
+    },
+    {
+      "pair_label": "m4_fp16_vs_rtx_fp32",
+      "left_capture_root": "/abs/path/to/e1_eval_m4fp16_run_a",
+      "right_capture_root": "/abs/path/to/e1_eval_rtxfp32_run_a"
+    }
+  ]
+}

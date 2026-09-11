@@ -1,0 +1,3901 @@
+{
+  "seed": 20260508,
+  "source": {
+    "profile_matrix": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E5/tables/exp_e5_20260511_verification_profile_matrix.csv",
+    "profile_matrix_sha256": "7ed45b6ce50a31f5273627dd600fa08c9134866f585b15f70bfd4421beb883d8",
+    "prompt_file": "/Users/siyuan/Developer/Veriedge/VeriEdge/artifacts/thc/data/qwen_prompt_splits_40_200.jsonl",
+    "requester_config": "/Users/siyuan/Developer/Veriedge/VeriEdge/artifacts/inference-E2E/requester/config.example.yaml"
+  },
+  "network_profiles": {
+    "LAN": {
+      "rtt_ms": 5.0,
+      "bandwidth_mbps": 300.0,
+      "loss_pct": 0.1
+    },
+    "WAN": {
+      "rtt_ms": 49.0,
+      "bandwidth_mbps": 40.0,
+      "loss_pct": 1.333
+    }
+  },
+  "constraints": {
+    "alpha_fpr_max": 0.1,
+    "beta_tpr_min": 0.9
+  },
+  "placements": [
+    {
+      "placement_id": "lan_single_homo_scalar16",
+      "label": "LAN single-node homo scalar16",
+      "network": "LAN",
+      "group_width": 1,
+      "pair_id": "single_homo",
+      "variant": "scalar16",
+      "risk_class": "low-risk",
+      "verification_risk": 0.0,
+      "false_dispute_risk": 0.0,
+      "material_tpr_min": 1.0,
+      "material_locacc_min": 1.0,
+      "feasible_under_alpha_beta": 1,
+      "signature_bytes_per_checkpoint_fp32": 64,
+      "reveal_payload_bytes_per_trace": 192,
+      "reference_replay_runtime_ms": 2.480402,
+      "challenge_latency_ms": 4.161692,
+      "commitment_head_bytes": 32.0,
+      "commitment_chain_bytes": 96.0,
+      "base_success": 0.992,
+      "base_fixed_ms": 780.0,
+      "per_char_ms": 0.84,
+      "network_rtt_ms": 5.0,
+      "network_loss_pct": 0.1
+    },
+    {
+      "placement_id": "lan_single_homo_projcos4",
+      "label": "LAN single-node homo projcos4",
+      "network": "LAN",
+      "group_width": 1,
+      "pair_id": "single_homo",
+      "variant": "projcos4",
+      "risk_class": "low-risk",
+      "verification_risk": 0.0,
+      "false_dispute_risk": 0.0,
+      "material_tpr_min": 1.0,
+      "material_locacc_min": 1.0,
+      "feasible_under_alpha_beta": 1,
+      "signature_bytes_per_checkpoint_fp32": 256,
+      "reveal_payload_bytes_per_trace": 768,
+      "reference_replay_runtime_ms": 2.640633,
+      "challenge_latency_ms": 3.771044,
+      "commitment_head_bytes": 32.0,
+      "commitment_chain_bytes": 96.0,
+      "base_success": 0.992,
+      "base_fixed_ms": 780.0,
+      "per_char_ms": 0.84,
+      "network_rtt_ms": 5.0,
+      "network_loss_pct": 0.1
+    },
+    {
+      "placement_id": "lan_ab_scalar16",
+      "label": "LAN A/B scalar16",
+      "network": "LAN",
+      "group_width": 3,
+      "pair_id": "t4strict_pair_a_vs_b_40_200",
+      "variant": "scalar16",
+      "risk_class": "high-risk",
+      "verification_risk": 0.15,
+      "false_dispute_risk": 0.15,
+      "material_tpr_min": 0.76,
+      "material_locacc_min": 0.76,
+      "feasible_under_alpha_beta": 0,
+      "signature_bytes_per_checkpoint_fp32": 64,
+      "reveal_payload_bytes_per_trace": 192,
+      "reference_replay_runtime_ms": 2.544226,
+      "challenge_latency_ms": 4.161692,
+      "commitment_head_bytes": 32.0,
+      "commitment_chain_bytes": 96.0,
+      "base_success": 0.978,
+      "base_fixed_ms": 940.0,
+      "per_char_ms": 0.97,
+      "network_rtt_ms": 5.0,
+      "network_loss_pct": 0.1
+    },
+    {
+      "placement_id": "lan_ab_projcos4",
+      "label": "LAN A/B projcos4",
+      "network": "LAN",
+      "group_width": 3,
+      "pair_id": "t4strict_pair_a_vs_b_40_200",
+      "variant": "projcos4",
+      "risk_class": "low-risk",
+      "verification_risk": 0.02,
+      "false_dispute_risk": 0.02,
+      "material_tpr_min": 1.0,
+      "material_locacc_min": 1.0,
+      "feasible_under_alpha_beta": 1,
+      "signature_bytes_per_checkpoint_fp32": 256,
+      "reveal_payload_bytes_per_trace": 768,
+      "reference_replay_runtime_ms": 2.631514,
+      "challenge_latency_ms": 3.771044,
+      "commitment_head_bytes": 32.0,
+      "commitment_chain_bytes": 96.0,
+      "base_success": 0.978,
+      "base_fixed_ms": 940.0,
+      "per_char_ms": 0.97,
+      "network_rtt_ms": 5.0,
+      "network_loss_pct": 0.1
+    },
+    {
+      "placement_id": "wan_ac_scalar16",
+      "label": "WAN A/C scalar16",
+      "network": "WAN",
+      "group_width": 3,
+      "pair_id": "t4strict_pair_a_vs_c_40_200",
+      "variant": "scalar16",
+      "risk_class": "high-risk",
+      "verification_risk": 0.11,
+      "false_dispute_risk": 0.11,
+      "material_tpr_min": 0.645,
+      "material_locacc_min": 0.645,
+      "feasible_under_alpha_beta": 0,
+      "signature_bytes_per_checkpoint_fp32": 64,
+      "reveal_payload_bytes_per_trace": 192,
+      "reference_replay_runtime_ms": 2.423463,
+      "challenge_latency_ms": 4.161692,
+      "commitment_head_bytes": 32.0,
+      "commitment_chain_bytes": 96.0,
+      "base_success": 0.958,
+      "base_fixed_ms": 1080.0,
+      "per_char_ms": 1.01,
+      "network_rtt_ms": 49.0,
+      "network_loss_pct": 1.333
+    },
+    {
+      "placement_id": "wan_ac_projcos4",
+      "label": "WAN A/C projcos4",
+      "network": "WAN",
+      "group_width": 3,
+      "pair_id": "t4strict_pair_a_vs_c_40_200",
+      "variant": "projcos4",
+      "risk_class": "low-risk",
+      "verification_risk": 0.045,
+      "false_dispute_risk": 0.045,
+      "material_tpr_min": 1.0,
+      "material_locacc_min": 1.0,
+      "feasible_under_alpha_beta": 1,
+      "signature_bytes_per_checkpoint_fp32": 256,
+      "reveal_payload_bytes_per_trace": 768,
+      "reference_replay_runtime_ms": 2.579195,
+      "challenge_latency_ms": 3.771044,
+      "commitment_head_bytes": 32.0,
+      "commitment_chain_bytes": 96.0,
+      "base_success": 0.958,
+      "base_fixed_ms": 1080.0,
+      "per_char_ms": 1.01,
+      "network_rtt_ms": 49.0,
+      "network_loss_pct": 1.333
+    },
+    {
+      "placement_id": "wan_ad_scalar16",
+      "label": "WAN A/D scalar16",
+      "network": "WAN",
+      "group_width": 3,
+      "pair_id": "t4strict_pair_a_vs_d_40_200",
+      "variant": "scalar16",
+      "risk_class": "high-risk",
+      "verification_risk": 0.09,
+      "false_dispute_risk": 0.09,
+      "material_tpr_min": 0.555,
+      "material_locacc_min": 0.555,
+      "feasible_under_alpha_beta": 0,
+      "signature_bytes_per_checkpoint_fp32": 64,
+      "reveal_payload_bytes_per_trace": 192,
+      "reference_replay_runtime_ms": 2.602692,
+      "challenge_latency_ms": 4.161692,
+      "commitment_head_bytes": 32.0,
+      "commitment_chain_bytes": 96.0,
+      "base_success": 0.952,
+      "base_fixed_ms": 1060.0,
+      "per_char_ms": 0.99,
+      "network_rtt_ms": 49.0,
+      "network_loss_pct": 1.333
+    },
+    {
+      "placement_id": "wan_ad_projcos4",
+      "label": "WAN A/D projcos4",
+      "network": "WAN",
+      "group_width": 3,
+      "pair_id": "t4strict_pair_a_vs_d_40_200",
+      "variant": "projcos4",
+      "risk_class": "low-risk",
+      "verification_risk": 0.02,
+      "false_dispute_risk": 0.02,
+      "material_tpr_min": 1.0,
+      "material_locacc_min": 1.0,
+      "feasible_under_alpha_beta": 1,
+      "signature_bytes_per_checkpoint_fp32": 256,
+      "reveal_payload_bytes_per_trace": 768,
+      "reference_replay_runtime_ms": 2.672994,
+      "challenge_latency_ms": 3.771044,
+      "commitment_head_bytes": 32.0,
+      "commitment_chain_bytes": 96.0,
+      "base_success": 0.952,
+      "base_fixed_ms": 1060.0,
+      "per_char_ms": 0.99,
+      "network_rtt_ms": 49.0,
+      "network_loss_pct": 1.333
+    },
+    {
+      "placement_id": "wan_bd_scalar16",
+      "label": "WAN B/D scalar16",
+      "network": "WAN",
+      "group_width": 3,
+      "pair_id": "t4strict_pair_b_vs_d_40_200",
+      "variant": "scalar16",
+      "risk_class": "high-risk",
+      "verification_risk": 0.245,
+      "false_dispute_risk": 0.245,
+      "material_tpr_min": 0.95,
+      "material_locacc_min": 0.95,
+      "feasible_under_alpha_beta": 0,
+      "signature_bytes_per_checkpoint_fp32": 64,
+      "reveal_payload_bytes_per_trace": 192,
+      "reference_replay_runtime_ms": 2.443296,
+      "challenge_latency_ms": 4.161692,
+      "commitment_head_bytes": 32.0,
+      "commitment_chain_bytes": 96.0,
+      "base_success": 0.91,
+      "base_fixed_ms": 1120.0,
+      "per_char_ms": 1.03,
+      "network_rtt_ms": 49.0,
+      "network_loss_pct": 1.333
+    },
+    {
+      "placement_id": "wan_bd_projcos4",
+      "label": "WAN B/D projcos4",
+      "network": "WAN",
+      "group_width": 3,
+      "pair_id": "t4strict_pair_b_vs_d_40_200",
+      "variant": "projcos4",
+      "risk_class": "low-risk",
+      "verification_risk": 0.075,
+      "false_dispute_risk": 0.075,
+      "material_tpr_min": 1.0,
+      "material_locacc_min": 1.0,
+      "feasible_under_alpha_beta": 1,
+      "signature_bytes_per_checkpoint_fp32": 256,
+      "reveal_payload_bytes_per_trace": 768,
+      "reference_replay_runtime_ms": 2.667634,
+      "challenge_latency_ms": 3.771044,
+      "commitment_head_bytes": 32.0,
+      "commitment_chain_bytes": 96.0,
+      "base_success": 0.91,
+      "base_fixed_ms": 1120.0,
+      "per_char_ms": 1.03,
+      "network_rtt_ms": 49.0,
+      "network_loss_pct": 1.333
+    }
+  ],
+  "workloads": [
+    {
+      "workload_id": "single_task",
+      "description": "Independent tasks with no queue pressure.",
+      "tasks": [
+        {
+          "task_id": "eval_001",
+          "prompt_chars": 87,
+          "prompt_words": 13,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.0
+        },
+        {
+          "task_id": "eval_002",
+          "prompt_chars": 89,
+          "prompt_words": 13,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 5.0
+        },
+        {
+          "task_id": "eval_003",
+          "prompt_chars": 87,
+          "prompt_words": 13,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 10.0
+        },
+        {
+          "task_id": "eval_004",
+          "prompt_chars": 87,
+          "prompt_words": 13,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 15.0
+        },
+        {
+          "task_id": "eval_005",
+          "prompt_chars": 88,
+          "prompt_words": 13,
+          "difficulty": 1.165563,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 20.0
+        },
+        {
+          "task_id": "eval_006",
+          "prompt_chars": 84,
+          "prompt_words": 13,
+          "difficulty": 1.112583,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 25.0
+        },
+        {
+          "task_id": "eval_007",
+          "prompt_chars": 108,
+          "prompt_words": 17,
+          "difficulty": 1.430464,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 30.0
+        },
+        {
+          "task_id": "eval_008",
+          "prompt_chars": 106,
+          "prompt_words": 17,
+          "difficulty": 1.403974,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 35.0
+        },
+        {
+          "task_id": "eval_009",
+          "prompt_chars": 104,
+          "prompt_words": 17,
+          "difficulty": 1.377483,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 40.0
+        },
+        {
+          "task_id": "eval_010",
+          "prompt_chars": 87,
+          "prompt_words": 13,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 45.0
+        },
+        {
+          "task_id": "eval_011",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 50.0
+        },
+        {
+          "task_id": "eval_012",
+          "prompt_chars": 70,
+          "prompt_words": 10,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 55.0
+        },
+        {
+          "task_id": "eval_013",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 60.0
+        },
+        {
+          "task_id": "eval_014",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 65.0
+        },
+        {
+          "task_id": "eval_015",
+          "prompt_chars": 69,
+          "prompt_words": 10,
+          "difficulty": 0.913907,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 70.0
+        },
+        {
+          "task_id": "eval_016",
+          "prompt_chars": 65,
+          "prompt_words": 10,
+          "difficulty": 0.860927,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 75.0
+        },
+        {
+          "task_id": "eval_017",
+          "prompt_chars": 89,
+          "prompt_words": 14,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 80.0
+        },
+        {
+          "task_id": "eval_018",
+          "prompt_chars": 87,
+          "prompt_words": 14,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 85.0
+        },
+        {
+          "task_id": "eval_019",
+          "prompt_chars": 85,
+          "prompt_words": 14,
+          "difficulty": 1.125828,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 90.0
+        },
+        {
+          "task_id": "eval_020",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 95.0
+        },
+        {
+          "task_id": "eval_021",
+          "prompt_chars": 59,
+          "prompt_words": 10,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 100.0
+        },
+        {
+          "task_id": "eval_022",
+          "prompt_chars": 61,
+          "prompt_words": 10,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 105.0
+        },
+        {
+          "task_id": "eval_023",
+          "prompt_chars": 59,
+          "prompt_words": 10,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 110.0
+        },
+        {
+          "task_id": "eval_024",
+          "prompt_chars": 59,
+          "prompt_words": 10,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 115.0
+        },
+        {
+          "task_id": "eval_025",
+          "prompt_chars": 60,
+          "prompt_words": 10,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 120.0
+        },
+        {
+          "task_id": "eval_026",
+          "prompt_chars": 56,
+          "prompt_words": 10,
+          "difficulty": 0.741722,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 125.0
+        },
+        {
+          "task_id": "eval_027",
+          "prompt_chars": 80,
+          "prompt_words": 14,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 130.0
+        },
+        {
+          "task_id": "eval_028",
+          "prompt_chars": 78,
+          "prompt_words": 14,
+          "difficulty": 1.033113,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 135.0
+        },
+        {
+          "task_id": "eval_029",
+          "prompt_chars": 76,
+          "prompt_words": 14,
+          "difficulty": 1.006623,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 140.0
+        },
+        {
+          "task_id": "eval_030",
+          "prompt_chars": 59,
+          "prompt_words": 10,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 145.0
+        },
+        {
+          "task_id": "eval_031",
+          "prompt_chars": 77,
+          "prompt_words": 10,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 150.0
+        },
+        {
+          "task_id": "eval_032",
+          "prompt_chars": 79,
+          "prompt_words": 10,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 155.0
+        },
+        {
+          "task_id": "eval_033",
+          "prompt_chars": 77,
+          "prompt_words": 10,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 160.0
+        },
+        {
+          "task_id": "eval_034",
+          "prompt_chars": 77,
+          "prompt_words": 10,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 165.0
+        },
+        {
+          "task_id": "eval_035",
+          "prompt_chars": 78,
+          "prompt_words": 10,
+          "difficulty": 1.033113,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 170.0
+        },
+        {
+          "task_id": "eval_036",
+          "prompt_chars": 74,
+          "prompt_words": 10,
+          "difficulty": 0.980132,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 175.0
+        },
+        {
+          "task_id": "eval_037",
+          "prompt_chars": 98,
+          "prompt_words": 14,
+          "difficulty": 1.298013,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 180.0
+        },
+        {
+          "task_id": "eval_038",
+          "prompt_chars": 96,
+          "prompt_words": 14,
+          "difficulty": 1.271523,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 185.0
+        },
+        {
+          "task_id": "eval_039",
+          "prompt_chars": 94,
+          "prompt_words": 14,
+          "difficulty": 1.245033,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 190.0
+        },
+        {
+          "task_id": "eval_040",
+          "prompt_chars": 77,
+          "prompt_words": 10,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 195.0
+        },
+        {
+          "task_id": "eval_041",
+          "prompt_chars": 77,
+          "prompt_words": 12,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 200.0
+        },
+        {
+          "task_id": "eval_042",
+          "prompt_chars": 79,
+          "prompt_words": 12,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 205.0
+        },
+        {
+          "task_id": "eval_043",
+          "prompt_chars": 77,
+          "prompt_words": 12,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 210.0
+        },
+        {
+          "task_id": "eval_044",
+          "prompt_chars": 77,
+          "prompt_words": 12,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 215.0
+        },
+        {
+          "task_id": "eval_045",
+          "prompt_chars": 78,
+          "prompt_words": 12,
+          "difficulty": 1.033113,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 220.0
+        },
+        {
+          "task_id": "eval_046",
+          "prompt_chars": 74,
+          "prompt_words": 12,
+          "difficulty": 0.980132,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 225.0
+        },
+        {
+          "task_id": "eval_047",
+          "prompt_chars": 98,
+          "prompt_words": 16,
+          "difficulty": 1.298013,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 230.0
+        },
+        {
+          "task_id": "eval_048",
+          "prompt_chars": 96,
+          "prompt_words": 16,
+          "difficulty": 1.271523,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 235.0
+        },
+        {
+          "task_id": "eval_049",
+          "prompt_chars": 94,
+          "prompt_words": 16,
+          "difficulty": 1.245033,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 240.0
+        },
+        {
+          "task_id": "eval_050",
+          "prompt_chars": 77,
+          "prompt_words": 12,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 245.0
+        },
+        {
+          "task_id": "eval_051",
+          "prompt_chars": 88,
+          "prompt_words": 13,
+          "difficulty": 1.165563,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 250.0
+        },
+        {
+          "task_id": "eval_052",
+          "prompt_chars": 90,
+          "prompt_words": 13,
+          "difficulty": 1.192053,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 255.0
+        },
+        {
+          "task_id": "eval_053",
+          "prompt_chars": 88,
+          "prompt_words": 13,
+          "difficulty": 1.165563,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 260.0
+        },
+        {
+          "task_id": "eval_054",
+          "prompt_chars": 88,
+          "prompt_words": 13,
+          "difficulty": 1.165563,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 265.0
+        },
+        {
+          "task_id": "eval_055",
+          "prompt_chars": 89,
+          "prompt_words": 13,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 270.0
+        },
+        {
+          "task_id": "eval_056",
+          "prompt_chars": 85,
+          "prompt_words": 13,
+          "difficulty": 1.125828,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 275.0
+        },
+        {
+          "task_id": "eval_057",
+          "prompt_chars": 109,
+          "prompt_words": 17,
+          "difficulty": 1.443709,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 280.0
+        },
+        {
+          "task_id": "eval_058",
+          "prompt_chars": 107,
+          "prompt_words": 17,
+          "difficulty": 1.417219,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 285.0
+        },
+        {
+          "task_id": "eval_059",
+          "prompt_chars": 105,
+          "prompt_words": 17,
+          "difficulty": 1.390728,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 290.0
+        },
+        {
+          "task_id": "eval_060",
+          "prompt_chars": 88,
+          "prompt_words": 13,
+          "difficulty": 1.165563,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 295.0
+        },
+        {
+          "task_id": "eval_061",
+          "prompt_chars": 59,
+          "prompt_words": 9,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 300.0
+        },
+        {
+          "task_id": "eval_062",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 305.0
+        },
+        {
+          "task_id": "eval_063",
+          "prompt_chars": 59,
+          "prompt_words": 9,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 310.0
+        },
+        {
+          "task_id": "eval_064",
+          "prompt_chars": 59,
+          "prompt_words": 9,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 315.0
+        },
+        {
+          "task_id": "eval_065",
+          "prompt_chars": 60,
+          "prompt_words": 9,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 320.0
+        },
+        {
+          "task_id": "eval_066",
+          "prompt_chars": 56,
+          "prompt_words": 9,
+          "difficulty": 0.741722,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 325.0
+        },
+        {
+          "task_id": "eval_067",
+          "prompt_chars": 80,
+          "prompt_words": 13,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 330.0
+        },
+        {
+          "task_id": "eval_068",
+          "prompt_chars": 78,
+          "prompt_words": 13,
+          "difficulty": 1.033113,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 335.0
+        },
+        {
+          "task_id": "eval_069",
+          "prompt_chars": 76,
+          "prompt_words": 13,
+          "difficulty": 1.006623,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 340.0
+        },
+        {
+          "task_id": "eval_070",
+          "prompt_chars": 59,
+          "prompt_words": 9,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 345.0
+        },
+        {
+          "task_id": "eval_071",
+          "prompt_chars": 60,
+          "prompt_words": 9,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 350.0
+        },
+        {
+          "task_id": "eval_072",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 355.0
+        },
+        {
+          "task_id": "eval_073",
+          "prompt_chars": 60,
+          "prompt_words": 9,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 360.0
+        },
+        {
+          "task_id": "eval_074",
+          "prompt_chars": 60,
+          "prompt_words": 9,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 365.0
+        },
+        {
+          "task_id": "eval_075",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 370.0
+        },
+        {
+          "task_id": "eval_076",
+          "prompt_chars": 57,
+          "prompt_words": 9,
+          "difficulty": 0.754967,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 375.0
+        },
+        {
+          "task_id": "eval_077",
+          "prompt_chars": 81,
+          "prompt_words": 13,
+          "difficulty": 1.072848,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 380.0
+        },
+        {
+          "task_id": "eval_078",
+          "prompt_chars": 79,
+          "prompt_words": 13,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 385.0
+        },
+        {
+          "task_id": "eval_079",
+          "prompt_chars": 77,
+          "prompt_words": 13,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 390.0
+        },
+        {
+          "task_id": "eval_080",
+          "prompt_chars": 60,
+          "prompt_words": 9,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 395.0
+        },
+        {
+          "task_id": "eval_081",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 400.0
+        },
+        {
+          "task_id": "eval_082",
+          "prompt_chars": 70,
+          "prompt_words": 10,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 405.0
+        },
+        {
+          "task_id": "eval_083",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 410.0
+        },
+        {
+          "task_id": "eval_084",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 415.0
+        },
+        {
+          "task_id": "eval_085",
+          "prompt_chars": 69,
+          "prompt_words": 10,
+          "difficulty": 0.913907,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 420.0
+        },
+        {
+          "task_id": "eval_086",
+          "prompt_chars": 65,
+          "prompt_words": 10,
+          "difficulty": 0.860927,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 425.0
+        },
+        {
+          "task_id": "eval_087",
+          "prompt_chars": 89,
+          "prompt_words": 14,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 430.0
+        },
+        {
+          "task_id": "eval_088",
+          "prompt_chars": 87,
+          "prompt_words": 14,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 435.0
+        },
+        {
+          "task_id": "eval_089",
+          "prompt_chars": 85,
+          "prompt_words": 14,
+          "difficulty": 1.125828,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 440.0
+        },
+        {
+          "task_id": "eval_090",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 445.0
+        },
+        {
+          "task_id": "eval_091",
+          "prompt_chars": 70,
+          "prompt_words": 8,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 450.0
+        },
+        {
+          "task_id": "eval_092",
+          "prompt_chars": 72,
+          "prompt_words": 8,
+          "difficulty": 0.953642,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 455.0
+        },
+        {
+          "task_id": "eval_093",
+          "prompt_chars": 70,
+          "prompt_words": 8,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 460.0
+        },
+        {
+          "task_id": "eval_094",
+          "prompt_chars": 70,
+          "prompt_words": 8,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 465.0
+        },
+        {
+          "task_id": "eval_095",
+          "prompt_chars": 71,
+          "prompt_words": 8,
+          "difficulty": 0.940397,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 470.0
+        },
+        {
+          "task_id": "eval_096",
+          "prompt_chars": 67,
+          "prompt_words": 8,
+          "difficulty": 0.887417,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 475.0
+        },
+        {
+          "task_id": "eval_097",
+          "prompt_chars": 91,
+          "prompt_words": 12,
+          "difficulty": 1.205298,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 480.0
+        },
+        {
+          "task_id": "eval_098",
+          "prompt_chars": 89,
+          "prompt_words": 12,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 485.0
+        },
+        {
+          "task_id": "eval_099",
+          "prompt_chars": 87,
+          "prompt_words": 12,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 490.0
+        },
+        {
+          "task_id": "eval_100",
+          "prompt_chars": 70,
+          "prompt_words": 8,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 495.0
+        },
+        {
+          "task_id": "eval_101",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 500.0
+        },
+        {
+          "task_id": "eval_102",
+          "prompt_chars": 63,
+          "prompt_words": 9,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 505.0
+        },
+        {
+          "task_id": "eval_103",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 510.0
+        },
+        {
+          "task_id": "eval_104",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 515.0
+        },
+        {
+          "task_id": "eval_105",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 520.0
+        },
+        {
+          "task_id": "eval_106",
+          "prompt_chars": 58,
+          "prompt_words": 9,
+          "difficulty": 0.768212,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 525.0
+        },
+        {
+          "task_id": "eval_107",
+          "prompt_chars": 82,
+          "prompt_words": 13,
+          "difficulty": 1.086093,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 530.0
+        },
+        {
+          "task_id": "eval_108",
+          "prompt_chars": 80,
+          "prompt_words": 13,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 535.0
+        },
+        {
+          "task_id": "eval_109",
+          "prompt_chars": 78,
+          "prompt_words": 13,
+          "difficulty": 1.033113,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 540.0
+        },
+        {
+          "task_id": "eval_110",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 545.0
+        },
+        {
+          "task_id": "eval_111",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 550.0
+        },
+        {
+          "task_id": "eval_112",
+          "prompt_chars": 64,
+          "prompt_words": 9,
+          "difficulty": 0.847682,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 555.0
+        },
+        {
+          "task_id": "eval_113",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 560.0
+        },
+        {
+          "task_id": "eval_114",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 565.0
+        },
+        {
+          "task_id": "eval_115",
+          "prompt_chars": 63,
+          "prompt_words": 9,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 570.0
+        },
+        {
+          "task_id": "eval_116",
+          "prompt_chars": 59,
+          "prompt_words": 9,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 575.0
+        },
+        {
+          "task_id": "eval_117",
+          "prompt_chars": 83,
+          "prompt_words": 13,
+          "difficulty": 1.099338,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 580.0
+        },
+        {
+          "task_id": "eval_118",
+          "prompt_chars": 81,
+          "prompt_words": 13,
+          "difficulty": 1.072848,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 585.0
+        },
+        {
+          "task_id": "eval_119",
+          "prompt_chars": 79,
+          "prompt_words": 13,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 590.0
+        },
+        {
+          "task_id": "eval_120",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 595.0
+        },
+        {
+          "task_id": "eval_121",
+          "prompt_chars": 68,
+          "prompt_words": 9,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 600.0
+        },
+        {
+          "task_id": "eval_122",
+          "prompt_chars": 70,
+          "prompt_words": 9,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 605.0
+        },
+        {
+          "task_id": "eval_123",
+          "prompt_chars": 68,
+          "prompt_words": 9,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 610.0
+        },
+        {
+          "task_id": "eval_124",
+          "prompt_chars": 68,
+          "prompt_words": 9,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 615.0
+        },
+        {
+          "task_id": "eval_125",
+          "prompt_chars": 69,
+          "prompt_words": 9,
+          "difficulty": 0.913907,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 620.0
+        },
+        {
+          "task_id": "eval_126",
+          "prompt_chars": 65,
+          "prompt_words": 9,
+          "difficulty": 0.860927,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 625.0
+        },
+        {
+          "task_id": "eval_127",
+          "prompt_chars": 89,
+          "prompt_words": 13,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 630.0
+        },
+        {
+          "task_id": "eval_128",
+          "prompt_chars": 87,
+          "prompt_words": 13,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 635.0
+        },
+        {
+          "task_id": "eval_129",
+          "prompt_chars": 85,
+          "prompt_words": 13,
+          "difficulty": 1.125828,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 640.0
+        },
+        {
+          "task_id": "eval_130",
+          "prompt_chars": 68,
+          "prompt_words": 9,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 645.0
+        },
+        {
+          "task_id": "eval_131",
+          "prompt_chars": 73,
+          "prompt_words": 8,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 650.0
+        },
+        {
+          "task_id": "eval_132",
+          "prompt_chars": 75,
+          "prompt_words": 8,
+          "difficulty": 0.993377,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 655.0
+        },
+        {
+          "task_id": "eval_133",
+          "prompt_chars": 73,
+          "prompt_words": 8,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 660.0
+        },
+        {
+          "task_id": "eval_134",
+          "prompt_chars": 73,
+          "prompt_words": 8,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 665.0
+        },
+        {
+          "task_id": "eval_135",
+          "prompt_chars": 74,
+          "prompt_words": 8,
+          "difficulty": 0.980132,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 670.0
+        },
+        {
+          "task_id": "eval_136",
+          "prompt_chars": 70,
+          "prompt_words": 8,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 675.0
+        },
+        {
+          "task_id": "eval_137",
+          "prompt_chars": 94,
+          "prompt_words": 12,
+          "difficulty": 1.245033,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 680.0
+        },
+        {
+          "task_id": "eval_138",
+          "prompt_chars": 92,
+          "prompt_words": 12,
+          "difficulty": 1.218543,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 685.0
+        },
+        {
+          "task_id": "eval_139",
+          "prompt_chars": 90,
+          "prompt_words": 12,
+          "difficulty": 1.192053,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 690.0
+        },
+        {
+          "task_id": "eval_140",
+          "prompt_chars": 73,
+          "prompt_words": 8,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 695.0
+        },
+        {
+          "task_id": "eval_141",
+          "prompt_chars": 60,
+          "prompt_words": 7,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 700.0
+        },
+        {
+          "task_id": "eval_142",
+          "prompt_chars": 62,
+          "prompt_words": 7,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 705.0
+        },
+        {
+          "task_id": "eval_143",
+          "prompt_chars": 60,
+          "prompt_words": 7,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 710.0
+        },
+        {
+          "task_id": "eval_144",
+          "prompt_chars": 60,
+          "prompt_words": 7,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 715.0
+        },
+        {
+          "task_id": "eval_145",
+          "prompt_chars": 61,
+          "prompt_words": 7,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 720.0
+        },
+        {
+          "task_id": "eval_146",
+          "prompt_chars": 57,
+          "prompt_words": 7,
+          "difficulty": 0.754967,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 725.0
+        },
+        {
+          "task_id": "eval_147",
+          "prompt_chars": 81,
+          "prompt_words": 11,
+          "difficulty": 1.072848,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 730.0
+        },
+        {
+          "task_id": "eval_148",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 735.0
+        },
+        {
+          "task_id": "eval_149",
+          "prompt_chars": 77,
+          "prompt_words": 11,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 740.0
+        },
+        {
+          "task_id": "eval_150",
+          "prompt_chars": 60,
+          "prompt_words": 7,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 745.0
+        },
+        {
+          "task_id": "eval_151",
+          "prompt_chars": 63,
+          "prompt_words": 8,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 750.0
+        },
+        {
+          "task_id": "eval_152",
+          "prompt_chars": 65,
+          "prompt_words": 8,
+          "difficulty": 0.860927,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 755.0
+        },
+        {
+          "task_id": "eval_153",
+          "prompt_chars": 63,
+          "prompt_words": 8,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 760.0
+        },
+        {
+          "task_id": "eval_154",
+          "prompt_chars": 63,
+          "prompt_words": 8,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 765.0
+        },
+        {
+          "task_id": "eval_155",
+          "prompt_chars": 64,
+          "prompt_words": 8,
+          "difficulty": 0.847682,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 770.0
+        },
+        {
+          "task_id": "eval_156",
+          "prompt_chars": 60,
+          "prompt_words": 8,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 775.0
+        },
+        {
+          "task_id": "eval_157",
+          "prompt_chars": 84,
+          "prompt_words": 12,
+          "difficulty": 1.112583,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 780.0
+        },
+        {
+          "task_id": "eval_158",
+          "prompt_chars": 82,
+          "prompt_words": 12,
+          "difficulty": 1.086093,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 785.0
+        },
+        {
+          "task_id": "eval_159",
+          "prompt_chars": 80,
+          "prompt_words": 12,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 790.0
+        },
+        {
+          "task_id": "eval_160",
+          "prompt_chars": 63,
+          "prompt_words": 8,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 795.0
+        },
+        {
+          "task_id": "eval_161",
+          "prompt_chars": 73,
+          "prompt_words": 11,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 800.0
+        },
+        {
+          "task_id": "eval_162",
+          "prompt_chars": 75,
+          "prompt_words": 11,
+          "difficulty": 0.993377,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 805.0
+        },
+        {
+          "task_id": "eval_163",
+          "prompt_chars": 73,
+          "prompt_words": 11,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 810.0
+        },
+        {
+          "task_id": "eval_164",
+          "prompt_chars": 73,
+          "prompt_words": 11,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 815.0
+        },
+        {
+          "task_id": "eval_165",
+          "prompt_chars": 74,
+          "prompt_words": 11,
+          "difficulty": 0.980132,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 820.0
+        },
+        {
+          "task_id": "eval_166",
+          "prompt_chars": 70,
+          "prompt_words": 11,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 825.0
+        },
+        {
+          "task_id": "eval_167",
+          "prompt_chars": 94,
+          "prompt_words": 15,
+          "difficulty": 1.245033,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 830.0
+        },
+        {
+          "task_id": "eval_168",
+          "prompt_chars": 92,
+          "prompt_words": 15,
+          "difficulty": 1.218543,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 835.0
+        },
+        {
+          "task_id": "eval_169",
+          "prompt_chars": 90,
+          "prompt_words": 15,
+          "difficulty": 1.192053,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 840.0
+        },
+        {
+          "task_id": "eval_170",
+          "prompt_chars": 73,
+          "prompt_words": 11,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 845.0
+        },
+        {
+          "task_id": "eval_171",
+          "prompt_chars": 70,
+          "prompt_words": 11,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 850.0
+        },
+        {
+          "task_id": "eval_172",
+          "prompt_chars": 72,
+          "prompt_words": 11,
+          "difficulty": 0.953642,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 855.0
+        },
+        {
+          "task_id": "eval_173",
+          "prompt_chars": 70,
+          "prompt_words": 11,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 860.0
+        },
+        {
+          "task_id": "eval_174",
+          "prompt_chars": 70,
+          "prompt_words": 11,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 865.0
+        },
+        {
+          "task_id": "eval_175",
+          "prompt_chars": 71,
+          "prompt_words": 11,
+          "difficulty": 0.940397,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 870.0
+        },
+        {
+          "task_id": "eval_176",
+          "prompt_chars": 67,
+          "prompt_words": 11,
+          "difficulty": 0.887417,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 875.0
+        },
+        {
+          "task_id": "eval_177",
+          "prompt_chars": 91,
+          "prompt_words": 15,
+          "difficulty": 1.205298,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 880.0
+        },
+        {
+          "task_id": "eval_178",
+          "prompt_chars": 89,
+          "prompt_words": 15,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 885.0
+        },
+        {
+          "task_id": "eval_179",
+          "prompt_chars": 87,
+          "prompt_words": 15,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 890.0
+        },
+        {
+          "task_id": "eval_180",
+          "prompt_chars": 70,
+          "prompt_words": 11,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 895.0
+        },
+        {
+          "task_id": "eval_181",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 900.0
+        },
+        {
+          "task_id": "eval_182",
+          "prompt_chars": 81,
+          "prompt_words": 11,
+          "difficulty": 1.072848,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 905.0
+        },
+        {
+          "task_id": "eval_183",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 910.0
+        },
+        {
+          "task_id": "eval_184",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 915.0
+        },
+        {
+          "task_id": "eval_185",
+          "prompt_chars": 80,
+          "prompt_words": 11,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 920.0
+        },
+        {
+          "task_id": "eval_186",
+          "prompt_chars": 76,
+          "prompt_words": 11,
+          "difficulty": 1.006623,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 925.0
+        },
+        {
+          "task_id": "eval_187",
+          "prompt_chars": 100,
+          "prompt_words": 15,
+          "difficulty": 1.324503,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 930.0
+        },
+        {
+          "task_id": "eval_188",
+          "prompt_chars": 98,
+          "prompt_words": 15,
+          "difficulty": 1.298013,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 935.0
+        },
+        {
+          "task_id": "eval_189",
+          "prompt_chars": 96,
+          "prompt_words": 15,
+          "difficulty": 1.271523,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 940.0
+        },
+        {
+          "task_id": "eval_190",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 945.0
+        },
+        {
+          "task_id": "eval_191",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 950.0
+        },
+        {
+          "task_id": "eval_192",
+          "prompt_chars": 81,
+          "prompt_words": 11,
+          "difficulty": 1.072848,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 955.0
+        },
+        {
+          "task_id": "eval_193",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 960.0
+        },
+        {
+          "task_id": "eval_194",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 965.0
+        },
+        {
+          "task_id": "eval_195",
+          "prompt_chars": 80,
+          "prompt_words": 11,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 970.0
+        },
+        {
+          "task_id": "eval_196",
+          "prompt_chars": 76,
+          "prompt_words": 11,
+          "difficulty": 1.006623,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 975.0
+        },
+        {
+          "task_id": "eval_197",
+          "prompt_chars": 100,
+          "prompt_words": 15,
+          "difficulty": 1.324503,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 980.0
+        },
+        {
+          "task_id": "eval_198",
+          "prompt_chars": 98,
+          "prompt_words": 15,
+          "difficulty": 1.298013,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 985.0
+        },
+        {
+          "task_id": "eval_199",
+          "prompt_chars": 96,
+          "prompt_words": 15,
+          "difficulty": 1.271523,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 990.0
+        },
+        {
+          "task_id": "eval_200",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 995.0
+        }
+      ]
+    },
+    {
+      "workload_id": "queued_8",
+      "description": "Burst arrivals with queue pressure every 8 tasks.",
+      "tasks": [
+        {
+          "task_id": "eval_001",
+          "prompt_chars": 87,
+          "prompt_words": 13,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.0
+        },
+        {
+          "task_id": "eval_002",
+          "prompt_chars": 89,
+          "prompt_words": 13,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.0
+        },
+        {
+          "task_id": "eval_003",
+          "prompt_chars": 87,
+          "prompt_words": 13,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.0
+        },
+        {
+          "task_id": "eval_004",
+          "prompt_chars": 87,
+          "prompt_words": 13,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.0
+        },
+        {
+          "task_id": "eval_005",
+          "prompt_chars": 88,
+          "prompt_words": 13,
+          "difficulty": 1.165563,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.0
+        },
+        {
+          "task_id": "eval_006",
+          "prompt_chars": 84,
+          "prompt_words": 13,
+          "difficulty": 1.112583,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 0.0
+        },
+        {
+          "task_id": "eval_007",
+          "prompt_chars": 108,
+          "prompt_words": 17,
+          "difficulty": 1.430464,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.0
+        },
+        {
+          "task_id": "eval_008",
+          "prompt_chars": 106,
+          "prompt_words": 17,
+          "difficulty": 1.403974,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.0
+        },
+        {
+          "task_id": "eval_009",
+          "prompt_chars": 104,
+          "prompt_words": 17,
+          "difficulty": 1.377483,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.25
+        },
+        {
+          "task_id": "eval_010",
+          "prompt_chars": 87,
+          "prompt_words": 13,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.25
+        },
+        {
+          "task_id": "eval_011",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.25
+        },
+        {
+          "task_id": "eval_012",
+          "prompt_chars": 70,
+          "prompt_words": 10,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.25
+        },
+        {
+          "task_id": "eval_013",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.25
+        },
+        {
+          "task_id": "eval_014",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.25
+        },
+        {
+          "task_id": "eval_015",
+          "prompt_chars": 69,
+          "prompt_words": 10,
+          "difficulty": 0.913907,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.25
+        },
+        {
+          "task_id": "eval_016",
+          "prompt_chars": 65,
+          "prompt_words": 10,
+          "difficulty": 0.860927,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.25
+        },
+        {
+          "task_id": "eval_017",
+          "prompt_chars": 89,
+          "prompt_words": 14,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.5
+        },
+        {
+          "task_id": "eval_018",
+          "prompt_chars": 87,
+          "prompt_words": 14,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 0.5
+        },
+        {
+          "task_id": "eval_019",
+          "prompt_chars": 85,
+          "prompt_words": 14,
+          "difficulty": 1.125828,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 0.5
+        },
+        {
+          "task_id": "eval_020",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.5
+        },
+        {
+          "task_id": "eval_021",
+          "prompt_chars": 59,
+          "prompt_words": 10,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.5
+        },
+        {
+          "task_id": "eval_022",
+          "prompt_chars": 61,
+          "prompt_words": 10,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.5
+        },
+        {
+          "task_id": "eval_023",
+          "prompt_chars": 59,
+          "prompt_words": 10,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.5
+        },
+        {
+          "task_id": "eval_024",
+          "prompt_chars": 59,
+          "prompt_words": 10,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.5
+        },
+        {
+          "task_id": "eval_025",
+          "prompt_chars": 60,
+          "prompt_words": 10,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.75
+        },
+        {
+          "task_id": "eval_026",
+          "prompt_chars": 56,
+          "prompt_words": 10,
+          "difficulty": 0.741722,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.75
+        },
+        {
+          "task_id": "eval_027",
+          "prompt_chars": 80,
+          "prompt_words": 14,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 0.75
+        },
+        {
+          "task_id": "eval_028",
+          "prompt_chars": 78,
+          "prompt_words": 14,
+          "difficulty": 1.033113,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 0.75
+        },
+        {
+          "task_id": "eval_029",
+          "prompt_chars": 76,
+          "prompt_words": 14,
+          "difficulty": 1.006623,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 0.75
+        },
+        {
+          "task_id": "eval_030",
+          "prompt_chars": 59,
+          "prompt_words": 10,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 0.75
+        },
+        {
+          "task_id": "eval_031",
+          "prompt_chars": 77,
+          "prompt_words": 10,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 0.75
+        },
+        {
+          "task_id": "eval_032",
+          "prompt_chars": 79,
+          "prompt_words": 10,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 0.75
+        },
+        {
+          "task_id": "eval_033",
+          "prompt_chars": 77,
+          "prompt_words": 10,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.0
+        },
+        {
+          "task_id": "eval_034",
+          "prompt_chars": 77,
+          "prompt_words": 10,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.0
+        },
+        {
+          "task_id": "eval_035",
+          "prompt_chars": 78,
+          "prompt_words": 10,
+          "difficulty": 1.033113,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.0
+        },
+        {
+          "task_id": "eval_036",
+          "prompt_chars": 74,
+          "prompt_words": 10,
+          "difficulty": 0.980132,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.0
+        },
+        {
+          "task_id": "eval_037",
+          "prompt_chars": 98,
+          "prompt_words": 14,
+          "difficulty": 1.298013,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.0
+        },
+        {
+          "task_id": "eval_038",
+          "prompt_chars": 96,
+          "prompt_words": 14,
+          "difficulty": 1.271523,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.0
+        },
+        {
+          "task_id": "eval_039",
+          "prompt_chars": 94,
+          "prompt_words": 14,
+          "difficulty": 1.245033,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.0
+        },
+        {
+          "task_id": "eval_040",
+          "prompt_chars": 77,
+          "prompt_words": 10,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.0
+        },
+        {
+          "task_id": "eval_041",
+          "prompt_chars": 77,
+          "prompt_words": 12,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.25
+        },
+        {
+          "task_id": "eval_042",
+          "prompt_chars": 79,
+          "prompt_words": 12,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.25
+        },
+        {
+          "task_id": "eval_043",
+          "prompt_chars": 77,
+          "prompt_words": 12,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.25
+        },
+        {
+          "task_id": "eval_044",
+          "prompt_chars": 77,
+          "prompt_words": 12,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.25
+        },
+        {
+          "task_id": "eval_045",
+          "prompt_chars": 78,
+          "prompt_words": 12,
+          "difficulty": 1.033113,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.25
+        },
+        {
+          "task_id": "eval_046",
+          "prompt_chars": 74,
+          "prompt_words": 12,
+          "difficulty": 0.980132,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.25
+        },
+        {
+          "task_id": "eval_047",
+          "prompt_chars": 98,
+          "prompt_words": 16,
+          "difficulty": 1.298013,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.25
+        },
+        {
+          "task_id": "eval_048",
+          "prompt_chars": 96,
+          "prompt_words": 16,
+          "difficulty": 1.271523,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.25
+        },
+        {
+          "task_id": "eval_049",
+          "prompt_chars": 94,
+          "prompt_words": 16,
+          "difficulty": 1.245033,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.5
+        },
+        {
+          "task_id": "eval_050",
+          "prompt_chars": 77,
+          "prompt_words": 12,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.5
+        },
+        {
+          "task_id": "eval_051",
+          "prompt_chars": 88,
+          "prompt_words": 13,
+          "difficulty": 1.165563,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.5
+        },
+        {
+          "task_id": "eval_052",
+          "prompt_chars": 90,
+          "prompt_words": 13,
+          "difficulty": 1.192053,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.5
+        },
+        {
+          "task_id": "eval_053",
+          "prompt_chars": 88,
+          "prompt_words": 13,
+          "difficulty": 1.165563,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.5
+        },
+        {
+          "task_id": "eval_054",
+          "prompt_chars": 88,
+          "prompt_words": 13,
+          "difficulty": 1.165563,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.5
+        },
+        {
+          "task_id": "eval_055",
+          "prompt_chars": 89,
+          "prompt_words": 13,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.5
+        },
+        {
+          "task_id": "eval_056",
+          "prompt_chars": 85,
+          "prompt_words": 13,
+          "difficulty": 1.125828,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 1.5
+        },
+        {
+          "task_id": "eval_057",
+          "prompt_chars": 109,
+          "prompt_words": 17,
+          "difficulty": 1.443709,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.75
+        },
+        {
+          "task_id": "eval_058",
+          "prompt_chars": 107,
+          "prompt_words": 17,
+          "difficulty": 1.417219,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.75
+        },
+        {
+          "task_id": "eval_059",
+          "prompt_chars": 105,
+          "prompt_words": 17,
+          "difficulty": 1.390728,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.75
+        },
+        {
+          "task_id": "eval_060",
+          "prompt_chars": 88,
+          "prompt_words": 13,
+          "difficulty": 1.165563,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 1.75
+        },
+        {
+          "task_id": "eval_061",
+          "prompt_chars": 59,
+          "prompt_words": 9,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 1.75
+        },
+        {
+          "task_id": "eval_062",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 1.75
+        },
+        {
+          "task_id": "eval_063",
+          "prompt_chars": 59,
+          "prompt_words": 9,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 1.75
+        },
+        {
+          "task_id": "eval_064",
+          "prompt_chars": 59,
+          "prompt_words": 9,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 1.75
+        },
+        {
+          "task_id": "eval_065",
+          "prompt_chars": 60,
+          "prompt_words": 9,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.0
+        },
+        {
+          "task_id": "eval_066",
+          "prompt_chars": 56,
+          "prompt_words": 9,
+          "difficulty": 0.741722,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.0
+        },
+        {
+          "task_id": "eval_067",
+          "prompt_chars": 80,
+          "prompt_words": 13,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 2.0
+        },
+        {
+          "task_id": "eval_068",
+          "prompt_chars": 78,
+          "prompt_words": 13,
+          "difficulty": 1.033113,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 2.0
+        },
+        {
+          "task_id": "eval_069",
+          "prompt_chars": 76,
+          "prompt_words": 13,
+          "difficulty": 1.006623,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 2.0
+        },
+        {
+          "task_id": "eval_070",
+          "prompt_chars": 59,
+          "prompt_words": 9,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.0
+        },
+        {
+          "task_id": "eval_071",
+          "prompt_chars": 60,
+          "prompt_words": 9,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.0
+        },
+        {
+          "task_id": "eval_072",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.0
+        },
+        {
+          "task_id": "eval_073",
+          "prompt_chars": 60,
+          "prompt_words": 9,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.25
+        },
+        {
+          "task_id": "eval_074",
+          "prompt_chars": 60,
+          "prompt_words": 9,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.25
+        },
+        {
+          "task_id": "eval_075",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.25
+        },
+        {
+          "task_id": "eval_076",
+          "prompt_chars": 57,
+          "prompt_words": 9,
+          "difficulty": 0.754967,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.25
+        },
+        {
+          "task_id": "eval_077",
+          "prompt_chars": 81,
+          "prompt_words": 13,
+          "difficulty": 1.072848,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 2.25
+        },
+        {
+          "task_id": "eval_078",
+          "prompt_chars": 79,
+          "prompt_words": 13,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 2.25
+        },
+        {
+          "task_id": "eval_079",
+          "prompt_chars": 77,
+          "prompt_words": 13,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 2.25
+        },
+        {
+          "task_id": "eval_080",
+          "prompt_chars": 60,
+          "prompt_words": 9,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.25
+        },
+        {
+          "task_id": "eval_081",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.5
+        },
+        {
+          "task_id": "eval_082",
+          "prompt_chars": 70,
+          "prompt_words": 10,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.5
+        },
+        {
+          "task_id": "eval_083",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.5
+        },
+        {
+          "task_id": "eval_084",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.5
+        },
+        {
+          "task_id": "eval_085",
+          "prompt_chars": 69,
+          "prompt_words": 10,
+          "difficulty": 0.913907,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.5
+        },
+        {
+          "task_id": "eval_086",
+          "prompt_chars": 65,
+          "prompt_words": 10,
+          "difficulty": 0.860927,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.5
+        },
+        {
+          "task_id": "eval_087",
+          "prompt_chars": 89,
+          "prompt_words": 14,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 2.5
+        },
+        {
+          "task_id": "eval_088",
+          "prompt_chars": 87,
+          "prompt_words": 14,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 2.5
+        },
+        {
+          "task_id": "eval_089",
+          "prompt_chars": 85,
+          "prompt_words": 14,
+          "difficulty": 1.125828,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 2.75
+        },
+        {
+          "task_id": "eval_090",
+          "prompt_chars": 68,
+          "prompt_words": 10,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.75
+        },
+        {
+          "task_id": "eval_091",
+          "prompt_chars": 70,
+          "prompt_words": 8,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.75
+        },
+        {
+          "task_id": "eval_092",
+          "prompt_chars": 72,
+          "prompt_words": 8,
+          "difficulty": 0.953642,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 2.75
+        },
+        {
+          "task_id": "eval_093",
+          "prompt_chars": 70,
+          "prompt_words": 8,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.75
+        },
+        {
+          "task_id": "eval_094",
+          "prompt_chars": 70,
+          "prompt_words": 8,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.75
+        },
+        {
+          "task_id": "eval_095",
+          "prompt_chars": 71,
+          "prompt_words": 8,
+          "difficulty": 0.940397,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 2.75
+        },
+        {
+          "task_id": "eval_096",
+          "prompt_chars": 67,
+          "prompt_words": 8,
+          "difficulty": 0.887417,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 2.75
+        },
+        {
+          "task_id": "eval_097",
+          "prompt_chars": 91,
+          "prompt_words": 12,
+          "difficulty": 1.205298,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 3.0
+        },
+        {
+          "task_id": "eval_098",
+          "prompt_chars": 89,
+          "prompt_words": 12,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 3.0
+        },
+        {
+          "task_id": "eval_099",
+          "prompt_chars": 87,
+          "prompt_words": 12,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 3.0
+        },
+        {
+          "task_id": "eval_100",
+          "prompt_chars": 70,
+          "prompt_words": 8,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.0
+        },
+        {
+          "task_id": "eval_101",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.0
+        },
+        {
+          "task_id": "eval_102",
+          "prompt_chars": 63,
+          "prompt_words": 9,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.0
+        },
+        {
+          "task_id": "eval_103",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.0
+        },
+        {
+          "task_id": "eval_104",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.0
+        },
+        {
+          "task_id": "eval_105",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.25
+        },
+        {
+          "task_id": "eval_106",
+          "prompt_chars": 58,
+          "prompt_words": 9,
+          "difficulty": 0.768212,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.25
+        },
+        {
+          "task_id": "eval_107",
+          "prompt_chars": 82,
+          "prompt_words": 13,
+          "difficulty": 1.086093,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 3.25
+        },
+        {
+          "task_id": "eval_108",
+          "prompt_chars": 80,
+          "prompt_words": 13,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 3.25
+        },
+        {
+          "task_id": "eval_109",
+          "prompt_chars": 78,
+          "prompt_words": 13,
+          "difficulty": 1.033113,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 3.25
+        },
+        {
+          "task_id": "eval_110",
+          "prompt_chars": 61,
+          "prompt_words": 9,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.25
+        },
+        {
+          "task_id": "eval_111",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.25
+        },
+        {
+          "task_id": "eval_112",
+          "prompt_chars": 64,
+          "prompt_words": 9,
+          "difficulty": 0.847682,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.25
+        },
+        {
+          "task_id": "eval_113",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.5
+        },
+        {
+          "task_id": "eval_114",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.5
+        },
+        {
+          "task_id": "eval_115",
+          "prompt_chars": 63,
+          "prompt_words": 9,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.5
+        },
+        {
+          "task_id": "eval_116",
+          "prompt_chars": 59,
+          "prompt_words": 9,
+          "difficulty": 0.781457,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.5
+        },
+        {
+          "task_id": "eval_117",
+          "prompt_chars": 83,
+          "prompt_words": 13,
+          "difficulty": 1.099338,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 3.5
+        },
+        {
+          "task_id": "eval_118",
+          "prompt_chars": 81,
+          "prompt_words": 13,
+          "difficulty": 1.072848,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 3.5
+        },
+        {
+          "task_id": "eval_119",
+          "prompt_chars": 79,
+          "prompt_words": 13,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 3.5
+        },
+        {
+          "task_id": "eval_120",
+          "prompt_chars": 62,
+          "prompt_words": 9,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.5
+        },
+        {
+          "task_id": "eval_121",
+          "prompt_chars": 68,
+          "prompt_words": 9,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.75
+        },
+        {
+          "task_id": "eval_122",
+          "prompt_chars": 70,
+          "prompt_words": 9,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.75
+        },
+        {
+          "task_id": "eval_123",
+          "prompt_chars": 68,
+          "prompt_words": 9,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.75
+        },
+        {
+          "task_id": "eval_124",
+          "prompt_chars": 68,
+          "prompt_words": 9,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.75
+        },
+        {
+          "task_id": "eval_125",
+          "prompt_chars": 69,
+          "prompt_words": 9,
+          "difficulty": 0.913907,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.75
+        },
+        {
+          "task_id": "eval_126",
+          "prompt_chars": 65,
+          "prompt_words": 9,
+          "difficulty": 0.860927,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 3.75
+        },
+        {
+          "task_id": "eval_127",
+          "prompt_chars": 89,
+          "prompt_words": 13,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 3.75
+        },
+        {
+          "task_id": "eval_128",
+          "prompt_chars": 87,
+          "prompt_words": 13,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 3.75
+        },
+        {
+          "task_id": "eval_129",
+          "prompt_chars": 85,
+          "prompt_words": 13,
+          "difficulty": 1.125828,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 4.0
+        },
+        {
+          "task_id": "eval_130",
+          "prompt_chars": 68,
+          "prompt_words": 9,
+          "difficulty": 0.900662,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 4.0
+        },
+        {
+          "task_id": "eval_131",
+          "prompt_chars": 73,
+          "prompt_words": 8,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 4.0
+        },
+        {
+          "task_id": "eval_132",
+          "prompt_chars": 75,
+          "prompt_words": 8,
+          "difficulty": 0.993377,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 4.0
+        },
+        {
+          "task_id": "eval_133",
+          "prompt_chars": 73,
+          "prompt_words": 8,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 4.0
+        },
+        {
+          "task_id": "eval_134",
+          "prompt_chars": 73,
+          "prompt_words": 8,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 4.0
+        },
+        {
+          "task_id": "eval_135",
+          "prompt_chars": 74,
+          "prompt_words": 8,
+          "difficulty": 0.980132,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 4.0
+        },
+        {
+          "task_id": "eval_136",
+          "prompt_chars": 70,
+          "prompt_words": 8,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "LAN",
+          "arrival_s": 4.0
+        },
+        {
+          "task_id": "eval_137",
+          "prompt_chars": 94,
+          "prompt_words": 12,
+          "difficulty": 1.245033,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 4.25
+        },
+        {
+          "task_id": "eval_138",
+          "prompt_chars": 92,
+          "prompt_words": 12,
+          "difficulty": 1.218543,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 4.25
+        },
+        {
+          "task_id": "eval_139",
+          "prompt_chars": 90,
+          "prompt_words": 12,
+          "difficulty": 1.192053,
+          "required_width": 3,
+          "client_profile": "LAN",
+          "arrival_s": 4.25
+        },
+        {
+          "task_id": "eval_140",
+          "prompt_chars": 73,
+          "prompt_words": 8,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "LAN",
+          "arrival_s": 4.25
+        },
+        {
+          "task_id": "eval_141",
+          "prompt_chars": 60,
+          "prompt_words": 7,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.25
+        },
+        {
+          "task_id": "eval_142",
+          "prompt_chars": 62,
+          "prompt_words": 7,
+          "difficulty": 0.821192,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.25
+        },
+        {
+          "task_id": "eval_143",
+          "prompt_chars": 60,
+          "prompt_words": 7,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.25
+        },
+        {
+          "task_id": "eval_144",
+          "prompt_chars": 60,
+          "prompt_words": 7,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.25
+        },
+        {
+          "task_id": "eval_145",
+          "prompt_chars": 61,
+          "prompt_words": 7,
+          "difficulty": 0.807947,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.5
+        },
+        {
+          "task_id": "eval_146",
+          "prompt_chars": 57,
+          "prompt_words": 7,
+          "difficulty": 0.754967,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.5
+        },
+        {
+          "task_id": "eval_147",
+          "prompt_chars": 81,
+          "prompt_words": 11,
+          "difficulty": 1.072848,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 4.5
+        },
+        {
+          "task_id": "eval_148",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 4.5
+        },
+        {
+          "task_id": "eval_149",
+          "prompt_chars": 77,
+          "prompt_words": 11,
+          "difficulty": 1.019868,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 4.5
+        },
+        {
+          "task_id": "eval_150",
+          "prompt_chars": 60,
+          "prompt_words": 7,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.5
+        },
+        {
+          "task_id": "eval_151",
+          "prompt_chars": 63,
+          "prompt_words": 8,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.5
+        },
+        {
+          "task_id": "eval_152",
+          "prompt_chars": 65,
+          "prompt_words": 8,
+          "difficulty": 0.860927,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.5
+        },
+        {
+          "task_id": "eval_153",
+          "prompt_chars": 63,
+          "prompt_words": 8,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.75
+        },
+        {
+          "task_id": "eval_154",
+          "prompt_chars": 63,
+          "prompt_words": 8,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.75
+        },
+        {
+          "task_id": "eval_155",
+          "prompt_chars": 64,
+          "prompt_words": 8,
+          "difficulty": 0.847682,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.75
+        },
+        {
+          "task_id": "eval_156",
+          "prompt_chars": 60,
+          "prompt_words": 8,
+          "difficulty": 0.794702,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.75
+        },
+        {
+          "task_id": "eval_157",
+          "prompt_chars": 84,
+          "prompt_words": 12,
+          "difficulty": 1.112583,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 4.75
+        },
+        {
+          "task_id": "eval_158",
+          "prompt_chars": 82,
+          "prompt_words": 12,
+          "difficulty": 1.086093,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 4.75
+        },
+        {
+          "task_id": "eval_159",
+          "prompt_chars": 80,
+          "prompt_words": 12,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 4.75
+        },
+        {
+          "task_id": "eval_160",
+          "prompt_chars": 63,
+          "prompt_words": 8,
+          "difficulty": 0.834437,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 4.75
+        },
+        {
+          "task_id": "eval_161",
+          "prompt_chars": 73,
+          "prompt_words": 11,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.0
+        },
+        {
+          "task_id": "eval_162",
+          "prompt_chars": 75,
+          "prompt_words": 11,
+          "difficulty": 0.993377,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.0
+        },
+        {
+          "task_id": "eval_163",
+          "prompt_chars": 73,
+          "prompt_words": 11,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.0
+        },
+        {
+          "task_id": "eval_164",
+          "prompt_chars": 73,
+          "prompt_words": 11,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.0
+        },
+        {
+          "task_id": "eval_165",
+          "prompt_chars": 74,
+          "prompt_words": 11,
+          "difficulty": 0.980132,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.0
+        },
+        {
+          "task_id": "eval_166",
+          "prompt_chars": 70,
+          "prompt_words": 11,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 5.0
+        },
+        {
+          "task_id": "eval_167",
+          "prompt_chars": 94,
+          "prompt_words": 15,
+          "difficulty": 1.245033,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 5.0
+        },
+        {
+          "task_id": "eval_168",
+          "prompt_chars": 92,
+          "prompt_words": 15,
+          "difficulty": 1.218543,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 5.0
+        },
+        {
+          "task_id": "eval_169",
+          "prompt_chars": 90,
+          "prompt_words": 15,
+          "difficulty": 1.192053,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 5.25
+        },
+        {
+          "task_id": "eval_170",
+          "prompt_chars": 73,
+          "prompt_words": 11,
+          "difficulty": 0.966887,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.25
+        },
+        {
+          "task_id": "eval_171",
+          "prompt_chars": 70,
+          "prompt_words": 11,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 5.25
+        },
+        {
+          "task_id": "eval_172",
+          "prompt_chars": 72,
+          "prompt_words": 11,
+          "difficulty": 0.953642,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.25
+        },
+        {
+          "task_id": "eval_173",
+          "prompt_chars": 70,
+          "prompt_words": 11,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 5.25
+        },
+        {
+          "task_id": "eval_174",
+          "prompt_chars": 70,
+          "prompt_words": 11,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 5.25
+        },
+        {
+          "task_id": "eval_175",
+          "prompt_chars": 71,
+          "prompt_words": 11,
+          "difficulty": 0.940397,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.25
+        },
+        {
+          "task_id": "eval_176",
+          "prompt_chars": 67,
+          "prompt_words": 11,
+          "difficulty": 0.887417,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 5.25
+        },
+        {
+          "task_id": "eval_177",
+          "prompt_chars": 91,
+          "prompt_words": 15,
+          "difficulty": 1.205298,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 5.5
+        },
+        {
+          "task_id": "eval_178",
+          "prompt_chars": 89,
+          "prompt_words": 15,
+          "difficulty": 1.178808,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 5.5
+        },
+        {
+          "task_id": "eval_179",
+          "prompt_chars": 87,
+          "prompt_words": 15,
+          "difficulty": 1.152318,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 5.5
+        },
+        {
+          "task_id": "eval_180",
+          "prompt_chars": 70,
+          "prompt_words": 11,
+          "difficulty": 0.927152,
+          "required_width": 1,
+          "client_profile": "WAN",
+          "arrival_s": 5.5
+        },
+        {
+          "task_id": "eval_181",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.5
+        },
+        {
+          "task_id": "eval_182",
+          "prompt_chars": 81,
+          "prompt_words": 11,
+          "difficulty": 1.072848,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.5
+        },
+        {
+          "task_id": "eval_183",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.5
+        },
+        {
+          "task_id": "eval_184",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.5
+        },
+        {
+          "task_id": "eval_185",
+          "prompt_chars": 80,
+          "prompt_words": 11,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.75
+        },
+        {
+          "task_id": "eval_186",
+          "prompt_chars": 76,
+          "prompt_words": 11,
+          "difficulty": 1.006623,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.75
+        },
+        {
+          "task_id": "eval_187",
+          "prompt_chars": 100,
+          "prompt_words": 15,
+          "difficulty": 1.324503,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 5.75
+        },
+        {
+          "task_id": "eval_188",
+          "prompt_chars": 98,
+          "prompt_words": 15,
+          "difficulty": 1.298013,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 5.75
+        },
+        {
+          "task_id": "eval_189",
+          "prompt_chars": 96,
+          "prompt_words": 15,
+          "difficulty": 1.271523,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 5.75
+        },
+        {
+          "task_id": "eval_190",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.75
+        },
+        {
+          "task_id": "eval_191",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.75
+        },
+        {
+          "task_id": "eval_192",
+          "prompt_chars": 81,
+          "prompt_words": 11,
+          "difficulty": 1.072848,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 5.75
+        },
+        {
+          "task_id": "eval_193",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 6.0
+        },
+        {
+          "task_id": "eval_194",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 6.0
+        },
+        {
+          "task_id": "eval_195",
+          "prompt_chars": 80,
+          "prompt_words": 11,
+          "difficulty": 1.059603,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 6.0
+        },
+        {
+          "task_id": "eval_196",
+          "prompt_chars": 76,
+          "prompt_words": 11,
+          "difficulty": 1.006623,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 6.0
+        },
+        {
+          "task_id": "eval_197",
+          "prompt_chars": 100,
+          "prompt_words": 15,
+          "difficulty": 1.324503,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 6.0
+        },
+        {
+          "task_id": "eval_198",
+          "prompt_chars": 98,
+          "prompt_words": 15,
+          "difficulty": 1.298013,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 6.0
+        },
+        {
+          "task_id": "eval_199",
+          "prompt_chars": 96,
+          "prompt_words": 15,
+          "difficulty": 1.271523,
+          "required_width": 3,
+          "client_profile": "WAN",
+          "arrival_s": 6.0
+        },
+        {
+          "task_id": "eval_200",
+          "prompt_chars": 79,
+          "prompt_words": 11,
+          "difficulty": 1.046358,
+          "required_width": 2,
+          "client_profile": "WAN",
+          "arrival_s": 6.0
+        }
+      ]
+    }
+  ],
+  "policy_weights": {
+    "failure_penalty": 850.0,
+    "network_penalty_factor": 0.35,
+    "width_penalty": 30.0,
+    "workload_penalty": 0.03,
+    "risk_penalty": 750.0,
+    "challenge_penalty": 320.0,
+    "efficacy_weight": 75.0
+  },
+  "notes": "Measured-profile E5 inputs use the verification profile matrix. Placement options differ both by pair and verifier signature."
+}

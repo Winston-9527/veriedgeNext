@@ -1,0 +1,17 @@
+{
+  "owner": "t4bf16_applebf16_vs_rtxfp32",
+  "stage_family": "prefill",
+  "pair_count": 1,
+  "prompt_filter": [],
+  "pairs": [
+    {
+      "pair_label": "apple_bf16_vs_rtx_fp32",
+      "left_capture_root": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/t4bf16_applemetal_vs_applebf16_eval_a",
+      "right_capture_root": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/t4bf16_applebf16_vs_rtxfp32_eval_b"
+    }
+  ],
+  "config": "/Users/siyuan/Developer/Veriedge/VeriEdge/artifacts/thc/config/e1_real_qwen_tstc_prefill_1x1.json",
+  "delta_map_file": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/t4bf16_applebf16_vs_rtxfp32_delta/delta_map.json",
+  "detail_csv": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E1/logs/t4bf16_applebf16_vs_rtxfp32/exp_e1_20260502_t4bf16_applebf16_vs_rtxfp32_pairwise_details.csv",
+  "summary_csv": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E1/logs/t4bf16_applebf16_vs_rtxfp32/exp_e1_20260502_t4bf16_applebf16_vs_rtxfp32_summary.csv"
+}

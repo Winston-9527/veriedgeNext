@@ -1,0 +1,12 @@
+# E4 Overhead Notes
+
+- Strict E4 uses strict E1 A/B traces as the challenged honest heterogeneous anchor.
+- `honest_trace` compares `Stack B eval` against the independently captured `Stack B eval rerun`.
+- `challenged_trace` compares `Stack B eval` against `Stack A eval` (real strict heterogeneous pair).
+- `tamper_trace` compares `Stack B eval` against a tampered version of `Stack B eval`.
+- `baseline_checkpoint_specific` uses the empirical strict A/B pair-specific delta map.
+- `global_shared` uses the stage-wise shared delta derived from the same strict A/B baseline map.
+- This experiment measures verifier operational overhead on real traces; it does not include EXO control-plane or online queueing overhead.
+
+- Baseline outputs: (PosixPath('/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E4/logs/exp_e4_20260511_strict_ab_mainline/baseline_checkpoint_specific/exp_e4_20260511_strict_ab_mainline_baseline_size_breakdown.csv'), PosixPath('/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E4/logs/exp_e4_20260511_strict_ab_mainline/baseline_checkpoint_specific/exp_e4_20260511_strict_ab_mainline_baseline_latency_breakdown.csv'), PosixPath('/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E4/logs/exp_e4_20260511_strict_ab_mainline/baseline_checkpoint_specific/exp_e4_20260511_strict_ab_mainline_baseline_storage_breakdown.csv'), PosixPath('/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E4/logs/exp_e4_20260511_strict_ab_mainline/baseline_checkpoint_specific/exp_e4_20260511_strict_ab_mainline_baseline_summary.csv'))
+- Global outputs: (PosixPath('/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E4/logs/exp_e4_20260511_strict_ab_mainline/global_shared/exp_e4_20260511_strict_ab_mainline_global_size_breakdown.csv'), PosixPath('/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E4/logs/exp_e4_20260511_strict_ab_mainline/global_shared/exp_e4_20260511_strict_ab_mainline_global_latency_breakdown.csv'), PosixPath('/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E4/logs/exp_e4_20260511_strict_ab_mainline/global_shared/exp_e4_20260511_strict_ab_mainline_global_storage_breakdown.csv'), PosixPath('/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E4/logs/exp_e4_20260511_strict_ab_mainline/global_shared/exp_e4_20260511_strict_ab_mainline_global_summary.csv'))

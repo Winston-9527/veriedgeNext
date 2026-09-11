@@ -1,0 +1,2 @@
+pair_label,stage,prompt_count,thc_fpr,tstc_fpr,thc_detect_count,tstc_detect_count,thc_dominant_mismatch_checkpoint,tstc_dominant_mismatch_checkpoint,thc_mismatch_distribution,tstc_mismatch_distribution,left_capture_root,right_capture_root,notes
+apple_metal_vs_apple_fp16,prefill,6,1.0,0.0,6,0,C1,,"{""C1"": 6}",{},/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/t4_applemetal_vs_applefp16_eval_a,/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/t4_applemetal_vs_applefp16_eval_b,honest-honest paired capture; localization is N/A

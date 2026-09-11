@@ -1,0 +1,80 @@
+{
+  "version": 2,
+  "smoke": {
+    "prompt_ids": [1, 2, 3, 4, 5]
+  },
+  "cells": [
+    {
+      "cell_id": "lan_n1",
+      "network": "LAN",
+      "instance_node_count": 1,
+      "tasks": [
+        {"task_index_in_cell": 1, "task_id": "lan-n1-task01", "prompt_id_range": [1, 20]},
+        {"task_index_in_cell": 2, "task_id": "lan-n1-task02", "prompt_id_range": [21, 40]},
+        {"task_index_in_cell": 3, "task_id": "lan-n1-task03", "prompt_id_range": [41, 60]},
+        {"task_index_in_cell": 4, "task_id": "lan-n1-task04", "prompt_id_range": [61, 80]},
+        {"task_index_in_cell": 5, "task_id": "lan-n1-task05", "prompt_id_range": [81, 100]}
+      ]
+    },
+    {
+      "cell_id": "lan_n2",
+      "network": "LAN",
+      "instance_node_count": 2,
+      "tasks": [
+        {"task_index_in_cell": 1, "task_id": "lan-n2-task01", "prompt_id_range": [101, 120]},
+        {"task_index_in_cell": 2, "task_id": "lan-n2-task02", "prompt_id_range": [121, 140]},
+        {"task_index_in_cell": 3, "task_id": "lan-n2-task03", "prompt_id_range": [141, 160]},
+        {"task_index_in_cell": 4, "task_id": "lan-n2-task04", "prompt_id_range": [161, 180]},
+        {"task_index_in_cell": 5, "task_id": "lan-n2-task05", "prompt_id_range": [181, 200]}
+      ]
+    },
+    {
+      "cell_id": "lan_n3",
+      "network": "LAN",
+      "instance_node_count": 3,
+      "tasks": [
+        {"task_index_in_cell": 1, "task_id": "lan-n3-task01", "prompt_id_range": [201, 220]},
+        {"task_index_in_cell": 2, "task_id": "lan-n3-task02", "prompt_id_range": [221, 240]},
+        {"task_index_in_cell": 3, "task_id": "lan-n3-task03", "prompt_id_range": [241, 260]},
+        {"task_index_in_cell": 4, "task_id": "lan-n3-task04", "prompt_id_range": [261, 280]},
+        {"task_index_in_cell": 5, "task_id": "lan-n3-task05", "prompt_id_range": [281, 300]}
+      ]
+    },
+    {
+      "cell_id": "wan_n1",
+      "network": "WAN",
+      "instance_node_count": 1,
+      "tasks": [
+        {"task_index_in_cell": 1, "task_id": "wan-n1-task01", "prompt_id_range": [301, 320]},
+        {"task_index_in_cell": 2, "task_id": "wan-n1-task02", "prompt_id_range": [321, 340]},
+        {"task_index_in_cell": 3, "task_id": "wan-n1-task03", "prompt_id_range": [341, 360]},
+        {"task_index_in_cell": 4, "task_id": "wan-n1-task04", "prompt_id_range": [361, 380]},
+        {"task_index_in_cell": 5, "task_id": "wan-n1-task05", "prompt_id_range": [381, 400]}
+      ]
+    },
+    {
+      "cell_id": "wan_n2",
+      "network": "WAN",
+      "instance_node_count": 2,
+      "tasks": [
+        {"task_index_in_cell": 1, "task_id": "wan-n2-task01", "prompt_id_range": [401, 420]},
+        {"task_index_in_cell": 2, "task_id": "wan-n2-task02", "prompt_id_range": [421, 440]},
+        {"task_index_in_cell": 3, "task_id": "wan-n2-task03", "prompt_id_range": [441, 460]},
+        {"task_index_in_cell": 4, "task_id": "wan-n2-task04", "prompt_id_range": [461, 480]},
+        {"task_index_in_cell": 5, "task_id": "wan-n2-task05", "prompt_id_range": [481, 500]}
+      ]
+    },
+    {
+      "cell_id": "wan_n3",
+      "network": "WAN",
+      "instance_node_count": 3,
+      "tasks": [
+        {"task_index_in_cell": 1, "task_id": "wan-n3-task01", "prompt_id_range": [501, 520]},
+        {"task_index_in_cell": 2, "task_id": "wan-n3-task02", "prompt_id_range": [521, 540]},
+        {"task_index_in_cell": 3, "task_id": "wan-n3-task03", "prompt_id_range": [541, 560]},
+        {"task_index_in_cell": 4, "task_id": "wan-n3-task04", "prompt_id_range": [561, 580]},
+        {"task_index_in_cell": 5, "task_id": "wan-n3-task05", "prompt_id_range": [581, 600]}
+      ]
+    }
+  ]
+}

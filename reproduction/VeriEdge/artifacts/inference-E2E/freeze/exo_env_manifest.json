@@ -1,0 +1,48 @@
+{
+  "captured_at": "2026-03-16T00:00:00+00:00",
+  "external_exo": {
+    "source_dir": "/Users/jlmini_2/repo/paper/third_party/exo",
+    "git": {
+      "branch": "main",
+      "commit": "ea18a625813d36069956ba742e8f519eabee05b2"
+    },
+    "files": {
+      "flake_lock_sha256": "77ff8c6021fef839ba94cb3cb337070109948c78bf5ba6d9b429b9ea6b69085b",
+      "uv_lock_sha256": "70d0bf4033d773dff8a6fa47303a67d9aaee5bdd1297495c93dbcac0fb7bbf14",
+      "python_version_sha256": "02e735b3dfe1c32833eb550b7ff8ffa17f5f2bc3fa1e7bae61a8f5a3883ce398",
+      "pyproject_sha256": "cf559e544b4950e93fb376c524f46d64ec2e4ff79ee229399eae65018b1282eb"
+    },
+    "python": {
+      "python_version_file": "3.13",
+      "requires_python": ">=3.13",
+      "uv_required_version": ">=0.8.6"
+    },
+    "project": {
+      "package_version": "0.3.68"
+    },
+    "nix": {
+      "nixpkgs_rev": "ffbc9f8cbaacfb331b6017d5a5abb21a492c9a38",
+      "nixpkgs_last_modified": 1768127708,
+      "nixpkgs_nar_hash": "sha256-1Sm77VfZh3mU0F5OqKABNLWxOuDeHIlcFjsXeeiPazs="
+    }
+  },
+  "applies_to": {
+    "requester": {
+      "ip": "192.168.31.189"
+    },
+    "providers": [
+      {
+        "node_id": "jlmini_1",
+        "ip": "192.168.31.52"
+      },
+      {
+        "node_id": "jlmini_2",
+        "ip": "192.168.31.159"
+      },
+      {
+        "node_id": "jlmini_3",
+        "ip": "192.168.31.83"
+      }
+    ]
+  }
+}

@@ -1,0 +1,3 @@
+setting,thc_fpr,tstc_fpr
+baseline p99.0,1.0,0.205
+tuned p99.99,1.0,0.095

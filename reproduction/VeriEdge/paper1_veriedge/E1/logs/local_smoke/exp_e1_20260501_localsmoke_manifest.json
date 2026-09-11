@@ -1,0 +1,17 @@
+{
+  "owner": "localsmoke",
+  "stage_family": "prefill",
+  "pair_count": 1,
+  "prompt_filter": [],
+  "pairs": [
+    {
+      "pair_label": "local_cpu_smoke",
+      "left_capture_root": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/local_smoke_eval_a",
+      "right_capture_root": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/local_smoke_eval_b"
+    }
+  ],
+  "config": "/Users/siyuan/Developer/Veriedge/VeriEdge/artifacts/thc/config/qwen.yaml",
+  "delta_map_file": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/local_smoke_delta/delta_map.json",
+  "detail_csv": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E1/logs/local_smoke/exp_e1_20260501_localsmoke_pairwise_details.csv",
+  "summary_csv": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E1/logs/local_smoke/exp_e1_20260501_localsmoke_summary.csv"
+}

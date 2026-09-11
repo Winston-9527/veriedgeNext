@@ -1,0 +1,12 @@
+study,sample_size,tolerance_mode,tolerance_scale,honest_homo_thc_runtime_ms_per_trace,honest_homo_tstc_runtime_ms_per_trace,honest_hetero_thc_runtime_ms_per_trace,honest_hetero_tstc_runtime_ms_per_trace,tamper_thc_runtime_ms_per_trace,tamper_tstc_runtime_ms_per_trace
+sample_size_sweep,4,checkpoint_specific,1.0,2.82879,2.86277,2.81529,2.8496,1.60002,1.752405
+sample_size_sweep,8,checkpoint_specific,1.0,2.720605,2.772325,2.772895,2.872205,1.605845,1.78558
+sample_size_sweep,16,checkpoint_specific,1.0,2.97582,3.231215,2.980965,2.88614,1.6184,1.57654
+sample_size_sweep,32,checkpoint_specific,1.0,2.796005,2.805105,2.718595,2.86596,1.56517,1.6385
+sample_size_sweep,64,checkpoint_specific,1.0,2.7432,2.843355,2.93394,2.91538,1.715985,1.922455
+tolerance_scale_sweep,4,checkpoint_specific,0.5,2.985855,2.85297,2.88009,2.870125,1.64896,1.962355
+tolerance_scale_sweep,4,checkpoint_specific,1.0,3.412015,3.008725,2.931275,3.02283,1.644975,1.62902
+tolerance_scale_sweep,4,checkpoint_specific,1.5,2.84091,2.817715,2.87882,2.786145,1.575825,1.63487
+tolerance_scale_sweep,4,checkpoint_specific,2.0,2.994105,2.99459,2.808735,2.939905,1.634705,1.723695
+global_vs_checkpoint,4,checkpoint_specific,1.0,2.88361,3.06575,2.786935,2.90369,1.56811,1.556475
+global_vs_checkpoint,4,global_shared,1.0,2.79851,2.88339,2.79225,2.807315,1.564795,1.662645

@@ -1,0 +1,7 @@
+trace_label,scenario,verifier,sample_count,reference_capture_kib,candidate_capture_kib,capture_pair_total_kib,commitment_head_bytes,commitment_chain_bytes,validator_storage_head_kib,validator_storage_full_chain_kib,replay_ms,compare_ms,verdict_emission_ms,challenge_latency_ms,detection_rate
+challenged_trace,honest_hetero,thc,200,105.622,105.626,211.248,32.0,96.0,106.912,106.974,0.056376,0.00141,0.003598,2.621321,1.0
+challenged_trace,honest_hetero,tstc,200,105.622,105.626,211.248,32.0,96.0,106.91,106.972,0.058055,0.001472,0.003344,2.642414,0.08
+honest_trace,honest_homo,thc,200,105.622,105.622,211.245,32.0,96.0,106.903,106.965,0.056015,0.00144,0.003808,2.648867,0.0
+honest_trace,honest_homo,tstc,200,105.622,105.622,211.245,32.0,96.0,106.904,106.966,0.058103,0.001514,0.003245,2.607556,0.0
+tamper_trace,tamper,thc,200,105.622,105.622,211.245,32.0,96.0,106.906,106.968,0.055531,0.00157,0.003719,2.591629,1.0
+tamper_trace,tamper,tstc,200,105.622,105.622,211.245,32.0,96.0,106.906,106.969,0.057904,0.001585,0.003261,2.585618,0.94

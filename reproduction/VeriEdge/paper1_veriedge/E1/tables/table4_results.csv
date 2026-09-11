@@ -1,0 +1,5 @@
+draft_label,actual_label,scope,thc_fpr,tstc_fpr,thc_detect_count,tstc_detect_count,thc_dominant_mismatch_checkpoint,tstc_dominant_mismatch_checkpoint,note
+"Current mixed stack (M4/int8, BF16, RTX/FP32)",Apple/Metal-int8 -> Apple/BF16 -> RTX/FP32 vs Apple/BF16 -> Apple/BF16 -> RTX/FP32,C1-C3,1.0,0.205,200,41,C1,C3,Final 40/200 rerun with Apple MPS bfloat16 on the non-Metal shard and RTX FP32 on the final shard.
+M4/Metal vs. M4/BF16,Apple/Metal-int8 vs Apple/BF16,C1-C3,1.0,0.27,200,54,C1,C3,Final 40/200 paired capture with Apple Metal int8 on one side and Apple MPS bfloat16 on the other.
+M4/Metal vs. RTX/BF16,Apple/Metal-int8 vs RTX/BF16,C1-C3,1.0,0.265,200,53,C1,C3,Final 40/200 paired capture with Apple Metal int8 on one side and RTX 3090 CUDA bfloat16 on the other.
+M4/BF16 vs. RTX/FP32,Apple/BF16 vs RTX/FP32,C1-C3,1.0,0.5,200,100,C1,C2,Final 40/200 paired capture with Apple MPS bfloat16 on one side and RTX 3090 CUDA fp32 on the other.

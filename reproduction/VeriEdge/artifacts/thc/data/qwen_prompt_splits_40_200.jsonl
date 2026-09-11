@@ -1,0 +1,240 @@
+{"prompt_id": "calib_001", "split": "calibration", "text": "Explain dynamic programming for a junior systems student in four sentences."}
+{"prompt_id": "calib_002", "split": "calibration", "text": "Summarize dynamic programming for a junior systems student in four sentences."}
+{"prompt_id": "calib_003", "split": "calibration", "text": "Compare dynamic programming for a junior systems student in four sentences."}
+{"prompt_id": "calib_004", "split": "calibration", "text": "Outline dynamic programming for a junior systems student in four sentences."}
+{"prompt_id": "calib_005", "split": "calibration", "text": "Describe dynamic programming for a junior systems student in four sentences."}
+{"prompt_id": "calib_006", "split": "calibration", "text": "List dynamic programming for a junior systems student in four sentences."}
+{"prompt_id": "calib_007", "split": "calibration", "text": "Give a concise checklist for dynamic programming for a junior systems student in four sentences."}
+{"prompt_id": "calib_008", "split": "calibration", "text": "Provide a short example of dynamic programming for a junior systems student in four sentences."}
+{"prompt_id": "calib_009", "split": "calibration", "text": "Write a brief note about dynamic programming for a junior systems student in four sentences."}
+{"prompt_id": "calib_010", "split": "calibration", "text": "Discuss dynamic programming for a junior systems student in four sentences."}
+{"prompt_id": "calib_011", "split": "calibration", "text": "Explain floating-point arithmetic across hardware for a junior systems student in four sentences."}
+{"prompt_id": "calib_012", "split": "calibration", "text": "Summarize floating-point arithmetic across hardware for a junior systems student in four sentences."}
+{"prompt_id": "calib_013", "split": "calibration", "text": "Compare floating-point arithmetic across hardware for a junior systems student in four sentences."}
+{"prompt_id": "calib_014", "split": "calibration", "text": "Outline floating-point arithmetic across hardware for a junior systems student in four sentences."}
+{"prompt_id": "calib_015", "split": "calibration", "text": "Describe floating-point arithmetic across hardware for a junior systems student in four sentences."}
+{"prompt_id": "calib_016", "split": "calibration", "text": "List floating-point arithmetic across hardware for a junior systems student in four sentences."}
+{"prompt_id": "calib_017", "split": "calibration", "text": "Give a concise checklist for floating-point arithmetic across hardware for a junior systems student in four sentences."}
+{"prompt_id": "calib_018", "split": "calibration", "text": "Provide a short example of floating-point arithmetic across hardware for a junior systems student in four sentences."}
+{"prompt_id": "calib_019", "split": "calibration", "text": "Write a brief note about floating-point arithmetic across hardware for a junior systems student in four sentences."}
+{"prompt_id": "calib_020", "split": "calibration", "text": "Discuss floating-point arithmetic across hardware for a junior systems student in four sentences."}
+{"prompt_id": "calib_021", "split": "calibration", "text": "Explain unit test debugging in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_022", "split": "calibration", "text": "Summarize unit test debugging in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_023", "split": "calibration", "text": "Compare unit test debugging in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_024", "split": "calibration", "text": "Outline unit test debugging in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_025", "split": "calibration", "text": "Describe unit test debugging in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_026", "split": "calibration", "text": "List unit test debugging in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_027", "split": "calibration", "text": "Give a concise checklist for unit test debugging in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_028", "split": "calibration", "text": "Provide a short example of unit test debugging in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_029", "split": "calibration", "text": "Write a brief note about unit test debugging in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_030", "split": "calibration", "text": "Discuss unit test debugging in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_031", "split": "calibration", "text": "Explain tokenization in language models in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_032", "split": "calibration", "text": "Summarize tokenization in language models in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_033", "split": "calibration", "text": "Compare tokenization in language models in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_034", "split": "calibration", "text": "Outline tokenization in language models in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_035", "split": "calibration", "text": "Describe tokenization in language models in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_036", "split": "calibration", "text": "List tokenization in language models in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_037", "split": "calibration", "text": "Give a concise checklist for tokenization in language models in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_038", "split": "calibration", "text": "Provide a short example of tokenization in language models in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_039", "split": "calibration", "text": "Write a brief note about tokenization in language models in two short paragraphs with one concrete example."}
+{"prompt_id": "calib_040", "split": "calibration", "text": "Discuss tokenization in language models in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_001", "split": "evaluation", "text": "Explain Merkle trees in distributed systems as a debugging checklist with five bullets."}
+{"prompt_id": "eval_002", "split": "evaluation", "text": "Summarize Merkle trees in distributed systems as a debugging checklist with five bullets."}
+{"prompt_id": "eval_003", "split": "evaluation", "text": "Compare Merkle trees in distributed systems as a debugging checklist with five bullets."}
+{"prompt_id": "eval_004", "split": "evaluation", "text": "Outline Merkle trees in distributed systems as a debugging checklist with five bullets."}
+{"prompt_id": "eval_005", "split": "evaluation", "text": "Describe Merkle trees in distributed systems as a debugging checklist with five bullets."}
+{"prompt_id": "eval_006", "split": "evaluation", "text": "List Merkle trees in distributed systems as a debugging checklist with five bullets."}
+{"prompt_id": "eval_007", "split": "evaluation", "text": "Give a concise checklist for Merkle trees in distributed systems as a debugging checklist with five bullets."}
+{"prompt_id": "eval_008", "split": "evaluation", "text": "Provide a short example of Merkle trees in distributed systems as a debugging checklist with five bullets."}
+{"prompt_id": "eval_009", "split": "evaluation", "text": "Write a brief note about Merkle trees in distributed systems as a debugging checklist with five bullets."}
+{"prompt_id": "eval_010", "split": "evaluation", "text": "Discuss Merkle trees in distributed systems as a debugging checklist with five bullets."}
+{"prompt_id": "eval_011", "split": "evaluation", "text": "Explain gradient descent as a debugging checklist with five bullets."}
+{"prompt_id": "eval_012", "split": "evaluation", "text": "Summarize gradient descent as a debugging checklist with five bullets."}
+{"prompt_id": "eval_013", "split": "evaluation", "text": "Compare gradient descent as a debugging checklist with five bullets."}
+{"prompt_id": "eval_014", "split": "evaluation", "text": "Outline gradient descent as a debugging checklist with five bullets."}
+{"prompt_id": "eval_015", "split": "evaluation", "text": "Describe gradient descent as a debugging checklist with five bullets."}
+{"prompt_id": "eval_016", "split": "evaluation", "text": "List gradient descent as a debugging checklist with five bullets."}
+{"prompt_id": "eval_017", "split": "evaluation", "text": "Give a concise checklist for gradient descent as a debugging checklist with five bullets."}
+{"prompt_id": "eval_018", "split": "evaluation", "text": "Provide a short example of gradient descent as a debugging checklist with five bullets."}
+{"prompt_id": "eval_019", "split": "evaluation", "text": "Write a brief note about gradient descent as a debugging checklist with five bullets."}
+{"prompt_id": "eval_020", "split": "evaluation", "text": "Discuss gradient descent as a debugging checklist with five bullets."}
+{"prompt_id": "eval_021", "split": "evaluation", "text": "Explain TCP versus UDP with one pitfall and one mitigation."}
+{"prompt_id": "eval_022", "split": "evaluation", "text": "Summarize TCP versus UDP with one pitfall and one mitigation."}
+{"prompt_id": "eval_023", "split": "evaluation", "text": "Compare TCP versus UDP with one pitfall and one mitigation."}
+{"prompt_id": "eval_024", "split": "evaluation", "text": "Outline TCP versus UDP with one pitfall and one mitigation."}
+{"prompt_id": "eval_025", "split": "evaluation", "text": "Describe TCP versus UDP with one pitfall and one mitigation."}
+{"prompt_id": "eval_026", "split": "evaluation", "text": "List TCP versus UDP with one pitfall and one mitigation."}
+{"prompt_id": "eval_027", "split": "evaluation", "text": "Give a concise checklist for TCP versus UDP with one pitfall and one mitigation."}
+{"prompt_id": "eval_028", "split": "evaluation", "text": "Provide a short example of TCP versus UDP with one pitfall and one mitigation."}
+{"prompt_id": "eval_029", "split": "evaluation", "text": "Write a brief note about TCP versus UDP with one pitfall and one mitigation."}
+{"prompt_id": "eval_030", "split": "evaluation", "text": "Discuss TCP versus UDP with one pitfall and one mitigation."}
+{"prompt_id": "eval_031", "split": "evaluation", "text": "Explain off-chain verification workflows with one pitfall and one mitigation."}
+{"prompt_id": "eval_032", "split": "evaluation", "text": "Summarize off-chain verification workflows with one pitfall and one mitigation."}
+{"prompt_id": "eval_033", "split": "evaluation", "text": "Compare off-chain verification workflows with one pitfall and one mitigation."}
+{"prompt_id": "eval_034", "split": "evaluation", "text": "Outline off-chain verification workflows with one pitfall and one mitigation."}
+{"prompt_id": "eval_035", "split": "evaluation", "text": "Describe off-chain verification workflows with one pitfall and one mitigation."}
+{"prompt_id": "eval_036", "split": "evaluation", "text": "List off-chain verification workflows with one pitfall and one mitigation."}
+{"prompt_id": "eval_037", "split": "evaluation", "text": "Give a concise checklist for off-chain verification workflows with one pitfall and one mitigation."}
+{"prompt_id": "eval_038", "split": "evaluation", "text": "Provide a short example of off-chain verification workflows with one pitfall and one mitigation."}
+{"prompt_id": "eval_039", "split": "evaluation", "text": "Write a brief note about off-chain verification workflows with one pitfall and one mitigation."}
+{"prompt_id": "eval_040", "split": "evaluation", "text": "Discuss off-chain verification workflows with one pitfall and one mitigation."}
+{"prompt_id": "eval_041", "split": "evaluation", "text": "Explain checkpoint hashing for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_042", "split": "evaluation", "text": "Summarize checkpoint hashing for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_043", "split": "evaluation", "text": "Compare checkpoint hashing for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_044", "split": "evaluation", "text": "Outline checkpoint hashing for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_045", "split": "evaluation", "text": "Describe checkpoint hashing for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_046", "split": "evaluation", "text": "List checkpoint hashing for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_047", "split": "evaluation", "text": "Give a concise checklist for checkpoint hashing for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_048", "split": "evaluation", "text": "Provide a short example of checkpoint hashing for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_049", "split": "evaluation", "text": "Write a brief note about checkpoint hashing for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_050", "split": "evaluation", "text": "Discuss checkpoint hashing for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_051", "split": "evaluation", "text": "Explain heterogeneous model execution for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_052", "split": "evaluation", "text": "Summarize heterogeneous model execution for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_053", "split": "evaluation", "text": "Compare heterogeneous model execution for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_054", "split": "evaluation", "text": "Outline heterogeneous model execution for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_055", "split": "evaluation", "text": "Describe heterogeneous model execution for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_056", "split": "evaluation", "text": "List heterogeneous model execution for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_057", "split": "evaluation", "text": "Give a concise checklist for heterogeneous model execution for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_058", "split": "evaluation", "text": "Provide a short example of heterogeneous model execution for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_059", "split": "evaluation", "text": "Write a brief note about heterogeneous model execution for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_060", "split": "evaluation", "text": "Discuss heterogeneous model execution for an engineer who is new to large-model serving."}
+{"prompt_id": "eval_061", "split": "evaluation", "text": "Explain vector clocks with a focus on practical trade-offs."}
+{"prompt_id": "eval_062", "split": "evaluation", "text": "Summarize vector clocks with a focus on practical trade-offs."}
+{"prompt_id": "eval_063", "split": "evaluation", "text": "Compare vector clocks with a focus on practical trade-offs."}
+{"prompt_id": "eval_064", "split": "evaluation", "text": "Outline vector clocks with a focus on practical trade-offs."}
+{"prompt_id": "eval_065", "split": "evaluation", "text": "Describe vector clocks with a focus on practical trade-offs."}
+{"prompt_id": "eval_066", "split": "evaluation", "text": "List vector clocks with a focus on practical trade-offs."}
+{"prompt_id": "eval_067", "split": "evaluation", "text": "Give a concise checklist for vector clocks with a focus on practical trade-offs."}
+{"prompt_id": "eval_068", "split": "evaluation", "text": "Provide a short example of vector clocks with a focus on practical trade-offs."}
+{"prompt_id": "eval_069", "split": "evaluation", "text": "Write a brief note about vector clocks with a focus on practical trade-offs."}
+{"prompt_id": "eval_070", "split": "evaluation", "text": "Discuss vector clocks with a focus on practical trade-offs."}
+{"prompt_id": "eval_071", "split": "evaluation", "text": "Explain quorum systems with a focus on practical trade-offs."}
+{"prompt_id": "eval_072", "split": "evaluation", "text": "Summarize quorum systems with a focus on practical trade-offs."}
+{"prompt_id": "eval_073", "split": "evaluation", "text": "Compare quorum systems with a focus on practical trade-offs."}
+{"prompt_id": "eval_074", "split": "evaluation", "text": "Outline quorum systems with a focus on practical trade-offs."}
+{"prompt_id": "eval_075", "split": "evaluation", "text": "Describe quorum systems with a focus on practical trade-offs."}
+{"prompt_id": "eval_076", "split": "evaluation", "text": "List quorum systems with a focus on practical trade-offs."}
+{"prompt_id": "eval_077", "split": "evaluation", "text": "Give a concise checklist for quorum systems with a focus on practical trade-offs."}
+{"prompt_id": "eval_078", "split": "evaluation", "text": "Provide a short example of quorum systems with a focus on practical trade-offs."}
+{"prompt_id": "eval_079", "split": "evaluation", "text": "Write a brief note about quorum systems with a focus on practical trade-offs."}
+{"prompt_id": "eval_080", "split": "evaluation", "text": "Discuss quorum systems with a focus on practical trade-offs."}
+{"prompt_id": "eval_081", "split": "evaluation", "text": "Explain RPC retries and backoff in plain language without equations."}
+{"prompt_id": "eval_082", "split": "evaluation", "text": "Summarize RPC retries and backoff in plain language without equations."}
+{"prompt_id": "eval_083", "split": "evaluation", "text": "Compare RPC retries and backoff in plain language without equations."}
+{"prompt_id": "eval_084", "split": "evaluation", "text": "Outline RPC retries and backoff in plain language without equations."}
+{"prompt_id": "eval_085", "split": "evaluation", "text": "Describe RPC retries and backoff in plain language without equations."}
+{"prompt_id": "eval_086", "split": "evaluation", "text": "List RPC retries and backoff in plain language without equations."}
+{"prompt_id": "eval_087", "split": "evaluation", "text": "Give a concise checklist for RPC retries and backoff in plain language without equations."}
+{"prompt_id": "eval_088", "split": "evaluation", "text": "Provide a short example of RPC retries and backoff in plain language without equations."}
+{"prompt_id": "eval_089", "split": "evaluation", "text": "Write a brief note about RPC retries and backoff in plain language without equations."}
+{"prompt_id": "eval_090", "split": "evaluation", "text": "Discuss RPC retries and backoff in plain language without equations."}
+{"prompt_id": "eval_091", "split": "evaluation", "text": "Explain content-addressed storage in plain language without equations."}
+{"prompt_id": "eval_092", "split": "evaluation", "text": "Summarize content-addressed storage in plain language without equations."}
+{"prompt_id": "eval_093", "split": "evaluation", "text": "Compare content-addressed storage in plain language without equations."}
+{"prompt_id": "eval_094", "split": "evaluation", "text": "Outline content-addressed storage in plain language without equations."}
+{"prompt_id": "eval_095", "split": "evaluation", "text": "Describe content-addressed storage in plain language without equations."}
+{"prompt_id": "eval_096", "split": "evaluation", "text": "List content-addressed storage in plain language without equations."}
+{"prompt_id": "eval_097", "split": "evaluation", "text": "Give a concise checklist for content-addressed storage in plain language without equations."}
+{"prompt_id": "eval_098", "split": "evaluation", "text": "Provide a short example of content-addressed storage in plain language without equations."}
+{"prompt_id": "eval_099", "split": "evaluation", "text": "Write a brief note about content-addressed storage in plain language without equations."}
+{"prompt_id": "eval_100", "split": "evaluation", "text": "Discuss content-addressed storage in plain language without equations."}
+{"prompt_id": "eval_101", "split": "evaluation", "text": "Explain sharded model inference for a code review discussion."}
+{"prompt_id": "eval_102", "split": "evaluation", "text": "Summarize sharded model inference for a code review discussion."}
+{"prompt_id": "eval_103", "split": "evaluation", "text": "Compare sharded model inference for a code review discussion."}
+{"prompt_id": "eval_104", "split": "evaluation", "text": "Outline sharded model inference for a code review discussion."}
+{"prompt_id": "eval_105", "split": "evaluation", "text": "Describe sharded model inference for a code review discussion."}
+{"prompt_id": "eval_106", "split": "evaluation", "text": "List sharded model inference for a code review discussion."}
+{"prompt_id": "eval_107", "split": "evaluation", "text": "Give a concise checklist for sharded model inference for a code review discussion."}
+{"prompt_id": "eval_108", "split": "evaluation", "text": "Provide a short example of sharded model inference for a code review discussion."}
+{"prompt_id": "eval_109", "split": "evaluation", "text": "Write a brief note about sharded model inference for a code review discussion."}
+{"prompt_id": "eval_110", "split": "evaluation", "text": "Discuss sharded model inference for a code review discussion."}
+{"prompt_id": "eval_111", "split": "evaluation", "text": "Explain GPU memory fragmentation for a code review discussion."}
+{"prompt_id": "eval_112", "split": "evaluation", "text": "Summarize GPU memory fragmentation for a code review discussion."}
+{"prompt_id": "eval_113", "split": "evaluation", "text": "Compare GPU memory fragmentation for a code review discussion."}
+{"prompt_id": "eval_114", "split": "evaluation", "text": "Outline GPU memory fragmentation for a code review discussion."}
+{"prompt_id": "eval_115", "split": "evaluation", "text": "Describe GPU memory fragmentation for a code review discussion."}
+{"prompt_id": "eval_116", "split": "evaluation", "text": "List GPU memory fragmentation for a code review discussion."}
+{"prompt_id": "eval_117", "split": "evaluation", "text": "Give a concise checklist for GPU memory fragmentation for a code review discussion."}
+{"prompt_id": "eval_118", "split": "evaluation", "text": "Provide a short example of GPU memory fragmentation for a code review discussion."}
+{"prompt_id": "eval_119", "split": "evaluation", "text": "Write a brief note about GPU memory fragmentation for a code review discussion."}
+{"prompt_id": "eval_120", "split": "evaluation", "text": "Discuss GPU memory fragmentation for a code review discussion."}
+{"prompt_id": "eval_121", "split": "evaluation", "text": "Explain bfloat16 versus float32 as advice for production deployment."}
+{"prompt_id": "eval_122", "split": "evaluation", "text": "Summarize bfloat16 versus float32 as advice for production deployment."}
+{"prompt_id": "eval_123", "split": "evaluation", "text": "Compare bfloat16 versus float32 as advice for production deployment."}
+{"prompt_id": "eval_124", "split": "evaluation", "text": "Outline bfloat16 versus float32 as advice for production deployment."}
+{"prompt_id": "eval_125", "split": "evaluation", "text": "Describe bfloat16 versus float32 as advice for production deployment."}
+{"prompt_id": "eval_126", "split": "evaluation", "text": "List bfloat16 versus float32 as advice for production deployment."}
+{"prompt_id": "eval_127", "split": "evaluation", "text": "Give a concise checklist for bfloat16 versus float32 as advice for production deployment."}
+{"prompt_id": "eval_128", "split": "evaluation", "text": "Provide a short example of bfloat16 versus float32 as advice for production deployment."}
+{"prompt_id": "eval_129", "split": "evaluation", "text": "Write a brief note about bfloat16 versus float32 as advice for production deployment."}
+{"prompt_id": "eval_130", "split": "evaluation", "text": "Discuss bfloat16 versus float32 as advice for production deployment."}
+{"prompt_id": "eval_131", "split": "evaluation", "text": "Explain quantization-aware inference as advice for production deployment."}
+{"prompt_id": "eval_132", "split": "evaluation", "text": "Summarize quantization-aware inference as advice for production deployment."}
+{"prompt_id": "eval_133", "split": "evaluation", "text": "Compare quantization-aware inference as advice for production deployment."}
+{"prompt_id": "eval_134", "split": "evaluation", "text": "Outline quantization-aware inference as advice for production deployment."}
+{"prompt_id": "eval_135", "split": "evaluation", "text": "Describe quantization-aware inference as advice for production deployment."}
+{"prompt_id": "eval_136", "split": "evaluation", "text": "List quantization-aware inference as advice for production deployment."}
+{"prompt_id": "eval_137", "split": "evaluation", "text": "Give a concise checklist for quantization-aware inference as advice for production deployment."}
+{"prompt_id": "eval_138", "split": "evaluation", "text": "Provide a short example of quantization-aware inference as advice for production deployment."}
+{"prompt_id": "eval_139", "split": "evaluation", "text": "Write a brief note about quantization-aware inference as advice for production deployment."}
+{"prompt_id": "eval_140", "split": "evaluation", "text": "Discuss quantization-aware inference as advice for production deployment."}
+{"prompt_id": "eval_141", "split": "evaluation", "text": "Explain cache invalidation with emphasis on reproducibility."}
+{"prompt_id": "eval_142", "split": "evaluation", "text": "Summarize cache invalidation with emphasis on reproducibility."}
+{"prompt_id": "eval_143", "split": "evaluation", "text": "Compare cache invalidation with emphasis on reproducibility."}
+{"prompt_id": "eval_144", "split": "evaluation", "text": "Outline cache invalidation with emphasis on reproducibility."}
+{"prompt_id": "eval_145", "split": "evaluation", "text": "Describe cache invalidation with emphasis on reproducibility."}
+{"prompt_id": "eval_146", "split": "evaluation", "text": "List cache invalidation with emphasis on reproducibility."}
+{"prompt_id": "eval_147", "split": "evaluation", "text": "Give a concise checklist for cache invalidation with emphasis on reproducibility."}
+{"prompt_id": "eval_148", "split": "evaluation", "text": "Provide a short example of cache invalidation with emphasis on reproducibility."}
+{"prompt_id": "eval_149", "split": "evaluation", "text": "Write a brief note about cache invalidation with emphasis on reproducibility."}
+{"prompt_id": "eval_150", "split": "evaluation", "text": "Discuss cache invalidation with emphasis on reproducibility."}
+{"prompt_id": "eval_151", "split": "evaluation", "text": "Explain idempotent API design with emphasis on reproducibility."}
+{"prompt_id": "eval_152", "split": "evaluation", "text": "Summarize idempotent API design with emphasis on reproducibility."}
+{"prompt_id": "eval_153", "split": "evaluation", "text": "Compare idempotent API design with emphasis on reproducibility."}
+{"prompt_id": "eval_154", "split": "evaluation", "text": "Outline idempotent API design with emphasis on reproducibility."}
+{"prompt_id": "eval_155", "split": "evaluation", "text": "Describe idempotent API design with emphasis on reproducibility."}
+{"prompt_id": "eval_156", "split": "evaluation", "text": "List idempotent API design with emphasis on reproducibility."}
+{"prompt_id": "eval_157", "split": "evaluation", "text": "Give a concise checklist for idempotent API design with emphasis on reproducibility."}
+{"prompt_id": "eval_158", "split": "evaluation", "text": "Provide a short example of idempotent API design with emphasis on reproducibility."}
+{"prompt_id": "eval_159", "split": "evaluation", "text": "Write a brief note about idempotent API design with emphasis on reproducibility."}
+{"prompt_id": "eval_160", "split": "evaluation", "text": "Discuss idempotent API design with emphasis on reproducibility."}
+{"prompt_id": "eval_161", "split": "evaluation", "text": "Explain database indexing for a junior systems student in four sentences."}
+{"prompt_id": "eval_162", "split": "evaluation", "text": "Summarize database indexing for a junior systems student in four sentences."}
+{"prompt_id": "eval_163", "split": "evaluation", "text": "Compare database indexing for a junior systems student in four sentences."}
+{"prompt_id": "eval_164", "split": "evaluation", "text": "Outline database indexing for a junior systems student in four sentences."}
+{"prompt_id": "eval_165", "split": "evaluation", "text": "Describe database indexing for a junior systems student in four sentences."}
+{"prompt_id": "eval_166", "split": "evaluation", "text": "List database indexing for a junior systems student in four sentences."}
+{"prompt_id": "eval_167", "split": "evaluation", "text": "Give a concise checklist for database indexing for a junior systems student in four sentences."}
+{"prompt_id": "eval_168", "split": "evaluation", "text": "Provide a short example of database indexing for a junior systems student in four sentences."}
+{"prompt_id": "eval_169", "split": "evaluation", "text": "Write a brief note about database indexing for a junior systems student in four sentences."}
+{"prompt_id": "eval_170", "split": "evaluation", "text": "Discuss database indexing for a junior systems student in four sentences."}
+{"prompt_id": "eval_171", "split": "evaluation", "text": "Explain load balancing for a junior systems student in four sentences."}
+{"prompt_id": "eval_172", "split": "evaluation", "text": "Summarize load balancing for a junior systems student in four sentences."}
+{"prompt_id": "eval_173", "split": "evaluation", "text": "Compare load balancing for a junior systems student in four sentences."}
+{"prompt_id": "eval_174", "split": "evaluation", "text": "Outline load balancing for a junior systems student in four sentences."}
+{"prompt_id": "eval_175", "split": "evaluation", "text": "Describe load balancing for a junior systems student in four sentences."}
+{"prompt_id": "eval_176", "split": "evaluation", "text": "List load balancing for a junior systems student in four sentences."}
+{"prompt_id": "eval_177", "split": "evaluation", "text": "Give a concise checklist for load balancing for a junior systems student in four sentences."}
+{"prompt_id": "eval_178", "split": "evaluation", "text": "Provide a short example of load balancing for a junior systems student in four sentences."}
+{"prompt_id": "eval_179", "split": "evaluation", "text": "Write a brief note about load balancing for a junior systems student in four sentences."}
+{"prompt_id": "eval_180", "split": "evaluation", "text": "Discuss load balancing for a junior systems student in four sentences."}
+{"prompt_id": "eval_181", "split": "evaluation", "text": "Explain eventual consistency in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_182", "split": "evaluation", "text": "Summarize eventual consistency in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_183", "split": "evaluation", "text": "Compare eventual consistency in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_184", "split": "evaluation", "text": "Outline eventual consistency in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_185", "split": "evaluation", "text": "Describe eventual consistency in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_186", "split": "evaluation", "text": "List eventual consistency in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_187", "split": "evaluation", "text": "Give a concise checklist for eventual consistency in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_188", "split": "evaluation", "text": "Provide a short example of eventual consistency in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_189", "split": "evaluation", "text": "Write a brief note about eventual consistency in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_190", "split": "evaluation", "text": "Discuss eventual consistency in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_191", "split": "evaluation", "text": "Explain failure localization in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_192", "split": "evaluation", "text": "Summarize failure localization in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_193", "split": "evaluation", "text": "Compare failure localization in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_194", "split": "evaluation", "text": "Outline failure localization in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_195", "split": "evaluation", "text": "Describe failure localization in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_196", "split": "evaluation", "text": "List failure localization in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_197", "split": "evaluation", "text": "Give a concise checklist for failure localization in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_198", "split": "evaluation", "text": "Provide a short example of failure localization in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_199", "split": "evaluation", "text": "Write a brief note about failure localization in two short paragraphs with one concrete example."}
+{"prompt_id": "eval_200", "split": "evaluation", "text": "Discuss failure localization in two short paragraphs with one concrete example."}

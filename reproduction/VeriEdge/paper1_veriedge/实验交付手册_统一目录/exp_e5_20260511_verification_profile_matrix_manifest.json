@@ -1,0 +1,22 @@
+{
+  "run_id": "exp_e5_20260511_verification_profile_matrix",
+  "inputs": {
+    "selected_operating_points": {
+      "path": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E2/tables/exp_e2_20260511_material_tamper_full_matrix_selected_operating_points.csv",
+      "sha256": "bce4050eaaf473c3572b803749c50a47fe9215eea075fdb35a238cd7a0ee9946"
+    },
+    "attack_summary": {
+      "path": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E2/tables/exp_e2_20260511_material_tamper_full_matrix_attack_summary.csv",
+      "sha256": "7cfa91316e4978b95c58472dd18bfd221714ef0d96c7cea504ed0c78168e1c44"
+    },
+    "e4_main_table": {
+      "path": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E4/tables/exp_e4_20260511_equal_budget_live_ab_main_table.csv",
+      "sha256": "02cf188bdf15ecb9720d66938e7f6b69accf7a2c0f64e5138829998d838c20c0"
+    }
+  },
+  "thresholds": {
+    "alpha": 0.1,
+    "beta": 0.9
+  },
+  "output_csv": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E5/tables/exp_e5_20260511_verification_profile_matrix.csv"
+}

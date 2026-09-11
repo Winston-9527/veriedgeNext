@@ -1,0 +1,13 @@
+workload_id,policy,task_count,mean_task_latency_s,success_rate,challenge_rate,mean_verifier_workload_ms_per_task,goodput_success_per_s,false_dispute_risk,unverifiable_placement_rate,infeasible_under_alpha_beta_rate,high_risk_placement_rate,medium_risk_placement_rate,low_risk_placement_rate,risk_adjusted_goodput,mean_completion_utility,average_group_width
+single_task,random,200,1.045788,0.925,0.06,2.824939,0.185693,0.055775,0.0,0.295,0.295,0.0,0.705,0.175336,0.910423,2.26
+single_task,cost_only,200,0.971796,0.89,0.04,2.683557,0.178667,0.027,0.0,0.3,0.3,0.0,0.7,0.173843,0.8813,1.6
+single_task,reputation_aware,200,1.007899,0.935,0.035,2.674237,0.187701,0.054,0.0,0.48,0.48,0.0,0.52,0.177565,0.92435,1.96
+single_task,network_aware,200,1.007899,0.93,0.05,2.736662,0.186697,0.054,0.0,0.48,0.48,0.0,0.52,0.176615,0.9171,1.96
+single_task,risk_constrained,200,1.007899,0.955,0.015,2.621945,0.191716,0.0096,0.0,0.0,0.0,0.0,1.0,0.189875,0.95179,1.96
+single_task,adaptive_verifier,200,1.007899,0.94,0.015,2.621945,0.188704,0.0096,0.0,0.0,0.0,0.0,1.0,0.186893,0.93679,1.96
+queued_8,random,200,12.451722,0.94,0.06,2.815361,4.862174,0.060325,0.0,0.36,0.36,0.0,0.64,4.568864,0.696864,2.28
+queued_8,cost_only,200,51.636917,0.875,0.025,2.621131,1.477265,0.027,0.0,0.3,0.3,0.0,0.7,1.437379,-0.144752,1.6
+queued_8,reputation_aware,200,36.310436,0.94,0.04,2.695045,2.149165,0.054,0.0,0.48,0.48,0.0,0.52,2.03311,0.222549,1.96
+queued_8,network_aware,200,36.310436,0.93,0.085,2.882321,2.126301,0.054,0.0,0.48,0.48,0.0,0.52,2.011481,0.205799,1.96
+queued_8,risk_constrained,200,36.310436,0.91,0.01,2.60309,2.080574,0.0096,0.0,0.0,0.0,0.0,1.0,2.060601,0.201489,1.96
+queued_8,adaptive_verifier,200,36.310436,0.935,0.005,2.584235,2.137733,0.0096,0.0,0.0,0.0,0.0,1.0,2.117211,0.227239,1.96

@@ -1,0 +1,17 @@
+{
+  "owner": "t4_final_current_mixed_40_200",
+  "stage_family": "prefill",
+  "pair_count": 1,
+  "prompt_filter": [],
+  "pairs": [
+    {
+      "pair_label": "current_mixed_stack",
+      "left_capture_root": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/t4_final_current_mixed_40_200_left_eval",
+      "right_capture_root": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/t4_final_current_mixed_40_200_right_eval"
+    }
+  ],
+  "config": "/Users/siyuan/Developer/Veriedge/VeriEdge/artifacts/thc/config/e1_real_qwen_tstc_prefill_1x1_40_200.json",
+  "delta_map_file": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/t4_final_current_mixed_40_200_delta/delta_map.json",
+  "detail_csv": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E1/logs/t4_final_current_mixed_40_200/exp_e1_20260502_t4_final_current_mixed_40_200_pairwise_details.csv",
+  "summary_csv": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E1/logs/t4_final_current_mixed_40_200/exp_e1_20260502_t4_final_current_mixed_40_200_summary.csv"
+}

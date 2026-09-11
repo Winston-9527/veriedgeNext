@@ -1,0 +1,58 @@
+{
+  "model_id": "Qwen/Qwen3-0.6B",
+  "nodes": [
+    {
+      "node_name": "jlmini_3",
+      "host": "192.168.31.51",
+      "bind_host": "0.0.0.0",
+      "port": 8311,
+      "checkpoint": "C1",
+      "start_layer": 0,
+      "end_layer": 7,
+      "device": "mps",
+      "torch_dtype": "float16",
+      "quantization": "metal_8bit",
+      "quantization_bits": 8,
+      "quantization_group_size": 64,
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "first_shard": true,
+      "last_shard": false
+    },
+    {
+      "node_name": "linux124",
+      "host": "172.31.100.124",
+      "bind_host": "0.0.0.0",
+      "port": 8311,
+      "checkpoint": "C2",
+      "start_layer": 8,
+      "end_layer": 15,
+      "device": "cuda",
+      "torch_dtype": "float16",
+      "quantization": "none",
+      "quantization_bits": 8,
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "first_shard": false,
+      "last_shard": false
+    },
+    {
+      "node_name": "jlmini_2",
+      "host": "192.168.31.159",
+      "bind_host": "0.0.0.0",
+      "port": 8311,
+      "checkpoint": "C3",
+      "start_layer": 16,
+      "end_layer": 23,
+      "device": "mps",
+      "torch_dtype": "float32",
+      "quantization": "none",
+      "quantization_bits": 8,
+      "quantization_group_size": 64,
+      "local_files_only": true,
+      "trust_remote_code": false,
+      "first_shard": false,
+      "last_shard": true
+    }
+  ]
+}

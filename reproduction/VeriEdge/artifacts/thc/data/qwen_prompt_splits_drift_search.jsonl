@@ -1,0 +1,600 @@
+{"prompt_id": "calib_ds_001", "split": "calibration", "text": "Explain the main idea of Python in two concise paragraphs."}
+{"prompt_id": "calib_ds_002", "split": "calibration", "text": "Explain the main idea of Python in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_003", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Python."}
+{"prompt_id": "calib_ds_004", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Python. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_005", "split": "calibration", "text": "Compare Python with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_006", "split": "calibration", "text": "Compare Python with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_007", "split": "calibration", "text": "Write a compact example that demonstrates Python for an engineer."}
+{"prompt_id": "calib_ds_008", "split": "calibration", "text": "Write a compact example that demonstrates Python for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_009", "split": "calibration", "text": "Describe one failure mode related to Python and how to detect it."}
+{"prompt_id": "calib_ds_010", "split": "calibration", "text": "Describe one failure mode related to Python and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_011", "split": "calibration", "text": "Explain the main idea of Rust in two concise paragraphs."}
+{"prompt_id": "calib_ds_012", "split": "calibration", "text": "Explain the main idea of Rust in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_013", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Rust."}
+{"prompt_id": "calib_ds_014", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Rust. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_015", "split": "calibration", "text": "Compare Rust with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_016", "split": "calibration", "text": "Compare Rust with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_017", "split": "calibration", "text": "Write a compact example that demonstrates Rust for an engineer."}
+{"prompt_id": "calib_ds_018", "split": "calibration", "text": "Write a compact example that demonstrates Rust for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_019", "split": "calibration", "text": "Describe one failure mode related to Rust and how to detect it."}
+{"prompt_id": "calib_ds_020", "split": "calibration", "text": "Describe one failure mode related to Rust and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_021", "split": "calibration", "text": "Explain the main idea of Go in two concise paragraphs."}
+{"prompt_id": "calib_ds_022", "split": "calibration", "text": "Explain the main idea of Go in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_023", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Go."}
+{"prompt_id": "calib_ds_024", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Go. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_025", "split": "calibration", "text": "Compare Go with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_026", "split": "calibration", "text": "Compare Go with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_027", "split": "calibration", "text": "Write a compact example that demonstrates Go for an engineer."}
+{"prompt_id": "calib_ds_028", "split": "calibration", "text": "Write a compact example that demonstrates Go for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_029", "split": "calibration", "text": "Describe one failure mode related to Go and how to detect it."}
+{"prompt_id": "calib_ds_030", "split": "calibration", "text": "Describe one failure mode related to Go and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_031", "split": "calibration", "text": "Explain the main idea of JavaScript in two concise paragraphs."}
+{"prompt_id": "calib_ds_032", "split": "calibration", "text": "Explain the main idea of JavaScript in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_033", "split": "calibration", "text": "Give a short checklist for debugging problems caused by JavaScript."}
+{"prompt_id": "calib_ds_034", "split": "calibration", "text": "Give a short checklist for debugging problems caused by JavaScript. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_035", "split": "calibration", "text": "Compare JavaScript with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_036", "split": "calibration", "text": "Compare JavaScript with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_037", "split": "calibration", "text": "Write a compact example that demonstrates JavaScript for an engineer."}
+{"prompt_id": "calib_ds_038", "split": "calibration", "text": "Write a compact example that demonstrates JavaScript for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_039", "split": "calibration", "text": "Describe one failure mode related to JavaScript and how to detect it."}
+{"prompt_id": "calib_ds_040", "split": "calibration", "text": "Describe one failure mode related to JavaScript and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_041", "split": "calibration", "text": "Explain the main idea of TypeScript in two concise paragraphs."}
+{"prompt_id": "calib_ds_042", "split": "calibration", "text": "Explain the main idea of TypeScript in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_043", "split": "calibration", "text": "Give a short checklist for debugging problems caused by TypeScript."}
+{"prompt_id": "calib_ds_044", "split": "calibration", "text": "Give a short checklist for debugging problems caused by TypeScript. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_045", "split": "calibration", "text": "Compare TypeScript with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_046", "split": "calibration", "text": "Compare TypeScript with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_047", "split": "calibration", "text": "Write a compact example that demonstrates TypeScript for an engineer."}
+{"prompt_id": "calib_ds_048", "split": "calibration", "text": "Write a compact example that demonstrates TypeScript for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_049", "split": "calibration", "text": "Describe one failure mode related to TypeScript and how to detect it."}
+{"prompt_id": "calib_ds_050", "split": "calibration", "text": "Describe one failure mode related to TypeScript and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_051", "split": "calibration", "text": "Explain the main idea of Java in two concise paragraphs."}
+{"prompt_id": "calib_ds_052", "split": "calibration", "text": "Explain the main idea of Java in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_053", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Java."}
+{"prompt_id": "calib_ds_054", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Java. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_055", "split": "calibration", "text": "Compare Java with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_056", "split": "calibration", "text": "Compare Java with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_057", "split": "calibration", "text": "Write a compact example that demonstrates Java for an engineer."}
+{"prompt_id": "calib_ds_058", "split": "calibration", "text": "Write a compact example that demonstrates Java for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_059", "split": "calibration", "text": "Describe one failure mode related to Java and how to detect it."}
+{"prompt_id": "calib_ds_060", "split": "calibration", "text": "Describe one failure mode related to Java and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_061", "split": "calibration", "text": "Explain the main idea of C++ in two concise paragraphs."}
+{"prompt_id": "calib_ds_062", "split": "calibration", "text": "Explain the main idea of C++ in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_063", "split": "calibration", "text": "Give a short checklist for debugging problems caused by C++."}
+{"prompt_id": "calib_ds_064", "split": "calibration", "text": "Give a short checklist for debugging problems caused by C++. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_065", "split": "calibration", "text": "Compare C++ with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_066", "split": "calibration", "text": "Compare C++ with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_067", "split": "calibration", "text": "Write a compact example that demonstrates C++ for an engineer."}
+{"prompt_id": "calib_ds_068", "split": "calibration", "text": "Write a compact example that demonstrates C++ for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_069", "split": "calibration", "text": "Describe one failure mode related to C++ and how to detect it."}
+{"prompt_id": "calib_ds_070", "split": "calibration", "text": "Describe one failure mode related to C++ and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_071", "split": "calibration", "text": "Explain the main idea of SQL in two concise paragraphs."}
+{"prompt_id": "calib_ds_072", "split": "calibration", "text": "Explain the main idea of SQL in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_073", "split": "calibration", "text": "Give a short checklist for debugging problems caused by SQL."}
+{"prompt_id": "calib_ds_074", "split": "calibration", "text": "Give a short checklist for debugging problems caused by SQL. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_075", "split": "calibration", "text": "Compare SQL with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_076", "split": "calibration", "text": "Compare SQL with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_077", "split": "calibration", "text": "Write a compact example that demonstrates SQL for an engineer."}
+{"prompt_id": "calib_ds_078", "split": "calibration", "text": "Write a compact example that demonstrates SQL for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_079", "split": "calibration", "text": "Describe one failure mode related to SQL and how to detect it."}
+{"prompt_id": "calib_ds_080", "split": "calibration", "text": "Describe one failure mode related to SQL and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_081", "split": "calibration", "text": "Explain the main idea of Bash in two concise paragraphs."}
+{"prompt_id": "calib_ds_082", "split": "calibration", "text": "Explain the main idea of Bash in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_083", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Bash."}
+{"prompt_id": "calib_ds_084", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Bash. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_085", "split": "calibration", "text": "Compare Bash with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_086", "split": "calibration", "text": "Compare Bash with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_087", "split": "calibration", "text": "Write a compact example that demonstrates Bash for an engineer."}
+{"prompt_id": "calib_ds_088", "split": "calibration", "text": "Write a compact example that demonstrates Bash for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_089", "split": "calibration", "text": "Describe one failure mode related to Bash and how to detect it."}
+{"prompt_id": "calib_ds_090", "split": "calibration", "text": "Describe one failure mode related to Bash and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_091", "split": "calibration", "text": "Explain the main idea of Ruby in two concise paragraphs."}
+{"prompt_id": "calib_ds_092", "split": "calibration", "text": "Explain the main idea of Ruby in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_093", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Ruby."}
+{"prompt_id": "calib_ds_094", "split": "calibration", "text": "Give a short checklist for debugging problems caused by Ruby. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_095", "split": "calibration", "text": "Compare Ruby with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_096", "split": "calibration", "text": "Compare Ruby with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_097", "split": "calibration", "text": "Write a compact example that demonstrates Ruby for an engineer."}
+{"prompt_id": "calib_ds_098", "split": "calibration", "text": "Write a compact example that demonstrates Ruby for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_099", "split": "calibration", "text": "Describe one failure mode related to Ruby and how to detect it."}
+{"prompt_id": "calib_ds_100", "split": "calibration", "text": "Describe one failure mode related to Ruby and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_101", "split": "calibration", "text": "Explain the main idea of process isolation in two concise paragraphs."}
+{"prompt_id": "calib_ds_102", "split": "calibration", "text": "Explain the main idea of process isolation in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_103", "split": "calibration", "text": "Give a short checklist for debugging problems caused by process isolation."}
+{"prompt_id": "calib_ds_104", "split": "calibration", "text": "Give a short checklist for debugging problems caused by process isolation. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_105", "split": "calibration", "text": "Compare process isolation with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_106", "split": "calibration", "text": "Compare process isolation with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_107", "split": "calibration", "text": "Write a compact example that demonstrates process isolation for an engineer."}
+{"prompt_id": "calib_ds_108", "split": "calibration", "text": "Write a compact example that demonstrates process isolation for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_109", "split": "calibration", "text": "Describe one failure mode related to process isolation and how to detect it."}
+{"prompt_id": "calib_ds_110", "split": "calibration", "text": "Describe one failure mode related to process isolation and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_111", "split": "calibration", "text": "Explain the main idea of virtual memory in two concise paragraphs."}
+{"prompt_id": "calib_ds_112", "split": "calibration", "text": "Explain the main idea of virtual memory in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_113", "split": "calibration", "text": "Give a short checklist for debugging problems caused by virtual memory."}
+{"prompt_id": "calib_ds_114", "split": "calibration", "text": "Give a short checklist for debugging problems caused by virtual memory. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_115", "split": "calibration", "text": "Compare virtual memory with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_116", "split": "calibration", "text": "Compare virtual memory with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_117", "split": "calibration", "text": "Write a compact example that demonstrates virtual memory for an engineer."}
+{"prompt_id": "calib_ds_118", "split": "calibration", "text": "Write a compact example that demonstrates virtual memory for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_119", "split": "calibration", "text": "Describe one failure mode related to virtual memory and how to detect it."}
+{"prompt_id": "calib_ds_120", "split": "calibration", "text": "Describe one failure mode related to virtual memory and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_121", "split": "calibration", "text": "Explain the main idea of NUMA scheduling in two concise paragraphs."}
+{"prompt_id": "calib_ds_122", "split": "calibration", "text": "Explain the main idea of NUMA scheduling in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_123", "split": "calibration", "text": "Give a short checklist for debugging problems caused by NUMA scheduling."}
+{"prompt_id": "calib_ds_124", "split": "calibration", "text": "Give a short checklist for debugging problems caused by NUMA scheduling. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_125", "split": "calibration", "text": "Compare NUMA scheduling with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_126", "split": "calibration", "text": "Compare NUMA scheduling with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_127", "split": "calibration", "text": "Write a compact example that demonstrates NUMA scheduling for an engineer."}
+{"prompt_id": "calib_ds_128", "split": "calibration", "text": "Write a compact example that demonstrates NUMA scheduling for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_129", "split": "calibration", "text": "Describe one failure mode related to NUMA scheduling and how to detect it."}
+{"prompt_id": "calib_ds_130", "split": "calibration", "text": "Describe one failure mode related to NUMA scheduling and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_131", "split": "calibration", "text": "Explain the main idea of write-ahead logging in two concise paragraphs."}
+{"prompt_id": "calib_ds_132", "split": "calibration", "text": "Explain the main idea of write-ahead logging in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_133", "split": "calibration", "text": "Give a short checklist for debugging problems caused by write-ahead logging."}
+{"prompt_id": "calib_ds_134", "split": "calibration", "text": "Give a short checklist for debugging problems caused by write-ahead logging. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_135", "split": "calibration", "text": "Compare write-ahead logging with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_136", "split": "calibration", "text": "Compare write-ahead logging with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_137", "split": "calibration", "text": "Write a compact example that demonstrates write-ahead logging for an engineer."}
+{"prompt_id": "calib_ds_138", "split": "calibration", "text": "Write a compact example that demonstrates write-ahead logging for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_139", "split": "calibration", "text": "Describe one failure mode related to write-ahead logging and how to detect it."}
+{"prompt_id": "calib_ds_140", "split": "calibration", "text": "Describe one failure mode related to write-ahead logging and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_141", "split": "calibration", "text": "Explain the main idea of consensus in two concise paragraphs."}
+{"prompt_id": "calib_ds_142", "split": "calibration", "text": "Explain the main idea of consensus in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_143", "split": "calibration", "text": "Give a short checklist for debugging problems caused by consensus."}
+{"prompt_id": "calib_ds_144", "split": "calibration", "text": "Give a short checklist for debugging problems caused by consensus. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_145", "split": "calibration", "text": "Compare consensus with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_146", "split": "calibration", "text": "Compare consensus with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_147", "split": "calibration", "text": "Write a compact example that demonstrates consensus for an engineer."}
+{"prompt_id": "calib_ds_148", "split": "calibration", "text": "Write a compact example that demonstrates consensus for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_149", "split": "calibration", "text": "Describe one failure mode related to consensus and how to detect it."}
+{"prompt_id": "calib_ds_150", "split": "calibration", "text": "Describe one failure mode related to consensus and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_151", "split": "calibration", "text": "Explain the main idea of lock contention in two concise paragraphs."}
+{"prompt_id": "calib_ds_152", "split": "calibration", "text": "Explain the main idea of lock contention in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_153", "split": "calibration", "text": "Give a short checklist for debugging problems caused by lock contention."}
+{"prompt_id": "calib_ds_154", "split": "calibration", "text": "Give a short checklist for debugging problems caused by lock contention. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_155", "split": "calibration", "text": "Compare lock contention with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_156", "split": "calibration", "text": "Compare lock contention with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_157", "split": "calibration", "text": "Write a compact example that demonstrates lock contention for an engineer."}
+{"prompt_id": "calib_ds_158", "split": "calibration", "text": "Write a compact example that demonstrates lock contention for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_159", "split": "calibration", "text": "Describe one failure mode related to lock contention and how to detect it."}
+{"prompt_id": "calib_ds_160", "split": "calibration", "text": "Describe one failure mode related to lock contention and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_161", "split": "calibration", "text": "Explain the main idea of cache invalidation in two concise paragraphs."}
+{"prompt_id": "calib_ds_162", "split": "calibration", "text": "Explain the main idea of cache invalidation in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_163", "split": "calibration", "text": "Give a short checklist for debugging problems caused by cache invalidation."}
+{"prompt_id": "calib_ds_164", "split": "calibration", "text": "Give a short checklist for debugging problems caused by cache invalidation. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_165", "split": "calibration", "text": "Compare cache invalidation with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_166", "split": "calibration", "text": "Compare cache invalidation with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_167", "split": "calibration", "text": "Write a compact example that demonstrates cache invalidation for an engineer."}
+{"prompt_id": "calib_ds_168", "split": "calibration", "text": "Write a compact example that demonstrates cache invalidation for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_169", "split": "calibration", "text": "Describe one failure mode related to cache invalidation and how to detect it."}
+{"prompt_id": "calib_ds_170", "split": "calibration", "text": "Describe one failure mode related to cache invalidation and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_171", "split": "calibration", "text": "Explain the main idea of checkpointing in two concise paragraphs."}
+{"prompt_id": "calib_ds_172", "split": "calibration", "text": "Explain the main idea of checkpointing in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_173", "split": "calibration", "text": "Give a short checklist for debugging problems caused by checkpointing."}
+{"prompt_id": "calib_ds_174", "split": "calibration", "text": "Give a short checklist for debugging problems caused by checkpointing. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_175", "split": "calibration", "text": "Compare checkpointing with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_176", "split": "calibration", "text": "Compare checkpointing with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_177", "split": "calibration", "text": "Write a compact example that demonstrates checkpointing for an engineer."}
+{"prompt_id": "calib_ds_178", "split": "calibration", "text": "Write a compact example that demonstrates checkpointing for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_179", "split": "calibration", "text": "Describe one failure mode related to checkpointing and how to detect it."}
+{"prompt_id": "calib_ds_180", "split": "calibration", "text": "Describe one failure mode related to checkpointing and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_181", "split": "calibration", "text": "Explain the main idea of vector clocks in two concise paragraphs."}
+{"prompt_id": "calib_ds_182", "split": "calibration", "text": "Explain the main idea of vector clocks in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_183", "split": "calibration", "text": "Give a short checklist for debugging problems caused by vector clocks."}
+{"prompt_id": "calib_ds_184", "split": "calibration", "text": "Give a short checklist for debugging problems caused by vector clocks. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_185", "split": "calibration", "text": "Compare vector clocks with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_186", "split": "calibration", "text": "Compare vector clocks with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_187", "split": "calibration", "text": "Write a compact example that demonstrates vector clocks for an engineer."}
+{"prompt_id": "calib_ds_188", "split": "calibration", "text": "Write a compact example that demonstrates vector clocks for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_189", "split": "calibration", "text": "Describe one failure mode related to vector clocks and how to detect it."}
+{"prompt_id": "calib_ds_190", "split": "calibration", "text": "Describe one failure mode related to vector clocks and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_191", "split": "calibration", "text": "Explain the main idea of snapshotting in two concise paragraphs."}
+{"prompt_id": "calib_ds_192", "split": "calibration", "text": "Explain the main idea of snapshotting in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_193", "split": "calibration", "text": "Give a short checklist for debugging problems caused by snapshotting."}
+{"prompt_id": "calib_ds_194", "split": "calibration", "text": "Give a short checklist for debugging problems caused by snapshotting. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_195", "split": "calibration", "text": "Compare snapshotting with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_196", "split": "calibration", "text": "Compare snapshotting with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_197", "split": "calibration", "text": "Write a compact example that demonstrates snapshotting for an engineer."}
+{"prompt_id": "calib_ds_198", "split": "calibration", "text": "Write a compact example that demonstrates snapshotting for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_199", "split": "calibration", "text": "Describe one failure mode related to snapshotting and how to detect it."}
+{"prompt_id": "calib_ds_200", "split": "calibration", "text": "Describe one failure mode related to snapshotting and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_201", "split": "calibration", "text": "Explain the main idea of TCP congestion control in two concise paragraphs."}
+{"prompt_id": "calib_ds_202", "split": "calibration", "text": "Explain the main idea of TCP congestion control in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_203", "split": "calibration", "text": "Give a short checklist for debugging problems caused by TCP congestion control."}
+{"prompt_id": "calib_ds_204", "split": "calibration", "text": "Give a short checklist for debugging problems caused by TCP congestion control. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_205", "split": "calibration", "text": "Compare TCP congestion control with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_206", "split": "calibration", "text": "Compare TCP congestion control with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_207", "split": "calibration", "text": "Write a compact example that demonstrates TCP congestion control for an engineer."}
+{"prompt_id": "calib_ds_208", "split": "calibration", "text": "Write a compact example that demonstrates TCP congestion control for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_209", "split": "calibration", "text": "Describe one failure mode related to TCP congestion control and how to detect it."}
+{"prompt_id": "calib_ds_210", "split": "calibration", "text": "Describe one failure mode related to TCP congestion control and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_211", "split": "calibration", "text": "Explain the main idea of packet reordering in two concise paragraphs."}
+{"prompt_id": "calib_ds_212", "split": "calibration", "text": "Explain the main idea of packet reordering in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_213", "split": "calibration", "text": "Give a short checklist for debugging problems caused by packet reordering."}
+{"prompt_id": "calib_ds_214", "split": "calibration", "text": "Give a short checklist for debugging problems caused by packet reordering. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_215", "split": "calibration", "text": "Compare packet reordering with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_216", "split": "calibration", "text": "Compare packet reordering with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_217", "split": "calibration", "text": "Write a compact example that demonstrates packet reordering for an engineer."}
+{"prompt_id": "calib_ds_218", "split": "calibration", "text": "Write a compact example that demonstrates packet reordering for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_219", "split": "calibration", "text": "Describe one failure mode related to packet reordering and how to detect it."}
+{"prompt_id": "calib_ds_220", "split": "calibration", "text": "Describe one failure mode related to packet reordering and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_221", "split": "calibration", "text": "Explain the main idea of TLS handshakes in two concise paragraphs."}
+{"prompt_id": "calib_ds_222", "split": "calibration", "text": "Explain the main idea of TLS handshakes in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_223", "split": "calibration", "text": "Give a short checklist for debugging problems caused by TLS handshakes."}
+{"prompt_id": "calib_ds_224", "split": "calibration", "text": "Give a short checklist for debugging problems caused by TLS handshakes. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_225", "split": "calibration", "text": "Compare TLS handshakes with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_226", "split": "calibration", "text": "Compare TLS handshakes with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_227", "split": "calibration", "text": "Write a compact example that demonstrates TLS handshakes for an engineer."}
+{"prompt_id": "calib_ds_228", "split": "calibration", "text": "Write a compact example that demonstrates TLS handshakes for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_229", "split": "calibration", "text": "Describe one failure mode related to TLS handshakes and how to detect it."}
+{"prompt_id": "calib_ds_230", "split": "calibration", "text": "Describe one failure mode related to TLS handshakes and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_231", "split": "calibration", "text": "Explain the main idea of NAT traversal in two concise paragraphs."}
+{"prompt_id": "calib_ds_232", "split": "calibration", "text": "Explain the main idea of NAT traversal in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_233", "split": "calibration", "text": "Give a short checklist for debugging problems caused by NAT traversal."}
+{"prompt_id": "calib_ds_234", "split": "calibration", "text": "Give a short checklist for debugging problems caused by NAT traversal. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_235", "split": "calibration", "text": "Compare NAT traversal with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_236", "split": "calibration", "text": "Compare NAT traversal with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_237", "split": "calibration", "text": "Write a compact example that demonstrates NAT traversal for an engineer."}
+{"prompt_id": "calib_ds_238", "split": "calibration", "text": "Write a compact example that demonstrates NAT traversal for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_239", "split": "calibration", "text": "Describe one failure mode related to NAT traversal and how to detect it."}
+{"prompt_id": "calib_ds_240", "split": "calibration", "text": "Describe one failure mode related to NAT traversal and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_241", "split": "calibration", "text": "Explain the main idea of backpressure in two concise paragraphs."}
+{"prompt_id": "calib_ds_242", "split": "calibration", "text": "Explain the main idea of backpressure in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_243", "split": "calibration", "text": "Give a short checklist for debugging problems caused by backpressure."}
+{"prompt_id": "calib_ds_244", "split": "calibration", "text": "Give a short checklist for debugging problems caused by backpressure. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_245", "split": "calibration", "text": "Compare backpressure with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_246", "split": "calibration", "text": "Compare backpressure with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_247", "split": "calibration", "text": "Write a compact example that demonstrates backpressure for an engineer."}
+{"prompt_id": "calib_ds_248", "split": "calibration", "text": "Write a compact example that demonstrates backpressure for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_249", "split": "calibration", "text": "Describe one failure mode related to backpressure and how to detect it."}
+{"prompt_id": "calib_ds_250", "split": "calibration", "text": "Describe one failure mode related to backpressure and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_251", "split": "calibration", "text": "Explain the main idea of load balancing in two concise paragraphs."}
+{"prompt_id": "calib_ds_252", "split": "calibration", "text": "Explain the main idea of load balancing in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_253", "split": "calibration", "text": "Give a short checklist for debugging problems caused by load balancing."}
+{"prompt_id": "calib_ds_254", "split": "calibration", "text": "Give a short checklist for debugging problems caused by load balancing. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_255", "split": "calibration", "text": "Compare load balancing with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_256", "split": "calibration", "text": "Compare load balancing with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_257", "split": "calibration", "text": "Write a compact example that demonstrates load balancing for an engineer."}
+{"prompt_id": "calib_ds_258", "split": "calibration", "text": "Write a compact example that demonstrates load balancing for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_259", "split": "calibration", "text": "Describe one failure mode related to load balancing and how to detect it."}
+{"prompt_id": "calib_ds_260", "split": "calibration", "text": "Describe one failure mode related to load balancing and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_261", "split": "calibration", "text": "Explain the main idea of connection pooling in two concise paragraphs."}
+{"prompt_id": "calib_ds_262", "split": "calibration", "text": "Explain the main idea of connection pooling in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_263", "split": "calibration", "text": "Give a short checklist for debugging problems caused by connection pooling."}
+{"prompt_id": "calib_ds_264", "split": "calibration", "text": "Give a short checklist for debugging problems caused by connection pooling. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_265", "split": "calibration", "text": "Compare connection pooling with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_266", "split": "calibration", "text": "Compare connection pooling with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_267", "split": "calibration", "text": "Write a compact example that demonstrates connection pooling for an engineer."}
+{"prompt_id": "calib_ds_268", "split": "calibration", "text": "Write a compact example that demonstrates connection pooling for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_269", "split": "calibration", "text": "Describe one failure mode related to connection pooling and how to detect it."}
+{"prompt_id": "calib_ds_270", "split": "calibration", "text": "Describe one failure mode related to connection pooling and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_271", "split": "calibration", "text": "Explain the main idea of retries in two concise paragraphs."}
+{"prompt_id": "calib_ds_272", "split": "calibration", "text": "Explain the main idea of retries in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_273", "split": "calibration", "text": "Give a short checklist for debugging problems caused by retries."}
+{"prompt_id": "calib_ds_274", "split": "calibration", "text": "Give a short checklist for debugging problems caused by retries. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_275", "split": "calibration", "text": "Compare retries with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_276", "split": "calibration", "text": "Compare retries with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_277", "split": "calibration", "text": "Write a compact example that demonstrates retries for an engineer."}
+{"prompt_id": "calib_ds_278", "split": "calibration", "text": "Write a compact example that demonstrates retries for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_279", "split": "calibration", "text": "Describe one failure mode related to retries and how to detect it."}
+{"prompt_id": "calib_ds_280", "split": "calibration", "text": "Describe one failure mode related to retries and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_281", "split": "calibration", "text": "Explain the main idea of quorum reads in two concise paragraphs."}
+{"prompt_id": "calib_ds_282", "split": "calibration", "text": "Explain the main idea of quorum reads in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_283", "split": "calibration", "text": "Give a short checklist for debugging problems caused by quorum reads."}
+{"prompt_id": "calib_ds_284", "split": "calibration", "text": "Give a short checklist for debugging problems caused by quorum reads. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_285", "split": "calibration", "text": "Compare quorum reads with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_286", "split": "calibration", "text": "Compare quorum reads with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_287", "split": "calibration", "text": "Write a compact example that demonstrates quorum reads for an engineer."}
+{"prompt_id": "calib_ds_288", "split": "calibration", "text": "Write a compact example that demonstrates quorum reads for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_289", "split": "calibration", "text": "Describe one failure mode related to quorum reads and how to detect it."}
+{"prompt_id": "calib_ds_290", "split": "calibration", "text": "Describe one failure mode related to quorum reads and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_291", "split": "calibration", "text": "Explain the main idea of replication lag in two concise paragraphs."}
+{"prompt_id": "calib_ds_292", "split": "calibration", "text": "Explain the main idea of replication lag in two concise paragraphs. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_293", "split": "calibration", "text": "Give a short checklist for debugging problems caused by replication lag."}
+{"prompt_id": "calib_ds_294", "split": "calibration", "text": "Give a short checklist for debugging problems caused by replication lag. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_295", "split": "calibration", "text": "Compare replication lag with a nearby alternative and state the tradeoff clearly."}
+{"prompt_id": "calib_ds_296", "split": "calibration", "text": "Compare replication lag with a nearby alternative and state the tradeoff clearly. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_297", "split": "calibration", "text": "Write a compact example that demonstrates replication lag for an engineer."}
+{"prompt_id": "calib_ds_298", "split": "calibration", "text": "Write a compact example that demonstrates replication lag for an engineer. Keep the answer under 120 words."}
+{"prompt_id": "calib_ds_299", "split": "calibration", "text": "Describe one failure mode related to replication lag and how to detect it."}
+{"prompt_id": "calib_ds_300", "split": "calibration", "text": "Describe one failure mode related to replication lag and how to detect it. Keep the answer under 120 words."}
+{"prompt_id": "eval_ds_001", "split": "evaluation", "text": "Summarize why Python matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_002", "split": "evaluation", "text": "Summarize why Python matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_003", "split": "evaluation", "text": "Summarize why Python matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_004", "split": "evaluation", "text": "List three practical reasons to choose or avoid Python. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_005", "split": "evaluation", "text": "List three practical reasons to choose or avoid Python. Focus on operational consequences."}
+{"prompt_id": "eval_ds_006", "split": "evaluation", "text": "List three practical reasons to choose or avoid Python. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_007", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Python. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_008", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Python. Focus on operational consequences."}
+{"prompt_id": "eval_ds_009", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Python. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_010", "split": "evaluation", "text": "Explain how Python can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_011", "split": "evaluation", "text": "Explain how Python can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_012", "split": "evaluation", "text": "Explain how Python can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_013", "split": "evaluation", "text": "Describe how you would review a change that modifies Python. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_014", "split": "evaluation", "text": "Describe how you would review a change that modifies Python. Focus on operational consequences."}
+{"prompt_id": "eval_ds_015", "split": "evaluation", "text": "Describe how you would review a change that modifies Python. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_016", "split": "evaluation", "text": "Summarize why Rust matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_017", "split": "evaluation", "text": "Summarize why Rust matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_018", "split": "evaluation", "text": "Summarize why Rust matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_019", "split": "evaluation", "text": "List three practical reasons to choose or avoid Rust. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_020", "split": "evaluation", "text": "List three practical reasons to choose or avoid Rust. Focus on operational consequences."}
+{"prompt_id": "eval_ds_021", "split": "evaluation", "text": "List three practical reasons to choose or avoid Rust. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_022", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Rust. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_023", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Rust. Focus on operational consequences."}
+{"prompt_id": "eval_ds_024", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Rust. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_025", "split": "evaluation", "text": "Explain how Rust can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_026", "split": "evaluation", "text": "Explain how Rust can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_027", "split": "evaluation", "text": "Explain how Rust can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_028", "split": "evaluation", "text": "Describe how you would review a change that modifies Rust. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_029", "split": "evaluation", "text": "Describe how you would review a change that modifies Rust. Focus on operational consequences."}
+{"prompt_id": "eval_ds_030", "split": "evaluation", "text": "Describe how you would review a change that modifies Rust. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_031", "split": "evaluation", "text": "Summarize why Go matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_032", "split": "evaluation", "text": "Summarize why Go matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_033", "split": "evaluation", "text": "Summarize why Go matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_034", "split": "evaluation", "text": "List three practical reasons to choose or avoid Go. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_035", "split": "evaluation", "text": "List three practical reasons to choose or avoid Go. Focus on operational consequences."}
+{"prompt_id": "eval_ds_036", "split": "evaluation", "text": "List three practical reasons to choose or avoid Go. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_037", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Go. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_038", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Go. Focus on operational consequences."}
+{"prompt_id": "eval_ds_039", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Go. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_040", "split": "evaluation", "text": "Explain how Go can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_041", "split": "evaluation", "text": "Explain how Go can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_042", "split": "evaluation", "text": "Explain how Go can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_043", "split": "evaluation", "text": "Describe how you would review a change that modifies Go. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_044", "split": "evaluation", "text": "Describe how you would review a change that modifies Go. Focus on operational consequences."}
+{"prompt_id": "eval_ds_045", "split": "evaluation", "text": "Describe how you would review a change that modifies Go. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_046", "split": "evaluation", "text": "Summarize why JavaScript matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_047", "split": "evaluation", "text": "Summarize why JavaScript matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_048", "split": "evaluation", "text": "Summarize why JavaScript matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_049", "split": "evaluation", "text": "List three practical reasons to choose or avoid JavaScript. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_050", "split": "evaluation", "text": "List three practical reasons to choose or avoid JavaScript. Focus on operational consequences."}
+{"prompt_id": "eval_ds_051", "split": "evaluation", "text": "List three practical reasons to choose or avoid JavaScript. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_052", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to JavaScript. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_053", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to JavaScript. Focus on operational consequences."}
+{"prompt_id": "eval_ds_054", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to JavaScript. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_055", "split": "evaluation", "text": "Explain how JavaScript can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_056", "split": "evaluation", "text": "Explain how JavaScript can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_057", "split": "evaluation", "text": "Explain how JavaScript can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_058", "split": "evaluation", "text": "Describe how you would review a change that modifies JavaScript. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_059", "split": "evaluation", "text": "Describe how you would review a change that modifies JavaScript. Focus on operational consequences."}
+{"prompt_id": "eval_ds_060", "split": "evaluation", "text": "Describe how you would review a change that modifies JavaScript. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_061", "split": "evaluation", "text": "Summarize why TypeScript matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_062", "split": "evaluation", "text": "Summarize why TypeScript matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_063", "split": "evaluation", "text": "Summarize why TypeScript matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_064", "split": "evaluation", "text": "List three practical reasons to choose or avoid TypeScript. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_065", "split": "evaluation", "text": "List three practical reasons to choose or avoid TypeScript. Focus on operational consequences."}
+{"prompt_id": "eval_ds_066", "split": "evaluation", "text": "List three practical reasons to choose or avoid TypeScript. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_067", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to TypeScript. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_068", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to TypeScript. Focus on operational consequences."}
+{"prompt_id": "eval_ds_069", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to TypeScript. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_070", "split": "evaluation", "text": "Explain how TypeScript can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_071", "split": "evaluation", "text": "Explain how TypeScript can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_072", "split": "evaluation", "text": "Explain how TypeScript can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_073", "split": "evaluation", "text": "Describe how you would review a change that modifies TypeScript. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_074", "split": "evaluation", "text": "Describe how you would review a change that modifies TypeScript. Focus on operational consequences."}
+{"prompt_id": "eval_ds_075", "split": "evaluation", "text": "Describe how you would review a change that modifies TypeScript. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_076", "split": "evaluation", "text": "Summarize why Java matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_077", "split": "evaluation", "text": "Summarize why Java matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_078", "split": "evaluation", "text": "Summarize why Java matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_079", "split": "evaluation", "text": "List three practical reasons to choose or avoid Java. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_080", "split": "evaluation", "text": "List three practical reasons to choose or avoid Java. Focus on operational consequences."}
+{"prompt_id": "eval_ds_081", "split": "evaluation", "text": "List three practical reasons to choose or avoid Java. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_082", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Java. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_083", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Java. Focus on operational consequences."}
+{"prompt_id": "eval_ds_084", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Java. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_085", "split": "evaluation", "text": "Explain how Java can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_086", "split": "evaluation", "text": "Explain how Java can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_087", "split": "evaluation", "text": "Explain how Java can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_088", "split": "evaluation", "text": "Describe how you would review a change that modifies Java. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_089", "split": "evaluation", "text": "Describe how you would review a change that modifies Java. Focus on operational consequences."}
+{"prompt_id": "eval_ds_090", "split": "evaluation", "text": "Describe how you would review a change that modifies Java. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_091", "split": "evaluation", "text": "Summarize why C++ matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_092", "split": "evaluation", "text": "Summarize why C++ matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_093", "split": "evaluation", "text": "Summarize why C++ matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_094", "split": "evaluation", "text": "List three practical reasons to choose or avoid C++. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_095", "split": "evaluation", "text": "List three practical reasons to choose or avoid C++. Focus on operational consequences."}
+{"prompt_id": "eval_ds_096", "split": "evaluation", "text": "List three practical reasons to choose or avoid C++. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_097", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to C++. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_098", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to C++. Focus on operational consequences."}
+{"prompt_id": "eval_ds_099", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to C++. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_100", "split": "evaluation", "text": "Explain how C++ can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_101", "split": "evaluation", "text": "Explain how C++ can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_102", "split": "evaluation", "text": "Explain how C++ can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_103", "split": "evaluation", "text": "Describe how you would review a change that modifies C++. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_104", "split": "evaluation", "text": "Describe how you would review a change that modifies C++. Focus on operational consequences."}
+{"prompt_id": "eval_ds_105", "split": "evaluation", "text": "Describe how you would review a change that modifies C++. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_106", "split": "evaluation", "text": "Summarize why SQL matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_107", "split": "evaluation", "text": "Summarize why SQL matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_108", "split": "evaluation", "text": "Summarize why SQL matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_109", "split": "evaluation", "text": "List three practical reasons to choose or avoid SQL. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_110", "split": "evaluation", "text": "List three practical reasons to choose or avoid SQL. Focus on operational consequences."}
+{"prompt_id": "eval_ds_111", "split": "evaluation", "text": "List three practical reasons to choose or avoid SQL. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_112", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to SQL. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_113", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to SQL. Focus on operational consequences."}
+{"prompt_id": "eval_ds_114", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to SQL. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_115", "split": "evaluation", "text": "Explain how SQL can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_116", "split": "evaluation", "text": "Explain how SQL can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_117", "split": "evaluation", "text": "Explain how SQL can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_118", "split": "evaluation", "text": "Describe how you would review a change that modifies SQL. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_119", "split": "evaluation", "text": "Describe how you would review a change that modifies SQL. Focus on operational consequences."}
+{"prompt_id": "eval_ds_120", "split": "evaluation", "text": "Describe how you would review a change that modifies SQL. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_121", "split": "evaluation", "text": "Summarize why Bash matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_122", "split": "evaluation", "text": "Summarize why Bash matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_123", "split": "evaluation", "text": "Summarize why Bash matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_124", "split": "evaluation", "text": "List three practical reasons to choose or avoid Bash. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_125", "split": "evaluation", "text": "List three practical reasons to choose or avoid Bash. Focus on operational consequences."}
+{"prompt_id": "eval_ds_126", "split": "evaluation", "text": "List three practical reasons to choose or avoid Bash. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_127", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Bash. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_128", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Bash. Focus on operational consequences."}
+{"prompt_id": "eval_ds_129", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Bash. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_130", "split": "evaluation", "text": "Explain how Bash can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_131", "split": "evaluation", "text": "Explain how Bash can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_132", "split": "evaluation", "text": "Explain how Bash can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_133", "split": "evaluation", "text": "Describe how you would review a change that modifies Bash. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_134", "split": "evaluation", "text": "Describe how you would review a change that modifies Bash. Focus on operational consequences."}
+{"prompt_id": "eval_ds_135", "split": "evaluation", "text": "Describe how you would review a change that modifies Bash. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_136", "split": "evaluation", "text": "Summarize why Ruby matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_137", "split": "evaluation", "text": "Summarize why Ruby matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_138", "split": "evaluation", "text": "Summarize why Ruby matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_139", "split": "evaluation", "text": "List three practical reasons to choose or avoid Ruby. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_140", "split": "evaluation", "text": "List three practical reasons to choose or avoid Ruby. Focus on operational consequences."}
+{"prompt_id": "eval_ds_141", "split": "evaluation", "text": "List three practical reasons to choose or avoid Ruby. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_142", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Ruby. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_143", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Ruby. Focus on operational consequences."}
+{"prompt_id": "eval_ds_144", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to Ruby. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_145", "split": "evaluation", "text": "Explain how Ruby can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_146", "split": "evaluation", "text": "Explain how Ruby can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_147", "split": "evaluation", "text": "Explain how Ruby can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_148", "split": "evaluation", "text": "Describe how you would review a change that modifies Ruby. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_149", "split": "evaluation", "text": "Describe how you would review a change that modifies Ruby. Focus on operational consequences."}
+{"prompt_id": "eval_ds_150", "split": "evaluation", "text": "Describe how you would review a change that modifies Ruby. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_151", "split": "evaluation", "text": "Summarize why process isolation matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_152", "split": "evaluation", "text": "Summarize why process isolation matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_153", "split": "evaluation", "text": "Summarize why process isolation matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_154", "split": "evaluation", "text": "List three practical reasons to choose or avoid process isolation. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_155", "split": "evaluation", "text": "List three practical reasons to choose or avoid process isolation. Focus on operational consequences."}
+{"prompt_id": "eval_ds_156", "split": "evaluation", "text": "List three practical reasons to choose or avoid process isolation. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_157", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to process isolation. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_158", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to process isolation. Focus on operational consequences."}
+{"prompt_id": "eval_ds_159", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to process isolation. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_160", "split": "evaluation", "text": "Explain how process isolation can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_161", "split": "evaluation", "text": "Explain how process isolation can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_162", "split": "evaluation", "text": "Explain how process isolation can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_163", "split": "evaluation", "text": "Describe how you would review a change that modifies process isolation. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_164", "split": "evaluation", "text": "Describe how you would review a change that modifies process isolation. Focus on operational consequences."}
+{"prompt_id": "eval_ds_165", "split": "evaluation", "text": "Describe how you would review a change that modifies process isolation. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_166", "split": "evaluation", "text": "Summarize why virtual memory matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_167", "split": "evaluation", "text": "Summarize why virtual memory matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_168", "split": "evaluation", "text": "Summarize why virtual memory matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_169", "split": "evaluation", "text": "List three practical reasons to choose or avoid virtual memory. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_170", "split": "evaluation", "text": "List three practical reasons to choose or avoid virtual memory. Focus on operational consequences."}
+{"prompt_id": "eval_ds_171", "split": "evaluation", "text": "List three practical reasons to choose or avoid virtual memory. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_172", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to virtual memory. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_173", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to virtual memory. Focus on operational consequences."}
+{"prompt_id": "eval_ds_174", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to virtual memory. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_175", "split": "evaluation", "text": "Explain how virtual memory can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_176", "split": "evaluation", "text": "Explain how virtual memory can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_177", "split": "evaluation", "text": "Explain how virtual memory can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_178", "split": "evaluation", "text": "Describe how you would review a change that modifies virtual memory. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_179", "split": "evaluation", "text": "Describe how you would review a change that modifies virtual memory. Focus on operational consequences."}
+{"prompt_id": "eval_ds_180", "split": "evaluation", "text": "Describe how you would review a change that modifies virtual memory. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_181", "split": "evaluation", "text": "Summarize why NUMA scheduling matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_182", "split": "evaluation", "text": "Summarize why NUMA scheduling matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_183", "split": "evaluation", "text": "Summarize why NUMA scheduling matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_184", "split": "evaluation", "text": "List three practical reasons to choose or avoid NUMA scheduling. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_185", "split": "evaluation", "text": "List three practical reasons to choose or avoid NUMA scheduling. Focus on operational consequences."}
+{"prompt_id": "eval_ds_186", "split": "evaluation", "text": "List three practical reasons to choose or avoid NUMA scheduling. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_187", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to NUMA scheduling. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_188", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to NUMA scheduling. Focus on operational consequences."}
+{"prompt_id": "eval_ds_189", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to NUMA scheduling. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_190", "split": "evaluation", "text": "Explain how NUMA scheduling can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_191", "split": "evaluation", "text": "Explain how NUMA scheduling can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_192", "split": "evaluation", "text": "Explain how NUMA scheduling can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_193", "split": "evaluation", "text": "Describe how you would review a change that modifies NUMA scheduling. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_194", "split": "evaluation", "text": "Describe how you would review a change that modifies NUMA scheduling. Focus on operational consequences."}
+{"prompt_id": "eval_ds_195", "split": "evaluation", "text": "Describe how you would review a change that modifies NUMA scheduling. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_196", "split": "evaluation", "text": "Summarize why write-ahead logging matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_197", "split": "evaluation", "text": "Summarize why write-ahead logging matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_198", "split": "evaluation", "text": "Summarize why write-ahead logging matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_199", "split": "evaluation", "text": "List three practical reasons to choose or avoid write-ahead logging. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_200", "split": "evaluation", "text": "List three practical reasons to choose or avoid write-ahead logging. Focus on operational consequences."}
+{"prompt_id": "eval_ds_201", "split": "evaluation", "text": "List three practical reasons to choose or avoid write-ahead logging. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_202", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to write-ahead logging. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_203", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to write-ahead logging. Focus on operational consequences."}
+{"prompt_id": "eval_ds_204", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to write-ahead logging. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_205", "split": "evaluation", "text": "Explain how write-ahead logging can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_206", "split": "evaluation", "text": "Explain how write-ahead logging can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_207", "split": "evaluation", "text": "Explain how write-ahead logging can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_208", "split": "evaluation", "text": "Describe how you would review a change that modifies write-ahead logging. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_209", "split": "evaluation", "text": "Describe how you would review a change that modifies write-ahead logging. Focus on operational consequences."}
+{"prompt_id": "eval_ds_210", "split": "evaluation", "text": "Describe how you would review a change that modifies write-ahead logging. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_211", "split": "evaluation", "text": "Summarize why consensus matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_212", "split": "evaluation", "text": "Summarize why consensus matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_213", "split": "evaluation", "text": "Summarize why consensus matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_214", "split": "evaluation", "text": "List three practical reasons to choose or avoid consensus. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_215", "split": "evaluation", "text": "List three practical reasons to choose or avoid consensus. Focus on operational consequences."}
+{"prompt_id": "eval_ds_216", "split": "evaluation", "text": "List three practical reasons to choose or avoid consensus. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_217", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to consensus. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_218", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to consensus. Focus on operational consequences."}
+{"prompt_id": "eval_ds_219", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to consensus. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_220", "split": "evaluation", "text": "Explain how consensus can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_221", "split": "evaluation", "text": "Explain how consensus can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_222", "split": "evaluation", "text": "Explain how consensus can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_223", "split": "evaluation", "text": "Describe how you would review a change that modifies consensus. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_224", "split": "evaluation", "text": "Describe how you would review a change that modifies consensus. Focus on operational consequences."}
+{"prompt_id": "eval_ds_225", "split": "evaluation", "text": "Describe how you would review a change that modifies consensus. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_226", "split": "evaluation", "text": "Summarize why lock contention matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_227", "split": "evaluation", "text": "Summarize why lock contention matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_228", "split": "evaluation", "text": "Summarize why lock contention matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_229", "split": "evaluation", "text": "List three practical reasons to choose or avoid lock contention. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_230", "split": "evaluation", "text": "List three practical reasons to choose or avoid lock contention. Focus on operational consequences."}
+{"prompt_id": "eval_ds_231", "split": "evaluation", "text": "List three practical reasons to choose or avoid lock contention. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_232", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to lock contention. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_233", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to lock contention. Focus on operational consequences."}
+{"prompt_id": "eval_ds_234", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to lock contention. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_235", "split": "evaluation", "text": "Explain how lock contention can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_236", "split": "evaluation", "text": "Explain how lock contention can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_237", "split": "evaluation", "text": "Explain how lock contention can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_238", "split": "evaluation", "text": "Describe how you would review a change that modifies lock contention. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_239", "split": "evaluation", "text": "Describe how you would review a change that modifies lock contention. Focus on operational consequences."}
+{"prompt_id": "eval_ds_240", "split": "evaluation", "text": "Describe how you would review a change that modifies lock contention. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_241", "split": "evaluation", "text": "Summarize why cache invalidation matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_242", "split": "evaluation", "text": "Summarize why cache invalidation matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_243", "split": "evaluation", "text": "Summarize why cache invalidation matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_244", "split": "evaluation", "text": "List three practical reasons to choose or avoid cache invalidation. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_245", "split": "evaluation", "text": "List three practical reasons to choose or avoid cache invalidation. Focus on operational consequences."}
+{"prompt_id": "eval_ds_246", "split": "evaluation", "text": "List three practical reasons to choose or avoid cache invalidation. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_247", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to cache invalidation. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_248", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to cache invalidation. Focus on operational consequences."}
+{"prompt_id": "eval_ds_249", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to cache invalidation. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_250", "split": "evaluation", "text": "Explain how cache invalidation can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_251", "split": "evaluation", "text": "Explain how cache invalidation can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_252", "split": "evaluation", "text": "Explain how cache invalidation can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_253", "split": "evaluation", "text": "Describe how you would review a change that modifies cache invalidation. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_254", "split": "evaluation", "text": "Describe how you would review a change that modifies cache invalidation. Focus on operational consequences."}
+{"prompt_id": "eval_ds_255", "split": "evaluation", "text": "Describe how you would review a change that modifies cache invalidation. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_256", "split": "evaluation", "text": "Summarize why checkpointing matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_257", "split": "evaluation", "text": "Summarize why checkpointing matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_258", "split": "evaluation", "text": "Summarize why checkpointing matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_259", "split": "evaluation", "text": "List three practical reasons to choose or avoid checkpointing. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_260", "split": "evaluation", "text": "List three practical reasons to choose or avoid checkpointing. Focus on operational consequences."}
+{"prompt_id": "eval_ds_261", "split": "evaluation", "text": "List three practical reasons to choose or avoid checkpointing. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_262", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to checkpointing. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_263", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to checkpointing. Focus on operational consequences."}
+{"prompt_id": "eval_ds_264", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to checkpointing. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_265", "split": "evaluation", "text": "Explain how checkpointing can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_266", "split": "evaluation", "text": "Explain how checkpointing can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_267", "split": "evaluation", "text": "Explain how checkpointing can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_268", "split": "evaluation", "text": "Describe how you would review a change that modifies checkpointing. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_269", "split": "evaluation", "text": "Describe how you would review a change that modifies checkpointing. Focus on operational consequences."}
+{"prompt_id": "eval_ds_270", "split": "evaluation", "text": "Describe how you would review a change that modifies checkpointing. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_271", "split": "evaluation", "text": "Summarize why vector clocks matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_272", "split": "evaluation", "text": "Summarize why vector clocks matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_273", "split": "evaluation", "text": "Summarize why vector clocks matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_274", "split": "evaluation", "text": "List three practical reasons to choose or avoid vector clocks. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_275", "split": "evaluation", "text": "List three practical reasons to choose or avoid vector clocks. Focus on operational consequences."}
+{"prompt_id": "eval_ds_276", "split": "evaluation", "text": "List three practical reasons to choose or avoid vector clocks. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_277", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to vector clocks. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_278", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to vector clocks. Focus on operational consequences."}
+{"prompt_id": "eval_ds_279", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to vector clocks. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_280", "split": "evaluation", "text": "Explain how vector clocks can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_281", "split": "evaluation", "text": "Explain how vector clocks can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_282", "split": "evaluation", "text": "Explain how vector clocks can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_283", "split": "evaluation", "text": "Describe how you would review a change that modifies vector clocks. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_284", "split": "evaluation", "text": "Describe how you would review a change that modifies vector clocks. Focus on operational consequences."}
+{"prompt_id": "eval_ds_285", "split": "evaluation", "text": "Describe how you would review a change that modifies vector clocks. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_286", "split": "evaluation", "text": "Summarize why snapshotting matters in a production system. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_287", "split": "evaluation", "text": "Summarize why snapshotting matters in a production system. Focus on operational consequences."}
+{"prompt_id": "eval_ds_288", "split": "evaluation", "text": "Summarize why snapshotting matters in a production system. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_289", "split": "evaluation", "text": "List three practical reasons to choose or avoid snapshotting. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_290", "split": "evaluation", "text": "List three practical reasons to choose or avoid snapshotting. Focus on operational consequences."}
+{"prompt_id": "eval_ds_291", "split": "evaluation", "text": "List three practical reasons to choose or avoid snapshotting. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_292", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to snapshotting. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_293", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to snapshotting. Focus on operational consequences."}
+{"prompt_id": "eval_ds_294", "split": "evaluation", "text": "Provide a minimal code or pseudocode sketch connected to snapshotting. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_295", "split": "evaluation", "text": "Explain how snapshotting can affect determinism, latency, or throughput. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_296", "split": "evaluation", "text": "Explain how snapshotting can affect determinism, latency, or throughput. Focus on operational consequences."}
+{"prompt_id": "eval_ds_297", "split": "evaluation", "text": "Explain how snapshotting can affect determinism, latency, or throughput. Mention one concrete metric to inspect."}
+{"prompt_id": "eval_ds_298", "split": "evaluation", "text": "Describe how you would review a change that modifies snapshotting. Use plain technical language without marketing terms."}
+{"prompt_id": "eval_ds_299", "split": "evaluation", "text": "Describe how you would review a change that modifies snapshotting. Focus on operational consequences."}
+{"prompt_id": "eval_ds_300", "split": "evaluation", "text": "Describe how you would review a change that modifies snapshotting. Mention one concrete metric to inspect."}

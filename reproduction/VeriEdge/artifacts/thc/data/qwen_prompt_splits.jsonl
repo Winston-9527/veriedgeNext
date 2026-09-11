@@ -1,0 +1,12 @@
+{"prompt_id":"calib_001","split":"calibration","text":"Summarize the main idea of dynamic programming in three sentences."}
+{"prompt_id":"calib_002","split":"calibration","text":"Write a Python function that checks whether a string is a palindrome."}
+{"prompt_id":"calib_003","split":"calibration","text":"Explain the difference between TCP and UDP for a networking student."}
+{"prompt_id":"calib_004","split":"calibration","text":"List four practical uses of Merkle trees in distributed systems."}
+{"prompt_id":"calib_005","split":"calibration","text":"Describe how gradient descent updates model parameters."}
+{"prompt_id":"calib_006","split":"calibration","text":"Give a short example of SQL that joins two tables on a user id."}
+{"prompt_id":"eval_001","split":"evaluation","text":"Write a short Python function that returns the nth Fibonacci number."}
+{"prompt_id":"eval_002","split":"evaluation","text":"Explain why floating-point arithmetic can differ across hardware."}
+{"prompt_id":"eval_003","split":"evaluation","text":"Provide a concise checklist for debugging a failing unit test."}
+{"prompt_id":"eval_004","split":"evaluation","text":"Describe the purpose of a tokenizer in a language model pipeline."}
+{"prompt_id":"eval_005","split":"evaluation","text":"Compare hash commitments and digital signatures in two paragraphs."}
+{"prompt_id":"eval_006","split":"evaluation","text":"Outline the steps of a simple off-chain verification workflow."}

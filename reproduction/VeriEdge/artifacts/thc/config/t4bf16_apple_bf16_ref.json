@@ -1,0 +1,47 @@
+{
+  "model_id": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/hf-cache/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca",
+  "nodes": [
+    {
+      "node_name": "localm5bf16c1",
+      "host": "192.168.31.87",
+      "bind_host": "0.0.0.0",
+      "port": 8341,
+      "checkpoint": "C1",
+      "start_layer": 0,
+      "end_layer": 7,
+      "device": "mps",
+      "torch_dtype": "bfloat16",
+      "quantization": "none",
+      "first_shard": true,
+      "last_shard": false
+    },
+    {
+      "node_name": "mini3bf16c2",
+      "host": "192.168.31.211",
+      "bind_host": "0.0.0.0",
+      "port": 8342,
+      "checkpoint": "C2",
+      "start_layer": 8,
+      "end_layer": 15,
+      "device": "mps",
+      "torch_dtype": "bfloat16",
+      "quantization": "none",
+      "first_shard": false,
+      "last_shard": false
+    },
+    {
+      "node_name": "mini1bf16c3",
+      "host": "192.168.31.237",
+      "bind_host": "0.0.0.0",
+      "port": 8343,
+      "checkpoint": "C3",
+      "start_layer": 16,
+      "end_layer": 23,
+      "device": "mps",
+      "torch_dtype": "bfloat16",
+      "quantization": "none",
+      "first_shard": false,
+      "last_shard": true
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+[project]
+name = "veriedge-experiments"
+version = "0.1.0"
+description = "Reproducible environments for VeriEdge paper experiments."
+requires-python = ">=3.11,<3.13"
+dependencies = []
+
+[dependency-groups]
+thc = [
+  "matplotlib>=3.7",
+  "numpy==2.4.4",
+  "PyYAML==6.0.3",
+  "rich==15.0.0",
+  "typer==0.25.1",
+  "web3>=6.10",
+]
+e1 = [
+  { include-group = "thc" },
+  "accelerate==1.13.0",
+  "huggingface_hub==1.13.0",
+  "kernels==0.13.0 ; sys_platform == 'darwin' and platform_machine == 'arm64'",
+  "psutil==7.2.2",
+  "safetensors==0.7.0",
+  "sentencepiece==0.2.1",
+  "torch==2.10.0",
+  "transformers==5.7.0",
+]
+e2 = [
+  { include-group = "e1" },
+]
+e4 = [
+  { include-group = "e1" },
+]
+e1-linux-cuda = [
+  "bitsandbytes>=0.43 ; platform_system == 'Linux'",
+]
+e5 = [
+  "cryptography>=42.0",
+  "httpx==0.28.1",
+  "matplotlib>=3.7",
+  "numpy==2.4.4",
+  "pandas>=2.0",
+  "PyYAML==6.0.3",
+  "transformers==5.7.0",
+]
+dev = [
+  "pytest>=8,<9",
+]
+
+[tool.uv]
+default-groups = ["e1"]

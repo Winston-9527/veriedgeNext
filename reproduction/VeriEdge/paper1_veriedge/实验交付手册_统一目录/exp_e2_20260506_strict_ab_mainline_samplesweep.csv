@@ -1,0 +1,6 @@
+sample_size,token_samples,channel_samples,tolerance_mode,tolerance_scale,honest_homo_thc_fpr,honest_homo_tstc_fpr,honest_homo_thc_runtime_ms_per_trace,honest_homo_tstc_runtime_ms_per_trace,honest_hetero_thc_fpr,honest_hetero_tstc_fpr,honest_hetero_thc_runtime_ms_per_trace,honest_hetero_tstc_runtime_ms_per_trace,honest_hetero_dominant_tstc_mismatch_checkpoint,tamper_thc_tpr,tamper_tstc_tpr,tamper_thc_locacc,tamper_tstc_locacc,tamper_thc_runtime_ms_per_trace,tamper_tstc_runtime_ms_per_trace,prefill_delta_c1,prefill_delta_c2,prefill_delta_c3
+4,1,4,checkpoint_specific,1.0,0.0,0.0,2.82879,2.86277,1.0,0.77,2.81529,2.8496,C3,1.0,1.0,1.0,1.0,1.60002,1.752405,,,
+8,1,8,checkpoint_specific,1.0,0.0,0.0,2.720605,2.772325,1.0,0.89,2.772895,2.872205,C3,1.0,1.0,1.0,1.0,1.605845,1.78558,,,
+16,1,16,checkpoint_specific,1.0,0.0,0.0,2.97582,3.231215,1.0,0.99,2.980965,2.88614,C3,1.0,1.0,1.0,1.0,1.6184,1.57654,,,
+32,1,32,checkpoint_specific,1.0,0.0,0.0,2.796005,2.805105,1.0,1.0,2.718595,2.86596,C2,1.0,1.0,1.0,1.0,1.56517,1.6385,,,
+64,1,64,checkpoint_specific,1.0,0.0,0.0,2.7432,2.843355,1.0,1.0,2.93394,2.91538,C1,1.0,1.0,1.0,1.0,1.715985,1.922455,,,

@@ -1,0 +1,13 @@
+tolerance_mode,trace_label,scenario,verifier,sample_count,mean_reference_capture_file_bytes,mean_candidate_capture_file_bytes,mean_capture_pair_total_bytes,mean_commitment_head_bytes,mean_commitment_chain_bytes,mean_validator_storage_head_bytes,mean_validator_storage_full_chain_bytes,mean_replay_ms,mean_compare_ms,mean_verdict_emission_ms,mean_challenge_latency_ms,detection_rate
+baseline_checkpoint_specific,challenged_trace,honest_hetero,thc,200,108157.385,108160.765,216318.15,32.0,96.0,109477.385,109541.385,0.0566,0.001501,0.004252,3.2785,1.0
+baseline_checkpoint_specific,challenged_trace,honest_hetero,tstc,200,108157.385,108160.765,216318.15,32.0,96.0,109476.15,109540.15,0.058832,0.001592,0.003478,2.655546,0.255
+baseline_checkpoint_specific,honest_trace,honest_homo,thc,200,108157.385,108157.385,216314.77,32.0,96.0,109468.385,109532.385,0.056056,0.001542,0.0044,4.098503,0.0
+baseline_checkpoint_specific,honest_trace,honest_homo,tstc,200,108157.385,108157.385,216314.77,32.0,96.0,109469.385,109533.385,0.059589,0.001558,0.003612,3.164742,0.0
+baseline_checkpoint_specific,tamper_trace,tamper,thc,200,108157.385,108157.385,216314.77,32.0,96.0,109471.385,109535.385,0.055635,0.001542,0.003714,2.57419,1.0
+baseline_checkpoint_specific,tamper_trace,tamper,tstc,200,108157.385,108157.385,216314.77,32.0,96.0,109471.905,109535.905,0.058464,0.001576,0.003279,2.58565,0.94
+global_shared,challenged_trace,honest_hetero,thc,200,108157.385,108160.765,216318.15,32.0,96.0,109477.385,109541.385,0.056376,0.00141,0.003598,2.621321,1.0
+global_shared,challenged_trace,honest_hetero,tstc,200,108157.385,108160.765,216318.15,32.0,96.0,109475.625,109539.625,0.058055,0.001472,0.003344,2.642414,0.08
+global_shared,honest_trace,honest_homo,thc,200,108157.385,108157.385,216314.77,32.0,96.0,109468.385,109532.385,0.056015,0.00144,0.003808,2.648867,0.0
+global_shared,honest_trace,honest_homo,tstc,200,108157.385,108157.385,216314.77,32.0,96.0,109469.385,109533.385,0.058103,0.001514,0.003245,2.607556,0.0
+global_shared,tamper_trace,tamper,thc,200,108157.385,108157.385,216314.77,32.0,96.0,109471.385,109535.385,0.055531,0.00157,0.003719,2.591629,1.0
+global_shared,tamper_trace,tamper,tstc,200,108157.385,108157.385,216314.77,32.0,96.0,109471.905,109535.905,0.057904,0.001585,0.003261,2.585618,0.94

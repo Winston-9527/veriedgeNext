@@ -1,0 +1,7 @@
+trace_label,scenario,verifier,baseline_detection_rate,global_detection_rate,baseline_mean_challenge_latency_ms,global_mean_challenge_latency_ms,baseline_mean_replay_ms,global_mean_replay_ms,baseline_mean_commitment_head_bytes,global_mean_commitment_head_bytes,baseline_mean_commitment_chain_bytes,global_mean_commitment_chain_bytes,baseline_mean_validator_storage_head_bytes,global_mean_validator_storage_head_bytes,baseline_mean_validator_storage_full_chain_bytes,global_mean_validator_storage_full_chain_bytes
+challenged_trace,honest_hetero,thc,1.0,1.0,3.2785,2.621321,0.0566,0.056376,32.0,32.0,96.0,96.0,109477.385,109477.385,109541.385,109541.385
+challenged_trace,honest_hetero,tstc,0.255,0.08,2.655546,2.642414,0.058832,0.058055,32.0,32.0,96.0,96.0,109476.15,109475.625,109540.15,109539.625
+honest_trace,honest_homo,thc,0.0,0.0,4.098503,2.648867,0.056056,0.056015,32.0,32.0,96.0,96.0,109468.385,109468.385,109532.385,109532.385
+honest_trace,honest_homo,tstc,0.0,0.0,3.164742,2.607556,0.059589,0.058103,32.0,32.0,96.0,96.0,109469.385,109469.385,109533.385,109533.385
+tamper_trace,tamper,thc,1.0,1.0,2.57419,2.591629,0.055635,0.055531,32.0,32.0,96.0,96.0,109471.385,109471.385,109535.385,109535.385
+tamper_trace,tamper,tstc,0.94,0.94,2.58565,2.585618,0.058464,0.057904,32.0,32.0,96.0,96.0,109471.905,109471.905,109535.905,109535.905

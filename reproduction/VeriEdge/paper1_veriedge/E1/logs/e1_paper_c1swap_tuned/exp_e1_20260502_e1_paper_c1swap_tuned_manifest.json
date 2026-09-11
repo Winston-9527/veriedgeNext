@@ -1,0 +1,17 @@
+{
+  "owner": "e1_paper_c1swap_tuned",
+  "stage_family": "prefill",
+  "pair_count": 1,
+  "prompt_filter": [],
+  "pairs": [
+    {
+      "pair_label": "localm5_vs_mini1",
+      "left_capture_root": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/e1_paper_c1swap_eval_a",
+      "right_capture_root": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/e1_paper_c1swap_eval_b"
+    }
+  ],
+  "config": "/Users/siyuan/Developer/Veriedge/VeriEdge/artifacts/thc/config/e1_real_qwen_tstc_prefill_1x1.json",
+  "delta_map_file": "/Users/siyuan/Developer/Veriedge/VeriEdge/workspace/captures/E1/e1_paper_c1swap_delta/delta_map.json",
+  "detail_csv": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E1/logs/e1_paper_c1swap_tuned/exp_e1_20260502_e1_paper_c1swap_tuned_pairwise_details.csv",
+  "summary_csv": "/Users/siyuan/Developer/Veriedge/VeriEdge/paper1_veriedge/E1/logs/e1_paper_c1swap_tuned/exp_e1_20260502_e1_paper_c1swap_tuned_summary.csv"
+}
