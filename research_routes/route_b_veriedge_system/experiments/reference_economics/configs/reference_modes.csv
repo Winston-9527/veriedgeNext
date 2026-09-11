@@ -1,0 +1,5 @@
+mode_id,label,c_always,c_ref,c_check,c_upgrade,source_type,notes
+V0_passive,Passive binding+retention only,0.03,0.0,0.0,0.0,assumed,"No active detection; V0 must NOT be presented as an active correctness guarantee"
+L1_prefill_local,Prefill shard-local replay reference,0.05,0.30,0.04,0.15,assumed,"Replace C_ref with E01/E02 measured values when linked"
+L2_decode_local,Decode shard-local replay reference,0.08,0.45,0.04,0.20,assumed,"Depends on trusted decode state (E03 open); may be infeasible"
+D0_duplicate,Always-on full duplicate (baseline),1.0,0.0,0.0,0.0,assumed,"C_duplicate_extra = 1.0 normalization anchor; cost ratio denominator"

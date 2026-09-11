@@ -1,0 +1,22 @@
+{
+  "caveats": [
+    "cost inputs are 'assumed' until E01/E02 measured values are linked",
+    "d is a conditional detection rate, not a semantic guarantee",
+    "V0_passive provides no active correctness guarantee",
+    "asynchronous discovery cannot undo harm already produced"
+  ],
+  "date": "2026-09-11",
+  "decisions": {
+    "D0_duplicate": "BASELINE",
+    "L1_prefill_local": "GO",
+    "L2_decode_local": "NO_GO",
+    "V0_passive": "NO_GO"
+  },
+  "primary_targets": {
+    "cost_cap_ratio": 0.5,
+    "persistent": 0.99,
+    "single_shot": 0.99
+  },
+  "run_id": "e09_20260911",
+  "self_checks_passed": true
+}

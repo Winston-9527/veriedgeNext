@@ -1,0 +1,41 @@
+{
+  "checks": {
+    "cumulative_detection_monotone": {
+      "detail": "d/m/p_a increasing -> D_m non-decreasing",
+      "ok": true
+    },
+    "missing_not_zero": {
+      "detail": "unknown values represented as NaN, not 0",
+      "ok": true
+    },
+    "pa0_active_detection_zero": {
+      "detail": "D_single(0,1)=0.0",
+      "ok": true
+    },
+    "pa0_no_in_audit_escalation": {
+      "detail": "escalation term = p_a*u*C_upgrade = 0",
+      "ok": true
+    },
+    "pa0_reference_zero": {
+      "detail": "p_a*C_ref@0=[0.0]",
+      "ok": true
+    },
+    "pa1_d1_detection_one": {
+      "detail": "D_single(1,1)=1.0",
+      "ok": true
+    },
+    "reference_demand_monotone": {
+      "detail": "p_a grid increasing",
+      "ok": true
+    },
+    "u_conditional_equals_total": {
+      "detail": "0.030000 vs 0.030000",
+      "ok": true
+    },
+    "v0_no_active_guarantee": {
+      "detail": "V0 has c_ref=c_check=0 (no active detection)",
+      "ok": true
+    }
+  },
+  "failures": []
+}

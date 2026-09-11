@@ -1,0 +1,5 @@
+mode_id,label,c_always,c_ref,c_check,c_upgrade,source_type
+V0_passive,Passive binding+retention only,0.03,0.0,0.0,0.0,assumed
+L1_prefill_local,Prefill shard-local replay reference,0.05,0.3,0.04,0.15,assumed
+L2_decode_local,Decode shard-local replay reference,0.08,0.45,0.04,0.2,assumed
+D0_duplicate,Always-on full duplicate (baseline),1.0,0.0,0.0,0.0,assumed
