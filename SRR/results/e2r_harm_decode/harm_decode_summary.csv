@@ -1,0 +1,7 @@
+family,n,mean_token_agreement,mean_rouge_l_f1,p_output_changed
+sign_balanced_sr,520,0.0327,0.2497,1.0
+null_space_projcos,520,0.0327,0.2497,1.0
+joint_null,520,0.0327,0.2497,1.0
+tol_hug_sr,520,0.0442,0.2593,0.9885
+tol_hug_projcos,520,0.049,0.2617,0.9827
+tol_hug_combined,520,0.1442,0.3404,0.8827

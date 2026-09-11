@@ -1,0 +1,9 @@
+# E2-R 依赖
+# 纯 numpy 脚本（main/run_e2r_assemble.py, validation/run_e2r_fresh.py, figures/run_e2r_figs.py）
+numpy>=2.0
+matplotlib>=3.8
+
+# CUDA 脚本（main/run_e2r_main.py, validation/run_e2r_harm_decode.py,
+#            validation/run_e2r_fresh_harm_decode.py）——需 GPU，项目实测 fp32 CUDA
+torch>=2.0
+transformers>=4.40

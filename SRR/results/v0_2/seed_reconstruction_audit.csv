@@ -1,0 +1,109 @@
+prompt,boundary,code_path,seed,n_total,n_checked,reconstructed_coords_hash,actual_coords_hash,match,note
+p0e2v2_t00_dynamic_programming_p00_explain,C1,P1_acct_scalar16,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C1,P1_acct_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C1,P2_tstc_scalar,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C1,P2_tstc_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C1,P3_SR_signradial_coords,1,12288,64,10f7a4a93b45,10f7a4a93b45,TRUE,score_equiv=True fn=2.036810e-03 manual=2.036810e-03
+p0e2v2_t00_dynamic_programming_p00_explain,C1,P3_vs_P1_cross,1,12288,64,51dc04ad1487,10f7a4a93b45,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p00_explain,C2,P1_acct_scalar16,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C2,P1_acct_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C2,P2_tstc_scalar,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C2,P2_tstc_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C2,P3_SR_signradial_coords,1,12288,64,10f7a4a93b45,10f7a4a93b45,TRUE,score_equiv=True fn=2.659069e-03 manual=2.659069e-03
+p0e2v2_t00_dynamic_programming_p00_explain,C2,P3_vs_P1_cross,1,12288,64,51dc04ad1487,10f7a4a93b45,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p00_explain,C3,P1_acct_scalar16,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C3,P1_acct_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C3,P2_tstc_scalar,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C3,P2_tstc_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p00_explain,C3,P3_SR_signradial_coords,1,12288,64,10f7a4a93b45,10f7a4a93b45,TRUE,score_equiv=True fn=6.760530e-03 manual=6.760530e-03
+p0e2v2_t00_dynamic_programming_p00_explain,C3,P3_vs_P1_cross,1,12288,64,51dc04ad1487,10f7a4a93b45,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p01_summarize,C1,P1_acct_scalar16,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C1,P1_acct_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C1,P2_tstc_scalar,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C1,P2_tstc_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C1,P3_SR_signradial_coords,1,13312,64,8fcf280bbc85,8fcf280bbc85,TRUE,score_equiv=True fn=7.389000e-04 manual=7.389000e-04
+p0e2v2_t00_dynamic_programming_p01_summarize,C1,P3_vs_P1_cross,1,13312,64,7e8d1063a4de,8fcf280bbc85,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p01_summarize,C2,P1_acct_scalar16,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C2,P1_acct_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C2,P2_tstc_scalar,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C2,P2_tstc_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C2,P3_SR_signradial_coords,1,13312,64,8fcf280bbc85,8fcf280bbc85,TRUE,score_equiv=True fn=1.746267e-03 manual=1.746267e-03
+p0e2v2_t00_dynamic_programming_p01_summarize,C2,P3_vs_P1_cross,1,13312,64,7e8d1063a4de,8fcf280bbc85,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p01_summarize,C3,P1_acct_scalar16,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C3,P1_acct_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C3,P2_tstc_scalar,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C3,P2_tstc_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p01_summarize,C3,P3_SR_signradial_coords,1,13312,64,8fcf280bbc85,8fcf280bbc85,TRUE,score_equiv=True fn=2.250784e-03 manual=2.250784e-03
+p0e2v2_t00_dynamic_programming_p01_summarize,C3,P3_vs_P1_cross,1,13312,64,7e8d1063a4de,8fcf280bbc85,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p02_compare,C1,P1_acct_scalar16,1,10240,16,310f0cbaca57,310f0cbaca57,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C1,P1_acct_projcos4_tokens,1,10,10,23c379d6c0f2,23c379d6c0f2,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C1,P2_tstc_scalar,1,10240,16,310f0cbaca57,310f0cbaca57,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C1,P2_tstc_projcos4_tokens,1,10,10,23c379d6c0f2,23c379d6c0f2,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C1,P3_SR_signradial_coords,1,10240,64,573d998b7db9,573d998b7db9,TRUE,score_equiv=True fn=2.843862e-03 manual=2.843862e-03
+p0e2v2_t00_dynamic_programming_p02_compare,C1,P3_vs_P1_cross,1,10240,64,b210ceaac00a,573d998b7db9,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p02_compare,C2,P1_acct_scalar16,1,10240,16,310f0cbaca57,310f0cbaca57,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C2,P1_acct_projcos4_tokens,1,10,10,23c379d6c0f2,23c379d6c0f2,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C2,P2_tstc_scalar,1,10240,16,310f0cbaca57,310f0cbaca57,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C2,P2_tstc_projcos4_tokens,1,10,10,23c379d6c0f2,23c379d6c0f2,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C2,P3_SR_signradial_coords,1,10240,64,573d998b7db9,573d998b7db9,TRUE,score_equiv=True fn=2.113619e-04 manual=2.113619e-04
+p0e2v2_t00_dynamic_programming_p02_compare,C2,P3_vs_P1_cross,1,10240,64,b210ceaac00a,573d998b7db9,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p02_compare,C3,P1_acct_scalar16,1,10240,16,310f0cbaca57,310f0cbaca57,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C3,P1_acct_projcos4_tokens,1,10,10,23c379d6c0f2,23c379d6c0f2,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C3,P2_tstc_scalar,1,10240,16,310f0cbaca57,310f0cbaca57,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C3,P2_tstc_projcos4_tokens,1,10,10,23c379d6c0f2,23c379d6c0f2,TRUE,
+p0e2v2_t00_dynamic_programming_p02_compare,C3,P3_SR_signradial_coords,1,10240,64,573d998b7db9,573d998b7db9,TRUE,score_equiv=True fn=4.900512e-04 manual=4.900512e-04
+p0e2v2_t00_dynamic_programming_p02_compare,C3,P3_vs_P1_cross,1,10240,64,b210ceaac00a,573d998b7db9,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p03_outline,C1,P1_acct_scalar16,1,14336,16,5a00050fe457,5a00050fe457,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C1,P1_acct_projcos4_tokens,1,14,14,8d6386596e4b,8d6386596e4b,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C1,P2_tstc_scalar,1,14336,16,5a00050fe457,5a00050fe457,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C1,P2_tstc_projcos4_tokens,1,14,14,8d6386596e4b,8d6386596e4b,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C1,P3_SR_signradial_coords,1,14336,64,c1e51e1d721b,c1e51e1d721b,TRUE,score_equiv=True fn=1.491848e-03 manual=1.491848e-03
+p0e2v2_t00_dynamic_programming_p03_outline,C1,P3_vs_P1_cross,1,14336,64,1c28628c7e42,c1e51e1d721b,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p03_outline,C2,P1_acct_scalar16,1,14336,16,5a00050fe457,5a00050fe457,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C2,P1_acct_projcos4_tokens,1,14,14,8d6386596e4b,8d6386596e4b,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C2,P2_tstc_scalar,1,14336,16,5a00050fe457,5a00050fe457,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C2,P2_tstc_projcos4_tokens,1,14,14,8d6386596e4b,8d6386596e4b,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C2,P3_SR_signradial_coords,1,14336,64,c1e51e1d721b,c1e51e1d721b,TRUE,score_equiv=True fn=1.878798e-03 manual=1.878798e-03
+p0e2v2_t00_dynamic_programming_p03_outline,C2,P3_vs_P1_cross,1,14336,64,1c28628c7e42,c1e51e1d721b,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p03_outline,C3,P1_acct_scalar16,1,14336,16,5a00050fe457,5a00050fe457,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C3,P1_acct_projcos4_tokens,1,14,14,8d6386596e4b,8d6386596e4b,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C3,P2_tstc_scalar,1,14336,16,5a00050fe457,5a00050fe457,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C3,P2_tstc_projcos4_tokens,1,14,14,8d6386596e4b,8d6386596e4b,TRUE,
+p0e2v2_t00_dynamic_programming_p03_outline,C3,P3_SR_signradial_coords,1,14336,64,c1e51e1d721b,c1e51e1d721b,TRUE,score_equiv=True fn=2.205064e-03 manual=2.205064e-03
+p0e2v2_t00_dynamic_programming_p03_outline,C3,P3_vs_P1_cross,1,14336,64,1c28628c7e42,c1e51e1d721b,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p04_describe,C1,P1_acct_scalar16,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C1,P1_acct_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C1,P2_tstc_scalar,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C1,P2_tstc_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C1,P3_SR_signradial_coords,1,12288,64,10f7a4a93b45,10f7a4a93b45,TRUE,score_equiv=True fn=1.592485e-03 manual=1.592485e-03
+p0e2v2_t00_dynamic_programming_p04_describe,C1,P3_vs_P1_cross,1,12288,64,51dc04ad1487,10f7a4a93b45,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p04_describe,C2,P1_acct_scalar16,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C2,P1_acct_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C2,P2_tstc_scalar,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C2,P2_tstc_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C2,P3_SR_signradial_coords,1,12288,64,10f7a4a93b45,10f7a4a93b45,TRUE,score_equiv=True fn=2.290248e-03 manual=2.290248e-03
+p0e2v2_t00_dynamic_programming_p04_describe,C2,P3_vs_P1_cross,1,12288,64,51dc04ad1487,10f7a4a93b45,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p04_describe,C3,P1_acct_scalar16,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C3,P1_acct_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C3,P2_tstc_scalar,1,12288,16,7454f44e2bee,7454f44e2bee,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C3,P2_tstc_projcos4_tokens,1,12,12,700a4498438a,700a4498438a,TRUE,
+p0e2v2_t00_dynamic_programming_p04_describe,C3,P3_SR_signradial_coords,1,12288,64,10f7a4a93b45,10f7a4a93b45,TRUE,score_equiv=True fn=1.387383e-03 manual=1.387383e-03
+p0e2v2_t00_dynamic_programming_p04_describe,C3,P3_vs_P1_cross,1,12288,64,51dc04ad1487,10f7a4a93b45,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p05_list,C1,P1_acct_scalar16,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C1,P1_acct_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C1,P2_tstc_scalar,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C1,P2_tstc_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C1,P3_SR_signradial_coords,1,13312,64,8fcf280bbc85,8fcf280bbc85,TRUE,score_equiv=True fn=3.315680e-03 manual=3.315680e-03
+p0e2v2_t00_dynamic_programming_p05_list,C1,P3_vs_P1_cross,1,13312,64,7e8d1063a4de,8fcf280bbc85,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p05_list,C2,P1_acct_scalar16,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C2,P1_acct_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C2,P2_tstc_scalar,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C2,P2_tstc_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C2,P3_SR_signradial_coords,1,13312,64,8fcf280bbc85,8fcf280bbc85,TRUE,score_equiv=True fn=2.186683e-03 manual=2.186683e-03
+p0e2v2_t00_dynamic_programming_p05_list,C2,P3_vs_P1_cross,1,13312,64,7e8d1063a4de,8fcf280bbc85,FALSE,expected_mismatch
+p0e2v2_t00_dynamic_programming_p05_list,C3,P1_acct_scalar16,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C3,P1_acct_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C3,P2_tstc_scalar,1,13312,16,fc9dcd0f469b,fc9dcd0f469b,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C3,P2_tstc_projcos4_tokens,1,13,13,2e67e70889ca,2e67e70889ca,TRUE,
+p0e2v2_t00_dynamic_programming_p05_list,C3,P3_SR_signradial_coords,1,13312,64,8fcf280bbc85,8fcf280bbc85,TRUE,score_equiv=True fn=6.820033e-03 manual=6.820033e-03
+p0e2v2_t00_dynamic_programming_p05_list,C3,P3_vs_P1_cross,1,13312,64,7e8d1063a4de,8fcf280bbc85,FALSE,expected_mismatch

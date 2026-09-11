@@ -1,0 +1,5 @@
+host,resolved_ip,ssh_target,nvidia_smi,hostname,evidence_note
+RTX6000,172.31.100.235,siyuan@RTX6000,"GPU 0: NVIDIA RTX 6000D; GPU 1: NVIDIA RTX 6000D",enine,"stack_b_720 生产者（CUDA fp32）；capture_720_stack.py mtime 2026-08-08 16:00:04; inversion/captures_720 含 stack_a+stack_b 镜像（md5 与本地一致）；无捕获时执行日志"
+RTX3090,172.31.100.17,siyuan@RTX3090,"GPU 0: NVIDIA GeForce RTX 3090",n206-System-Product-Name,"零证据：无 capture 脚本、无 captures_720 npz、bash_history 无 capture/720 痕迹 → 排除为 stack_b 生产者；捕获时在跑其他实验"
+mini1,siyuandeMac-mini.local,siyuan@mini1,MPS-only (Apple M4, arm64),siyuandeMac-mini.local,"stack_a_720 生产者（MPS bf16）；持有 inversion/captures_720/stack_a_720 主副本 720 npz（mtime 2026-08-08 16:00:25，md5 5819b2… 与本地一致）；无 stack_b"
+local_macbook,<local>,siyuandeMacBook-Pro.local,MPS-only (Apple M4, arm64),siyuandeMacBook-Pro.local,"非 stack_a 生产者（mini1 已实证）；本地仅作控制器与结果存储 workspace/captures_720"

@@ -1,6 +1,0 @@
-# Local provider config (machine-specific)
-provider.env
-provider.env.bak.*
-
-# Keep template committed
-!provider.env.example

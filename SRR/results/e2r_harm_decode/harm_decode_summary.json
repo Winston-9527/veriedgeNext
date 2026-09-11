@@ -1,0 +1,42 @@
+{
+  "rho": 0.01,
+  "max_new": 32,
+  "summary": {
+    "sign_balanced_sr": {
+      "n": 520,
+      "mean_token_agreement": 0.0327,
+      "mean_rouge_l_f1": 0.2497,
+      "p_output_changed": 1.0
+    },
+    "null_space_projcos": {
+      "n": 520,
+      "mean_token_agreement": 0.0327,
+      "mean_rouge_l_f1": 0.2497,
+      "p_output_changed": 1.0
+    },
+    "joint_null": {
+      "n": 520,
+      "mean_token_agreement": 0.0327,
+      "mean_rouge_l_f1": 0.2497,
+      "p_output_changed": 1.0
+    },
+    "tol_hug_sr": {
+      "n": 520,
+      "mean_token_agreement": 0.0442,
+      "mean_rouge_l_f1": 0.2593,
+      "p_output_changed": 0.9885
+    },
+    "tol_hug_projcos": {
+      "n": 520,
+      "mean_token_agreement": 0.049,
+      "mean_rouge_l_f1": 0.2617,
+      "p_output_changed": 0.9827
+    },
+    "tol_hug_combined": {
+      "n": 520,
+      "mean_token_agreement": 0.1442,
+      "mean_rouge_l_f1": 0.3404,
+      "p_output_changed": 0.8827
+    }
+  }
+}

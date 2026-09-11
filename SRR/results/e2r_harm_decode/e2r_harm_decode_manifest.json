@@ -1,0 +1,18 @@
+{
+  "experiment": "E2-R second-level harm validation: 32-token greedy output change",
+  "date": "2026-08-09",
+  "method": "HF generate + forward hook on model.model.layers[27]; during prefill (seq len == T) the layer-27 output is replaced by the injected C3 activation (honest b_C3 + e); layer-27 KV cache stays honest (tamper replaces boundary OUTPUT, feeding only norm+head -> first-token logits); subsequent decode attends to honest KV + tampered first token. Greedy (do_sample=False), MAX_NEW=32.",
+  "scope": "C3 injection only, TM2_seed_known, all 6 families, rho=0.01, eval 520. Harm directions = output-gradient (same as main E2-R).",
+  "data_fingerprint": "see e2r_manifest.json in results/e2r (same 720 pool)",
+  "metrics": {
+    "token_agreement": "mean per-position exact-match over min(len_honest, len_tampered) generated tokens",
+    "rouge_l_f1": "LCS-based ROUGE-L F1 between honest and tampered token sequences",
+    "p_output_changed": "fraction of prompts with token_agreement < 1.0 (auxiliary; first-token replacement makes this near-1 by construction)",
+    "honest_reference": "greedy decode of the same prompt (honest prefill, no hook)"
+  },
+  "script_hashes": {
+    "run_e2r_harm_decode.py": "bb9fec496793",
+    "e2r_attacks.py": "c8826a7a0826",
+    "e2r_common.py": "c0815e18e87d"
+  }
+}

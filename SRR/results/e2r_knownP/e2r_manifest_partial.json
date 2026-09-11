@@ -1,0 +1,64 @@
+{
+  "verifier_seed": 2026,
+  "guess_seeds": [
+    2027,
+    12345,
+    777
+  ],
+  "primary_guess_seed": 2027,
+  "p_seed_public": 2026,
+  "rho_grid": [
+    0.002,
+    0.005,
+    0.01,
+    0.02,
+    0.05,
+    0.1
+  ],
+  "delta": 0.05,
+  "alpha": 0.01,
+  "sr_q": 64,
+  "proj_k": 4,
+  "harm_dir": "gradient",
+  "data_fingerprint": {
+    "captures_root": "/home/siyuan/Developer/ndss2027/workspace/captures_720",
+    "n_stack_a": 720,
+    "n_stack_b": 720,
+    "prompts_file": "/home/siyuan/Developer/ndss2027/workspace/AdversarialEvaluation/data/qwen_prompt_splits_stratified_v2_200_500.jsonl",
+    "prompts_sha256": "5f1be1eed14bf2978964e53c87665b75165dd6da859bf3458ccc96a449cdec7d",
+    "n_prompts": 720,
+    "token_len_min": 10,
+    "token_len_max": 23,
+    "token_len_median": 14.0
+  },
+  "n_calib": 200,
+  "n_eval": 520,
+  "tau_trace": {
+    "SignRadial": 0.0089650032950744,
+    "ProjCos4": 0.0006104827877780165,
+    "Combined": 0.9900995024875622
+  },
+  "gamma": {
+    "SignRadial": {
+      "C1": 0.00706428069062561,
+      "C2": 0.006140400859518732,
+      "C3": 0.008703679465906708
+    },
+    "ProjCos4": {
+      "C1": 0.00012269774163216292,
+      "C2": 0.00010532449463311871,
+      "C3": 0.0006104827877780165
+    },
+    "Combined": {
+      "C1": 0.9900995024875622,
+      "C2": 0.9900995024875622,
+      "C3": 0.9900995024875622
+    }
+  },
+  "h0": {
+    "C1": 0.008722729452172381,
+    "C2": 0.011793684493098056,
+    "C3": 0.023302865579904273
+  },
+  "harm_proxy": "relative L2 shift of last-token logits vs honest; harmful iff > h0[boundary]"
+}

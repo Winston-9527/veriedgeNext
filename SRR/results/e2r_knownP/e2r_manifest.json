@@ -1,0 +1,85 @@
+{
+  "verifier_seed": 2026,
+  "guess_seeds": [
+    2027,
+    12345,
+    777
+  ],
+  "primary_guess_seed": 2027,
+  "p_seed_public": 2026,
+  "rho_grid": [
+    0.002,
+    0.005,
+    0.01,
+    0.02,
+    0.05,
+    0.1
+  ],
+  "delta": 0.05,
+  "alpha": 0.01,
+  "sr_q": 64,
+  "proj_k": 4,
+  "harm_dir": "gradient",
+  "data_fingerprint": {
+    "captures_root": "/home/siyuan/Developer/ndss2027/workspace/captures_720",
+    "n_stack_a": 720,
+    "n_stack_b": 720,
+    "prompts_file": "/home/siyuan/Developer/ndss2027/workspace/AdversarialEvaluation/data/qwen_prompt_splits_stratified_v2_200_500.jsonl",
+    "prompts_sha256": "5f1be1eed14bf2978964e53c87665b75165dd6da859bf3458ccc96a449cdec7d",
+    "n_prompts": 720,
+    "token_len_min": 10,
+    "token_len_max": 23,
+    "token_len_median": 14.0
+  },
+  "n_calib": 200,
+  "n_eval": 520,
+  "tau_trace": {
+    "SignRadial": 0.0089650032950744,
+    "ProjCos4": 0.0006104827877780165,
+    "Combined": 0.9900995024875622
+  },
+  "gamma": {
+    "SignRadial": {
+      "C1": 0.00706428069062561,
+      "C2": 0.006140400859518732,
+      "C3": 0.008703679465906708
+    },
+    "ProjCos4": {
+      "C1": 0.00012269774163216292,
+      "C2": 0.00010532449463311871,
+      "C3": 0.0006104827877780165
+    },
+    "Combined": {
+      "C1": 0.9900995024875622,
+      "C2": 0.9900995024875622,
+      "C3": 0.9900995024875622
+    }
+  },
+  "h0": {
+    "C1": 0.008722729452172381,
+    "C2": 0.011793684493098056,
+    "C3": 0.023302865579904273
+  },
+  "harm_proxy": "relative L2 shift of last-token logits vs honest; harmful iff > h0[boundary]",
+  "script_hashes": {
+    "e2r_common.py": "c0815e18e87d",
+    "e2r_attacks.py": "c8826a7a0826",
+    "run_e2r_main.py": "f7896b721b8f",
+    "run_e2r_assemble.py": "a807bff6943c",
+    "run_e2r_harm_decode.py": "bb9fec496793"
+  },
+  "construction_code": {
+    "sign_balanced_sr": "e2r_attacks.py:sign_balanced (per-row sign projection on Omega)",
+    "null_space_projcos": "e2r_attacks.py:null_space_projcos (per-row null(P) via (P^T P)^{-1}P^T)",
+    "joint_null": "e2r_attacks.py:joint_null (null(P) + sign-balance fixup; report via joint_null_report)",
+    "tol_hug_sr": "e2r_attacks.py:tol_hug (harm dir clamped to (1-delta)*Gamma by grid+bisect)",
+    "tol_hug_projcos": "e2r_attacks.py:tol_hug (target Gamma_ProjCos)",
+    "tol_hug_combined": "e2r_attacks.py:tol_hug (target Gamma_Combined via per-boundary ECDF max)"
+  },
+  "threat_models": {
+    "TM2_seed_known": "attacker aligns construction to verifier seed 2026 (current impl node_sees_before_exec)",
+    "TM1_seed_secret": "attacker aligns to guessed seed; verifier scores on 2026 (commit-then-challenge hypothetical)",
+    "TM1b_knownP": "audit arm: P public (verifier seed), SignRadial coordinate sampling secret"
+  },
+  "column_note": "e2r_main_matrix.threshold_gamma is the TRACE-MAX detection threshold tau_trace = Q_{0.99}(calib trace-max honest); the per-boundary thresholds used for localization/tol_hug are in this manifest under 'gamma'."
+}
