@@ -28,13 +28,14 @@ DEFAULT_DATA_ROOT = (
 )
 sys.path.insert(0, str(PCRA_DIR))
 
-from pcra_offline import CHECKPOINTS, Pair, normalized_residual  # noqa: E402
+from pcra_offline import CHECKPOINTS, Pair, normalized_residual, resolve_stack_dir  # noqa: E402
 
 
 def capture_files(root: Path, stack: str, prefix: str) -> list[Path]:
-    files = sorted((root / stack / "captures").glob(f"{prefix}_*.npz"))
+    stack_dir = resolve_stack_dir(root, stack)
+    files = sorted((root / stack_dir / "captures").glob(f"{prefix}_*.npz"))
     if not files:
-        raise FileNotFoundError(root / stack / "captures" / f"{prefix}_*.npz")
+        raise FileNotFoundError(root / stack_dir / "captures" / f"{prefix}_*.npz")
     return files
 
 
@@ -126,9 +127,13 @@ def audit(
                 "median_evaluation_energy": float(np.median(evaluation)),
                 "max_evaluation_energy": float(np.max(evaluation)),
                 "evaluation_exceedance_rate_at_max_calibration": float(np.mean(evaluation > threshold)),
-                "rerun_exceedance_rate_at_max_calibration": float(np.mean(rerun > threshold)),
-                "median_abs_original_rerun_energy_difference": float(
-                    np.median(np.abs(evaluation - rerun))
+                "rerun_exceedance_rate_at_max_calibration": (
+                    float(np.mean(rerun > threshold)) if rerun.size else None
+                ),
+                "median_abs_original_rerun_energy_difference": (
+                    float(np.median(np.abs(evaluation - rerun)))
+                    if rerun.size and rerun.size == evaluation.size
+                    else None
                 ),
                 "nominal_alpha": alpha,
                 "smallest_distribution_free_alpha_with_n_calibration": 1.0
@@ -206,30 +211,39 @@ def main() -> None:
     )
     parser.add_argument("--output", type=Path, default=HERE / "results" / "calibration_audit")
     parser.add_argument("--alpha", type=float, default=0.01)
+    parser.add_argument(
+        "--skip-rerun",
+        action="store_true",
+        help="skip the same-stack rerun comparison (no stack_02_rerun_eval captures present)",
+    )
     args = parser.parse_args()
 
     calibration = load_stack_pair(
-        args.data_root, "stack_01_calib_6", "stack_02_calib_6", "calib"
+        args.data_root, "stack_01_calib", "stack_02_calib", "calib"
     )
     evaluation = load_stack_pair(
-        args.data_root, "stack_01_eval_12", "stack_02_eval_12", "eval"
+        args.data_root, "stack_01_eval", "stack_02_eval", "eval"
     )
-    rerun = load_stack_pair(
-        args.data_root, "stack_01_eval_12", "stack_02_rerun_eval_12", "eval"
+    rows = energy_rows(calibration, "calibration", "original") + energy_rows(
+        evaluation, "evaluation", "original"
     )
-    rerun_identical = all(
-        original.prompt_id == repeated.prompt_id
-        and original.checkpoint == repeated.checkpoint
-        and np.array_equal(original.candidate, repeated.candidate)
-        for original, repeated in zip(evaluation, rerun)
-    )
-    rows = (
-        energy_rows(calibration, "calibration", "original")
-        + energy_rows(evaluation, "evaluation", "original")
-        + energy_rows(rerun, "evaluation", "rerun")
-    )
+    if args.skip_rerun:
+        rerun_identical = None
+    else:
+        rerun = load_stack_pair(
+            args.data_root, "stack_01_eval", "stack_02_rerun_eval", "eval"
+        )
+        rerun_identical = all(
+            original.prompt_id == repeated.prompt_id
+            and original.checkpoint == repeated.checkpoint
+            and np.array_equal(original.candidate, repeated.candidate)
+            for original, repeated in zip(evaluation, rerun)
+        )
+        rows = rows + energy_rows(rerun, "evaluation", "rerun")
     summary, oracle = audit(rows, [0.01, 0.02, 0.05], args.alpha)
 
+    n_calib = len({pair.prompt_id for pair in calibration})
+    n_eval = len({pair.prompt_id for pair in evaluation})
     args.output.mkdir(parents=True, exist_ok=True)
     write_csv(args.output / "energy_by_prompt.csv", rows)
     write_csv(args.output / "calibration_summary.csv", summary)
@@ -240,8 +254,8 @@ def main() -> None:
             {
                 "status": "prompt-level exact-energy audit; no projection Monte Carlo error",
                 "alpha": args.alpha,
-                "independent_calibration_prompts": 6,
-                "independent_evaluation_prompts": 12,
+                "independent_calibration_prompts": n_calib,
+                "independent_evaluation_prompts": n_eval,
                 "minimum_calibration_prompts_for_nontrivial_distribution_free_1pct": 99,
                 "rerun_is_correlated_with_evaluation_and_not_counted_as_new_prompts": True,
                 "rerun_candidate_tensors_value_identical_to_original": rerun_identical,

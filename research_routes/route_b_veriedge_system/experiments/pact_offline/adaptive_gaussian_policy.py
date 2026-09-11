@@ -175,10 +175,10 @@ def main() -> None:
 
     k_values = [8, 16, 32, 64, 128, 256]
     calibration = load_stack_pair(
-        args.data_root, "stack_01_calib_6", "stack_02_calib_6", "calib"
+        args.data_root, "stack_01_calib", "stack_02_calib", "calib"
     )
     evaluation = load_stack_pair(
-        args.data_root, "stack_01_eval_12", "stack_02_eval_12", "eval"
+        args.data_root, "stack_01_eval", "stack_02_eval", "eval"
     )
     thresholds = {
         checkpoint: max(

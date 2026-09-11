@@ -60,16 +60,35 @@ def stable_seed(*parts: object) -> int:
     return int.from_bytes(hashlib.sha256(payload).digest()[:8], "little")
 
 
+def resolve_stack_dir(root: Path, base: str) -> str:
+    """Resolve a stack directory name, tolerant of legacy sample-count suffixes.
+
+    ``base="stack_01_calib"`` matches the honest naming ``stack_01_calib`` or the
+    legacy ``stack_01_calib_6``; likewise ``stack_01_eval`` / ``stack_02_rerun_eval``.
+    This keeps the shipped ``e2_live_subset`` (sample count embedded in dir names)
+    working alongside the re-organized 720-pool layout that drops it.
+    """
+    if (root / base).is_dir():
+        return base
+    matches = sorted(p.name for p in root.glob(f"{base}_*") if p.is_dir())
+    if len(matches) == 1:
+        return matches[0]
+    if not matches:
+        raise FileNotFoundError(f"No stack dir {base!r} or {base}_* under {root}")
+    raise ValueError(f"Ambiguous stack dirs for {base!r}: {matches}")
+
+
 def capture_files(root: Path, stack: str, split: str) -> list[Path]:
     pattern = "calib_*.npz" if split == "calib" else "eval_*.npz"
-    files = sorted((root / stack / "captures").glob(pattern))
+    stack_dir = resolve_stack_dir(root, stack)
+    files = sorted((root / stack_dir / "captures").glob(pattern))
     if not files:
-        raise FileNotFoundError(f"No {pattern} files under {root / stack / 'captures'}")
+        raise FileNotFoundError(f"No {pattern} files under {root / stack_dir / 'captures'}")
     return files
 
 
 def load_pairs(root: Path, split: str) -> list[Pair]:
-    suffix = "calib_6" if split == "calib" else "eval_12"
+    suffix = "calib" if split == "calib" else "eval"
     ref_files = capture_files(root, f"stack_01_{suffix}", split)
     cand_files = capture_files(root, f"stack_02_{suffix}", split)
     if [path.name for path in ref_files] != [path.name for path in cand_files]:
