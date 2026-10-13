@@ -1,0 +1,15 @@
+{
+  "model": "Qwen/Qwen3-4B",
+  "dtype": "bfloat16",
+  "device": "cuda",
+  "gen_len": 64,
+  "split": "calibration",
+  "n": 200,
+  "prompts_file": "qwen_prompt_splits_stratified_v2_200_500.jsonl",
+  "prompts_sha256": "5f1be1eed14bf2978964e53c87665b75165dd6da859bf3458ccc96a449cdec7d",
+  "contexts_sha256": "daf7769220c3b2dcadf40073dfe7327ca00acc35a494587b47ea50d329e4334e",
+  "torch": "2.13.0+cu130",
+  "hostname": "[已脱敏]",
+  "python": "3.10.12",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35"
+}
