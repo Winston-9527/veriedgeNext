@@ -1,7 +1,7 @@
 # P1b: Real BF16 → Low-Precision Precision Cheating
 
 **实验日期**：2026-08-06
-**执行环境**：Mac mini M4（100.80.96.92），PyTorch 2.10 + MPS，Qwen3-0.6B
+**执行环境**：Mac mini M4，PyTorch 2.10 + MPS，Qwen3-0.6B
 **前置**：P0（exact-replay 边界）、P1a（sign-balanced 攻击）
 
 ---

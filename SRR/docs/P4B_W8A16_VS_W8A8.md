@@ -1,7 +1,7 @@
 # P4b: W8A16 vs W8A8 Precision Cheating（RTX3090）
 
 **实验日期**：2026-08-07
-**执行环境**：RTX3090（172.31.100.17），CUDA，Qwen3-0.6B
+**执行环境**：RTX3090，CUDA，Qwen3-0.6B
 **前置**：P1b（MPS 上的 FP8/INT8/INT4）、P2a/P2b/P3b/P5a
 
 ---

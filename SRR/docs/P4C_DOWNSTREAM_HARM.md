@@ -1,7 +1,7 @@
 # P4c: Downstream-Harm Coupling（W8A16 vs W8A8）
 
 **实验日期**：2026-08-07
-**执行环境**：RTX3090（172.31.100.17），CUDA，Qwen3-0.6B
+**执行环境**：RTX3090，CUDA，Qwen3-0.6B
 **目的**：把精度作弊的 activation 漂移（SignRadial）与**输出退化**（token 分歧率、KL）关联起来，回答：SignRadial 检测到的作弊是否真的伤害输出？检测不到的作弊是否无害？
 
 ---

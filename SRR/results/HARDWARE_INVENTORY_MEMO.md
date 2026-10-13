@@ -46,9 +46,9 @@
 
 | stack_id | 机器 | GPU/芯片 | backend | 精度 | 本轮哪些实验用了它 | 是否在原 A–F 定义内 |
 |---|---|---|---|---|---|---|
-| stack_a_720 | **mini1（siyuandeMac-mini.local）**——已实证（§2.1）| Apple M4 / MPS | torch_mps | BF16（存为 fp32）| P0 主表 §6.4、P1 §6.6、P2 §6.5、W8A16 §6.2 | **否**（A–F 无"全前缀 MPS BF16"同构 stack）|
-| stack_b_720 | **RTX6000**（enine, 172.31.100.235）| **NVIDIA RTX 6000D ×2**（Blackwell sm_120）| torch_cuda | FP32 | P0 主表 §6.4、P1 §6.6、P2 §6.5、W8A16 §6.2（W8A16 明确写 RTX6000）| **否**（A–F 所有 CUDA stage = RTX3090）|
-| （对照）RTX3090 | n206（172.31.100.17）| GeForce RTX 3090 | torch_cuda | — | 40/200 旧池 B/D（run_full28_capture 混合 stage）| 是（A–F 的 CUDA 定义）|
+| stack_a_720 | **mini1（[已脱敏]）**——已实证（§2.1）| Apple M4 / MPS | torch_mps | BF16（存为 fp32）| P0 主表 §6.4、P1 §6.6、P2 §6.5、W8A16 §6.2 | **否**（A–F 无"全前缀 MPS BF16"同构 stack）|
+| stack_b_720 | **RTX6000**| **NVIDIA RTX 6000D ×2**（Blackwell sm_120）| torch_cuda | FP32 | P0 主表 §6.4、P1 §6.6、P2 §6.5、W8A16 §6.2（W8A16 明确写 RTX6000）| **否**（A–F 所有 CUDA stage = RTX3090）|
+| （对照）RTX3090 | [已脱敏]| GeForce RTX 3090 | torch_cuda | — | 40/200 旧池 B/D（run_full28_capture 混合 stage）| 是（A–F 的 CUDA 定义）|
 | 主稿 A–F | 2× Mac mini M4 + RTX3090 | M4/MPS + RTX3090/CUDA | torch_mps/cuda | FP16/BF16/FP32/Metal-int8 | 论文 `tab:eval-execution-stacks` 声明的全部 stack | —（定义本身）|
 
 **原始证据**：`workspace/V0-2/results/b/device_facts.csv`（RTX6000/RTX3090 的 `nvidia-smi -L` + mini1 的 MPS 机器事实 + 出处注）。
@@ -62,12 +62,12 @@
 ### 2.1 结论：`used_outside_A-F`
 
 **实证链**（按强度排序）：
-1. **RTX6000 是真实独立机器**：`ssh RTX6000 "nvidia-smi -L"` → `NVIDIA RTX 6000D` ×2，hostname `enine`（172.31.100.235）。
+1. **RTX6000 是真实独立机器**：`ssh RTX6000 "nvidia-smi -L"` → `NVIDIA RTX 6000D` ×2，hostname `[已脱敏]`。
 2. **RTX6000 上存在捕获脚本且 mtime 精确匹配捕获时间**：`workspace/inversion/scripts/capture_720_stack.py` mtime = **2026-08-08 16:00:04**（本地 720 npz mtime = 2026-08-08 16:00-16:01）。
 3. **RTX6000 有 stack_b_720 捕获副本**（`inversion/captures_720/stack_b_720/captures/`，与本地 `workspace/captures_720/stack_b_720/` **逐字节一致**，md5 相同）——捕获后同步。
 4. **RTX3090 零证据**：无 capture 脚本、无 captures_720 npz、bash_history 无 capture/720 痕迹 → 排除 RTX3090 作为 stack_b 生产者。
 5. **720 memo + capture 脚本 docstring** 明确写 "stack_b = RTX6000 CUDA fp32"。
-6. **stack_a = mini1 实证确认**：`ssh mini1` → hostname `siyuandeMac-mini.local`，持有 `inversion/captures_720/stack_a_720/captures/` 的 **720 个 npz 主副本**（mtime **2026-08-08 16:00:25**），md5 与本地一致（5819b2…），且 mini1 **无 stack_b** → mini1 是 MPS bf16 侧生产者。
+6. **stack_a = mini1 实证确认**：`ssh mini1` → hostname `[已脱敏]`，持有 `inversion/captures_720/stack_a_720/captures/` 的 **720 个 npz 主副本**（mtime **2026-08-08 16:00:25**），md5 与本地一致（5819b2…），且 mini1 **无 stack_b** → mini1 是 MPS bf16 侧生产者。
 7. **RTX6000 上的 stack_a 副本是镜像**：RTX6000 `inversion/captures_720/` 同时含 stack_a/stack_b，两者 md5 均与本地一致——捕获后两栈一起同步到 RTX6000 做分析；stack_a 真正产自 mini1。
 
 **与主稿冲突**：主稿 `tab:eval-execution-stacks`（main_ndss.tex:948-1017）**全部 CUDA stage 用 RTX3090**，无 RTX6000。环境 inventory（`env/inventory_2026-08-06.yaml`）也只登记 mini1/mac_candidate/rtx3090，**无 RTX6000**。→ 720 池 P0/P1/P2/W8A16 的 CUDA 侧跑在 A–F 之外的真机上。
