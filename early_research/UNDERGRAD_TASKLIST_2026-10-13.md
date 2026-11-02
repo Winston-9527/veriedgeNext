@@ -57,11 +57,12 @@
 ### 1.2 开工前导师要准备的
 
 - [ ] 恢复 RTX3090 的网络（当前连接超时；地址由导师私下告知，不写进文档），给你开账号，确认 Python 环境和 `Qwen/Qwen3-4B`、`Qwen/Qwen3-0.6B` 的模型缓存。
-- [ ] 把数据交接包 `e0_captures_for_student.tar.gz`（22 MB，不在本仓库里，由导师单独发给你）交给你。包里有：
-  - E0 的 0.6B 和 4B 的全部 captures（各执行栈输出的 top-5 logits），共 30 + 19 个执行栈；
-  - 两份 `contexts_*.jsonl`（测试上下文的 token 序列）；
+- [x] 数据交接包 `e0_captures_for_student.tar.gz`（22.6 MB）已发布在仓库 Release [`e0-handoff-v1`](https://github.com/Winston-9527/veriedgeNext/releases/tag/e0-handoff-v1)，直接下载即可，tar.gz 的 sha256 为 `c8483372746720d9c45cfd4ed899d9d73966be8b8b135f463c2fc7909620003e`。包里有：
+  - E0 的 0.6B 和 4B 的全部 captures（各执行栈输出的 top-5 logits），共 19 + 26 个执行栈；
+  - 两个模型各自的 `contexts_{eval,calib}.jsonl`（测试上下文的 token 序列）；
   - prompt 数据文件；
-  - `MANIFEST.sha256`，用来逐个核对文件。
+  - `MANIFEST.sha256`（逐个核对文件）、`DATA_CHECKSUMS.csv`（核对数据数组）和 `README_HANDOFF.md`（内容说明与快速核对步骤）。
+  - 发布前已把元数据里的主机名和家目录路径替换掉，数据数组没有改动。所以 npz 文件的 sha256 和 `early_research/E0/results/*/MANIFEST.sha256` 记录的原件不同，以包内的 `DATA_CHECKSUMS.csv` 为准。
   这个包用来复现已有结果、做纯 CPU 的分析，**不需要服务器**。
 - [ ] 给你 `early_research/E0/scripts/` 的代码访问权限。
 
@@ -97,7 +98,7 @@
 
 #### T0：环境搭建与复现 ★
 - **任务**：
-  1. **离线复现**：解压交接包，核对 `MANIFEST.sha256`。在笔记本上用 `e0_same_tier.py` 复现 `same_tier.txt`（在交接包的 `qwen3_4b/` 目录下运行，只需要 CPU），并逐行对比。
+  1. **离线复现**：从 Release 下载并解压交接包，按 `README_HANDOFF.md` 核对 `MANIFEST.sha256`。在笔记本上用 `e0_same_tier.py` 复现 `same_tier.txt`（在交接包的 `qwen3_4b/` 目录下运行，只需要 CPU），并逐行对比。
   2. **装环境**：笔记本装好支持 Blackwell 的 PyTorch（见 1.3）；3090 恢复后确认它的环境。
   3. **冒烟测试**：两台机器都用 0.6B 跑 `e0_capture_torch.py`（只取 8 条 prompt），确认能正常出结果。
   4. **给 `e0_capture_torch.py` 加一个 `--offload` 选项**，用 `device_map` + `max_memory` 实现，并在 0.6B 上做逐位一致性检查（见 1.3）。这是你写的第一段新代码。
