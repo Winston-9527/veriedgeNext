@@ -32,7 +32,7 @@ early_research/
     ├── scripts/                       # 采集与分析脚本（torch / mlx / 统计）
     └── results/                       # 两次运行的报告、CSV、摘要清单
         ├── full_20261009/             # Qwen3-0.6B，19 个执行栈
-        └── qwen3_4b_20261009/         # Qwen3-4B，30 个执行栈（含单分片降档）
+        └── qwen3_4b_20261009/         # Qwen3-4B，26 个执行栈（含单分片降档）
 ```
 
 ## 截至目前的主要结论
@@ -51,5 +51,5 @@ early_research/
 
 - 脚本按当时的 CUDA 服务器与 Apple M4 节点的环境编写，路径和 Python 环境可用环境变量覆盖，见各脚本开头说明。
 - 原始 captures（每个执行栈的 top-5 logits npz）没有放进本仓库。
-  `E0/results/*/MANIFEST.sha256` 记录了它们的摘要；学生交接包 `e0_captures_for_student.tar.gz` 由导师单独提供。
+  `E0/results/*/MANIFEST.sha256` 记录了它们的摘要；captures 本体在学生交接包 `e0_captures_for_student.tar.gz` 里，已发布在 Release [`e0-handoff-v1`](https://github.com/Winston-9527/veriedgeNext/releases/tag/e0-handoff-v1)。
 - prompt 数据 `qwen_prompt_splits_stratified_v2_200_500.jsonl`（sha256 前缀 `5f1be1ee`）在 ndss2027 主仓库，也包含在交接包里。

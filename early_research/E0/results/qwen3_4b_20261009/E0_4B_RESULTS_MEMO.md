@@ -1,13 +1,13 @@
 # E0-scale 结果：Qwen3-4B 与单分片降精度
 
 - **运行**：2026-10-09 至 10-10。设计见 [E0_EXPERIMENT_DESIGN.md §5](../../docs/E0_EXPERIMENT_DESIGN.md)。0.6B 的对照结果见 [E0_RESULTS_MEMO](../full_20261009/E0_RESULTS_MEMO.md)。
-- **规模**：33,280 个 context（520 个 prompt × 64 个位置），共 30 个执行栈。
-  - CUDA 服务器上 24 个：参考是 CPU fp32，另有 CUDA torch 和 mlx-CUDA；
+- **规模**：33,280 个 context（520 个 prompt × 64 个位置），共 26 个执行栈（含参考栈；早先版本误写为 30 个，2026-11-02 更正）。
+  - CUDA 服务器上 20 个：参考是 CPU fp32，另有 13 个 CUDA torch 栈和 6 个 mlx-CUDA 栈；
   - Apple M4 节点上 6 个：Apple MPS 和 mlx-Metal。
 - **产物**：
   - 自动报告：[spec_bf16](analysis/spec_bf16/E0_REPORT.md) · [spec_8bit](analysis/spec_8bit/E0_REPORT.md) · [spec_8bit_nobnb](analysis/spec_8bit_nobnb/E0_REPORT.md)
   - 失配率与误差尺度汇总：[e0_error_scale_and_rates.txt](e0_error_scale_and_rates.txt)
-  - 摘要清单：[MANIFEST.sha256](MANIFEST.sha256)；原始 npz 在 CUDA 服务器的 `~/qfc_e0/qwen3_4b_20261009/captures/`。
+  - 摘要清单：[MANIFEST.sha256](MANIFEST.sha256)；原始 npz 在 CUDA 服务器上，脱敏后的副本见 Release [`e0-handoff-v1`](https://github.com/Winston-9527/veriedgeNext/releases/tag/e0-handoff-v1)。
 - **N 的含义**：要求误报和漏报都不超过 10⁻³ 时，所需 canary 个数的精确二项设计。canary 区间在偶数 prompt 上挑选、在奇数 prompt 上报告；诚实失配率用 Wilson 95% 上界。"—"表示在 N≤20000 内无法区分。
 
 ## 0. 结论
