@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>新增任务说明</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d1d1f;--muted:#5f6368;--card:#fff;--line:#e3e0d8;--accent:#1f5f8b;--good:#2e7d32;--warn:#b26a00;--bad:#b3261e;--chip:#eef3f7}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#17181a;--fg:#e8e6e1;--muted:#a3a7ad;--card:#1f2124;--line:#33363b;--accent:#7fb8e0;--good:#7cc47f;--warn:#e0a54a;--bad:#ef8a80;--chip:#26303a}}
+:root[data-theme="dark"]{--bg:#17181a;--fg:#e8e6e1;--muted:#a3a7ad;--card:#1f2124;--line:#33363b;--accent:#7fb8e0;--good:#7cc47f;--warn:#e0a54a;--bad:#ef8a80;--chip:#26303a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.75 -apple-system,"PingFang SC","Noto Sans SC","Microsoft YaHei","Helvetica Neue",sans-serif}
+main{max-width:880px;margin:0 auto;padding:28px 16px 64px}
+h1{font-size:26px;line-height:1.3;margin:0 0 6px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:20px}
+h2{font-size:21px;margin:40px 0 10px;padding-top:8px;border-top:1px solid var(--line)}
+h3{font-size:17px;margin:22px 0 6px}
+p{margin:8px 0}
+.lead{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:8px;padding:14px 16px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:12px 0}
+.task{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 18px 14px;margin:18px 0}
+.task h2{border-top:none;margin-top:14px}
+.tag{display:inline-block;font-size:12px;padding:1px 9px;border-radius:999px;background:var(--chip);margin:0 6px 4px 0;white-space:nowrap}
+.k{font-weight:700}
+.ok{color:var(--good);font-weight:600}.mid{color:var(--warn);font-weight:600}.no{color:var(--bad);font-weight:600}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px;display:block;overflow-x:auto}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;white-space:nowrap}
+ol li,ul li{margin:4px 0}
+code{font-family:Menlo,Consolas,monospace;font-size:13px;background:var(--chip);padding:1px 4px;border-radius:4px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:12px 0}
+.flow div{flex:1 1 160px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px}
+.flow b{display:block}
+.stop{border-left:4px solid var(--bad);padding-left:10px;margin:10px 0}
+.note{color:var(--muted);font-size:14px}
+nav a{color:var(--accent);margin-right:12px;white-space:nowrap}
+</style>
+</head>
+<body>
+<main>
+<h1>新增任务说明（2026-11-10）</h1>
+<div class="sub">写给：负责降档检测排雷实验的同学｜接在原任务清单 T0–T9 之后｜看完这一页就能开工，不需要再读 Markdown</div>
+<nav><a href="#why">为什么加任务</a><a href="#order">先做什么</a><a href="#t10">T10</a><a href="#t11">T11</a><a href="#t8">T8 定稿</a><a href="#fair">评测公平原则</a><a href="#report">汇报方式</a></nav>
+
+<div class="lead">
+<p><b>先说结论：你这一个月的工作非常扎实。</b>T0–T5 基本完成，T7 的负结果也很有价值。这次新增两个任务，并把 T8 的数据集定了下来：</p>
+<ul>
+<li><b>T10</b>：先按 token 位置把误差"拉平"，再用 PACT 原来的全局能量做检测。目标是同时解决"诚实误报"和"轻微降档抓不到"这两个问题。</li>
+<li><b>T11</b>：长度扫描。检查一下：到目前为止"误报很低"的结论，是不是只在约 80 个 token 的短输入上才成立。</li>
+<li><b>T8</b>：数据集定为 OASST1。</li>
+</ul>
+</div>
+
+<h2 id="why">1. 为什么要加这两个任务</h2>
+<h3>T10 的由来：合成方式是个跷跷板</h3>
+<p>你已经比较过三种"把 32 个投影数合成一个分数"的方法，每种都有盲区：</p>
+<table>
+<tr><th>合成方式</th><th>好处</th><th>盲区（你自己测出来的）</th></tr>
+<tr><td>全局均值<br><span class="note">就是 PACT 原来的统计量</span></td><td>作弊只改少数位置也藏不住（改 1/4/16 个位置都是 63/63）</td><td>诚实误差偶尔集中在某个位置时，阈值会被抬高，只换最后 1 层 INT8 抓不到（0/64）</td></tr>
+<tr><td>分组均值</td><td>新输入上没有误报</td><td>两种尾层 INT8 都抓不到（0/64）</td></tr>
+<tr><td>分组中位数</td><td>尾 1 层、尾 4 层 INT8 都能抓到（64/64）</td><td>作弊只改 1–4 个位置时，即使能量很大也抓不到（0/64）</td></tr>
+</table>
+<p>中位数的本性就是忽略少数几个特别大的值，所以压住"诚实误差偶尔集中在一处"的同时，也放过了"作弊只改一两处"。<b>只在"怎么合成"上调，不可能两边都顾到。</b>而且 PACT 原设计专门要求"每个测量都覆盖全部位置"，就是为了防止"只改少数地方就能躲过"，中位数等于把这个老问题又带了回来。</p>
+<p>你的复核里有个关键线索：一条被误报的诚实输入，<b>99.03% 的误差能量在单独一个位置上</b>。Qwen 这类模型有少数 token（常见的是第一个 token）的 activation 特别大。如果诚实误差大致和数值大小成正比，误差自然就挤在这几个位置。所以问题可能出在<b>"没有按位置拉平"</b>，而不是"选哪种合成方式"。这还只是推测，T10 第 1 步就是用来验证它的。</p>
+
+<h3>T11 的由来：现在的输入太短、太整齐</h3>
+<p>到目前为止，所有实验都用同一套模板提问："Explain / Compare / Describe / List + 主题"。提问本身只有 10–23 个 token，加上续写也只有 74–87 个 token，而且只测了一次性前向（prefill）。真实请求常常有几百到几千个 token。注意力要对前面所有 token 求和，序列越长，舍入误差积累的机会越多。只用短输入校准，长输入上可能出现更多误报。</p>
+
+<h2 id="order">2. 先做什么、后做什么</h2>
+<div class="flow">
+<div><b>① T10 第 1 步</b>纯 CPU，只用已有数据，1–2 天</div>
+<div><b>① T11 长度扫描</b>需要 3090 和笔记本，3–5 天；和左边同时做</div>
+<div><b>② T10 第 2 步</b>候选检测器，在已看过的数据上开发</div>
+<div><b>③ T10 第 3 步</b>用 OASST1 扩大诚实校准集；长文本要不要放进来，看 T11 的结论</div>
+<div><b>④ T8</b>canary 能不能被认出来，和 ③ 用同一份 OASST1</div>
+</div>
+<p class="note">T7 记负结果收尾即可，不要再投入。T6、T9 暂时不扩展。</p>
+
+<div class="task" id="t10">
+<h2>T10：先按位置拉平，再用 PACT 的全局能量检测；扩大诚实校准集</h2>
+<span class="tag">难度 ★★★</span><span class="tag">优先级：最高</span><span class="tag">第 1 步只需 CPU</span>
+
+<h3>第 1 步：诊断（1–2 天，只用已有数据）</h3>
+<p>回答三个问题：</p>
+<ol>
+<li>诚实误差能量最集中的是哪些位置？每个位置记下：序号、对应的 token、该位置参考 activation 的范数是其他位置的几倍。</li>
+<li>把每个位置的残差除以该位置参考向量的范数之后，单个位置占诚实能量的最大比例变成多少？</li>
+<li>上面两点在边界 23 和 35、在两张卡上是否一致？</li>
+</ol>
+<p><span class="k">判据</span>：如果最大占比从现在的 94%–99% 降到接近均匀水平（64 个位置平均约 1.6%）的几倍以内，"诚实误差集中在大 activation 位置"的推测就成立；否则记为不成立，另找原因。<b>两种结果都要写进 RESULT_MEMO。</b></p>
+
+<h3>第 2 步：候选检测器（开发阶段）</h3>
+<ul>
+<li><b>流程</b>：按位置归一化残差 → 32 个高斯投影（和 PACT 一样，每个投影都覆盖全部位置）→ 全局能量。</li>
+<li>可以另加一个"单位置最大值"统计量，和全局能量一起用，两个阈值合起来控制总误报。</li>
+<li><b>归一化系数必须在出题之前确定</b>（例如由参考方随承诺一起提交），保证整个计算仍然是线性的，和 PACT"先锁定、再出题"兼容。</li>
+</ul>
+<p><span class="k">对照矩阵</span>：原全局均值、分组中位数和新检测器放在同一张表里，逐行比较：</p>
+<table>
+<tr><th>行</th><th>看什么</th></tr>
+<tr><td>诚实 FP16（两卡）</td><td>误报（越低越好）</td></tr>
+<tr><td>诚实 SDPA（如果规格允许）</td><td>误报</td></tr>
+<tr><td>尾 1 层 / 尾 4 层 INT8</td><td>检出（越高越好）</td></tr>
+<tr><td>单分片 RTN4 / GPTQ4</td><td>检出</td></tr>
+<tr><td>固定能量 4H 的稀疏注入，改 1 / 4 / 16 / 64 个位置</td><td>检出，<b>重点看只改 1–4 个位置时</b></td></tr>
+<tr><td>噪声 σ 扫描、缩放 ε 扫描</td><td>检出随强度的变化</td></tr>
+</table>
+
+<h3>第 3 步：扩大诚实校准集（排在 T11 之后）</h3>
+<ul>
+<li>从 OASST1 取英文的根提问（用法见 T8 一节）：几百条做校准，另留一批<b>完全没用过的</b>做最终确认。</li>
+<li>如果 T11 发现诚实误差随长度明显上升，校准集要按长度分档，并包含长文本。</li>
+<li>报告诚实误报率的置信上界：0 误报时，95% 上界约为 3/n。所以说"≤ 1%"大约需要 300 条，说"≤ 0.1%"大约需要 3000 条。</li>
+</ul>
+
+<div class="stop"><b>停止条件</b>：如果开发阶段归一化之后仍然分不开尾 1 层 INT8，或者诚实误报变多了，就记为负结果，把"尾 1 层 INT8 这种程度的作弊"写成当前方法的检测下限。<b>不要继续调比例，不要挑种子。</b>这本身也是一个可以写进论文的结论。</div>
+
+<p><span class="k">交付</span>：第 1 步诊断表；第 2 步对照矩阵（开发和确认分开报告）；RESULT_MEMO。</p>
+<p><span class="k">排的雷</span>：PACT 能不能在坚持"每个测量都覆盖全部位置"的前提下，同时压住诚实误报、抓住轻微降档。</p>
+</div>
+
+<div class="task" id="t11">
+<h2>T11：长度扫描——短 prompt 会不会低估诚实误差</h2>
+<span class="tag">难度 ★★</span><span class="tag">和 T10 第 1 步同时做</span><span class="tag">需要 3090 和笔记本</span>
+
+<h3>数据</h3>
+<table>
+<tr><th>数据集</th><th>许可证</th><th>为什么用它</th><th>注意</th></tr>
+<tr><td><b>PG-19</b><br><code>deepmind/pg19</code></td><td class="ok">Apache-2.0</td><td>整本的书，能截成任意长度的自然文本</td><td>文体偏旧，所以要配一个真实对话来源</td></tr>
+<tr><td><b>WildChat-1M</b><br><code>allenai/WildChat-1M</code></td><td class="ok">ODC-BY</td><td>真实用户的对话，长短不一</td><td>按有害内容标注过滤；不要保存个人信息；引用时注明来源</td></tr>
+</table>
+<p class="note">许可证是 2026-11-10 从 HuggingFace 数据卡上查到的，使用时以页面为准。记下数据集版本或下载文件的 hash。</p>
+
+<h3>做法</h3>
+<ol>
+<li>两个来源各取约 32 条，截成约 <b>128 / 512 / 2k / 8k</b> 个 token 四档。同一条文本截出的四档算同一个来源，分析时按"来源 × 长度"成对比较。</li>
+<li>3090 和笔记本都用 <b>FP16</b>、同一种注意力实现，采集边界 11 / 23 / 35 的同档诚实残差。笔记本用你已有的流式加载器。</li>
+<li>边界数据<b>只抽一部分位置保存</b>（例如随机 64 个位置，再加上第一个 token），否则 8k 长度的文件太大。<b>抽样规则先固定好再跑。</b></li>
+<li>报告每个长度档、每个边界的相对 L2 和 MSE（中位数、p90、p99、最大值）。第一个 token 和其余位置分开统计，这一点和 T10 第 1 步互相印证。</li>
+<li>选做：两卡都边生成边截取边界数据（decode 阶段，带 KV cache），生成几十个 token，和同长度的 prefill 结果对照。</li>
+</ol>
+
+<h3>判据（开跑前写进 RESULT_MEMO）</h3>
+<ul>
+<li>如果 8k 档的诚实误差中位数或 p99 明显高于 128 档（例如超过 1.5 倍，<b>具体倍数开跑前固定</b>）：以后的诚实校准必须按长度分档，T10 第 3 步的校准集要包含长文本。</li>
+<li>如果各档基本一致：短 prompt 的结论可以有条件地沿用，在报告里写明测过的长度范围。</li>
+<li>两种结果都要记录。</li>
+</ul>
+<p><span class="k">交付</span>：长度 × 边界的诚实误差表和图（图由 CSV 生成）、抽样规则、数据集版本记录、RESULT_MEMO。</p>
+<p><span class="k">排的雷</span>：目前所有"误报率很低"的结论，是不是只在约 80 个 token 的短输入上才成立。</p>
+</div>
+
+<div class="task" id="t8">
+<h2>T8 定稿：数据集用 OASST1</h2>
+<span class="tag">排在 T10 第 3 步之后</span><span class="tag">笔记本即可</span>
+<ul>
+<li><b>数据</b>：OASST1（<code>OpenAssistant/oasst1</code>，Apache-2.0），由志愿者手写。取每棵对话树的根消息作为"真人提问"。</li>
+<li><b>只保留英文</b>（可以另做一组英文加中文）。否则分类器会靠语言来区分，结果不可信。</li>
+<li>按毒性标注过滤，或者保留但在报告里说明。</li>
+<li>训练集和测试集<b>按 prompt 切分</b>，报告 AUC。再试一组"直接从 OASST1 里抽 prompt 当 canary"，看 AUC 能不能降到 0.5 附近。</li>
+<li><b>措辞</b>：OASST1 是志愿者为了训练助手写的提问，比真实线上请求更规整。结论要写成"代表真人提问的公开近似"。</li>
+</ul>
+</div>
+
+<h2 id="fair">3. 评测公平原则（以后所有实验都按这个来）</h2>
+<h3>四个池子，互不重叠</h3>
+<div class="flow">
+<div><b>① 诚实校准池</b>定阈值用</div>
+<div><b>② 开发池</b>调方法用；看过的就不能再当确认用</div>
+<div><b>③ 最终确认池</b>只用一次</div>
+<div><b>④ 作弊者量化器校准池</b>C4（<code>allenai/c4</code>，ODC-BY），只给 GPTQ/AWQ 用</div>
+</div>
+<p>特别注意第 ④ 个池子：之前 GPTQ 的 Hessian 是在评测用的同一批上下文上累积的。真实的作弊者一般用 C4 这类通用语料校准，以后要分开。</p>
+<h3>分档报告</h3>
+<ul>
+<li>按长度分档（约 128 / 512 / 2k / 8k），按用途分档（闲聊、代码、数学、长文档、中文）。每一档单独报告，不要混在一起取平均。</li>
+<li>一条提问算一个样本；同一条提问里的多个位置不算独立样本。</li>
+</ul>
+<h3>以后可能用到的数据集（许可证已查）</h3>
+<table>
+<tr><th>用途</th><th>数据集</th><th>许可证</th></tr>
+<tr><td>真实提问</td><td>OASST1 / WildChat-1M</td><td>Apache-2.0 / ODC-BY</td></tr>
+<tr><td>长文本</td><td>PG-19 / LongBench（GitHub <code>THUDM/LongBench</code>）/ RULER（GitHub <code>NVIDIA/RULER</code>，能指定长度）</td><td>Apache-2.0 / MIT / Apache-2.0</td></tr>
+<tr><td>作弊者量化校准</td><td>C4（WikiText 也可以，但许可证是 CC BY-SA）</td><td>ODC-BY</td></tr>
+<tr><td>任务质量（以后测降档的危害）</td><td>GSM8K / MMLU / IFEval</td><td>MIT / MIT / Apache-2.0</td></tr>
+<tr><td>不建议用</td><td>L-Eval（GPL-3.0 传染性许可证）、LMSYS-Chat-1M（需申请和签协议）、ShareGPT（来源和授权不清）</td><td>—</td></tr>
+</table>
+
+<h2 id="report">4. 汇报方式调整</h2>
+<div class="card">
+<ul>
+<li><b>周报正文只写一页大白话</b>：做了什么、结果是什么（每个数字说清楚"是多少条里的多少、越高越好还是越低越好"）、遇到什么问题、下周做什么。</li>
+<li><b>哈希、审计范围、测试项数统一放附录</b>。审计照做，只是不要放进正文。</li>
+<li>结果文档也尽量写成 HTML（内联样式、不引用外部脚本），方便直接在浏览器里看。</li>
+<li><b>11 月的成果请这周推到你的 GitHub 仓库</b>（不含模型权重和大的 npz），README 的"当前结论"更新到 11 月。推送前检查文件里没有 IP、主机名和账号。</li>
+</ul>
+</div>
+
+<p class="note">原来的纪律照旧：负结果要保留；INCONCLUSIVE 不能算作 PASS；图要由 CSV 生成；跨机器比较前先核对输入文件的 hash。遇到卡点时，写清楚缺什么、已经查过哪里、最小的解锁动作是什么。</p>
+</main>
+</body>
+</html>

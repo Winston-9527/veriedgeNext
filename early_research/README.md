@@ -12,6 +12,7 @@
 | 想了解 | 读这个 |
 |---|---|
 | 新同学的任务安排 | [`UNDERGRAD_TASKLIST_2026-10-13.md`](UNDERGRAD_TASKLIST_2026-10-13.md) |
+| **2026-11-10 新增任务（T10、T11、T8 定稿），网页版** | [`TASKS_UPDATE_2026-11-10.html`](TASKS_UPDATE_2026-11-10.html)（克隆后用浏览器打开） |
 | 相关工作与"主动信号"的空白 | [`docs/ACTIVE_SIGNAL_SURVEY.md`](docs/ACTIVE_SIGNAL_SURVEY.md) |
 | QFC（量化脆弱 canary）推导，以及 E0 之后的修正 | [`docs/QFC_METHOD_DERIVATION.md`](docs/QFC_METHOD_DERIVATION.md) |
 | E0 实验设计（被动 canary + 升级攻击） | [`E0/docs/E0_EXPERIMENT_DESIGN.md`](E0/docs/E0_EXPERIMENT_DESIGN.md) |
@@ -26,6 +27,7 @@
 early_research/
 ├── README.md
 ├── UNDERGRAD_TASKLIST_2026-10-13.md   # 新同学任务清单（笔记本 RTX 5060 + RTX3090）
+├── TASKS_UPDATE_2026-11-10.html      # 新增任务说明（网页版，T10/T11/T8）
 ├── docs/                              # 调研与方法推导
 └── E0/
     ├── docs/                          # 实验设计
